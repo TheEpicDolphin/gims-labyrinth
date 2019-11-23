@@ -17,12 +17,15 @@ for t in range(iterations):
     temp = np.copy(skel_img)
     for i in range(3, r - 3):
         for j in range(3, c - 3):
+            #This part just makes sure that we keep the skeleton fully connected. 
             k = np.ravel(skel_img[i - 1 : i + 2, j - 1 : j + 2])
             n = k[[0,1,2,5,8,7,6,3]]
             n_s = np.roll(n, 1)
             changes = np.sum(np.logical_xor(n, n_s))
             if(changes > 2):
                 continue
+
+            #Apply kernels
             win = temp[i - 1 : i + 2, j - 1 : j + 2]
             h0 = win[0,0] == 0 and win[1,0] == 0 and win[2,0] == 0 and win[1,1] == 1 and win[0,2] == 1 and win[1,2] == 1 and win[2,2] == 1
             h1 = win[1,0] == 0 and win[2,0] == 0 and win[2,1] == 0 and win[0,1] == 1 and win[1,1] == 1 and win[1,2] == 1

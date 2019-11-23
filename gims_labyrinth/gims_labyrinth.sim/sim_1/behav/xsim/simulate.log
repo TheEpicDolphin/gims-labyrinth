@@ -1,0 +1,28 @@
+Vivado Simulator 2018.2
+Time resolution is 1 ps
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module dijkstras_algorithm_tb.gm.adj_list.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module dijkstras_algorithm_tb.gm.n_list.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module dijkstras_algorithm_tb.gm.spt_bp.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module dijkstras_algorithm_tb.gm.spt_min_w.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Stopped at time : 175 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 295 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 325 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 465 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 495 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 635 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 665 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 705 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/min_heap.sv" Line 87
+Stopped at time : 805 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 835 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 995 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 1025 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 1085 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/min_heap.sv" Line 87
+Stopped at time : 1125 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/min_heap.sv" Line 87
+Stopped at time : 1165 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 1195 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 1295 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 1325 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128
+Stopped at time : 1445 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 175
+Stopped at time : 1475 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" Line 128

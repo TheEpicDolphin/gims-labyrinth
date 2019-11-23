@@ -1,0 +1,18 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../gims_labyrinth.srcs/sources_1/ip/spt_min_weights/sim/spt_min_weights.v" \
+"../../../../gims_labyrinth.srcs/sources_1/ip/spt_backpointers/sim/spt_backpointers.v" \
+"../../../../gims_labyrinth.srcs/sources_1/ip/node_list/sim/node_list.v" \
+"../../../../gims_labyrinth.srcs/sources_1/ip/adjacency_list/sim/adjacency_list.v" \
+
+sv xil_defaultlib  \
+"../../../../gims_labyrinth.srcs/sources_1/new/dijkstras_algorithm.sv" \
+"../../../../gims_labyrinth.srcs/sources_1/new/graph_manager.sv" \
+"../../../../gims_labyrinth.srcs/sources_1/new/min_heap.sv" \
+"../../../../gims_labyrinth.srcs/sim_1/new/dijkstras_algorithm_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

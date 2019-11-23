@@ -1,0 +1,2 @@
+spt_min_weights.v,verilog,xil_defaultlib,../../../../gims_labyrinth.srcs/sources_1/ip/spt_min_weights/sim/spt_min_weights.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v

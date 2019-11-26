@@ -5,11 +5,11 @@ from scipy import ndimage
 
 # Load maze
 
-im = (imageio.imread("test_imgs/chain.bmp") > 0).astype(int)
-#im = (imageio.imread("test_imgs/maze_denoised.png") > 0).astype(int)
+#im = (imageio.imread("test_imgs/chain.bmp") > 0).astype(int)
+im = (imageio.imread("test_imgs/maze_denoised.png") > 0).astype(int)
 #im = (imageio.imread("test_imgs/maze_thin_denoised.png") > 0).astype(int)
 
-iterations = 15
+iterations = 25
 r, c = im.shape
 
 skel_img = np.copy(im)
@@ -37,7 +37,8 @@ for t in range(iterations):
             h7 = win[0,0] == 0 and win[1,0] == 0 and win[0,1] == 0 and win[1,1] == 1 and win[2,1] == 1 and win[1,2] == 1
                 
             skel_img[i, j] = temp[i, j] & ~(h0 or h1 or h2 or h3 or h4 or h5 or h6 or h7)
-    
+
+    '''
     if(t % 10 == 0):
         plt.figure()
         plt.imshow(im, cmap='Greys')
@@ -45,6 +46,7 @@ for t in range(iterations):
         plt.figure()
         plt.imshow(skel_img, cmap='Greys')
         plt.show()
+    '''
     
 
 plt.figure()
@@ -54,6 +56,6 @@ plt.figure()
 plt.imshow(skel_img, cmap='Greys')
 plt.show()
 
-#imageio.imsave("test_imgs/skel.png", skel_img)
+imageio.imsave("test_imgs/skel.png", skel_img)
 #imageio.imsave("test_imgs/skel2.png", skel_img)
-imageio.imsave("test_imgs/skel_chain.png", skel_img)
+#imageio.imsave("test_imgs/skel_chain.png", skel_img)

@@ -72,9 +72,10 @@ for intersection_node in intersection_nodes:
                 v2 = np.array([local_pos[MAX_POS_SIZE][1], local_pos[MAX_POS_SIZE][0]]) - np.array([local_pos[MAX_POS_SIZE//2][1], local_pos[MAX_POS_SIZE//2][0]])
                 cos_theta = np.dot(v1, v2)/(np.linalg.norm(v1) * np.linalg.norm(v2))
                 theta = np.arccos(cos_theta) * 180/np.pi
-                print(theta)
+                #print(theta)
                 if(state == STRAIGHT_MODE):
                     if(theta < CORNER_THRESHOLD):
+                        print(cos_theta)
                         state = CORNER_MODE
                         cooldown = MAX_SPACING
                         

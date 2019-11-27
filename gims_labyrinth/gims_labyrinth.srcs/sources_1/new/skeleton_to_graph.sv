@@ -151,12 +151,10 @@ module skeleton_corner_finder #(parameter IMG_W = 640, parameter IMG_H = 480)
     input clk,
     input rst,
     input start,
-    input [2:0] pixel_r,
+    input [18:0] intersection_xy,
+    input [5:0] intersection_count,
     
-    output logic [18:0] window_center_i,
-    output logic [18:0] window_end_i,
-    output logic [2:0] pixel_out,
-    output logic write_pixel,
+    input bram_ready,
     
     output logic write_node,
     output logic [9:0] node,
@@ -164,20 +162,79 @@ module skeleton_corner_finder #(parameter IMG_W = 640, parameter IMG_H = 480)
     output done
     );
     
+    logic done1;
+    logic done2;
+    logic done3;
+    logic done4;
+    
+    logic cf1;
+    logic cf2;
+    logic cf3;
+    logic cf4;
+    logic start_crawling;
+    
+    logic [18:0] c1;
+    logic [18:0] c2;
+    logic [18:0] c3;
+    logic [18:0] c4;
+    
+    logic [18:0] cout1;
+    logic [18:0] cout2;
+    logic [18:0] cout3;
+    logic [18:0] cout4;
+    
+    logic empty1;
+    logic empty2;
+    logic empty3;
+    logic empty4;
+    
+    logic r_en1;
+    logic r_en2;
+    logic r_en3;
+    logic r_en4;
+    
+    logic [1:0] fifo_choice;
+    
+    assign r_en1 = fifo_choice == 2'b00;
+    assign r_en2 = fifo_choice == 2'b01;
+    assign r_en3 = fifo_choice == 2'b01;
+    assign r_en4 = fifo_choice == 2'b01;
+    
+    corner_node_fifo f1(.clk(clk),
+                        .din(c1),
+                        .wr_en(cf1),
+                        .empty(empty1),
+                        .dout(cout1),
+                        .rd_en(r_en1));
+    corner_node_fifo f2(.clk(clk),
+                        .din(c2),
+                        .wr_en(cf2),
+                        .empty(empty2),
+                        .dout(cout2),
+                        .rd_en(r_en2));
+    corner_node_fifo f3(.clk(clk),
+                        .din(c3),
+                        .wr_en(cf3),
+                        .empty(empty3),
+                        .dout(cout3),
+                        .rd_en(r_en3));
+    corner_node_fifo f4(.clk(clk),
+                        .din(c4),
+                        .wr_en(cf4),
+                        .empty(empty4),
+                        .dout(cout4),
+                        .rd_en(r_en4));
+    
+    path_crawler pc1(.clk(clk),.rst(rst),.start(start_crawling),.origin(intersection_xy),.corner_found(cf1),.c(c1),.done(done1));
+    path_crawler pc2(.clk(clk),.rst(rst),.start(start_crawling),.origin(intersection_xy),.corner_found(cf2),.c(c2),.done(done2));
+    path_crawler pc3(.clk(clk),.rst(rst),.start(start_crawling),.origin(intersection_xy),.corner_found(cf3),.c(c3),.done(done3));
+    path_crawler pc4(.clk(clk),.rst(rst),.start(start_crawling),.origin(intersection_xy),.corner_found(cf4),.c(c4),.done(done4));
+    
     parameter IDLE = 2'b00;
-    parameter FILLING_WINDOW = 2'b01;
-    parameter FIND_INTERSECTIONS = 2'b10;
+    parameter FETCH_NEXT_INTERSECTION = 2'b01;
+    parameter CRAWL = 2'b10;
     parameter DONE = 2'b11;
-    
-    reg [((IMG_W + 3) << 1) - 1 : 0] skel_window;
     logic [1:0] state;
-    
-    logic w_11, w_01, w_10, w_21, w_12;
-    assign w_11 = IMG_W + 3;
-    assign w_01 = (IMG_W + 3) + 1;
-    assign w_10 = ((IMG_W + 3) << 1) - 2;
-    assign w_21 = (IMG_W + 3) - 1;
-    assign w_12 = 1;
     
     logic x_end;
     logic y_end;
@@ -185,69 +242,64 @@ module skeleton_corner_finder #(parameter IMG_W = 640, parameter IMG_H = 480)
     logic x_c;
     logic y_c;
     
-    always_comb begin
-        window_end_i = IMG_W * y_end + x_end;
-        x_c = x_end - 1;
-        y_c = y_end - 1;
-        window_center_i = window_end_i - (IMG_W + 3);
-    end
-    
-    logic intersection;
-    assign intersection = w_11 && 
-                        (w_01 && w_21 && w_12) &&
-                        (w_10 && w_21 && w_12) &&
-                        (w_10 && w_01 && w_12) &&
-                        (w_10 && w_01 && w_21);
+    logic n;
+    logic [5:0] num_intersections_left;
 
-    logic [9:0] n;
-    assign done = (state == DONE);
-    
     always_ff @(posedge clk)begin
         if(rst)begin
-            
+            state <= IDLE;
+            fifo_choice <= 2'b00;
         end
         else begin
-            skel_window <= {skel_window[((IMG_W + 3) << 1) - 1:1], (pixel_r > 0)};
+            
+            fifo_choice <= fifo_choice + 1;
+            //This makes sure that we select only one node at a time to add to the node list
+            case(fifo_choice)
+                2'b00: begin
+                    write_node <= !empty1;
+                    node_xy <= cout1;
+                end
+                2'b01: begin
+                    write_node <= !empty2;
+                    node_xy <= cout2;
+                end
+                2'b10: begin
+                    write_node <= !empty2;
+                    node_xy <= cout2;
+                end
+                2'b11: begin
+                    write_node <= !empty2;
+                    node_xy <= cout2;
+                end
+            endcase
+            
+            
             case(state)
                 IDLE: begin
                     if(start)begin
-                        state <= FILLING_WINDOW;
-                        window_end_i <= 19'b00;
-                        x_end <= 10'b00;
-                        y_end <= 9'b00;
+                        state <= FETCH_NEXT_INTERSECTION;
+                        num_intersections_left <= intersection_count;
                         //The zeroth node is reserved as a dummy node
                         n <= 10'b1;
                     end
                 end
-                FILLING_WINDOW: begin
-                    if(window_end_i > ((IMG_W + 3) << 1))begin
-                        state <= FIND_INTERSECTIONS;
-                    end
-                    window_end_i <= window_end_i + 1;
-                    
-                    if(x_end == 10'd640)begin
-                        x_end <= 10'b0;
-                        y_end <= y_end + 1;
-                    end
-                    else begin
-                        x_end <= x_end + 1;
-                    end
-                end
-                FIND_INTERSECTIONS: begin
-                    if(x_end == IMG_W && y_end == IMG_H)begin
-                        write_pixel <= 0;
+                FETCH_NEXT_INTERSECTION: begin
+                    if(num_intersections_left == 0)begin
                         state <= DONE;
                     end
-                    if(intersection)begin
-                        write_pixel <= 1;
-                        pixel_out <= 3'b010;
-                        
-                        node <= n;
-                        node_xy <= {x_c, y_c};
-                        n <= n + 1;
-                    end
                     else begin
-                        write_pixel <= 0;
+                        if(bram_ready)begin
+                             num_intersections_left <= num_intersections_left - 1;
+                             state <= CRAWL;
+                             start_crawling <= 1;
+                        end
+                    end
+                    
+                end
+                CRAWL: begin
+                    start_crawling <= 0;
+                    if(done1 && done2 && done3 && done4)begin
+                        state <= FETCH_NEXT_INTERSECTION);
                     end
                 end
                 DONE: begin

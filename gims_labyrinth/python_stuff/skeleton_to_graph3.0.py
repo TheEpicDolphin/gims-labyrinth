@@ -10,7 +10,7 @@ skel_img = (imageio.imread("test_imgs/skel.png") > 0).astype(int)
 
 r, c = skel_img.shape
 graph_img = np.copy(skel_img)
-graph_img.astype(np.uint8)
+graph_img = graph_img.astype(np.uint8)
 
 intersection_nodes = []
 #Find all intersections. These will be nodes in the graph

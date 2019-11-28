@@ -52,6 +52,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     
     parameter NORMAL_PIXEL = 2'b00;
     parameter OBSTACLE_PIXEL = 2'b01;
+    parameter START_PIXEL = 2'b10;
     parameter END_PIXEL = 2'b11;
     
     parameter QUEUE_SIZE = 64;
@@ -91,10 +92,12 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                         state <= FETCH_NEIGHBORS;
                         queue[0] <= start_pos;
                         q_idx <= 1;
-                        
+                        write_visited <= 1;
+                        pixel_wr_addr <= start_pos[7:0] * IMG_W + start_pos[16:8];
                     end
                 end
                 FETCH_NEIGHBORS: begin
+                    write_visited <= 0;
                     if(q_idx == 0)begin
                         //End was not found
                         state <= DONE;
@@ -133,7 +136,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                     end
                     else if(i == j + BRAM_DELAY_CYCLES + 1)begin
                         j <= j + 1;
-                        if(pixel_type == NORMAL_PIXEL && skel_pixel == 1 && !visited && neighbor_within_bounds)begin
+                        if((pixel_type == NORMAL_PIXEL || pixel_type == START_PIXEL) && skel_pixel == 1 && !visited && neighbor_within_bounds)begin
                             queue[q_idx] <= neighbors[j];
                             q_idx <= q_idx + 1;
                             
@@ -158,7 +161,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                         end    
                     end
                     if(i < MAX_OUT_DEGREE)begin
-                        pixel_r_addr <= neighbors[i][7:0] * IMG_W + neighbors[i][16:8];;
+                        pixel_r_addr <= neighbors[i][7:0] * IMG_W + neighbors[i][16:8];
                     end
                     i <= i + 1;
                 end

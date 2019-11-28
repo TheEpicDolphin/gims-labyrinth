@@ -25,11 +25,12 @@ def pixel_type_map_coe_gen(bin_maze_im):
     r, c = bin_maze_im.shape
     segmented_img = np.zeros((r,c))
     segmented_img = segmented_img.astype(np.uint8)
+    
     #assign start
-    segmented_img[42:56,12:18] = 2
+    segmented_img[12:18, 42:56] = 2
     
     #assign end
-    segmented_img[186:196,216:226] = 3
+    segmented_img[216:226,186:196] = 3
 
     "memory_initialization_radix=2;\nmemory_initialization_vector="
     coe_contents = "memory_initialization_radix=2;\nmemory_initialization_vector=\n"

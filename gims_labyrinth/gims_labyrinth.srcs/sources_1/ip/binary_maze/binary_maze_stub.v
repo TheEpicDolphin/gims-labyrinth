@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Wed Nov 27 01:21:20 2019
+// Date        : Thu Nov 28 16:38:18 2019
 // Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub -rename_top binary_maze -prefix
-//               binary_maze_ binary_maze_stub.v
+// Command     : write_verilog -force -mode synth_stub
+//               C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/binary_maze/binary_maze_stub.v
 // Design      : binary_maze
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tcsg324-3

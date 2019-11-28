@@ -5,8 +5,8 @@ from scipy import ndimage
 
 # Load maze
 
-#im = (imageio.imread("test_imgs/chain.bmp") > 0).astype(int)
-im = (imageio.imread("test_imgs/maze_denoised.png") > 0).astype(int)
+im = (imageio.imread("test_imgs/maze_complicated.bmp") > 0).astype(int)
+#im = (imageio.imread("test_imgs/maze_denoised.png") > 0).astype(int)
 #im = (imageio.imread("test_imgs/maze_thin_denoised.png") > 0).astype(int)
 
 iterations = 25
@@ -38,7 +38,7 @@ for t in range(iterations):
                 
             skel_img[i, j] = temp[i, j] & ~(h0 or h1 or h2 or h3 or h4 or h5 or h6 or h7)
 
-    '''
+    
     if(t % 10 == 0):
         plt.figure()
         plt.imshow(im, cmap='Greys')
@@ -46,7 +46,7 @@ for t in range(iterations):
         plt.figure()
         plt.imshow(skel_img, cmap='Greys')
         plt.show()
-    '''
+    
     
 
 plt.figure()
@@ -56,6 +56,7 @@ plt.figure()
 plt.imshow(skel_img, cmap='Greys')
 plt.show()
 
-imageio.imsave("test_imgs/skel.png", skel_img)
+imageio.imsave("test_imgs/skel_complicated.png", skel_img)
+#imageio.imsave("test_imgs/skel.png", skel_img)
 #imageio.imsave("test_imgs/skel2.png", skel_img)
 #imageio.imsave("test_imgs/skel_chain.png", skel_img)

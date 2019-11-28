@@ -40,27 +40,30 @@ module backpointer_tracer #(parameter BRAM_DELAY_CYCLES = 2, parameter IMG_W = 3
     logic [2:0] cycles;
     logic [16:0] cur_pos;
     logic [16:0] next_pos;
+    
     always_comb begin
         case(bp)
             2'b00: begin
                 next_pos = {cur_pos[16:8] - 9'b1, cur_pos[7:0]};
             end
             2'b01: begin
-                next_pos = {cur_pos[16:8], cur_pos[7:0] + 9'b1};
+                next_pos = {cur_pos[16:8], cur_pos[7:0] + 8'b1};
             end
             2'b10: begin
                 next_pos = {cur_pos[16:8] + 9'b1, cur_pos[7:0]};
             end
             2'b11: begin
-                next_pos = {cur_pos[16:8], cur_pos[7:0] - 9'b1};
+                next_pos = {cur_pos[16:8], cur_pos[7:0] - 8'b1};
             end
         endcase
     end
     
+    integer maze_sol_f;
+        
     assign done = state == DONE;
     always_ff @(posedge clk)begin
         if(rst)begin
-        
+            state <= IDLE;
         end
         else begin
             case(state)
@@ -70,11 +73,15 @@ module backpointer_tracer #(parameter BRAM_DELAY_CYCLES = 2, parameter IMG_W = 3
                         write_path <= 1;
                         pixel_addr <= end_pos[7:0] * IMG_W + end_pos[16:8];
                         cur_pos <= end_pos;
+                        cycles <= 0;
+                        
+                        //Debugging
+                        maze_sol_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/maze_sol.txt","w");
                     end
                 end
                 READING_BACKPOINTER: begin
                     write_path <= 0;
-                    if(cycles == BRAM_DELAY_CYCLES)begin
+                    if(cycles == BRAM_DELAY_CYCLES - 1)begin
                         state <= NEXT_PIXEL;
                     end
                     else begin
@@ -93,10 +100,16 @@ module backpointer_tracer #(parameter BRAM_DELAY_CYCLES = 2, parameter IMG_W = 3
                     write_path <= 1;
                     cur_pos <= next_pos;
                     
+                    //Debugging
+                    $fwrite(maze_sol_f,"%b\n",next_pos);
+                    
                 end
                 DONE: begin
                     write_path <= 0;
                     state <= IDLE;
+                    
+                    //Debugging
+                    $fclose(maze_sol_f);
                 end
             endcase
         end

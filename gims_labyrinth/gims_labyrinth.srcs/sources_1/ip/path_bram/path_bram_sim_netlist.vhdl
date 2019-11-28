@@ -1,11 +1,11 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Thu Nov 28 15:03:10 2019
+-- Date        : Wed Nov 27 19:29:28 2019
 -- Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/path_bram/path_bram_sim_netlist.vhdl
--- Design      : path_bram
+-- Command     : write_vhdl -force -mode funcsim -rename_top path_bram -prefix
+--               path_bram_ visited_map_sim_netlist.vhdl
+-- Design      : visited_map
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
 -- Device      : xc7a100tcsg324-3
@@ -20,8 +20,6 @@ entity path_bram_bindec is
     addra : in STD_LOGIC_VECTOR ( 2 downto 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of path_bram_bindec : entity is "bindec";
 end path_bram_bindec;
 
 architecture STRUCTURE of path_bram_bindec is
@@ -45,8 +43,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity path_bram_bindec_0 is
   port (
     enb_array : out STD_LOGIC_VECTOR ( 0 to 0 );
-    addrb : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    enb : in STD_LOGIC
+    addrb : in STD_LOGIC_VECTOR ( 2 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of path_bram_bindec_0 : entity is "bindec";
@@ -54,15 +51,14 @@ end path_bram_bindec_0;
 
 architecture STRUCTURE of path_bram_bindec_0 is
 begin
-ENOUT: unisim.vcomponents.LUT4
+ENOUT: unisim.vcomponents.LUT3
     generic map(
-      INIT => X"1000"
+      INIT => X"04"
     )
         port map (
-      I0 => addrb(1),
-      I1 => addrb(0),
-      I2 => addrb(2),
-      I3 => enb,
+      I0 => addrb(0),
+      I1 => addrb(2),
+      I2 => addrb(1),
       O => enb_array(0)
     );
 end STRUCTURE;
@@ -75,7 +71,6 @@ entity \path_bram_blk_mem_gen_mux__parameterized0\ is
     \^doutb\ : out STD_LOGIC_VECTOR ( 0 to 0 );
     DOBDO : in STD_LOGIC_VECTOR ( 0 to 0 );
     DOUTB : in STD_LOGIC_VECTOR ( 0 to 0 );
-    enb : in STD_LOGIC;
     addrb : in STD_LOGIC_VECTOR ( 2 downto 0 );
     clkb : in STD_LOGIC
   );
@@ -105,7 +100,7 @@ begin
     )
         port map (
       C => clkb,
-      CE => enb,
+      CE => '1',
       D => sel_pipe(0),
       Q => sel_pipe_d1(0),
       R => '0'
@@ -116,7 +111,7 @@ begin
     )
         port map (
       C => clkb,
-      CE => enb,
+      CE => '1',
       D => sel_pipe(1),
       Q => sel_pipe_d1(1),
       R => '0'
@@ -127,7 +122,7 @@ begin
     )
         port map (
       C => clkb,
-      CE => enb,
+      CE => '1',
       D => sel_pipe(2),
       Q => sel_pipe_d1(2),
       R => '0'
@@ -138,7 +133,7 @@ begin
     )
         port map (
       C => clkb,
-      CE => enb,
+      CE => '1',
       D => addrb(0),
       Q => sel_pipe(0),
       R => '0'
@@ -149,7 +144,7 @@ begin
     )
         port map (
       C => clkb,
-      CE => enb,
+      CE => '1',
       D => addrb(1),
       Q => sel_pipe(1),
       R => '0'
@@ -160,7 +155,7 @@ begin
     )
         port map (
       C => clkb,
-      CE => enb,
+      CE => '1',
       D => addrb(2),
       Q => sel_pipe(2),
       R => '0'
@@ -177,13 +172,10 @@ entity path_bram_blk_mem_gen_prim_wrapper is
     clkb : in STD_LOGIC;
     ENA : in STD_LOGIC;
     ENB : in STD_LOGIC;
-    \^enb\ : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 15 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 15 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of path_bram_blk_mem_gen_prim_wrapper : entity is "blk_mem_gen_prim_wrapper";
 end path_bram_blk_mem_gen_prim_wrapper;
 
 architecture STRUCTURE of path_bram_blk_mem_gen_prim_wrapper is
@@ -415,7 +407,7 @@ begin
       INJECTSBITERR => '0',
       RDADDRECC(8 downto 0) => \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_RDADDRECC_UNCONNECTED\(8 downto 0),
       REGCEAREGCE => '0',
-      REGCEB => \^enb\,
+      REGCEB => '1',
       RSTRAMARSTRAM => '0',
       RSTRAMB => '0',
       RSTREGARSTREG => '0',
@@ -629,7 +621,7 @@ begin
       INJECTSBITERR => '0',
       RDADDRECC(8 downto 0) => \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T_RDADDRECC_UNCONNECTED\(8 downto 0),
       REGCEAREGCE => '0',
-      REGCEB => \^enb\,
+      REGCEB => '1',
       RSTRAMARSTRAM => '0',
       RSTRAMB => '0',
       RSTREGARSTREG => '0',
@@ -650,7 +642,6 @@ entity \path_bram_blk_mem_gen_prim_wrapper__parameterized0\ is
     clkb : in STD_LOGIC;
     ena_array : in STD_LOGIC_VECTOR ( 0 to 0 );
     enb_array : in STD_LOGIC_VECTOR ( 0 to 0 );
-    enb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 13 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 13 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 )
@@ -787,7 +778,7 @@ begin
       ENARDEN => ena_array(0),
       ENBWREN => enb_array(0),
       REGCEAREGCE => '0',
-      REGCEB => enb,
+      REGCEB => '1',
       RSTRAMARSTRAM => '0',
       RSTRAMB => '0',
       RSTREGARSTREG => '0',
@@ -807,13 +798,10 @@ entity path_bram_blk_mem_gen_prim_width is
     clkb : in STD_LOGIC;
     ENA : in STD_LOGIC;
     ENB : in STD_LOGIC;
-    \^enb\ : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 15 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 15 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of path_bram_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end path_bram_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of path_bram_blk_mem_gen_prim_width is
@@ -827,8 +815,7 @@ begin
       addrb(15 downto 0) => addrb(15 downto 0),
       clka => clka,
       clkb => clkb,
-      dina(0) => dina(0),
-      \^enb\ => \^enb\
+      dina(0) => dina(0)
     );
 end STRUCTURE;
 library IEEE;
@@ -842,7 +829,6 @@ entity \path_bram_blk_mem_gen_prim_width__parameterized0\ is
     clkb : in STD_LOGIC;
     ena_array : in STD_LOGIC_VECTOR ( 0 to 0 );
     enb_array : in STD_LOGIC_VECTOR ( 0 to 0 );
-    enb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 13 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 13 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 )
@@ -862,7 +848,6 @@ begin
       clkb => clkb,
       dina(0) => dina(0),
       ena_array(0) => ena_array(0),
-      enb => enb,
       enb_array(0) => enb_array(0)
     );
 end STRUCTURE;
@@ -875,14 +860,11 @@ entity path_bram_blk_mem_gen_generic_cstr is
     doutb : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
     clkb : in STD_LOGIC;
-    enb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 16 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of path_bram_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end path_bram_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of path_bram_blk_mem_gen_generic_cstr is
@@ -902,7 +884,6 @@ begin
 \bindec_b.bindec_inst_b\: entity work.path_bram_bindec_0
      port map (
       addrb(2 downto 0) => addrb(16 downto 14),
-      enb => enb,
       enb_array(0) => enb_array(4)
     );
 \has_mux_b.B\: entity work.\path_bram_blk_mem_gen_mux__parameterized0\
@@ -911,8 +892,7 @@ begin
       DOUTB(0) => ram_doutb,
       addrb(2 downto 0) => addrb(16 downto 14),
       clkb => clkb,
-      \^doutb\(0) => doutb(0),
-      enb => enb
+      \^doutb\(0) => doutb(0)
     );
 ram_ena: unisim.vcomponents.LUT2
     generic map(
@@ -923,13 +903,12 @@ ram_ena: unisim.vcomponents.LUT2
       I1 => wea(0),
       O => ram_ena_n_0
     );
-ram_enb: unisim.vcomponents.LUT2
+ram_enb: unisim.vcomponents.LUT1
     generic map(
-      INIT => X"4"
+      INIT => X"1"
     )
         port map (
       I0 => addrb(16),
-      I1 => enb,
       O => ram_enb_n_0
     );
 \ramloop[0].ram.r\: entity work.path_bram_blk_mem_gen_prim_width
@@ -941,8 +920,7 @@ ram_enb: unisim.vcomponents.LUT2
       addrb(15 downto 0) => addrb(15 downto 0),
       clka => clka,
       clkb => clkb,
-      dina(0) => dina(0),
-      \^enb\ => enb
+      dina(0) => dina(0)
     );
 \ramloop[1].ram.r\: entity work.\path_bram_blk_mem_gen_prim_width__parameterized0\
      port map (
@@ -953,7 +931,6 @@ ram_enb: unisim.vcomponents.LUT2
       clkb => clkb,
       dina(0) => dina(0),
       ena_array(0) => ena_array(4),
-      enb => enb,
       enb_array(0) => enb_array(4)
     );
 end STRUCTURE;
@@ -966,14 +943,11 @@ entity path_bram_blk_mem_gen_top is
     doutb : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
     clkb : in STD_LOGIC;
-    enb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 16 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of path_bram_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end path_bram_blk_mem_gen_top;
 
 architecture STRUCTURE of path_bram_blk_mem_gen_top is
@@ -986,7 +960,6 @@ begin
       clkb => clkb,
       dina(0) => dina(0),
       doutb(0) => doutb(0),
-      enb => enb,
       wea(0) => wea(0)
     );
 end STRUCTURE;
@@ -999,14 +972,11 @@ entity path_bram_blk_mem_gen_v8_4_1_synth is
     doutb : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
     clkb : in STD_LOGIC;
-    enb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 16 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of path_bram_blk_mem_gen_v8_4_1_synth : entity is "blk_mem_gen_v8_4_1_synth";
 end path_bram_blk_mem_gen_v8_4_1_synth;
 
 architecture STRUCTURE of path_bram_blk_mem_gen_v8_4_1_synth is
@@ -1019,7 +989,6 @@ begin
       clkb => clkb,
       dina(0) => dina(0),
       doutb(0) => doutb(0),
-      enb => enb,
       wea(0) => wea(0)
     );
 end STRUCTURE;
@@ -1148,7 +1117,7 @@ entity path_bram_blk_mem_gen_v8_4_1 is
   attribute C_HAS_ENA : integer;
   attribute C_HAS_ENA of path_bram_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_HAS_ENB : integer;
-  attribute C_HAS_ENB of path_bram_blk_mem_gen_v8_4_1 : entity is 1;
+  attribute C_HAS_ENB of path_bram_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_HAS_INJECTERR : integer;
   attribute C_HAS_INJECTERR of path_bram_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_A : integer;
@@ -1176,7 +1145,7 @@ entity path_bram_blk_mem_gen_v8_4_1 is
   attribute C_INITB_VAL : string;
   attribute C_INITB_VAL of path_bram_blk_mem_gen_v8_4_1 : entity is "0";
   attribute C_INIT_FILE : string;
-  attribute C_INIT_FILE of path_bram_blk_mem_gen_v8_4_1 : entity is "path_bram.mem";
+  attribute C_INIT_FILE of path_bram_blk_mem_gen_v8_4_1 : entity is "visited_map.mem";
   attribute C_INIT_FILE_NAME : string;
   attribute C_INIT_FILE_NAME of path_bram_blk_mem_gen_v8_4_1 : entity is "no_coe_file_loaded";
   attribute C_INTERFACE_TYPE : integer;
@@ -1239,8 +1208,6 @@ entity path_bram_blk_mem_gen_v8_4_1 is
   attribute C_WRITE_WIDTH_B of path_bram_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_XDEVICEFAMILY : string;
   attribute C_XDEVICEFAMILY of path_bram_blk_mem_gen_v8_4_1 : entity is "artix7";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of path_bram_blk_mem_gen_v8_4_1 : entity is "blk_mem_gen_v8_4_1";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of path_bram_blk_mem_gen_v8_4_1 : entity is "yes";
 end path_bram_blk_mem_gen_v8_4_1;
@@ -1320,7 +1287,6 @@ inst_blk_mem_gen: entity work.path_bram_blk_mem_gen_v8_4_1_synth
       clkb => clkb,
       dina(0) => dina(0),
       doutb(0) => doutb(0),
-      enb => enb,
       wea(0) => wea(0)
     );
 end STRUCTURE;
@@ -1335,14 +1301,13 @@ entity path_bram is
     addra : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     clkb : in STD_LOGIC;
-    enb : in STD_LOGIC;
     addrb : in STD_LOGIC_VECTOR ( 16 downto 0 );
     doutb : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   attribute NotValidForBitStream : boolean;
   attribute NotValidForBitStream of path_bram : entity is true;
   attribute CHECK_LICENSE_TYPE : string;
-  attribute CHECK_LICENSE_TYPE of path_bram : entity is "path_bram,blk_mem_gen_v8_4_1,{}";
+  attribute CHECK_LICENSE_TYPE of path_bram : entity is "visited_map,blk_mem_gen_v8_4_1,{}";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of path_bram : entity is "yes";
   attribute x_core_info : string;
@@ -1425,7 +1390,7 @@ architecture STRUCTURE of path_bram is
   attribute C_HAS_ENA : integer;
   attribute C_HAS_ENA of U0 : label is 0;
   attribute C_HAS_ENB : integer;
-  attribute C_HAS_ENB of U0 : label is 1;
+  attribute C_HAS_ENB of U0 : label is 0;
   attribute C_HAS_INJECTERR : integer;
   attribute C_HAS_INJECTERR of U0 : label is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_A : integer;
@@ -1453,7 +1418,7 @@ architecture STRUCTURE of path_bram is
   attribute C_INITB_VAL : string;
   attribute C_INITB_VAL of U0 : label is "0";
   attribute C_INIT_FILE : string;
-  attribute C_INIT_FILE of U0 : label is "path_bram.mem";
+  attribute C_INIT_FILE of U0 : label is "visited_map.mem";
   attribute C_INIT_FILE_NAME : string;
   attribute C_INIT_FILE_NAME of U0 : label is "no_coe_file_loaded";
   attribute C_INTERFACE_TYPE : integer;
@@ -1523,7 +1488,6 @@ architecture STRUCTURE of path_bram is
   attribute x_interface_parameter of clka : signal is "XIL_INTERFACENAME BRAM_PORTA, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER";
   attribute x_interface_info of clkb : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTB CLK";
   attribute x_interface_parameter of clkb : signal is "XIL_INTERFACENAME BRAM_PORTB, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER";
-  attribute x_interface_info of enb : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTB EN";
   attribute x_interface_info of addra : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTA ADDR";
   attribute x_interface_info of addrb : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTB ADDR";
   attribute x_interface_info of dina : signal is "xilinx.com:interface:bram:1.0 BRAM_PORTA DIN";
@@ -1544,7 +1508,7 @@ U0: entity work.path_bram_blk_mem_gen_v8_4_1
       doutb(0) => doutb(0),
       eccpipece => '0',
       ena => '0',
-      enb => enb,
+      enb => '0',
       injectdbiterr => '0',
       injectsbiterr => '0',
       rdaddrecc(16 downto 0) => NLW_U0_rdaddrecc_UNCONNECTED(16 downto 0),

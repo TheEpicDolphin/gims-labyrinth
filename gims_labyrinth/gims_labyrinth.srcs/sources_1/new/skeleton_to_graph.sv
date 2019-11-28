@@ -158,7 +158,7 @@ endmodule
 
 
 //IGNORE THIS LUIS. not important for the skeltonizer or erosion
-
+/*
 module skeleton_corner_finder #(parameter IMG_W = 640, parameter IMG_H = 480)
     (
     input clk,
@@ -323,3 +323,4 @@ module skeleton_corner_finder #(parameter IMG_W = 640, parameter IMG_H = 480)
     end
     
 endmodule
+*/

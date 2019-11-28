@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Thu Nov 28 14:54:15 2019
+// Date        : Thu Nov 28 15:25:29 2019
 // Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
-//               c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/pixel_backpointers/pixel_backpointers_sim_netlist.v
+//               C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/pixel_backpointers/pixel_backpointers_sim_netlist.v
 // Design      : pixel_backpointers
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -20,7 +20,6 @@ module pixel_backpointers
     addra,
     dina,
     clkb,
-    enb,
     addrb,
     doutb);
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME BRAM_PORTA, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER" *) input clka;
@@ -28,7 +27,6 @@ module pixel_backpointers
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA ADDR" *) input [16:0]addra;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA DIN" *) input [1:0]dina;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTB CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME BRAM_PORTB, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER" *) input clkb;
-  (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTB EN" *) input enb;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTB ADDR" *) input [16:0]addrb;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTB DOUT" *) output [1:0]doutb;
 
@@ -38,7 +36,6 @@ module pixel_backpointers
   wire clkb;
   wire [1:0]dina;
   wire [1:0]doutb;
-  wire enb;
   wire [0:0]wea;
   wire NLW_U0_dbiterr_UNCONNECTED;
   wire NLW_U0_rsta_busy_UNCONNECTED;
@@ -88,7 +85,7 @@ module pixel_backpointers
   (* C_FAMILY = "artix7" *) 
   (* C_HAS_AXI_ID = "0" *) 
   (* C_HAS_ENA = "0" *) 
-  (* C_HAS_ENB = "1" *) 
+  (* C_HAS_ENB = "0" *) 
   (* C_HAS_INJECTERR = "0" *) 
   (* C_HAS_MEM_OUTPUT_REGS_A = "0" *) 
   (* C_HAS_MEM_OUTPUT_REGS_B = "1" *) 
@@ -148,7 +145,7 @@ module pixel_backpointers
         .doutb(doutb),
         .eccpipece(1'b0),
         .ena(1'b0),
-        .enb(enb),
+        .enb(1'b0),
         .injectdbiterr(1'b0),
         .injectsbiterr(1'b0),
         .rdaddrecc(NLW_U0_rdaddrecc_UNCONNECTED[16:0]),
@@ -227,23 +224,19 @@ endmodule
 (* ORIG_REF_NAME = "bindec" *) 
 module pixel_backpointers_bindec_0
    (enb_array,
-    addrb,
-    enb);
+    addrb);
   output [0:0]enb_array;
   input [2:0]addrb;
-  input enb;
 
   wire [2:0]addrb;
-  wire enb;
   wire [0:0]enb_array;
 
-  LUT4 #(
-    .INIT(16'h1000)) 
+  LUT3 #(
+    .INIT(8'h04)) 
     ENOUT
-       (.I0(addrb[1]),
-        .I1(addrb[0]),
-        .I2(addrb[2]),
-        .I3(enb),
+       (.I0(addrb[0]),
+        .I1(addrb[2]),
+        .I2(addrb[1]),
         .O(enb_array));
 endmodule
 
@@ -252,7 +245,6 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
    (doutb,
     clka,
     clkb,
-    enb,
     addra,
     addrb,
     dina,
@@ -260,7 +252,6 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
   output [1:0]doutb;
   input clka;
   input clkb;
-  input enb;
   input [16:0]addra;
   input [16:0]addrb;
   input [1:0]dina;
@@ -273,7 +264,6 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
   wire [1:0]dina;
   wire [1:0]doutb;
   wire [4:4]ena_array;
-  wire enb;
   wire [4:4]enb_array;
   wire ram_doutb;
   wire ram_ena_n_0;
@@ -289,7 +279,6 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
         .wea(wea));
   pixel_backpointers_bindec_0 \bindec_b.bindec_inst_b 
        (.addrb(addrb[16:14]),
-        .enb(enb),
         .enb_array(enb_array));
   pixel_backpointers_blk_mem_gen_mux__parameterized0 \has_mux_b.B 
        (.\DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T (\ramloop[2].ram.r_n_0 ),
@@ -297,19 +286,17 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
         .DOUTB(ram_doutb),
         .addrb(addrb[16:14]),
         .clkb(clkb),
-        .doutb(doutb),
-        .enb(enb));
+        .doutb(doutb));
   LUT2 #(
     .INIT(4'h4)) 
     ram_ena
        (.I0(addra[16]),
         .I1(wea),
         .O(ram_ena_n_0));
-  LUT2 #(
-    .INIT(4'h4)) 
+  LUT1 #(
+    .INIT(2'h1)) 
     ram_enb
        (.I0(addrb[16]),
-        .I1(enb),
         .O(ram_enb_n_0));
   pixel_backpointers_blk_mem_gen_prim_width \ramloop[0].ram.r 
        (.DOUTB(ram_doutb),
@@ -319,8 +306,7 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
         .addrb(addrb[15:0]),
         .clka(clka),
         .clkb(clkb),
-        .dina(dina[0]),
-        .enb(enb));
+        .dina(dina[0]));
   pixel_backpointers_blk_mem_gen_prim_width__parameterized0 \ramloop[1].ram.r 
        (.DOBDO({\ramloop[1].ram.r_n_0 ,\ramloop[1].ram.r_n_1 }),
         .addra(addra[13:0]),
@@ -329,7 +315,6 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
         .clkb(clkb),
         .dina(dina),
         .ena_array(ena_array),
-        .enb(enb),
         .enb_array(enb_array));
   pixel_backpointers_blk_mem_gen_prim_width__parameterized1 \ramloop[2].ram.r 
        (.DOUTB(\ramloop[2].ram.r_n_0 ),
@@ -339,21 +324,18 @@ module pixel_backpointers_blk_mem_gen_generic_cstr
         .addrb(addrb[15:0]),
         .clka(clka),
         .clkb(clkb),
-        .dina(dina[1]),
-        .enb(enb));
+        .dina(dina[1]));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_mux" *) 
 module pixel_backpointers_blk_mem_gen_mux__parameterized0
    (doutb,
-    enb,
     addrb,
     clkb,
     DOBDO,
     DOUTB,
     \DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T );
   output [1:0]doutb;
-  input enb;
   input [2:0]addrb;
   input clkb;
   input [1:0]DOBDO;
@@ -366,7 +348,6 @@ module pixel_backpointers_blk_mem_gen_mux__parameterized0
   wire [2:0]addrb;
   wire clkb;
   wire [1:0]doutb;
-  wire enb;
   wire [2:0]sel_pipe;
   wire [2:0]sel_pipe_d1;
 
@@ -392,7 +373,7 @@ module pixel_backpointers_blk_mem_gen_mux__parameterized0
     .INIT(1'b0)) 
     \no_softecc_norm_sel2.has_mem_regs.WITHOUT_ECC_PIPE.ce_pri.sel_pipe_d1_reg[0] 
        (.C(clkb),
-        .CE(enb),
+        .CE(1'b1),
         .D(sel_pipe[0]),
         .Q(sel_pipe_d1[0]),
         .R(1'b0));
@@ -400,7 +381,7 @@ module pixel_backpointers_blk_mem_gen_mux__parameterized0
     .INIT(1'b0)) 
     \no_softecc_norm_sel2.has_mem_regs.WITHOUT_ECC_PIPE.ce_pri.sel_pipe_d1_reg[1] 
        (.C(clkb),
-        .CE(enb),
+        .CE(1'b1),
         .D(sel_pipe[1]),
         .Q(sel_pipe_d1[1]),
         .R(1'b0));
@@ -408,7 +389,7 @@ module pixel_backpointers_blk_mem_gen_mux__parameterized0
     .INIT(1'b0)) 
     \no_softecc_norm_sel2.has_mem_regs.WITHOUT_ECC_PIPE.ce_pri.sel_pipe_d1_reg[2] 
        (.C(clkb),
-        .CE(enb),
+        .CE(1'b1),
         .D(sel_pipe[2]),
         .Q(sel_pipe_d1[2]),
         .R(1'b0));
@@ -416,7 +397,7 @@ module pixel_backpointers_blk_mem_gen_mux__parameterized0
     .INIT(1'b0)) 
     \no_softecc_sel_reg.ce_pri.sel_pipe_reg[0] 
        (.C(clkb),
-        .CE(enb),
+        .CE(1'b1),
         .D(addrb[0]),
         .Q(sel_pipe[0]),
         .R(1'b0));
@@ -424,7 +405,7 @@ module pixel_backpointers_blk_mem_gen_mux__parameterized0
     .INIT(1'b0)) 
     \no_softecc_sel_reg.ce_pri.sel_pipe_reg[1] 
        (.C(clkb),
-        .CE(enb),
+        .CE(1'b1),
         .D(addrb[1]),
         .Q(sel_pipe[1]),
         .R(1'b0));
@@ -432,7 +413,7 @@ module pixel_backpointers_blk_mem_gen_mux__parameterized0
     .INIT(1'b0)) 
     \no_softecc_sel_reg.ce_pri.sel_pipe_reg[2] 
        (.C(clkb),
-        .CE(enb),
+        .CE(1'b1),
         .D(addrb[2]),
         .Q(sel_pipe[2]),
         .R(1'b0));
@@ -445,7 +426,6 @@ module pixel_backpointers_blk_mem_gen_prim_width
     clkb,
     ENA,
     ENB,
-    enb,
     addra,
     addrb,
     dina);
@@ -454,7 +434,6 @@ module pixel_backpointers_blk_mem_gen_prim_width
   input clkb;
   input ENA;
   input ENB;
-  input enb;
   input [15:0]addra;
   input [15:0]addrb;
   input [0:0]dina;
@@ -467,7 +446,6 @@ module pixel_backpointers_blk_mem_gen_prim_width
   wire clka;
   wire clkb;
   wire [0:0]dina;
-  wire enb;
 
   pixel_backpointers_blk_mem_gen_prim_wrapper \prim_noinit.ram 
        (.DOUTB(DOUTB),
@@ -477,8 +455,7 @@ module pixel_backpointers_blk_mem_gen_prim_width
         .addrb(addrb),
         .clka(clka),
         .clkb(clkb),
-        .dina(dina),
-        .enb(enb));
+        .dina(dina));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -488,7 +465,6 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized0
     clkb,
     ena_array,
     enb_array,
-    enb,
     addra,
     addrb,
     dina);
@@ -497,7 +473,6 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized0
   input clkb;
   input [0:0]ena_array;
   input [0:0]enb_array;
-  input enb;
   input [13:0]addra;
   input [13:0]addrb;
   input [1:0]dina;
@@ -509,7 +484,6 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized0
   wire clkb;
   wire [1:0]dina;
   wire [0:0]ena_array;
-  wire enb;
   wire [0:0]enb_array;
 
   pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized0 \prim_noinit.ram 
@@ -520,7 +494,6 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized0
         .clkb(clkb),
         .dina(dina),
         .ena_array(ena_array),
-        .enb(enb),
         .enb_array(enb_array));
 endmodule
 
@@ -531,7 +504,6 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized1
     clkb,
     ENA,
     ENB,
-    enb,
     addra,
     addrb,
     dina);
@@ -540,7 +512,6 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized1
   input clkb;
   input ENA;
   input ENB;
-  input enb;
   input [15:0]addra;
   input [15:0]addrb;
   input [0:0]dina;
@@ -553,7 +524,6 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized1
   wire clka;
   wire clkb;
   wire [0:0]dina;
-  wire enb;
 
   pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized1 \prim_noinit.ram 
        (.DOUTB(DOUTB),
@@ -563,8 +533,7 @@ module pixel_backpointers_blk_mem_gen_prim_width__parameterized1
         .addrb(addrb),
         .clka(clka),
         .clkb(clkb),
-        .dina(dina),
-        .enb(enb));
+        .dina(dina));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper" *) 
@@ -574,7 +543,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper
     clkb,
     ENA,
     ENB,
-    enb,
     addra,
     addrb,
     dina);
@@ -583,7 +551,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper
   input clkb;
   input ENA;
   input ENB;
-  input enb;
   input [15:0]addra;
   input [15:0]addrb;
   input [0:0]dina;
@@ -598,7 +565,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper
   wire clka;
   wire clkb;
   wire [0:0]dina;
-  wire enb;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_DBITERR_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_SBITERR_UNCONNECTED ;
   wire [31:0]\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_DOADO_UNCONNECTED ;
@@ -820,7 +786,7 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper
         .INJECTSBITERR(1'b0),
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
-        .REGCEB(enb),
+        .REGCEB(1'b1),
         .RSTRAMARSTRAM(1'b0),
         .RSTRAMB(1'b0),
         .RSTREGARSTREG(1'b0),
@@ -1030,7 +996,7 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper
         .INJECTSBITERR(1'b0),
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
-        .REGCEB(enb),
+        .REGCEB(1'b1),
         .RSTRAMARSTRAM(1'b0),
         .RSTRAMB(1'b0),
         .RSTREGARSTREG(1'b0),
@@ -1047,7 +1013,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized0
     clkb,
     ena_array,
     enb_array,
-    enb,
     addra,
     addrb,
     dina);
@@ -1056,7 +1021,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized0
   input clkb;
   input [0:0]ena_array;
   input [0:0]enb_array;
-  input enb;
   input [13:0]addra;
   input [13:0]addrb;
   input [1:0]dina;
@@ -1068,7 +1032,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized0
   wire clkb;
   wire [1:0]dina;
   wire [0:0]ena_array;
-  wire enb;
   wire [0:0]enb_array;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
@@ -1283,7 +1246,7 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized0
         .INJECTSBITERR(1'b0),
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
-        .REGCEB(enb),
+        .REGCEB(1'b1),
         .RSTRAMARSTRAM(1'b0),
         .RSTRAMB(1'b0),
         .RSTREGARSTREG(1'b0),
@@ -1300,7 +1263,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized1
     clkb,
     ENA,
     ENB,
-    enb,
     addra,
     addrb,
     dina);
@@ -1309,7 +1271,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized1
   input clkb;
   input ENA;
   input ENB;
-  input enb;
   input [15:0]addra;
   input [15:0]addrb;
   input [0:0]dina;
@@ -1324,7 +1285,6 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized1
   wire clka;
   wire clkb;
   wire [0:0]dina;
-  wire enb;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_DBITERR_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_SBITERR_UNCONNECTED ;
   wire [31:0]\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_DOADO_UNCONNECTED ;
@@ -1546,7 +1506,7 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized1
         .INJECTSBITERR(1'b0),
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
-        .REGCEB(enb),
+        .REGCEB(1'b1),
         .RSTRAMARSTRAM(1'b0),
         .RSTRAMB(1'b0),
         .RSTREGARSTREG(1'b0),
@@ -1756,7 +1716,7 @@ module pixel_backpointers_blk_mem_gen_prim_wrapper__parameterized1
         .INJECTSBITERR(1'b0),
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
-        .REGCEB(enb),
+        .REGCEB(1'b1),
         .RSTRAMARSTRAM(1'b0),
         .RSTRAMB(1'b0),
         .RSTREGARSTREG(1'b0),
@@ -1771,7 +1731,6 @@ module pixel_backpointers_blk_mem_gen_top
    (doutb,
     clka,
     clkb,
-    enb,
     addra,
     addrb,
     dina,
@@ -1779,7 +1738,6 @@ module pixel_backpointers_blk_mem_gen_top
   output [1:0]doutb;
   input clka;
   input clkb;
-  input enb;
   input [16:0]addra;
   input [16:0]addrb;
   input [1:0]dina;
@@ -1791,7 +1749,6 @@ module pixel_backpointers_blk_mem_gen_top
   wire clkb;
   wire [1:0]dina;
   wire [1:0]doutb;
-  wire enb;
   wire [0:0]wea;
 
   pixel_backpointers_blk_mem_gen_generic_cstr \valid.cstr 
@@ -1801,7 +1758,6 @@ module pixel_backpointers_blk_mem_gen_top
         .clkb(clkb),
         .dina(dina),
         .doutb(doutb),
-        .enb(enb),
         .wea(wea));
 endmodule
 
@@ -1814,7 +1770,7 @@ endmodule
 (* C_EN_RDADDRA_CHG = "0" *) (* C_EN_RDADDRB_CHG = "0" *) (* C_EN_SAFETY_CKT = "0" *) 
 (* C_EN_SHUTDOWN_PIN = "0" *) (* C_EN_SLEEP_PIN = "0" *) (* C_EST_POWER_SUMMARY = "Estimated Power for IP     :     7.745373 mW" *) 
 (* C_FAMILY = "artix7" *) (* C_HAS_AXI_ID = "0" *) (* C_HAS_ENA = "0" *) 
-(* C_HAS_ENB = "1" *) (* C_HAS_INJECTERR = "0" *) (* C_HAS_MEM_OUTPUT_REGS_A = "0" *) 
+(* C_HAS_ENB = "0" *) (* C_HAS_INJECTERR = "0" *) (* C_HAS_MEM_OUTPUT_REGS_A = "0" *) 
 (* C_HAS_MEM_OUTPUT_REGS_B = "1" *) (* C_HAS_MUX_OUTPUT_REGS_A = "0" *) (* C_HAS_MUX_OUTPUT_REGS_B = "0" *) 
 (* C_HAS_REGCEA = "0" *) (* C_HAS_REGCEB = "0" *) (* C_HAS_RSTA = "0" *) 
 (* C_HAS_RSTB = "0" *) (* C_HAS_SOFTECC_INPUT_REGS_A = "0" *) (* C_HAS_SOFTECC_OUTPUT_REGS_B = "0" *) 
@@ -1965,7 +1921,6 @@ module pixel_backpointers_blk_mem_gen_v8_4_1
   wire clkb;
   wire [1:0]dina;
   wire [1:0]doutb;
-  wire enb;
   wire [0:0]wea;
 
   assign dbiterr = \<const0> ;
@@ -2039,7 +1994,6 @@ module pixel_backpointers_blk_mem_gen_v8_4_1
         .clkb(clkb),
         .dina(dina),
         .doutb(doutb),
-        .enb(enb),
         .wea(wea));
 endmodule
 
@@ -2048,7 +2002,6 @@ module pixel_backpointers_blk_mem_gen_v8_4_1_synth
    (doutb,
     clka,
     clkb,
-    enb,
     addra,
     addrb,
     dina,
@@ -2056,7 +2009,6 @@ module pixel_backpointers_blk_mem_gen_v8_4_1_synth
   output [1:0]doutb;
   input clka;
   input clkb;
-  input enb;
   input [16:0]addra;
   input [16:0]addrb;
   input [1:0]dina;
@@ -2068,7 +2020,6 @@ module pixel_backpointers_blk_mem_gen_v8_4_1_synth
   wire clkb;
   wire [1:0]dina;
   wire [1:0]doutb;
-  wire enb;
   wire [0:0]wea;
 
   pixel_backpointers_blk_mem_gen_top \gnbram.gnativebmg.native_blk_mem_gen 
@@ -2078,7 +2029,6 @@ module pixel_backpointers_blk_mem_gen_v8_4_1_synth
         .clkb(clkb),
         .dina(dina),
         .doutb(doutb),
-        .enb(enb),
         .wea(wea));
 endmodule
 `ifndef GLBL

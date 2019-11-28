@@ -50,6 +50,9 @@ assign start_bp_tracer = lee_alg_done;
 //Debugging
 logic [2:0] state;
 
+integer maze_sol_f;
+integer i;
+
 
 // Instantiate the Unit Under Test (UUT)
 binary_maze skel_maze(.clka(clock),
@@ -134,12 +137,20 @@ rst = 1;
 rst = 0;
 #15;
 
-start_pos = {9'd49, 8'd15};
+//start_pos = {9'd49, 8'd15};
+start_pos = {9'd19, 8'd7};
 start = 1;
 #15
 start = 0;
 #500;
 
+/*
+maze_sol_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/maze_sol.txt","w");
+for(i = 0; i < 10; i = i + 1)begin
+    $fwrite(maze_sol_f,"%h\n",{h,s,v});
+end
+$fclose(maze_sol_f);
+*/
 end
 
 endmodule

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="pixel_type_map_synth_1" LaunchPart="xc7a100tcsg324-3" LaunchTime="1574963095">
+<GenRun Id="pixel_type_map_synth_1" LaunchPart="xc7a100tcsg324-3" LaunchTime="1574977468">
   <File Type="PA-TCL" Name="pixel_type_map.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="pixel_type_map_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="pixel_type_map_reports.tcl"/>
@@ -36,9 +36,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

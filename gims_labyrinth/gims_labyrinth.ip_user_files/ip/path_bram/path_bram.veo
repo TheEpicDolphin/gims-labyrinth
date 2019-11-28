@@ -60,7 +60,6 @@ path_bram your_instance_name (
   .addra(addra),  // input wire [16 : 0] addra
   .dina(dina),    // input wire [0 : 0] dina
   .clkb(clkb),    // input wire clkb
-  .enb(enb),      // input wire enb
   .addrb(addrb),  // input wire [16 : 0] addrb
   .doutb(doutb)  // output wire [0 : 0] doutb
 );

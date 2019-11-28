@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import imageio
 
@@ -18,19 +19,21 @@ def bin_maze_coe_gen(bin_maze_im):
         f.write(coe_contents)
     return None
 
-bin_maze_im = (imageio.imread("../test_imgs/skel.png") > 0).astype(int)
-bin_maze_coe_gen(bin_maze_im)
-
 def pixel_type_map_coe_gen(bin_maze_im):
     r, c = bin_maze_im.shape
     segmented_img = np.zeros((r,c))
     segmented_img = segmented_img.astype(np.uint8)
+
+    #assign obstacles
+    segmented_img[84:94, 130:144] = 1
     
     #assign start
-    segmented_img[12:18, 42:56] = 2
+    #segmented_img[12:18, 42:56] = 2
+    segmented_img[2:8, 16:22] = 2
     
     #assign end
-    segmented_img[216:226,186:196] = 3
+    #segmented_img[216:226,186:196] = 3
+    segmented_img[224:228, 286:292] = 3
 
     "memory_initialization_radix=2;\nmemory_initialization_vector="
     coe_contents = "memory_initialization_radix=2;\nmemory_initialization_vector=\n"
@@ -43,6 +46,21 @@ def pixel_type_map_coe_gen(bin_maze_im):
 
     with open("pixel_type_map.coe", 'w') as f:
         f.write(coe_contents)
-    return None
+
+
+    #Visualize
+    plt.figure()
+    plt.imshow(segmented_img)
+
+    plt.figure()
+    plt.imshow(bin_maze_im)
     
+    plt.figure()
+    #superimposed
+    plt.imshow(segmented_img + 4 * ((segmented_img == 0) & bin_maze_im))
+    plt.show()
+    return None
+
+bin_maze_im = (imageio.imread("../test_imgs/skel_complicated.png") > 0).astype(int)
+bin_maze_coe_gen(bin_maze_im)
 pixel_type_map_coe_gen(bin_maze_im)

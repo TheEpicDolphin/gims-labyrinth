@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Thu Nov 28 14:54:15 2019
+| Date         : Thu Nov 28 15:25:29 2019
 | Host         : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 | Command      : report_utilization -file pixel_backpointers_utilization_synth.rpt -pb pixel_backpointers_utilization_synth.pb
 | Design       : pixel_backpointers
@@ -150,8 +150,10 @@ Table of Contents
 | FDRE     |    6 |        Flop & Latch |
 | RAMB36E1 |    5 |        Block Memory |
 | LUT5     |    2 |                 LUT |
-| LUT4     |    2 |                 LUT |
-| LUT2     |    2 |                 LUT |
+| LUT4     |    1 |                 LUT |
+| LUT3     |    1 |                 LUT |
+| LUT2     |    1 |                 LUT |
+| LUT1     |    1 |                 LUT |
 +----------+------+---------------------+
 
 

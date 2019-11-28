@@ -2,3 +2,6 @@ Running: xsim.dir/skeleton_intersection_finder_tb_behav/xsimk.exe -simmode gui -
 Design successfully loaded
 Design Loading Memory Usage: 5432 KB (Peak: 5432 KB)
 Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 19648 KB (Peak: 19648 KB)
+Simulation CPU Usage: 952 ms

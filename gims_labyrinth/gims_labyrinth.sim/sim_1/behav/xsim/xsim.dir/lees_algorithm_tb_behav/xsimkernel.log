@@ -2,3 +2,6 @@ Running: xsim.dir/lees_algorithm_tb_behav/xsimk.exe -simmode gui -wdb lees_algor
 Design successfully loaded
 Design Loading Memory Usage: 6232 KB (Peak: 6232 KB)
 Design Loading CPU Usage: 78 ms
+Simulation completed
+Simulation Memory Usage: 11868 KB (Peak: 11868 KB)
+Simulation CPU Usage: 999 ms

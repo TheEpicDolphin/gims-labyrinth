@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Thu Nov 28 15:01:36 2019
+# Process ID: 10196
+# Current directory: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/path_bram_synth_1
+# Command line: vivado.exe -log path_bram.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source path_bram.tcl
+# Log file: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/path_bram_synth_1/path_bram.vds
+# Journal file: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/path_bram_synth_1\vivado.jou
+#-----------------------------------------------------------
+source path_bram.tcl -notrace

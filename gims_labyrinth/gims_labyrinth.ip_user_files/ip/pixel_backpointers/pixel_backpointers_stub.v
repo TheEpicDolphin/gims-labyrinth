@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Wed Nov 27 17:39:43 2019
+// Date        : Thu Nov 28 14:54:15 2019
 // Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/pixel_backpointers/pixel_backpointers_stub.v
@@ -14,11 +14,14 @@
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* x_core_info = "blk_mem_gen_v8_4_1,Vivado 2018.2" *)
-module pixel_backpointers(clka, wea, addra, dina, douta)
-/* synthesis syn_black_box black_box_pad_pin="clka,wea[0:0],addra[16:0],dina[1:0],douta[1:0]" */;
+module pixel_backpointers(clka, wea, addra, dina, clkb, enb, addrb, doutb)
+/* synthesis syn_black_box black_box_pad_pin="clka,wea[0:0],addra[16:0],dina[1:0],clkb,enb,addrb[16:0],doutb[1:0]" */;
   input clka;
   input [0:0]wea;
   input [16:0]addra;
   input [1:0]dina;
-  output [1:0]douta;
+  input clkb;
+  input enb;
+  input [16:0]addrb;
+  output [1:0]doutb;
 endmodule

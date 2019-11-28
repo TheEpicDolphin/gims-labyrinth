@@ -2,20 +2,21 @@ Vivado Simulator 2018.2
 Time resolution is 1 ps
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module lees_algorithm_tb.skel_maze.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-Block Memory Generator module lees_algorithm_tb.p_bp.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
- Block Memory Generator module loading initial data...
- Block Memory Generator data initialization complete.
-Block Memory Generator module lees_algorithm_tb.p_tmap.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-Block Memory Generator module lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-Stopped at time : 135 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv" Line 91
-Stopped at time : 145 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv" Line 91
-Stopped at time : 145 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv" Line 92
-blk_mem_gen_v8_4_1 collision detected at time: 235000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1431, B  read address: 1431
-blk_mem_gen_v8_4_1 collision detected at time: 415000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1571, B  read address: 1571
-blk_mem_gen_v8_4_1 collision detected at time: 595000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 16b1, B  read address: 16b1
-blk_mem_gen_v8_4_1 collision detected at time: 775000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 17f1, B  read address: 17f1
-blk_mem_gen_v8_4_1 collision detected at time: 955000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1931, B  read address: 1931
+Block Memory Generator module skeleton_intersection_finder_tb.skel_maze.inst.native_mem_module.blk_mem_gen_v8_4_1_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Stopped at time : 145 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 92
+Stopped at time : 156225 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+Stopped at time : 156625 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+Stopped at time : 174655 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+Stopped at time : 315525 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+Stopped at time : 411445 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+Stopped at time : 418685 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+Stopped at time : 511435 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+Stopped at time : 692765 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 112
+blk_mem_gen_v8_4_1 WARNING: Address 12c00 is outside range for A Read
+blk_mem_gen_v8_4_1 WARNING: Address 12c01 is outside range for A Read
+blk_mem_gen_v8_4_1 WARNING: Address 12c02 is outside range for A Read
+Stopped at time : 768185 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" Line 140
+4_1 collision detected at time: 955000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1931, B  read address: 1931
 blk_mem_gen_v8_4_1 collision detected at time: 1135000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1a71, B  read address: 1a71
 blk_mem_gen_v8_4_1 collision detected at time: 1315000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1bb1, B  read address: 1bb1
 blk_mem_gen_v8_4_1 collision detected at time: 1495000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1cf1, B  read address: 1cf1
@@ -304,4 +305,19 @@ blk_mem_gen_v8_4_1 collision detected at time: 84745000, Instance: lees_algorith
 blk_mem_gen_v8_4_1 collision detected at time: 84835000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: f97a, B  read address: f97a
 blk_mem_gen_v8_4_1 collision detected at time: 84925000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: faba, B  read address: faba
 blk_mem_gen_v8_4_1 collision detected at time: 85015000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: fbfa, B  read address: fbfa
-blk_mem_gen_v8_4_1 collision detected at time: 85105000, Instance: lees_algorithm_tb.visited_map.inst.native_mem
+blk_mem_gen_v8_4_1 collision detected at time: 85105000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: fd3a, B  read address: fd3a
+blk_mem_gen_v8_4_1 collision detected at time: 85195000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: fe7a, B  read address: fe7a
+blk_mem_gen_v8_4_1 collision detected at time: 85375000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: ffbb, B  read address: ffbb
+blk_mem_gen_v8_4_1 collision detected at time: 85465000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 100fb, B  read address: 100fb
+blk_mem_gen_v8_4_1 collision detected at time: 85555000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1023b, B  read address: 1023b
+blk_mem_gen_v8_4_1 collision detected at time: 85735000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1037c, B  read address: 1037c
+blk_mem_gen_v8_4_1 collision detected at time: 85825000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 104bc, B  read address: 104bc
+blk_mem_gen_v8_4_1 collision detected at time: 85915000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 105fc, B  read address: 105fc
+blk_mem_gen_v8_4_1 collision detected at time: 86005000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1073c, B  read address: 1073c
+blk_mem_gen_v8_4_1 collision detected at time: 86095000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 1087c, B  read address: 1087c
+blk_mem_gen_v8_4_1 collision detected at time: 86275000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 109bd, B  read address: 109bd
+blk_mem_gen_v8_4_1 collision detected at time: 86365000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 10afd, B  read address: 10afd
+blk_mem_gen_v8_4_1 collision detected at time: 86455000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 10c3d, B  read address: 10c3d
+blk_mem_gen_v8_4_1 collision detected at time: 86545000, Instance: lees_algorithm_tb.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 10d7d, B  read address: 10d7d
+Stopped at time : 86625 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv" Line 150
+Stopped at time : 86635 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv" Line 169

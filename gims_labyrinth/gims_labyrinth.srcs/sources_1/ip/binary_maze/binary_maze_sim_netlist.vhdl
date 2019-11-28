@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Wed Nov 27 01:40:59 2019
+-- Date        : Wed Nov 27 01:21:20 2019
 -- Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/binary_maze/binary_maze_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top binary_maze -prefix
+--               binary_maze_ binary_maze_sim_netlist.vhdl
 -- Design      : binary_maze
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -19,8 +19,6 @@ entity binary_maze_bindec is
     ena_array : out STD_LOGIC_VECTOR ( 0 to 0 );
     addra : in STD_LOGIC_VECTOR ( 2 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_bindec : entity is "bindec";
 end binary_maze_bindec;
 
 architecture STRUCTURE of binary_maze_bindec is
@@ -49,8 +47,6 @@ entity binary_maze_blk_mem_gen_mux is
     wea : in STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_blk_mem_gen_mux : entity is "blk_mem_gen_mux";
 end binary_maze_blk_mem_gen_mux;
 
 architecture STRUCTURE of binary_maze_blk_mem_gen_mux is
@@ -185,8 +181,6 @@ entity binary_maze_blk_mem_gen_prim_wrapper_init is
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_blk_mem_gen_prim_wrapper_init : entity is "blk_mem_gen_prim_wrapper_init";
 end binary_maze_blk_mem_gen_prim_wrapper_init;
 
 architecture STRUCTURE of binary_maze_blk_mem_gen_prim_wrapper_init is
@@ -816,8 +810,6 @@ entity binary_maze_blk_mem_gen_prim_width is
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end binary_maze_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of binary_maze_blk_mem_gen_prim_width is
@@ -873,8 +865,6 @@ entity binary_maze_blk_mem_gen_generic_cstr is
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end binary_maze_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of binary_maze_blk_mem_gen_generic_cstr is
@@ -936,8 +926,6 @@ entity binary_maze_blk_mem_gen_top is
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end binary_maze_blk_mem_gen_top;
 
 architecture STRUCTURE of binary_maze_blk_mem_gen_top is
@@ -963,8 +951,6 @@ entity binary_maze_blk_mem_gen_v8_4_1_synth is
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_blk_mem_gen_v8_4_1_synth : entity is "blk_mem_gen_v8_4_1_synth";
 end binary_maze_blk_mem_gen_v8_4_1_synth;
 
 architecture STRUCTURE of binary_maze_blk_mem_gen_v8_4_1_synth is
@@ -1194,8 +1180,6 @@ entity binary_maze_blk_mem_gen_v8_4_1 is
   attribute C_WRITE_WIDTH_B of binary_maze_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_XDEVICEFAMILY : string;
   attribute C_XDEVICEFAMILY of binary_maze_blk_mem_gen_v8_4_1 : entity is "artix7";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of binary_maze_blk_mem_gen_v8_4_1 : entity is "blk_mem_gen_v8_4_1";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of binary_maze_blk_mem_gen_v8_4_1 : entity is "yes";
 end binary_maze_blk_mem_gen_v8_4_1;

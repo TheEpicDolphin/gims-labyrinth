@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Wed Nov 27 01:40:59 2019
+// Date        : Wed Nov 27 01:21:20 2019
 // Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/binary_maze/binary_maze_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top binary_maze -prefix
+//               binary_maze_ binary_maze_sim_netlist.v
 // Design      : binary_maze
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -192,7 +192,6 @@ module binary_maze
         .web(1'b0));
 endmodule
 
-(* ORIG_REF_NAME = "bindec" *) 
 module binary_maze_bindec
    (ena_array,
     addra);
@@ -211,7 +210,6 @@ module binary_maze_bindec
         .O(ena_array));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_generic_cstr" *) 
 module binary_maze_blk_mem_gen_generic_cstr
    (douta,
     clka,
@@ -265,7 +263,6 @@ module binary_maze_blk_mem_gen_generic_cstr
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_mux" *) 
 module binary_maze_blk_mem_gen_mux
    (douta,
     DOADO,
@@ -374,7 +371,6 @@ module binary_maze_blk_mem_gen_mux
         .R(1'b0));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
 module binary_maze_blk_mem_gen_prim_width
    (DOUTA,
     clka,
@@ -436,7 +432,6 @@ module binary_maze_blk_mem_gen_prim_width__parameterized0
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
 module binary_maze_blk_mem_gen_prim_wrapper_init
    (DOUTA,
     clka,
@@ -1052,7 +1047,6 @@ module binary_maze_blk_mem_gen_prim_wrapper_init__parameterized0
         .WEBWE({1'b0,1'b0,1'b0,1'b0}));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_top" *) 
 module binary_maze_blk_mem_gen_top
    (douta,
     clka,
@@ -1103,7 +1097,7 @@ endmodule
 (* C_USE_URAM = "0" *) (* C_WEA_WIDTH = "1" *) (* C_WEB_WIDTH = "1" *) 
 (* C_WRITE_DEPTH_A = "76800" *) (* C_WRITE_DEPTH_B = "76800" *) (* C_WRITE_MODE_A = "NO_CHANGE" *) 
 (* C_WRITE_MODE_B = "WRITE_FIRST" *) (* C_WRITE_WIDTH_A = "1" *) (* C_WRITE_WIDTH_B = "1" *) 
-(* C_XDEVICEFAMILY = "artix7" *) (* ORIG_REF_NAME = "blk_mem_gen_v8_4_1" *) (* downgradeipidentifiedwarnings = "yes" *) 
+(* C_XDEVICEFAMILY = "artix7" *) (* downgradeipidentifiedwarnings = "yes" *) 
 module binary_maze_blk_mem_gen_v8_4_1
    (clka,
     rsta,
@@ -1309,7 +1303,6 @@ module binary_maze_blk_mem_gen_v8_4_1
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_v8_4_1_synth" *) 
 module binary_maze_blk_mem_gen_v8_4_1_synth
    (douta,
     clka,

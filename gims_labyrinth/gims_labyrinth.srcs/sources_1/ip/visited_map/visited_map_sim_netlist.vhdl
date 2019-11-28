@@ -1,7 +1,7 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Wed Nov 27 17:52:11 2019
+-- Date        : Wed Nov 27 19:29:28 2019
 -- Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/visited_map/visited_map_sim_netlist.vhdl
@@ -74,7 +74,7 @@ entity \visited_map_blk_mem_gen_mux__parameterized0\ is
     DOBDO : in STD_LOGIC_VECTOR ( 0 to 0 );
     DOUTB : in STD_LOGIC_VECTOR ( 0 to 0 );
     addrb : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    clka : in STD_LOGIC
+    clkb : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of \visited_map_blk_mem_gen_mux__parameterized0\ : entity is "blk_mem_gen_mux";
@@ -101,7 +101,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clka,
+      C => clkb,
       CE => '1',
       D => sel_pipe(0),
       Q => sel_pipe_d1(0),
@@ -112,7 +112,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clka,
+      C => clkb,
       CE => '1',
       D => sel_pipe(1),
       Q => sel_pipe_d1(1),
@@ -123,7 +123,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clka,
+      C => clkb,
       CE => '1',
       D => sel_pipe(2),
       Q => sel_pipe_d1(2),
@@ -134,7 +134,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clka,
+      C => clkb,
       CE => '1',
       D => addrb(0),
       Q => sel_pipe(0),
@@ -145,7 +145,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clka,
+      C => clkb,
       CE => '1',
       D => addrb(1),
       Q => sel_pipe(1),
@@ -156,7 +156,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clka,
+      C => clkb,
       CE => '1',
       D => addrb(2),
       Q => sel_pipe(2),
@@ -171,6 +171,7 @@ entity visited_map_blk_mem_gen_prim_wrapper is
   port (
     DOUTB : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
+    clkb : in STD_LOGIC;
     ENA : in STD_LOGIC;
     ENB : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -392,7 +393,7 @@ begin
       CASCADEOUTA => CASCADEINA,
       CASCADEOUTB => CASCADEINB,
       CLKARDCLK => clka,
-      CLKBWRCLK => clka,
+      CLKBWRCLK => clkb,
       DBITERR => \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_B_DBITERR_UNCONNECTED\,
       DIADI(31 downto 1) => B"0000000000000000000000000000000",
       DIADI(0) => dina(0),
@@ -605,7 +606,7 @@ begin
       CASCADEOUTA => \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T_CASCADEOUTA_UNCONNECTED\,
       CASCADEOUTB => \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T_CASCADEOUTB_UNCONNECTED\,
       CLKARDCLK => clka,
-      CLKBWRCLK => clka,
+      CLKBWRCLK => clkb,
       DBITERR => \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.CASCADED_PRIM36.ram_T_DBITERR_UNCONNECTED\,
       DIADI(31 downto 1) => B"0000000000000000000000000000000",
       DIADI(0) => dina(0),
@@ -642,6 +643,7 @@ entity \visited_map_blk_mem_gen_prim_wrapper__parameterized0\ is
   port (
     DOBDO : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
+    clkb : in STD_LOGIC;
     ena_array : in STD_LOGIC_VECTOR ( 0 to 0 );
     enb_array : in STD_LOGIC_VECTOR ( 0 to 0 );
     addra : in STD_LOGIC_VECTOR ( 13 downto 0 );
@@ -766,7 +768,7 @@ begin
       ADDRARDADDR(13 downto 0) => addra(13 downto 0),
       ADDRBWRADDR(13 downto 0) => addrb(13 downto 0),
       CLKARDCLK => clka,
-      CLKBWRCLK => clka,
+      CLKBWRCLK => clkb,
       DIADI(15 downto 1) => B"000000000000000",
       DIADI(0) => dina(0),
       DIBDI(15 downto 0) => B"0000000000000000",
@@ -797,6 +799,7 @@ entity visited_map_blk_mem_gen_prim_width is
   port (
     DOUTB : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
+    clkb : in STD_LOGIC;
     ENA : in STD_LOGIC;
     ENB : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -817,6 +820,7 @@ begin
       addra(15 downto 0) => addra(15 downto 0),
       addrb(15 downto 0) => addrb(15 downto 0),
       clka => clka,
+      clkb => clkb,
       dina(0) => dina(0)
     );
 end STRUCTURE;
@@ -828,6 +832,7 @@ entity \visited_map_blk_mem_gen_prim_width__parameterized0\ is
   port (
     DOBDO : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
+    clkb : in STD_LOGIC;
     ena_array : in STD_LOGIC_VECTOR ( 0 to 0 );
     enb_array : in STD_LOGIC_VECTOR ( 0 to 0 );
     addra : in STD_LOGIC_VECTOR ( 13 downto 0 );
@@ -846,6 +851,7 @@ begin
       addra(13 downto 0) => addra(13 downto 0),
       addrb(13 downto 0) => addrb(13 downto 0),
       clka => clka,
+      clkb => clkb,
       dina(0) => dina(0),
       ena_array(0) => ena_array(0),
       enb_array(0) => enb_array(0)
@@ -859,6 +865,7 @@ entity visited_map_blk_mem_gen_generic_cstr is
   port (
     doutb : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
+    clkb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 16 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -892,7 +899,7 @@ begin
       DOBDO(0) => \ramloop[1].ram.r_n_0\,
       DOUTB(0) => ram_doutb,
       addrb(2 downto 0) => addrb(16 downto 14),
-      clka => clka,
+      clkb => clkb,
       \^doutb\(0) => doutb(0)
     );
 ram_ena: unisim.vcomponents.LUT2
@@ -920,6 +927,7 @@ ram_enb: unisim.vcomponents.LUT1
       addra(15 downto 0) => addra(15 downto 0),
       addrb(15 downto 0) => addrb(15 downto 0),
       clka => clka,
+      clkb => clkb,
       dina(0) => dina(0)
     );
 \ramloop[1].ram.r\: entity work.\visited_map_blk_mem_gen_prim_width__parameterized0\
@@ -928,6 +936,7 @@ ram_enb: unisim.vcomponents.LUT1
       addra(13 downto 0) => addra(13 downto 0),
       addrb(13 downto 0) => addrb(13 downto 0),
       clka => clka,
+      clkb => clkb,
       dina(0) => dina(0),
       ena_array(0) => ena_array(4),
       enb_array(0) => enb_array(4)
@@ -941,6 +950,7 @@ entity visited_map_blk_mem_gen_top is
   port (
     doutb : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
+    clkb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 16 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -957,6 +967,7 @@ begin
       addra(16 downto 0) => addra(16 downto 0),
       addrb(16 downto 0) => addrb(16 downto 0),
       clka => clka,
+      clkb => clkb,
       dina(0) => dina(0),
       doutb(0) => doutb(0),
       wea(0) => wea(0)
@@ -970,6 +981,7 @@ entity visited_map_blk_mem_gen_v8_4_1_synth is
   port (
     doutb : out STD_LOGIC_VECTOR ( 0 to 0 );
     clka : in STD_LOGIC;
+    clkb : in STD_LOGIC;
     addra : in STD_LOGIC_VECTOR ( 16 downto 0 );
     addrb : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dina : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -986,6 +998,7 @@ begin
       addra(16 downto 0) => addra(16 downto 0),
       addrb(16 downto 0) => addrb(16 downto 0),
       clka => clka,
+      clkb => clkb,
       dina(0) => dina(0),
       doutb(0) => doutb(0),
       wea(0) => wea(0)
@@ -1076,7 +1089,7 @@ entity visited_map_blk_mem_gen_v8_4_1 is
   attribute C_BYTE_SIZE : integer;
   attribute C_BYTE_SIZE of visited_map_blk_mem_gen_v8_4_1 : entity is 9;
   attribute C_COMMON_CLK : integer;
-  attribute C_COMMON_CLK of visited_map_blk_mem_gen_v8_4_1 : entity is 1;
+  attribute C_COMMON_CLK of visited_map_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_COUNT_18K_BRAM : string;
   attribute C_COUNT_18K_BRAM of visited_map_blk_mem_gen_v8_4_1 : entity is "1";
   attribute C_COUNT_36K_BRAM : string;
@@ -1108,7 +1121,7 @@ entity visited_map_blk_mem_gen_v8_4_1 is
   attribute C_EN_SLEEP_PIN : integer;
   attribute C_EN_SLEEP_PIN of visited_map_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_EST_POWER_SUMMARY : string;
-  attribute C_EST_POWER_SUMMARY of visited_map_blk_mem_gen_v8_4_1 : entity is "Estimated Power for IP     :     4.061306 mW";
+  attribute C_EST_POWER_SUMMARY of visited_map_blk_mem_gen_v8_4_1 : entity is "Estimated Power for IP     :     3.88388 mW";
   attribute C_FAMILY : string;
   attribute C_FAMILY of visited_map_blk_mem_gen_v8_4_1 : entity is "artix7";
   attribute C_HAS_AXI_ID : integer;
@@ -1200,7 +1213,7 @@ entity visited_map_blk_mem_gen_v8_4_1 is
   attribute C_WRITE_MODE_A : string;
   attribute C_WRITE_MODE_A of visited_map_blk_mem_gen_v8_4_1 : entity is "NO_CHANGE";
   attribute C_WRITE_MODE_B : string;
-  attribute C_WRITE_MODE_B of visited_map_blk_mem_gen_v8_4_1 : entity is "READ_FIRST";
+  attribute C_WRITE_MODE_B of visited_map_blk_mem_gen_v8_4_1 : entity is "WRITE_FIRST";
   attribute C_WRITE_WIDTH_A : integer;
   attribute C_WRITE_WIDTH_A of visited_map_blk_mem_gen_v8_4_1 : entity is 1;
   attribute C_WRITE_WIDTH_B : integer;
@@ -1285,6 +1298,7 @@ inst_blk_mem_gen: entity work.visited_map_blk_mem_gen_v8_4_1_synth
       addra(16 downto 0) => addra(16 downto 0),
       addrb(16 downto 0) => addrb(16 downto 0),
       clka => clka,
+      clkb => clkb,
       dina(0) => dina(0),
       doutb(0) => doutb(0),
       wea(0) => wea(0)
@@ -1350,7 +1364,7 @@ architecture STRUCTURE of visited_map is
   attribute C_BYTE_SIZE : integer;
   attribute C_BYTE_SIZE of U0 : label is 9;
   attribute C_COMMON_CLK : integer;
-  attribute C_COMMON_CLK of U0 : label is 1;
+  attribute C_COMMON_CLK of U0 : label is 0;
   attribute C_COUNT_18K_BRAM : string;
   attribute C_COUNT_18K_BRAM of U0 : label is "1";
   attribute C_COUNT_36K_BRAM : string;
@@ -1382,7 +1396,7 @@ architecture STRUCTURE of visited_map is
   attribute C_EN_SLEEP_PIN : integer;
   attribute C_EN_SLEEP_PIN of U0 : label is 0;
   attribute C_EST_POWER_SUMMARY : string;
-  attribute C_EST_POWER_SUMMARY of U0 : label is "Estimated Power for IP     :     4.061306 mW";
+  attribute C_EST_POWER_SUMMARY of U0 : label is "Estimated Power for IP     :     3.88388 mW";
   attribute C_FAMILY : string;
   attribute C_FAMILY of U0 : label is "artix7";
   attribute C_HAS_AXI_ID : integer;
@@ -1474,7 +1488,7 @@ architecture STRUCTURE of visited_map is
   attribute C_WRITE_MODE_A : string;
   attribute C_WRITE_MODE_A of U0 : label is "NO_CHANGE";
   attribute C_WRITE_MODE_B : string;
-  attribute C_WRITE_MODE_B of U0 : label is "READ_FIRST";
+  attribute C_WRITE_MODE_B of U0 : label is "WRITE_FIRST";
   attribute C_WRITE_WIDTH_A : integer;
   attribute C_WRITE_WIDTH_A of U0 : label is 1;
   attribute C_WRITE_WIDTH_B : integer;

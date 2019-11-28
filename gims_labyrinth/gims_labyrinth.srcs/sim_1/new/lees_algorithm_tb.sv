@@ -65,6 +65,7 @@ visited_map visited_map(.clka(clock),
                       .addra(pixel_wr_addr),
                       .dina(visit),
                       .wea(write_visited),
+                      .clkb(clock),
                       .addrb(pixel_r_addr),
                       .doutb(visited));
     

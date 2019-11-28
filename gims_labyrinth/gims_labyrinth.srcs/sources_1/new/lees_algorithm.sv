@@ -62,10 +62,10 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     parameter DONE = 2'b11;
     
     logic [5:0] q_idx;
-    reg [18:0] queue[0:QUEUE_SIZE - 1];
+    reg [16:0] queue[0:QUEUE_SIZE - 1];
     integer k;
     
-    reg [18:0] neighbors[0:MAX_OUT_DEGREE - 1];
+    reg [16:0] neighbors[0:MAX_OUT_DEGREE - 1];
     reg [1:0] backpointers[0:MAX_OUT_DEGREE - 1];
     logic [2:0] i;
     logic [2:0] j;
@@ -101,17 +101,16 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                     end
                     else begin
                         //right
-                        neighbors[0] <= {queue[0][16:8] + 1, queue[0][7:0]};
+                        neighbors[0] <= {queue[0][16:8] + 9'b1, queue[0][7:0]};
                         backpointers[0] <= 2'b00;
                         //up
-                        neighbors[1] <= {queue[0][16:8], queue[0][7:0] - 1};
-                        
+                        neighbors[1] <= {queue[0][16:8], queue[0][7:0] - 8'b1};
                         backpointers[1] <= 2'b01;
                         //left
-                        neighbors[2] <= {queue[0][16:8] - 1, queue[0][7:0]};
+                        neighbors[2] <= {queue[0][16:8] - 9'b1, queue[0][7:0]};
                         backpointers[2] <= 2'b10;
                         //down
-                        neighbors[3] <= {queue[0][16:8], queue[0][7:0] + 1};
+                        neighbors[3] <= {queue[0][16:8], queue[0][7:0] + 8'b1};
                         backpointers[3] <= 2'b11;
                         
                         state <= VALIDATE_NEIGHBORS;
@@ -132,7 +131,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                         write_visited <= 0;
                         state <= FETCH_NEIGHBORS;
                     end
-                    else if(i == j + BRAM_DELAY_CYCLES)begin
+                    else if(i == j + BRAM_DELAY_CYCLES + 1)begin
                         j <= j + 1;
                         if(pixel_type == NORMAL_PIXEL && skel_pixel == 1 && !visited && neighbor_within_bounds)begin
                             queue[q_idx] <= neighbors[j];
@@ -159,7 +158,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                         end    
                     end
                     if(i < MAX_OUT_DEGREE)begin
-                        pixel_r_addr <= neighbors[i];
+                        pixel_r_addr <= neighbors[i][7:0] * IMG_W + neighbors[i][16:8];;
                     end
                     i <= i + 1;
                 end

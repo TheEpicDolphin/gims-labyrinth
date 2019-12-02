@@ -30,17 +30,19 @@ module erosion #(K = 5, IMG_WIDTH=320, IMG_HEIGHT=240)(
 	output logic done									// flag for when erosion is done
     );
 	
-	logic [K*K-1:0] window;								// window into original image
+	logic [K*K-1:0] window;								// window into original image for kernel
 	logic [(K-1)*IMG_WIDTH + K - 1: 0] pixel_buffer;	// buffer of relevant pixels
 	logic [17:0] pixel_counter;							// # of pixels we have received since start
 	logic [1:0] state;
-	logic buffer_full;									// safe to start eroding
+	logic buffer_full;									// have enough pixels in buffer to start eroding
 	logic out_of_bounds;								// kernel is out_of_bounds
-	integer i;
-	integer j;
+	integer i;											// used to build window
+	integer j;											// used to build window
 	
-	logic [] center_x;									// x location of the center pixel of the window
-	logic [] center_y;									// y location of the center pixel of the window
+	logic [8:0] center_x;								// x location of the center pixel of the window
+	logic [7:0] center_y;								// y location of the center pixel of the window
+	logic [8:0] latest_pixel_x;							// x location of the latest pixel we have received
+	logic [7:0] latest_pixel_y;							// y location of the latest pixel we have received
 	integer half_k = K >> 1;							// half width of kernel
 	integer center_idx = (K*K) >> 1;					// index into window of center pixel of the window
 
@@ -49,20 +51,20 @@ module erosion #(K = 5, IMG_WIDTH=320, IMG_HEIGHT=240)(
 	parameter DONE = 2'b11;
 	
 	always_comb begin
-		done = state == DONE;
+		done = (state == DONE);
 		// this constructs the window from our pixel buffer
 		for(i = 0; i < K; i = i + 1) begin
 			for(j = 0; j < K; j = j + 1) begin
 				window[i*K + j] = pixel_buffer[i*IMG_WIDTH+j];
 			end
 		end
-		done = (state == DONE);
 		out_of_bounds = center_x < half_k || center_x > (IMG_WIDTH - 1 - half_k) || center_y < half_k || center_y > (IMG_HEIGHT - 1 - half_k);
-		processed_pixel = out_of_bounds ? window[center_idx] : &window;
+		processed_pixel = out_of_bounds ? 1'b0 : &window;	// change to window[center_idx] if we want to pass through
 		buffer_full = pixel_counter >= (K * K);
 		
 		// logic for getting center_x and center_y
-		// NEED TO IMPLEMENT!!!
+		center_x  = latest_pixel_x - half_k;
+		center_y = latest_pixel_y - half_k;
 	end
 
     
@@ -72,20 +74,28 @@ module erosion #(K = 5, IMG_WIDTH=320, IMG_HEIGHT=240)(
 			buffer_full <= 1'b0;
 			pixel_counter <= 18'b0;
 			pixel_buffer <= 0;
+			latest_pixel_x <= 9'b0;
+			latest_pixel_y <= 9'b0;
         end
         else begin
-            pixel_buffer <= pixel_buffer << 1;
-			pixel_buffer[0] <= pixel_in;
+			pixel_buffer <= {pixel_buffer[(K-1)*IMG_WIDTH + K - 2:0], pixel_in};
             case(state)
                 IDLE: begin
                     if(start)begin
                         state <= ERODING_PIXEL;
                         pixel_counter <= 18'b1;
+						latest_pixel_x <= 9'b0;
+						latest_pixel_y <= 8'b0;
                     end
                 end
                 ERODING: begin
                     pixel_counter <= pixel_counter + 1;
-					state <= (center_x == (IMG_WIDTH - 1) && center_y == (IMG_HEIGHT - 1)) ? DONE : ERODING;
+					state <= (latest_pixel_x == (IMG_WIDTH - 1) && latest_pixel_y == (IMG_HEIGHT - 1)) ? DONE : ERODING;
+					if(latest_pixel_x == (IMG_WIDTH - 1)) begin
+						latest_pixel_x <= 9'b0;
+						latest_pixel_y <= latest_pixel_y + 1;
+					end else
+						latest_pixel_x <= latest_pixel_x + 1;
                 end
                 DONE: begin
                     state <= IDLE;

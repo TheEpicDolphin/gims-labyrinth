@@ -45,8 +45,14 @@ module skeleton_intersection_finder #(parameter IMG_W = 640, parameter IMG_H = 4
     parameter FIND_INTERSECTIONS = 2'b10;
     parameter DONE = 2'b11;
     
+    //This contains the 3x3 window that we will apply the kernel on.
     reg [((IMG_W << 1) + 3) - 1 : 0] skel_window;
     //logic [1:0] state;
+    
+    //This constructs the 3x3 window shown below
+    // w_00 w_10 w_20
+    // w_01 w_11 w_21
+    // w_02 w_12 w_22
     
     logic w_11, w_01, w_10, w_21, w_12;
     assign w_11 = skel_window[IMG_W + 1];
@@ -55,9 +61,11 @@ module skeleton_intersection_finder #(parameter IMG_W = 640, parameter IMG_H = 4
     assign w_21 = skel_window[IMG_W];
     assign w_12 = skel_window[1];
     
+    //This marks the location on the image of pixel skel_window[0]
     logic [9:0] x_end;
     logic [8:0] y_end;
     
+    //This marks the location on the image of the center of skel_window
     logic [9:0] x_c;
     logic [8:0] y_c;
     
@@ -70,6 +78,7 @@ module skeleton_intersection_finder #(parameter IMG_W = 640, parameter IMG_H = 4
         window_center_i = window_end_i - (IMG_W + 3);
     end
     
+    //Below is the kernel being applied to the 3x3 window 
     logic intersection;
     assign intersection = w_11 && 
                         ((w_01 && w_21 && w_12) ||
@@ -91,11 +100,12 @@ module skeleton_intersection_finder #(parameter IMG_W = 640, parameter IMG_H = 4
                     if(start)begin
                         state <= READ_DELAY;
                         window_end_i_read <= 0;
-                        //The zeroth node is reserved as a dummy node
+                        //The zeroth node is reserved as a dummy node for dijkstra
                         n <= 10'b1;
                     end
                 end
                 READ_DELAY: begin
+                    //window_end_i_read reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
                     window_end_i_read <= window_end_i_read + 1;
                     if(window_end_i_read == BRAM_READ_DELAY)begin
                         x_end <= 10'd00;
@@ -109,6 +119,7 @@ module skeleton_intersection_finder #(parameter IMG_W = 640, parameter IMG_H = 4
                     //Avoid y <= 2, y >= IMG_H - 3, x <= 2 and x >= IMG_W - 3 to avoid artifacts around edges of image from skeletonization
                     if(window_end_i > ((IMG_W << 1) + 3) && y_c > 9'd2 && y_c < IMG_H - 3 && x_c > 10'd2 && x_c < IMG_W - 3)begin
                         if(intersection)begin
+                            //If we have an intersection, we mark it with the value 3'b010 in the bram
                             write_pixel <= 1;
                             pixel_out <= 3'b010;
                                                    
@@ -146,6 +157,8 @@ module skeleton_intersection_finder #(parameter IMG_W = 640, parameter IMG_H = 4
 endmodule
 
 
+//IGNORE THIS LUIS. not important for the skeltonizer or erosion
+/*
 module skeleton_corner_finder #(parameter IMG_W = 640, parameter IMG_H = 480)
     (
     input clk,
@@ -310,3 +323,4 @@ module skeleton_corner_finder #(parameter IMG_W = 640, parameter IMG_H = 480)
     end
     
 endmodule
+*/

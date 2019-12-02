@@ -59,7 +59,8 @@ module rgb_2_hsv(
     
     logic [31:0] h_prod;
     
-    assign ready = state == DONE;
+
+    assign ready = div_ready;
     
     divider #(.WIDTH(DIVIDEND_WIDTH)) h_div1 (
     .clk(clk),
@@ -93,7 +94,7 @@ module rgb_2_hsv(
         delta = max - min;
         h_prod = 16'h3c00 * h_quotient;
         
-        if(max == 0)begin
+        if(delta == 0)begin
             h_dividend = 0;
             h = 0;
         end
@@ -126,6 +127,23 @@ module rgb_2_hsv(
                 h_dividend = {g - r, 8'b0};
                 h = 17'h0F000 - h_prod[23:8];
             end
+        end
+        
+        if(delta == max)begin
+            s = 8'hff;
+        end
+        else if(max == 0)begin
+            s = 8'h00;
+        end
+        else begin
+            s = s_quotient;
+        end
+        
+        if(max == 8'hff)begin
+            v = 8'hff;
+        end
+        else begin
+            v = v_quotient;
         end
         
     end
@@ -169,14 +187,9 @@ module rgb_2_hsv(
                 DIV: begin
                     div_start <= 0;
                     if(div_ready)begin
-                        state <= DONE;
-                        s <= s_quotient;
-                        v <= v_quotient;
+                        state <= IDLE;
                     end
                 end
-                DONE: begin
-                    state <= IDLE;
-                end   
                 default: begin
                     //Do nothing
                 end         

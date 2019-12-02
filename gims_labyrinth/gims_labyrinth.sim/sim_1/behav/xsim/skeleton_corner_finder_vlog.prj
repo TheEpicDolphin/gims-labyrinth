@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../gims_labyrinth.srcs/sources_1/ip/corner_node_fifo/sim/corner_node_fifo.v" \
+
+sv xil_defaultlib  \
+"../../../../gims_labyrinth.srcs/sources_1/new/skeleton_to_graph.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

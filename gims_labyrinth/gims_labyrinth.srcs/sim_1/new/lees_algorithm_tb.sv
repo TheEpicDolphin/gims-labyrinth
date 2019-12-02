@@ -34,14 +34,24 @@ logic visited;
 
 logic write_bp;
 logic write_visited;
-logic [1:0] backpointer;
+logic [1:0] backpointer_wr;
 logic visit;
+logic lee_alg_done;
 
+logic start_bp_tracer;
 logic [16:0] end_pos;
-logic done;
+logic [1:0] backpointer_r;
+logic [16:0] bp_tracer_addr;
+logic bp_tracer_done;
+logic write_path;
+
+assign start_bp_tracer = lee_alg_done;
 
 //Debugging
 logic [2:0] state;
+
+integer maze_sol_f;
+integer i;
 
 
 // Instantiate the Unit Under Test (UUT)
@@ -53,8 +63,11 @@ binary_maze skel_maze(.clka(clock),
                       
 pixel_backpointers p_bp(.clka(clock),
                         .addra(pixel_wr_addr),
-                        .dina(backpointer),
-                        .wea(write_bp));
+                        .dina(backpointer_wr),
+                        .wea(write_bp),
+                        .clkb(clock),
+                        .addrb(bp_tracer_addr),
+                        .doutb(backpointer_r));
                         
 pixel_type_map p_tmap(.clka(clock),
                       .addra(pixel_r_addr),
@@ -81,16 +94,33 @@ lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240
                       .visited(visited),
                       .pixel_r_addr(pixel_r_addr),
                       .pixel_wr_addr(pixel_wr_addr),
-                      .backpointer(backpointer),
+                      .backpointer(backpointer_wr),
                       .write_bp(write_bp),
                       .write_visited(write_visited),
                       .visit(visit),
-                      .done(done),
+                      .done(lee_alg_done),
                       .end_pos(end_pos),
                           
                       .state(state)
                        );
 
+path_bram pb(.clka(clock),
+             .addra(bp_tracer_addr),
+             .dina(write_path),
+             .wea(write_path));
+                      
+backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240)) bp_tracer(
+    .clk(clock),
+    .rst(rst),
+    .start(start_bp_tracer),
+    .start_pos(start_pos),
+    .end_pos(end_pos),
+    .bp(backpointer_r),
+    .pixel_addr(bp_tracer_addr),
+    .write_path(write_path),
+    .done(bp_tracer_done)
+    );
+    
 always #5 clock = !clock;
 
 initial begin
@@ -107,12 +137,20 @@ rst = 1;
 rst = 0;
 #15;
 
-start_pos = {9'd49, 8'd15};
+//start_pos = {9'd49, 8'd15};
+start_pos = {9'd5, 8'd85};
 start = 1;
 #15
 start = 0;
 #500;
 
+/*
+maze_sol_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/maze_sol.txt","w");
+for(i = 0; i < 10; i = i + 1)begin
+    $fwrite(maze_sol_f,"%h\n",{h,s,v});
+end
+$fclose(maze_sol_f);
+*/
 end
 
 endmodule

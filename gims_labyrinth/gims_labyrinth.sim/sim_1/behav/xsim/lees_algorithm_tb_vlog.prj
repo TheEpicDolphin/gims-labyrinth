@@ -1,11 +1,13 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
+"../../../../gims_labyrinth.srcs/sources_1/ip/path_bram/sim/path_bram.v" \
 "../../../../gims_labyrinth.srcs/sources_1/ip/visited_map/sim/visited_map.v" \
 "../../../../gims_labyrinth.srcs/sources_1/ip/pixel_type_map/sim/pixel_type_map.v" \
 "../../../../gims_labyrinth.srcs/sources_1/ip/pixel_backpointers/sim/pixel_backpointers.v" \
 "../../../../gims_labyrinth.srcs/sources_1/ip/binary_maze/sim/binary_maze.v" \
 
 sv xil_defaultlib  \
+"../../../../gims_labyrinth.srcs/sources_1/new/backpointer_tracer.sv" \
 "../../../../gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv" \
 "../../../../gims_labyrinth.srcs/sim_1/new/lees_algorithm_tb.sv" \
 

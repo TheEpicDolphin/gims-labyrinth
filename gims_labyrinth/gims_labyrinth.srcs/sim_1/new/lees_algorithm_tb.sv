@@ -138,7 +138,7 @@ rst = 0;
 #15;
 
 //start_pos = {9'd49, 8'd15};
-start_pos = {9'd19, 8'd7};
+start_pos = {9'd5, 8'd85};
 start = 1;
 #15
 start = 0;

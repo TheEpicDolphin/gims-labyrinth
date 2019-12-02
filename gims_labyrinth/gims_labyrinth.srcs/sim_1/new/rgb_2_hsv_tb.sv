@@ -82,9 +82,9 @@ initial begin
    start_conv = 0;
    #200;
    
-   rgb_f=$fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/rgb.txt","r");
-   hsv_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/hsv.txt","w");
-   for(i = 0; i < 10; i = i + 1)begin
+   rgb_f=$fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/rgb.txt","r");
+   hsv_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/hsv.txt","w");
+   for(i = 0; i < 30; i = i + 1)begin
         $fscanf(rgb_f,"%h\n",rgb);
         r_in = rgb[23:16];
         g_in = rgb[15:8];
@@ -98,6 +98,7 @@ initial begin
    end
    $fclose(rgb_f);
    $fclose(hsv_f);
+   #200;
 end
    
 endmodule

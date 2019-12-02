@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="binary_maze_synth_1" LaunchPart="xc7a100tcsg324-3" LaunchTime="1574976972">
+<GenRun Id="binary_maze_synth_1" LaunchPart="xc7a100tcsg324-3" LaunchTime="1575270453">
   <File Type="PA-TCL" Name="binary_maze.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="binary_maze_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="binary_maze_reports.tcl"/>
@@ -36,9 +36,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

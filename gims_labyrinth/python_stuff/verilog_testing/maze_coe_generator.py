@@ -25,15 +25,15 @@ def pixel_type_map_coe_gen(bin_maze_im):
     segmented_img = segmented_img.astype(np.uint8)
 
     #assign obstacles
-    segmented_img[84:94, 130:144] = 1
+    #segmented_img[84:94, 130:144] = 1
     
     #assign start
     #segmented_img[12:18, 42:56] = 2
-    segmented_img[2:8, 16:22] = 2
+    segmented_img[82:89, 4:8] = 2
     
     #assign end
     #segmented_img[216:226,186:196] = 3
-    segmented_img[224:228, 286:292] = 3
+    segmented_img[226:234, 248:252] = 3
 
     "memory_initialization_radix=2;\nmemory_initialization_vector="
     coe_contents = "memory_initialization_radix=2;\nmemory_initialization_vector=\n"
@@ -61,6 +61,6 @@ def pixel_type_map_coe_gen(bin_maze_im):
     plt.show()
     return None
 
-bin_maze_im = (imageio.imread("../test_imgs/skel_complicated.png") > 0).astype(int)
+bin_maze_im = (imageio.imread("../test_imgs/skel_real.png") > 0).astype(int)
 bin_maze_coe_gen(bin_maze_im)
 pixel_type_map_coe_gen(bin_maze_im)

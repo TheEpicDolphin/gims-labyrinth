@@ -45,6 +45,8 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
     //logic [7:0] s;
     //logic [7:0] v;
     logic bin_maze_pixel;
+    logic eroded_pixel;
+    
     
     reg [32:0] hsv_buffer [0:RGB_2_HSV_CYCLES - 1];
     logic [4:0] rgb_2_hsv_sel;
@@ -80,7 +82,7 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
                 .v(v),  //Q8
                 .b(bin_maze_pixel)
             );
-    
+            
     logic [23:0] cycles;        
     logic start_erosion;
     logic start_dilation;
@@ -88,9 +90,19 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
     
     assign start_erosion = cycles == RGB_2_HSV_CYCLES;
     assign start_dilation = cycles == (RGB_2_HSV_CYCLES + IMG_W * IMG_H);
+            
+    erosion #(.K(5),.IMG_W(320),.IMG_H(240)) bin_erosion
+                (
+                .clk(clk),
+                .rst(rst),
+                .start(start_erosion),
+                .pixel_in(bin_maze_pixel),
+                .processed_pixel(eroded_pixel)
+                );
     
     //Debugging
     integer bin_maze_f;
+    integer bin_maze_eroded_f;
     
     always_ff @(posedge clk)begin
         if(rst)begin
@@ -105,6 +117,7 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
                         cycles <= 0;
                         //Debugging
                         bin_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_img.txt","w");
+                        bin_maze_eroded_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_eroded_img.txt","w");
                     end
                 end
                 PROCESSING: begin
@@ -116,18 +129,18 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
                     end
                     
                     if(cycles >= (RGB_2_HSV_CYCLES + IMG_W * IMG_H))begin
+                        $fclose(bin_maze_f);
+                        $fclose(bin_maze_eroded_f);
                         state <= DONE;
                     end
                     else if(cycles >= RGB_2_HSV_CYCLES)begin
                         //Debugging
                         $fwrite(bin_maze_f,"%b\n",bin_maze_pixel);
+                        $fwrite(bin_maze_eroded_f,"%b\n",eroded_pixel);
                     end
                     cycles <= cycles + 1;
                 end
                 DONE: begin
-                    
-                    //Debugging
-                    $fclose(bin_maze_f);
                     state <= IDLE;
                 end
             endcase

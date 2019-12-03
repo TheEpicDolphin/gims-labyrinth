@@ -1,6 +1,7 @@
 # compile verilog/system verilog design source files
 sv xil_defaultlib  \
 "../../../../gims_labyrinth.srcs/sources_1/new/divider.sv" \
+"../../../../gims_labyrinth.srcs/sources_1/new/erosion.sv" \
 "../../../../gims_labyrinth.srcs/sources_1/new/rgb_2_hsv.sv" \
 "../../../../gims_labyrinth.srcs/sources_1/new/signal_processing.sv" \
 "../../../../gims_labyrinth.srcs/sources_1/new/thresholder.sv" \

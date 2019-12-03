@@ -2,3 +2,6 @@ Running: xsim.dir/rgb_2_hsv_tb_behav/xsimk.exe -simmode gui -wdb rgb_2_hsv_tb_be
 Design successfully loaded
 Design Loading Memory Usage: 5196 KB (Peak: 5196 KB)
 Design Loading CPU Usage: 0 ms
+Simulation completed
+Simulation Memory Usage: 6668 KB (Peak: 6668 KB)
+Simulation CPU Usage: 46 ms

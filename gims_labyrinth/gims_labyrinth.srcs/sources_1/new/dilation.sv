@@ -26,78 +26,98 @@ module dilation #(K = 5, IMG_W=320, IMG_H=240)(
 	input start,
 	input pixel_in,
 	
+	output logic pixel_addr,
 	output logic processed_pixel,
+	output logic pixel_valid,
 	output logic done									// flag for when erosion is done
     );
 	
-	logic [K*K-1:0] window;								// window into original image for kernel
-	logic [(K-1)*IMG_W + K - 1: 0] pixel_buffer;	// buffer of relevant pixels
+	logic [(K-1)*IMG_W + K - 1: 0] pixel_buffer;	        // buffer of relevant pixels
+    logic [(K-1)*IMG_W + K - 1: 0] pixel_buffer_dilated;    // buffer of relevant pixels after modification by dilation
+    logic [(K-1)*IMG_W + K - 1: 0] temp;    
 	logic [17:0] pixel_counter;							// # of pixels we have received since start
 	logic [1:0] state;
 	logic buffer_full;									// have enough pixels in buffer to start eroding
-	logic in_bounds;								    // kernel is in bounds
 	integer i;											// used to build window
 	integer j;											// used to build window
 	
-	logic [8:0] center_x;								// x location of the center pixel of the window
-	logic [7:0] center_y;								// y location of the center pixel of the window
-	logic [8:0] latest_pixel_x;							// x location of the latest pixel we have received
-	logic [7:0] latest_pixel_y;							// y location of the latest pixel we have received
+						
+	logic [8:0] oldest_pixel_x;                         // x location of the oldest pixel we have received
+	logic [7:0] oldest_pixel_y;                         // y location of the oldest pixel we have received
 	integer half_k = K >> 1;							// half width of kernel
 	integer center_idx = (K*K) >> 1;					// index into window of center pixel of the window
+	
+	logic [(K-1)*IMG_W + K - 1: 0] dilation_mask;
 
 	parameter IDLE = 2'b00;
-	parameter ERODING = 2'b01;
+	parameter DELAY = 2'b01;
+	parameter DILATING = 2'b10;
 	parameter DONE = 2'b11;
 	
 	assign buffer_full = pixel_counter >= (K-1)*IMG_W + K;
 	
+	assign pixel_valid = (state == DILATING);
+	assign done = (state == DONE);
+	
 	always_comb begin
-		done = (state == DONE);
 		// this constructs the window from our pixel buffer
+		dilation_mask = 0;
 		for(i = 0; i < K; i = i + 1) begin
 			for(j = 0; j < K; j = j + 1) begin
-				window[i*K + j] = pixel_buffer[i*IMG_W+j];
+			    //dilation_mask[i*IMG_W+j] = pixel_buffer[((K-1)*IMG_W + K - 1) >> 1];
+			    dilation_mask[i*IMG_W+j] = pixel_buffer[2*IMG_W + 2];
 			end
 		end
-		in_bounds = center_x >= half_k && center_x <= (IMG_W - 1 - half_k) && center_y >= half_k && center_y <= (IMG_H - 1 - half_k);
 		
-		processed_pixel = in_bounds ? &window : 1'b0;	// change to window[center_idx] if we want to pass through
-		//buffer_full = pixel_counter >= (K * K);
-		
-		// logic for getting center_x and center_y
-		center_x  = latest_pixel_x - half_k;
-		center_y = latest_pixel_y - half_k;
+		temp = pixel_buffer_dilated | dilation_mask;
+		processed_pixel = temp[(K-1)*IMG_W + K - 1];
+		pixel_addr = pixel_counter - ((K-1)*IMG_W + K);
+
 	end
 
-    
+    integer bin_maze_dilated_f;
     always_ff @(posedge clk)begin
         if(rst)begin
             state <= IDLE;
 			pixel_counter <= 18'b0;
 			pixel_buffer <= 0;
+			pixel_buffer_dilated <= 0;
         end
         else begin
 			pixel_buffer <= {pixel_buffer[(K-1)*IMG_W + K - 2:0], pixel_in};
+			pixel_buffer_dilated <= {temp[(K-1)*IMG_W + K - 2:0], pixel_in};
             case(state)
                 IDLE: begin
                     if(start)begin
-                        state <= ERODING;
+                        state <= DELAY;
                         pixel_counter <= 18'b1;
-						latest_pixel_x <= 9'b0;
-						latest_pixel_y <= 8'b0;
                     end
                 end
-                ERODING: begin
+                DELAY: begin
                     pixel_counter <= pixel_counter + 1;
-					state <= (latest_pixel_x == (IMG_W - 1) && latest_pixel_y == (IMG_H - 1)) ? DONE : ERODING;
-					if(latest_pixel_x == (IMG_W - 1)) begin
-						latest_pixel_x <= 9'b0;
-						latest_pixel_y <= latest_pixel_y + 1;
-					end else
-						latest_pixel_x <= latest_pixel_x + 1;
+                    if(pixel_counter >= ((K-1)*IMG_W + K - 1) >> 1)begin
+                        state <= DILATING;
+                        oldest_pixel_x <= 9'b0;
+                        oldest_pixel_y <= 8'b0;
+                        bin_maze_dilated_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_dilated_img.txt","w");
+                    end
+                end
+                DILATING: begin
+                    $fwrite(bin_maze_dilated_f,"%b\n",processed_pixel);
+                    pixel_counter <= pixel_counter + 1;
+					if(oldest_pixel_x == (IMG_W - 1) && oldest_pixel_y == (IMG_H - 1))begin
+					   state <= DONE;
+					end
+					if(oldest_pixel_x == (IMG_W - 1)) begin
+						oldest_pixel_x <= 9'b0;
+						oldest_pixel_y <= oldest_pixel_y + 1;
+					end 
+					else begin
+						oldest_pixel_x <= oldest_pixel_x + 1;
+				    end
                 end
                 DONE: begin
+                    $fclose(bin_maze_dilated_f);
                     state <= IDLE;
                 end
             endcase

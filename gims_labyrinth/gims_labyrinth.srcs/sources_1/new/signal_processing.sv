@@ -1,3 +1,5 @@
+`define SIM 1
+
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -97,7 +99,7 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
                 .rst(rst),
                 .start(start_erosion),
                 .pixel_in(bin_maze_pixel),
-                .start_dilation(start_dilation),
+                .pixel_valid(start_dilation),
                 .processed_pixel(eroded_pixel)
                 );
     
@@ -111,8 +113,9 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
                     );
     
     //Debugging
+    `ifdef SIM
     integer bin_maze_f;
-    
+    `endif
     
     always_ff @(posedge clk)begin
         if(rst)begin
@@ -125,9 +128,10 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
                         state <= PROCESSING;
                         rgb_2_hsv_sel <= 0;
                         cycles <= 0;
-                        //Debugging
-                        bin_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_img.txt","w");
                         
+                        `ifdef SIM   
+                        bin_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_img.txt","w");
+                        `endif
                     end
                 end
                 PROCESSING: begin
@@ -138,12 +142,14 @@ module signal_processing #(parameter IMG_W = 320, parameter IMG_H = 240)
                         rgb_2_hsv_sel <= rgb_2_hsv_sel + 1;
                     end
                     
-                    if(cycles >= (RGB_2_HSV_CYCLES + IMG_W * IMG_H))begin
-                        $fclose(bin_maze_f);
+                    `ifdef SIM
+                    if(cycles == (RGB_2_HSV_CYCLES + IMG_W * IMG_H))begin
+                    $fclose(bin_maze_f);
                     end
                     else if(cycles >= RGB_2_HSV_CYCLES)begin
-                        $fwrite(bin_maze_f,"%b\n",bin_maze_pixel);
+                    $fwrite(bin_maze_f,"%b\n",bin_maze_pixel);
                     end
+                    `endif
                     
                     cycles <= cycles + 1;
                 end

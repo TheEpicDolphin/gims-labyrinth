@@ -25,9 +25,8 @@ module erosion #(K = 5, IMG_W=320, IMG_H=240)(
 	input rst,
 	input start,
 	input pixel_in,
-	
+	output pixel_valid,
 	output logic processed_pixel,
-	output logic start_dilation,
 	output logic done									// flag for when erosion is done
 	
     );
@@ -50,8 +49,8 @@ module erosion #(K = 5, IMG_W=320, IMG_H=240)(
 	parameter ERODING = 2'b10;
 	parameter DONE = 2'b11;
 	
-	assign start_dilation = pixel_counter == (K-1)*IMG_W + K;
-	
+	//assign pixel_valid = pixel_counter >= (((K-1)*IMG_W + K - 1) >> 1);
+	assign pixel_valid = state == ERODING;
 	always_comb begin
 		done = (state == DONE);
 		// this constructs the window from our pixel buffer
@@ -65,7 +64,10 @@ module erosion #(K = 5, IMG_W=320, IMG_H=240)(
 		processed_pixel = in_bounds ? &window : 1'b0;	// change to window[center_idx] if we want to pass through
 	end
 
+    `ifdef SIM
     integer bin_maze_eroded_f;
+    `endif
+    
     always_ff @(posedge clk)begin
         if(rst)begin
             state <= IDLE;
@@ -87,11 +89,17 @@ module erosion #(K = 5, IMG_W=320, IMG_H=240)(
                         state <= ERODING;
                         center_x <= 9'b0;
                         center_y <= 8'b0;
+                        `ifdef SIM
                         bin_maze_eroded_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_eroded_img.txt","w");
+                        `endif
+                        
                     end
                 end
                 ERODING: begin
+                    `ifdef SIM
                     $fwrite(bin_maze_eroded_f,"%b\n",processed_pixel);
+                    `endif
+                    
                     pixel_counter <= pixel_counter + 1;
 					state <= (center_x == (IMG_W - 1) && center_y == (IMG_H - 1)) ? DONE : ERODING;
 					if(center_x == (IMG_W - 1)) begin
@@ -102,7 +110,9 @@ module erosion #(K = 5, IMG_W=320, IMG_H=240)(
                 end
                 DONE: begin
                     state <= IDLE;
+                    `ifdef SIM
                     $fclose(bin_maze_eroded_f);
+                    `endif
                 end
             endcase
         end

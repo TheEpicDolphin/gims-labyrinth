@@ -7,4 +7,16 @@ WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 1 for
 WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 1 for port sign [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/rgb_2_hsv.sv:77]
 WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 1 for port sign [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/rgb_2_hsv.sv:86]
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.divider(WIDTH=16)
+Compiling module xil_defaultlib.rgb_2_hsv
+Compiling module xil_defaultlib.thresholder(H_LOW=17'b0,H_HIGH=1...
+Compiling module xil_defaultlib.erosion
+Compiling module xil_defaultlib.dilation
+Compiling module xil_defaultlib.signal_processing_default
+Compiling module xil_defaultlib.image_processing_tb
+WARNING: [XSIM 43-3373] "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sim_1/new/image_processing_tb.sv" Line 114. System function $fscanf is used as system task. This system function should have a LHS e.g. x=$fscanf().
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot image_processing_tb_behav

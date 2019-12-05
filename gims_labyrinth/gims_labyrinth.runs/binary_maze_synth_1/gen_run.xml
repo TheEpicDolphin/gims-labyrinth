@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="binary_maze_synth_1" LaunchPart="xc7a100tcsg324-3" LaunchTime="1575578235">
   <File Type="PA-TCL" Name="binary_maze.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="binary_maze_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="binary_maze_reports.tcl"/>
   <File Type="RDS-RDS" Name="binary_maze.vds"/>
   <File Type="RDS-UTIL" Name="binary_maze_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="binary_maze_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="binary_maze.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="binary_maze_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="binary_maze_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/binary_maze">
     <File Path="$PSRCDIR/sources_1/ip/binary_maze/binary_maze.xci">
       <FileInfo>

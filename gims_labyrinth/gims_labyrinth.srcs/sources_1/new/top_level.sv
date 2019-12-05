@@ -45,22 +45,6 @@ module top_level(
     // create 25mhz system clock, happens to match 640 x 480 VGA timing
     clk_wiz_0 clkdivider(.clk_in1(clk_100mhz), .clk_out1(clk_25mhz));
 
-    wire [31:0] data;      //  instantiate 7-segment display; display (8) 4-bit hex
-    wire [6:0] segments;
-    assign {cg, cf, ce, cd, cc, cb, ca} = segments[6:0];
-    display_8hex display(.clk_in(clk_25mhz),.data_in(data), .seg_out(segments), .strobe_out(an));
-    //assign seg[6:0] = segments;
-    assign  dp = 1'b1;  // turn off the period
-
-    assign led = sw;                        // turn leds on
-    assign data = {28'h0123456, sw[3:0]};   // display 0123456 + sw[3:0]
-    assign led16_r = btnl;                  // left button -> red led
-    assign led16_g = btnc;                  // center button -> green led
-    assign led16_b = btnr;                  // right button -> blue led
-    assign led17_r = btnl;
-    assign led17_g = btnc;
-    assign led17_b = btnr;
-
     wire [9:0] hcount;    // pixel on current line
     wire [9:0] vcount;     // line number
     wire hsync, vsync, blank;
@@ -72,17 +56,9 @@ module top_level(
 
     // btnc button is user reset
     wire reset;
-    //wire up,down;
-    debounce db1(.reset_in(0),.clock_in(clk_25mhz),.noisy_in(btnc),.clean_out(reset));
-    // UP and DOWN buttons for pong paddle 
-    //debounce db2(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(btnu),.clean_out(up));
-    //debounce db3(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(btnd),.clean_out(down));
-    logic freeze;   //added by viv
-    debounce db4(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(sw[15]),   //added by viv
-                .clean_out(freeze));
-                
+    wire up,down;
+    debounce db1(.reset_in(0),.clock_in(clk_25mhz),.noisy_in(btnc),.clean_out(reset));             
     logic xclk;
-    logic[1:0] xclk_count;
     
     logic pclk_buff, pclk_in;
     logic vsync_buff, vsync_in;
@@ -117,6 +93,22 @@ module top_level(
 
     logic [2:0] state;
     
+    wire [31:0] data;      //  instantiate 7-segment display; display (8) 4-bit hex
+    wire [6:0] segments;
+    assign {cg, cf, ce, cd, cc, cb, ca} = segments[6:0];
+    display_8hex display(.clk_in(clk_25mhz),.data_in(data), .seg_out(segments), .strobe_out(an));
+    //assign seg[6:0] = segments;
+    assign  dp = 1'b1;  // turn off the period
+
+    assign led = sw;                        // turn leds on
+    assign data = {29'h0, state};   // display 0123456 + sw[3:0]
+    assign led16_r = btnl;                  // left button -> red led
+    assign led16_g = btnc;                  // center button -> green led
+    assign led16_b = btnr;                  // right button -> blue led
+    assign led17_r = btnl;
+    assign led17_g = btnc;
+    assign led17_b = btnr;
+    
     logic [16:0] cam_pixel_wr_addr;
     logic [16:0] cam_pixel_r_addr;
     
@@ -144,7 +136,7 @@ module top_level(
                           .wea(filt_bin_pixel_wea),
                           .clkb(clk_25mhz),
                           .addrb(filt_bin_pixel_r_addr),
-                          .doutb(filt_bin_pixel_out),
+                          .doutb(filt_bin_pixel_out)
                           );
     logic bin_maze_filt_start;
     logic bin_maze_filt_done;
@@ -238,7 +230,7 @@ module top_level(
                  
     always_ff @(posedge clk_25mhz)begin
         if(reset)begin
-        
+            state <= IDLE;
         end
         else begin
             case(state)
@@ -267,6 +259,7 @@ module top_level(
                 end
                 SKELETONIZING: begin
                     //get stuck in here for now
+                    state <= IDLE;
                 end
                 COLORED_MAZE_FILTERING: begin
                     if(colored_maze_filt_done)begin
@@ -275,9 +268,9 @@ module top_level(
                     end
                 end
                 SOLVING: begin
-                    if(solving_done)begin
-                        state <= TRACING_BACKPOINTERS;
-                    end
+                    //if(solving_done)begin
+                    //    state <= TRACING_BACKPOINTERS;
+                    //end
                 end
                 TRACING_BACKPOINTERS: begin
                     
@@ -299,7 +292,6 @@ module top_level(
         href_in <= href_buff;
         pixel_in <= pixel_buff;
         old_output_pixels <= output_pixels;
-        xclk_count <= xclk_count + 2'b01;
         processed_pixels = {output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]};
     end
     
@@ -329,20 +321,23 @@ module top_level(
          vs <= vsync;
          b <= blank;
          rgb <= {12{border}};
-      end else if (sw[1:0] == 2'b10) begin
+      end 
+      else if (sw[1:0] == 2'b10) begin
          // color bars
          hs <= hsync;
          vs <= vsync;
          b <= blank;
          rgb <= {{4{hcount[7]}}, {4{hcount[6]}}, {4{hcount[5]}}} ;
-      end else begin
+      end 
+      else begin
          
          hs <= phsync;
          vs <= pvsync;
          b <= pblank;
          filt_bin_pixel_r_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
          rgb <= filt_bin_pixel_out ? 12'hFFF : 12'b0;
-     end
+       end
+    end
 
     // the following lines are required for the Nexys4 VGA circuit - do not change
     assign vga_r = ~b ? rgb[11:8]: 0;

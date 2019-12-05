@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Thu Nov 21 00:54:14 2019
+// Date        : Sat Nov 16 15:35:08 2019
 // Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/adjacency_list/adjacency_list_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top adjacency_list -prefix
+//               adjacency_list_ adjacency_list_sim_netlist.v
 // Design      : adjacency_list
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -94,9 +94,9 @@ module adjacency_list
   (* C_INITA_VAL = "0" *) 
   (* C_INITB_VAL = "0" *) 
   (* C_INIT_FILE = "adjacency_list.mem" *) 
-  (* C_INIT_FILE_NAME = "adjacency_list.mif" *) 
+  (* C_INIT_FILE_NAME = "no_coe_file_loaded" *) 
   (* C_INTERFACE_TYPE = "0" *) 
-  (* C_LOAD_INIT_FILE = "1" *) 
+  (* C_LOAD_INIT_FILE = "0" *) 
   (* C_MEM_TYPE = "0" *) 
   (* C_MUX_PIPELINE_STAGES = "0" *) 
   (* C_PRIM_TYPE = "1" *) 
@@ -192,7 +192,6 @@ module adjacency_list
         .web(1'b0));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_generic_cstr" *) 
 module adjacency_list_blk_mem_gen_generic_cstr
    (douta,
     clka,
@@ -225,7 +224,6 @@ module adjacency_list_blk_mem_gen_generic_cstr
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
 module adjacency_list_blk_mem_gen_prim_width
    (douta,
     clka,
@@ -244,7 +242,7 @@ module adjacency_list_blk_mem_gen_prim_width
   wire [35:0]douta;
   wire [0:0]wea;
 
-  adjacency_list_blk_mem_gen_prim_wrapper_init \prim_init.ram 
+  adjacency_list_blk_mem_gen_prim_wrapper \prim_noinit.ram 
        (.addra(addra),
         .clka(clka),
         .dina(dina),
@@ -271,7 +269,7 @@ module adjacency_list_blk_mem_gen_prim_width__parameterized0
   wire [27:0]douta;
   wire [0:0]wea;
 
-  adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0 \prim_init.ram 
+  adjacency_list_blk_mem_gen_prim_wrapper__parameterized0 \prim_noinit.ram 
        (.addra(addra),
         .clka(clka),
         .dina(dina),
@@ -279,8 +277,7 @@ module adjacency_list_blk_mem_gen_prim_width__parameterized0
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
-module adjacency_list_blk_mem_gen_prim_wrapper_init
+module adjacency_list_blk_mem_gen_prim_wrapper
    (douta,
     clka,
     addra,
@@ -312,7 +309,7 @@ module adjacency_list_blk_mem_gen_prim_wrapper_init
     .DOB_REG(0),
     .EN_ECC_READ("FALSE"),
     .EN_ECC_WRITE("FALSE"),
-    .INITP_00(256'h000000000000000000000000000000000000000000000000000000280B113000),
+    .INITP_00(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_01(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_02(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_03(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -328,8 +325,8 @@ module adjacency_list_blk_mem_gen_prim_wrapper_init
     .INITP_0D(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_0E(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_0F(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_00(256'h40808146C05200C20042808AE052808EE09000848032010B0021010800000000),
-    .INIT_01(256'h0000000000000000000000000000000000000000000000004071010760708147),
+    .INIT_00(256'h0000000000000000000000000000000000000000000000000000000000000000),
+    .INIT_01(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_02(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_03(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_04(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -518,8 +515,8 @@ module adjacency_list_blk_mem_gen_prim_wrapper_init
         .WEBWE({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
-module adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0
+(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper" *) 
+module adjacency_list_blk_mem_gen_prim_wrapper__parameterized0
    (douta,
     clka,
     addra,
@@ -575,8 +572,8 @@ module adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0
     .INITP_0D(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_0E(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_0F(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_00(256'h0000001800310010000000000000000C00220010000000040000000000000000),
-    .INIT_01(256'h0000000000000000000000000000000000000000000000000000000C00120008),
+    .INIT_00(256'h0000000000000000000000000000000000000000000000000000000000000000),
+    .INIT_01(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_02(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_03(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INIT_04(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -765,7 +762,6 @@ module adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0
         .WEBWE({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_top" *) 
 module adjacency_list_blk_mem_gen_top
    (douta,
     clka,
@@ -806,7 +802,7 @@ endmodule
 (* C_HAS_REGCEA = "0" *) (* C_HAS_REGCEB = "0" *) (* C_HAS_RSTA = "0" *) 
 (* C_HAS_RSTB = "0" *) (* C_HAS_SOFTECC_INPUT_REGS_A = "0" *) (* C_HAS_SOFTECC_OUTPUT_REGS_B = "0" *) 
 (* C_INITA_VAL = "0" *) (* C_INITB_VAL = "0" *) (* C_INIT_FILE = "adjacency_list.mem" *) 
-(* C_INIT_FILE_NAME = "adjacency_list.mif" *) (* C_INTERFACE_TYPE = "0" *) (* C_LOAD_INIT_FILE = "1" *) 
+(* C_INIT_FILE_NAME = "no_coe_file_loaded" *) (* C_INTERFACE_TYPE = "0" *) (* C_LOAD_INIT_FILE = "0" *) 
 (* C_MEM_TYPE = "0" *) (* C_MUX_PIPELINE_STAGES = "0" *) (* C_PRIM_TYPE = "1" *) 
 (* C_READ_DEPTH_A = "1024" *) (* C_READ_DEPTH_B = "1024" *) (* C_READ_WIDTH_A = "64" *) 
 (* C_READ_WIDTH_B = "64" *) (* C_RSTRAM_A = "0" *) (* C_RSTRAM_B = "0" *) 
@@ -816,7 +812,7 @@ endmodule
 (* C_USE_URAM = "0" *) (* C_WEA_WIDTH = "1" *) (* C_WEB_WIDTH = "1" *) 
 (* C_WRITE_DEPTH_A = "1024" *) (* C_WRITE_DEPTH_B = "1024" *) (* C_WRITE_MODE_A = "WRITE_FIRST" *) 
 (* C_WRITE_MODE_B = "WRITE_FIRST" *) (* C_WRITE_WIDTH_A = "64" *) (* C_WRITE_WIDTH_B = "64" *) 
-(* C_XDEVICEFAMILY = "artix7" *) (* ORIG_REF_NAME = "blk_mem_gen_v8_4_1" *) (* downgradeipidentifiedwarnings = "yes" *) 
+(* C_XDEVICEFAMILY = "artix7" *) (* downgradeipidentifiedwarnings = "yes" *) 
 module adjacency_list_blk_mem_gen_v8_4_1
    (clka,
     rsta,
@@ -1134,7 +1130,6 @@ module adjacency_list_blk_mem_gen_v8_4_1
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_v8_4_1_synth" *) 
 module adjacency_list_blk_mem_gen_v8_4_1_synth
    (douta,
     clka,

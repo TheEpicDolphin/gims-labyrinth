@@ -1,3 +1,4 @@
+
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -18,12 +19,17 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+`timescale 1ns / 1ps
 
 module top_level(
    input clk_100mhz,
    input[15:0] sw,
    input btnc, btnu, btnl, btnr, btnd,
+   input [7:0] ja,
+   input [2:0] jb,
+   output   jbclk,
+   input [2:0] jd,
+   output   jdclk,
    output[3:0] vga_r,
    output[3:0] vga_b,
    output[3:0] vga_g,
@@ -35,100 +41,132 @@ module top_level(
    output ca, cb, cc, cd, ce, cf, cg, dp,  // segments a-g, dp
    output[7:0] an    // Display location 0-7
    );
-   
-    logic clk_25mhz;    // ???
-    logic blank;    // ???
-    
-    // create 65mhz system clock, happens to match 1024 x 768 XVGA timing
-    clk_wiz_vga clkdivider(.clk_in1(clk_100mhz), .clk_out1(clk_25mhz));
+    logic clk_25mhz;
+    // create 25mhz system clock, happens to match 640 x 480 VGA timing
+    clk_wiz_0 clkdivider(.clk_in1(clk_100mhz), .clk_out1(clk_25mhz));
 
-    logic [31:0] data;      //  instantiate 7-segment display; display (8) 4-bit hex
-    logic [6:0] segments;
+    wire [31:0] data;      //  instantiate 7-segment display; display (8) 4-bit hex
+    wire [6:0] segments;
     assign {cg, cf, ce, cd, cc, cb, ca} = segments[6:0];
-    //display_8hex display(.clk_in(clk_25mhz),.data_in(data), .seg_out(segments), .strobe_out(an));
+    display_8hex display(.clk_in(clk_25mhz),.data_in(data), .seg_out(segments), .strobe_out(an));
     //assign seg[6:0] = segments;
     assign  dp = 1'b1;  // turn off the period
 
     assign led = sw;                        // turn leds on
-    //assign data = {28'h0123456, sw[3:0]};   // display 0123456 + sw[3:0]
+    assign data = {28'h0123456, sw[3:0]};   // display 0123456 + sw[3:0]
     assign led16_r = btnl;                  // left button -> red led
     assign led16_g = btnc;                  // center button -> green led
     assign led16_b = btnr;                  // right button -> blue led
     assign led17_r = btnl;
     assign led17_g = btnc;
     assign led17_b = btnr;
-                
-    logic [9:0] hcount;     // pixel on current line
-    logic [9:0] vcount;     // line number
-    logic hsync, vsync;
-    logic [11:0] pixel, pixel_path;
-    logic [11:0] rgb;    
+
+    wire [9:0] hcount;    // pixel on current line
+    wire [9:0] vcount;     // line number
+    wire hsync, vsync, blank;
+    wire [11:0] pixel;
+    reg [11:0] rgb;    
     vga vga1(.vclock_in(clk_25mhz),.hcount_out(hcount),.vcount_out(vcount),
           .hsync_out(hsync),.vsync_out(vsync),.blank_out(blank));
 
-    // btnc button is user reset
-    logic reset;
-    debounce db1(.reset_in(0),.clock_in(clk_25mhz),.noisy_in(btnc),.clean_out(reset));
-   
-    logic find_path, move_car;
-    debounce db2(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(btnu),
-            .clean_out(find_path));
-    debounce db3(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(btnd),
-            .clean_out(move_car));                               
 
-    // BRAMs operating mode No_Change
-    parameter BRAM_SIZE = 76800;
-    logic my_wea0, my_wea1;
-    logic [16:0] addr0, my_addr0, addr1;
-    logic [3:0] data_to_bram0, data_from_bram0;
-    logic data_to_bram1, data_from_bram1;
-    logic BRAM0_initialized, BRAM1_initialized;
-    
-    blk_mem_gen_0 bram0(.clka(clk_25mhz), .wea(my_wea0), .addra(addr0),  
-                .dina(data_to_bram0), .douta(data_from_bram0));                           
-    blk_mem_gen_1 bram1(.clka(clk_25mhz), .wea(my_wea1), .addra(addr1),  
-                .dina(data_to_bram1), .douta(data_from_bram1));  
+    // btnc button is user reset
+    wire reset;
+    //wire up,down;
+    debounce db1(.reset_in(0),.clock_in(clk_25mhz),.noisy_in(btnc),.clean_out(reset));
+    // UP and DOWN buttons for pong paddle 
+    //debounce db2(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(btnu),.clean_out(up));
+    //debounce db3(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(btnd),.clean_out(down));
+    logic freeze;   //added by viv
+    debounce db4(.reset_in(reset),.clock_in(clk_25mhz),.noisy_in(sw[15]),   //added by viv
+                .clean_out(freeze));
                 
+    logic xclk;
+    logic[1:0] xclk_count;
+    
+    logic pclk_buff, pclk_in;
+    logic vsync_buff, vsync_in;
+    logic href_buff, href_in;
+    logic[7:0] pixel_buff, pixel_in;
+    
+    logic [15:0] output_pixels;
+    logic [15:0] old_output_pixels;
+    logic [12:0] processed_pixels;
+    logic valid_pixel;
+    logic frame_done_out;
+    
+    logic [16:0] pixel_addr_in;
+    logic [16:0] pixel_addr_out;
+    
+    assign xclk = clk_25mhz;    //changed by viv
+    assign jbclk = xclk;
+    assign jdclk = xclk;
+
+    
     parameter IMG_W = 320;
     parameter IMG_H = 240;
     
     parameter IDLE = 3'b000;
-    parameter BINARY_MAZE_FILTERING = 3'b001;
-    parameter SKELETONIZING = 3'b010;
+    parameter CAPTURING_IMG = 3'b001;
+    parameter BINARY_MAZE_FILTERING = 3'b010;
+    parameter SKELETONIZING = 3'b011;
     
-    parameter COLORED_MAZE_FILTERING = 3'b011;
-    parameter SOLVING = 3'b100;
-    parameter TRACING_BACKPOINTERS = 3'b101;
+    parameter COLORED_MAZE_FILTERING = 3'b100;
+    parameter SOLVING = 3'b101;
+    parameter TRACING_BACKPOINTERS = 3'b110;
 
     logic [2:0] state;
-               
-    // Instantiate the Unit Under Test (UUT)
-    binary_maze skel_maze(.clka(clk_25mhz),
-                          .addra(pixel_r_addr),
-                          .douta(skel_pixel),
-                          .wea(0)
-                          );
     
+    logic [16:0] cam_pixel_wr_addr;
+    logic [16:0] cam_pixel_r_addr;
+    
+    logic cam_pixel_wea;
+    assign cam_pixel_wea = (valid_pixel && state == CAPTURING_IMG);
+    logic [11:0] rgb_pixel;
+    
+    cam_image_buffer cam_img_buf(.clka(clk_25mhz),
+                                .addra(cam_pixel_wr_addr),
+                                .dina({output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]}),
+                                .wea(cam_pixel_wea),
+                                .clkb(clk_25mhz),
+                                .addrb(cam_pixel_r_addr),
+                                .doutb(rgb_pixel));
+    
+    logic [16:0] filt_bin_pixel_wr_addr;
+    logic filt_bin_pixel_in;
+    logic filt_bin_pixel_wea;
+    logic [16:0] filt_bin_pixel_r_addr;
+    logic filt_bin_pixel_out;
+                                    
+    binary_maze skel_maze(.clka(clk_25mhz),
+                          .addra(filt_bin_pixel_wr_addr),
+                          .dina(filt_bin_pixel_in),
+                          .wea(filt_bin_pixel_wea),
+                          .clkb(clk_25mhz),
+                          .addrb(filt_bin_pixel_r_addr),
+                          .doutb(filt_bin_pixel_out),
+                          );
+    logic bin_maze_filt_start;
     logic bin_maze_filt_done;
-    binary_maze_filtering #(.IMG_W(320),.IMG_W(240)) bin_maze_filt
+    
+    binary_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) bin_maze_filt
         (
         
          .clk(clk_25mhz),
          .rst(reset),
-         .start(),
-         .r(),
-         .g(),
-         .b(),        
+         .start(bin_maze_filt_start),
+         .rgb_pixel(rgb_pixel),  
+         .cam_pixel_r_addr(cam_pixel_r_addr), 
          .done(bin_maze_filt_done),
-         .pixel_wr_addr(),
-         .pixel_wr(),
-         .pixel_out()
+         .pixel_wr_addr(filt_bin_pixel_wr_addr),
+         .pixel_wea(filt_bin_pixel_wea),
+         .pixel_out(filt_bin_pixel_in)
          );
          
     logic colored_maze_filt_done;
     logic [16:0] start_pos;
-    
-    module colored_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240)
+    /*
+    colored_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) c_maze_filt
         (
         .clk(clk_25mhz),
         .rst(reset),
@@ -139,7 +177,9 @@ module top_level(
         .start_pos(start_pos),
         .done(colored_maze_filt_done)
     );
+    */
     
+    /*
     pixel_type_map p_tmap(.clka(clk_25mhz),
                           .addra(pixel_r_addr),
                           .douta(pixel_type),
@@ -177,9 +217,9 @@ module top_level(
                  .addra(bp_tracer_addr),
                  .dina(write_path),
                  .wea(write_path));   
-                     
-    backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240)) bp_tracer(
-                      .clk(clock),
+      
+    backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(IMG_W),.IMG_H(IMG_H)) bp_tracer(
+                      .clk(clk_25mhz),
                       .rst(rst),
                       .start(start_bp_tracer),
                       .start_pos(start_pos),
@@ -189,7 +229,13 @@ module top_level(
                       .write_path(write_path),
                       .done(bp_tracer_done)
                       );
-         
+    
+    path_bram pb(.clka(clk_25mhz),
+                 .addra(bp_tracer_addr),
+                 .dina(write_path),
+                 .wea(write_path));   
+    */
+                 
     always_ff @(posedge clk_25mhz)begin
         if(reset)begin
         
@@ -197,15 +243,30 @@ module top_level(
         else begin
             case(state)
                 IDLE: begin
-                    
+                    //Wait for current frame to be finished
+                    if(frame_done_out)begin
+                        state <= CAPTURING_IMG;
+                        cam_pixel_wr_addr <= 17'b0;
+                    end
+                end
+                CAPTURING_IMG: begin
+                    if (valid_pixel)begin
+                        cam_pixel_wr_addr <= cam_pixel_wr_addr + 1;        
+                    end
+                    if(frame_done_out)begin
+                        //camera image is now stored in bram
+                        state <= BINARY_MAZE_FILTERING;
+                        bin_maze_filt_start <= 1;
+                    end
                 end
                 BINARY_MAZE_FILTERING: begin
+                    bin_maze_filt_start <= 0;
                     if(bin_maze_filt_done)begin
                         state <= SKELETONIZING;
                     end
                 end
                 SKELETONIZING: begin
-                
+                    //get stuck in here for now
                 end
                 COLORED_MAZE_FILTERING: begin
                     if(colored_maze_filt_done)begin
@@ -224,165 +285,65 @@ module top_level(
             endcase
         end
     end
-                              
-    logic phsync,pvsync,pblank;
-    logic b,hs,vs;
-    logic my_hcount, my_vcount; 
-    logic hsync1, vsync1, blank1, hsync2, vsync2, blank2;
     
-    logic [9:0] car_x, car_y;
-    parameter car_x_init = 0;   // The starting address is provided by maze algorithm
-    parameter car_y_init = 9;   // so these two initial parameters are TO BE DELETED
-    path pa(.vclock_in(clk_25mhz),.reset_in(reset), .data_from_bram1(data_from_bram1),
-                .hcount_in(my_hcount),.vcount_in(my_vcount),
-                .hsync_in(hsync2),.vsync_in(vsync2),.blank_in(blank2),
-                .phsync_out(phsync),.pvsync_out(pvsync),.pblank_out(pblank),
-                .pixel_out(pixel_path));
-
-    logic border = (hcount==0 | hcount==639 | vcount==0 | vcount==479 |
-                   hcount == 320 | vcount == 240);
     
-    logic addr0_inc, addr1_inc;
     always_ff @(posedge clk_25mhz) begin
-        if (reset) begin  //initialize BRAM path
-            BRAM0_initialized <= 0;
-            my_wea0 <= 1;
-            addr0 <= 0;
-            BRAM1_initialized <= 0;
-            my_wea1 <= 1;
-            addr1 <= 0;
-            addr0_inc <= 0;
-            addr1_inc <= 0;
-        end else if (!BRAM0_initialized) begin      
-            if (addr0 < BRAM_SIZE) begin
-                if (!addr0_inc) begin
-                    addr0_inc <= 1;
-                    if ((addr0 >= 2880) && (addr0 < 3100)) 
-                        data_to_bram0 <=  4'b0001;
-                    else if (addr0==3100) data_to_bram0<=4'b0010;
-                    else if ((addr0 == 3420) || (addr0 == 3740) || (addr0 == 4060) || (addr0 == 4380)
-                        || (addr0 == 4700) || (addr0 == 5020) || (addr0 == 5340) || (addr0 == 5660))
-                        data_to_bram0 <=  4'b0010;
-                    else if ((addr0 == 5980) || (addr0 == 6300) || (addr0 == 6620) || (addr0 == 6940)
-                        || (addr0 == 7260) || (addr0 == 7580) || (addr0 == 7900) || (addr0 == 8220))
-                        data_to_bram0 <=  4'b0010;
-                    else if ((addr0 == 8540) || (addr0 == 8860) || (addr0 == 9180) || (addr0 == 9500)
-                        || (addr0 == 9820) || (addr0 == 10140) || (addr0 == 10460) )
-                        data_to_bram0 <=  4'b0010;
-                    else if ((addr0 >= 10561) && (addr0 < 10781)) 
-                        data_to_bram0 <=  4'b0100;
-                    else  data_to_bram0 <=  4'b0;                         
-                end else begin
-                    addr0_inc <= 0;
-                    addr0 <= addr0 + 1;                    
-                end            
-            end else begin
-                BRAM0_initialized <= 1; 
-                addr0 <= 0;
-                my_wea0 <= 0;
-            end
+        //Comes from camera sensor
+        pclk_buff <= jb[0];//WAS JB
+        vsync_buff <= jb[1]; //WAS JB
+        href_buff <= jb[2]; //WAS JB
+        pixel_buff <= ja;
         
-        // find path    
-        end else if (!BRAM1_initialized) begin       
-            if (addr1 < BRAM_SIZE) begin
-                if (!addr1_inc) begin
-                    data_to_bram1 <= (data_from_bram0 == 4'b0) ? 1'b0 : 1'b1;
-                    addr1_inc <= 1;
-                end else begin
-                    addr1_inc <= 0;
-                    addr0 <= addr0 + 1;
-                    addr1 <= addr1 + 1;
-                end
-            end else begin
-                BRAM1_initialized <= 1;
-                addr0 <= 0;
-                addr1 <= 0; 
-                my_wea1 <= 0;
-            end
-        //read from BRAM1 for solved path
-        end else begin        
-            addr0 <= my_addr0; 
-            addr1 <= (hcount>>1)+ ((vcount>>1)*32'd320);    
-        end
-    
-        //1 step delay of addr1 calculation + data out from bram of another step delay
-        hsync2 <= hsync1;
-        vsync2 <= vsync1;
-        blank2 <= blank1;
-        hsync1 <= hsync;
-        vsync1 <= vsync;
-        blank1 <= blank;
-        my_hcount <= hcount;
-        my_vcount <= vcount;
-                
-        if (sw[1:0] == 2'b01) begin
-            // 1 pixel outline of visible area (white)
-            hs <= hsync;
-            vs <= vsync;
-            b <= blank;
-            rgb <= {12{border}};
-        end else if (sw[1:0] == 2'b10) begin
-            // color bars
-            hs <= hsync;
-            vs <= vsync;
-            b <= blank;
-            rgb <= {{4{hcount[7]}}, {4{hcount[6]}}, {4{hcount[5]}}};
-        end else begin
-            // default: path_car
-            hs <= phsync;
-            vs <= pvsync;
-            b <= pblank;
-            rgb <= pixel;
-        end
+        pclk_in <= pclk_buff;
+        vsync_in <= vsync_buff;
+        href_in <= href_buff;
+        pixel_in <= pixel_buff;
+        old_output_pixels <= output_pixels;
+        xclk_count <= xclk_count + 2'b01;
+        processed_pixels = {output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]};
     end
     
-    parameter EAST  = 4'b0001;
-    parameter SOUTH = 4'b0010;
-    parameter WEST  = 4'b0100;
-    parameter NORTH = 4'b1000;    
-    always_ff @(negedge vsync2) begin  
-        if(!BRAM1_initialized) begin
-            car_x <= car_x_init;    // car_x_init and car_y_init are from maze algorithm
-            car_y <= car_y_init;    // not from defined parameters (theh two parameters to be deleted
-        end else begin
-            if (data_from_bram0 == EAST) car_x <= (addr0 % 320) +1;
-            else if (data_from_bram0 == SOUTH) car_y <= (addr0 / 320)+1;
-            else if (data_from_bram0 == WEST) car_x <= (addr0 % 320)-1;
-            else if (data_from_bram0 == NORTH) car_y <= (addr0 / 320)-1;
-        end  
-    end
+    camera_read  my_camera(.p_clock_in(pclk_in),
+                          .vsync_in(vsync_in),
+                          .href_in(href_in),
+                          .p_data_in(pixel_in),
+                          .pixel_data_out(output_pixels),
+                          .pixel_valid_out(valid_pixel),
+                          .frame_done_out(frame_done_out));   
     
-    assign my_addr0 = car_x + (car_y*32'd320);
- 
-    parameter WIDTH = 4;
-    parameter HEIGHT = 4;
-    parameter COLOR = 12'h0F0;
-    logic [9:0] car_x_min, car_y_min, car_x_max, car_y_max, x3, y3;
-    logic [11:0] pixel_car;
-    always_ff @(posedge clk_25mhz) begin
-        if(!BRAM1_initialized) begin
-            car_x_min <= 0;
-            car_y_min <= 0;
-            car_x_max <= 0;
-            car_y_max <= 0;
-            x3 <= (hcount>>1);
-            y3 <= (vcount>>1);
-        end else begin
-            car_x_min <= (car_x < WIDTH)? 0 : (car_x-WIDTH);
-            car_y_min <= (car_y < HEIGHT)? 0 : (car_y-HEIGHT);
-            car_x_max <= (car_x < (320-WIDTH))? (car_x+WIDTH) : 319;
-            car_y_max <= (car_y < 240-HEIGHT)? (car_y+HEIGHT) : 239;
+    wire phsync,pvsync,pblank;
+    pong_game pg(.vclock_in(clk_25mhz),.reset_in(reset),
+                .up_in(up),.down_in(down),.pspeed_in(sw[15:12]),
+                .hcount_in(hcount),.vcount_in(vcount),
+                .hsync_in(hsync),.vsync_in(vsync),.blank_in(blank),
+                .phsync_out(phsync),.pvsync_out(pvsync),.pblank_out(pblank),.pixel_out(pixel));
 
-            x3 <= (hcount>>1);
-            y3 <= (vcount>>1);
-            if ((x3 >= car_x_min && x3 < car_x_max) &&
-                (y3 >= car_y_min && y3 < car_y_max))
-                pixel_car <= COLOR;
-            else pixel_car <= 12'b0;
-            end
-    end 
-    assign pixel = pixel_path | pixel_car;
- 
+    wire border = (hcount==0 | hcount==639 | vcount==0 | vcount==479 |
+                   hcount == 320 | vcount == 240);
+
+    reg b,hs,vs;
+    always_ff @(posedge clk_25mhz) begin
+      if (sw[1:0] == 2'b01) begin
+         // 1 pixel outline of visible area (white)
+         hs <= hsync;
+         vs <= vsync;
+         b <= blank;
+         rgb <= {12{border}};
+      end else if (sw[1:0] == 2'b10) begin
+         // color bars
+         hs <= hsync;
+         vs <= vsync;
+         b <= blank;
+         rgb <= {{4{hcount[7]}}, {4{hcount[6]}}, {4{hcount[5]}}} ;
+      end else begin
+         
+         hs <= phsync;
+         vs <= pvsync;
+         b <= pblank;
+         filt_bin_pixel_r_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
+         rgb <= filt_bin_pixel_out ? 12'hFFF : 12'b0;
+     end
+
     // the following lines are required for the Nexys4 VGA circuit - do not change
     assign vga_r = ~b ? rgb[11:8]: 0;
     assign vga_g = ~b ? rgb[7:4] : 0;
@@ -393,40 +354,225 @@ module top_level(
 
 endmodule
 
+////////////////////////////////////////////////////////////////////////////////
+//
+// camera_read
+//
+////////////////////////////////////////////////////////////////////////////////
+
+module camera_read(
+	input  p_clock_in,
+	input  vsync_in,
+	input  href_in,
+	input  [7:0] p_data_in,
+	output logic [15:0] pixel_data_out,
+	output logic pixel_valid_out,
+	output logic frame_done_out
+    );
+	 
+	
+	logic [1:0] FSM_state = 0;
+    logic pixel_half = 0;
+	
+	localparam WAIT_FRAME_START = 0;
+	localparam ROW_CAPTURE = 1;
+	
+	
+	always_ff@(posedge p_clock_in) begin 
+        case(FSM_state)
+            WAIT_FRAME_START: begin //wait for VSYNC
+               FSM_state <= (!vsync_in) ? ROW_CAPTURE : WAIT_FRAME_START;
+               frame_done_out <= 0;
+               pixel_half <= 0;
+            end
+            
+            ROW_CAPTURE: begin 
+               FSM_state <= vsync_in ? WAIT_FRAME_START : ROW_CAPTURE;
+               frame_done_out <= vsync_in ? 1 : 0;
+               pixel_valid_out <= (href_in && pixel_half) ? 1 : 0; 
+               if (href_in) begin
+                   pixel_half <= ~ pixel_half;
+                   if (pixel_half) pixel_data_out[7:0] <= p_data_in;
+                   else pixel_data_out[15:8] <= p_data_in;
+               end
+            end
+        endcase
+	end
+	
+endmodule
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-// path: draw path 
+// pong_game: the game itself!
 //
 ////////////////////////////////////////////////////////////////////////////////
-module path (
-    input vclock_in,        // 25MHz clock
-    input reset_in,         // 1 to initialize module
-    input data_from_bram1,
-    input [9:0] hcount_in,  // horizontal index of current pixel (0..639)
-    input [9:0] vcount_in,  // vertical index of current pixel (0..479)
-    input hsync_in,         // VGA horizontal sync signal (active low)
-    input vsync_in,         // VGA vertical sync signal (active low)
-    input blank_in,         // VGA blanking (1 means output black pixel)    
-    output phsync_out,      // path_car's horizontal sync
-    output pvsync_out,      // path_car's vertical sync
-    output pblank_out,      // path_car's blanking
-    output [11:0] pixel_out // path_car's pixel  // r=23:16, g=15:8, b=7:0 
+
+module pong_game (
+   input vclock_in,         // 25MHz clock
+   input reset_in,          // 1 to initialize module
+   input up_in,             // 1 when paddle should move up
+   input down_in,           // 1 when paddle should move down
+   input [3:0] pspeed_in,   // puck speed in pixels/tick 
+   input [9:0] hcount_in,   // horizontal index of current pixel (0..639)
+   input [9:0]  vcount_in,  // vertical index of current pixel (0..479)
+   input hsync_in,          // XVGA horizontal sync signal (active low)
+   input vsync_in,          // XVGA vertical sync signal (active low)
+   input blank_in,          // XVGA blanking (1 means output black pixel)
+        
+   output phsync_out,       // pong game's horizontal sync
+   output pvsync_out,       // pong game's vertical sync
+   output pblank_out,       // pong game's blanking
+   output [11:0] pixel_out  // pong game's pixel  // r=23:16, g=15:8, b=7:0 
+   );
+
+   wire [2:0] checkerboard;
+        
+   // REPLACE ME! The code below just generates a color checkerboard
+   // using 64 pixel by 64 pixel squares.
+   
+   assign phsync_out = hsync_in;
+   assign pvsync_out = vsync_in;
+   assign pblank_out = blank_in;
+   assign checkerboard = hcount_in[8:6] + vcount_in[8:6];
+
+   // here we use three bits from hcount and vcount to generate the
+   // checkerboard
+
+   assign pixel_out = {{4{checkerboard[2]}}, {4{checkerboard[1]}}, {4{checkerboard[0]}}} ;
+     
+endmodule
+
+module synchronize #(parameter NSYNC = 3)  // number of sync flops.  must be >= 2
+                   (input clk,in,
+                    output reg out);
+
+  reg [NSYNC-2:0] sync;
+
+  always_ff @ (posedge clk)
+  begin
+    {out,sync} <= {sync[NSYNC-2:0],in};
+  end
+endmodule
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Pushbutton Debounce Module (video version - 24 bits)  
+//
+///////////////////////////////////////////////////////////////////////////////
+
+module debounce (input reset_in, clock_in, noisy_in,
+                 output reg clean_out);
+
+   reg [19:0] count;
+   reg new_input;
+
+//   always_ff @(posedge clock_in)
+//     if (reset_in) begin new <= noisy_in; clean_out <= noisy_in; count <= 0; end
+//     else if (noisy_in != new) begin new <= noisy_in; count <= 0; end
+//     else if (count == 200000) clean_out <= new;
+//     else count <= count+1;
+
+   always_ff @(posedge clock_in)
+     if (reset_in) begin 
+        new_input <= noisy_in; 
+        clean_out <= noisy_in; 
+        count <= 0; end
+     else if (noisy_in != new_input) begin new_input<=noisy_in; count <= 0; end
+     else if (count == 200000) clean_out <= new_input;
+     else count <= count+1;
+
+
+endmodule
+
+//////////////////////////////////////////////////////////////////////////////////
+// Engineer:   g.p.hom
+// 
+// Create Date:    18:18:59 04/21/2013 
+// Module Name:    display_8hex 
+// Description:  Display 8 hex numbers on 7 segment display
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+module display_8hex(
+    input clk_in,                 // system clock
+    input [31:0] data_in,         // 8 hex numbers, msb first
+    output reg [6:0] seg_out,     // seven segment display output
+    output reg [7:0] strobe_out   // digit strobe
     );
 
-    parameter WHITE = 12'hFFF;
-    parameter GREEN = 12'h0F0;
-    
-    logic [11:0] pixel_car, pixel_path;    
+    localparam bits = 13;
+     
+    reg [bits:0] counter = 0;  // clear on power up
+     
+    wire [6:0] segments[15:0]; // 16 7 bit memorys
+    assign segments[0]  = 7'b100_0000;  // inverted logic
+    assign segments[1]  = 7'b111_1001;  // gfedcba
+    assign segments[2]  = 7'b010_0100;
+    assign segments[3]  = 7'b011_0000;
+    assign segments[4]  = 7'b001_1001;
+    assign segments[5]  = 7'b001_0010;
+    assign segments[6]  = 7'b000_0010;
+    assign segments[7]  = 7'b111_1000;
+    assign segments[8]  = 7'b000_0000;
+    assign segments[9]  = 7'b001_1000;
+    assign segments[10] = 7'b000_1000;
+    assign segments[11] = 7'b000_0011;
+    assign segments[12] = 7'b010_0111;
+    assign segments[13] = 7'b010_0001;
+    assign segments[14] = 7'b000_0110;
+    assign segments[15] = 7'b000_1110;
+     
+    always_ff @(posedge clk_in) begin
+      // Here I am using a counter and select 3 bits which provides
+      // a reasonable refresh rate starting the left most digit
+      // and moving left.
+      counter <= counter + 1;
+      case (counter[bits:bits-2])
+          3'b000: begin  // use the MSB 4 bits
+                  seg_out <= segments[data_in[31:28]];
+                  strobe_out <= 8'b0111_1111 ;
+                 end
 
-    assign pixel_path = data_from_bram1? WHITE : 12'b0;     
- 
-    assign phsync_out = hsync_in;
-    assign pvsync_out = vsync_in;
-    assign pblank_out = blank_in;
-    
-    assign pixel_out = pixel_path; 
+          3'b001: begin
+                  seg_out <= segments[data_in[27:24]];
+                  strobe_out <= 8'b1011_1111 ;
+                 end
+
+          3'b010: begin
+                   seg_out <= segments[data_in[23:20]];
+                   strobe_out <= 8'b1101_1111 ;
+                  end
+          3'b011: begin
+                  seg_out <= segments[data_in[19:16]];
+                  strobe_out <= 8'b1110_1111;        
+                 end
+          3'b100: begin
+                  seg_out <= segments[data_in[15:12]];
+                  strobe_out <= 8'b1111_0111;
+                 end
+
+          3'b101: begin
+                  seg_out <= segments[data_in[11:8]];
+                  strobe_out <= 8'b1111_1011;
+                 end
+
+          3'b110: begin
+                   seg_out <= segments[data_in[7:4]];
+                   strobe_out <= 8'b1111_1101;
+                  end
+          3'b111: begin
+                  seg_out <= segments[data_in[3:0]];
+                  strobe_out <= 8'b1111_1110;
+                 end
+
+       endcase
+      end
+
 endmodule
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -500,25 +646,4 @@ module vga(input vclock_in,
       blank_out <= next_vblank | (next_hblank & ~hreset);
    end
    
-endmodule
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Pushbutton Debounce Module (video version - 24 bits)  
-//
-///////////////////////////////////////////////////////////////////////////////
-module debounce (input reset_in, clock_in, noisy_in,
-                 output reg clean_out);
-   reg [19:0] count;
-   reg new_input;
-
-   always_ff @(posedge clock_in)
-     if (reset_in) begin 
-        new_input <= noisy_in; 
-        clean_out <= noisy_in; 
-        count <= 0; end
-     else if (noisy_in != new_input) begin new_input<=noisy_in; count <= 0; end
-     else if (count == 650000) clean_out <= new_input;
-     else count <= count+1;
 endmodule

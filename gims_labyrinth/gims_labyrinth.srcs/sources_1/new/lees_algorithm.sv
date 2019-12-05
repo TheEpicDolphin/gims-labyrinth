@@ -182,7 +182,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                 end
                 
                 CLEAR_VISITED_MAP: begin
-                    if(pixel_wr_addr < IMG_W * IMG_H)begin
+                    if(pixel_wr_addr == IMG_W * IMG_H)begin
                         state <= IDLE;
                         write_visited <= 0;
                     end

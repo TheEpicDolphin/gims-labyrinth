@@ -5,7 +5,6 @@ import imageio
 
 
 def bin_maze_coe_gen(bin_maze_im):
-    "memory_initialization_radix=2;\nmemory_initialization_vector="
     coe_contents = "memory_initialization_radix=2;\nmemory_initialization_vector=\n"
     r, c = bin_maze_im.shape
     for i in range(r):

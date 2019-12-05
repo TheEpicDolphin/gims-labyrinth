@@ -21,24 +21,30 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240)
+module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, parameter BRAM_READ_DELAY = 2)
     (
         input clk,
         input start,
         input rst,
-        input [7:0] r,
-        input [7:0] g,
-        input [7:0] b,
-
+        input [11:0] rgb_pixel,
+        
+        output logic [16:0] cam_pixel_r_addr,
+        
         output done,
         //Used for writing filtered pixel values into bram
         output logic [16:0] pixel_wr_addr,
-        output pixel_wr,
+        output pixel_wea,
         output pixel_out
     );
+    logic [7:0] r;
+    logic [7:0] g;
+    logic [7:0] b;
+    assign r = {rgb_pixel[11:8], 4'b0};
+    assign g = {rgb_pixel[7:4], 4'b0};
+    assign b = {rgb_pixel[3:0], 4'b0}; 
     
     parameter IDLE = 2'b00;
-    parameter DELAY = 2'b01;
+    parameter READ_DELAY = 2'b01;
     parameter SMOOTHING = 2'b10;
     parameter DONE = 2'b11;
     logic [1:0] state;
@@ -112,7 +118,7 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240)
                     .start(start_dilation),
                     .pixel_in(eroded_pixel),
                     .pixel_addr(pixel_wr_addr),
-                    .pixel_valid(pixel_wr),
+                    .pixel_valid(pixel_wea),
                     .processed_pixel(dilated_pixel),
                     .done(dilation_done)
                     );
@@ -132,16 +138,24 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240)
             case(state)
                 IDLE: begin
                     if(start)begin
+                        state <= READ_DELAY;
+                        cam_pixel_r_addr <= 0;
+                    end
+                end
+                READ_DELAY: begin
+                    //window_end_i_read reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
+                    cam_pixel_r_addr <= cam_pixel_r_addr + 1;
+                    if(cam_pixel_r_addr == BRAM_READ_DELAY - 1)begin
                         state <= SMOOTHING;
                         rgb_2_hsv_sel <= 0;
                         cycles <= 0;
-                        
                         `ifdef SIM   
                         bin_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_img.txt","w");
                         `endif
                     end
                 end
                 SMOOTHING: begin
+                    cam_pixel_r_addr <= cam_pixel_r_addr + 1;
                     if(rgb_2_hsv_sel == RGB_2_HSV_CYCLES - 1)begin
                         rgb_2_hsv_sel <= 0;
                     end
@@ -194,9 +208,7 @@ logic [1:0] state;
 
 parameter RGB_2_HSV_CYCLES = 19;
 
-//logic [16:0] h;
-//logic [7:0] s;
-//logic [7:0] v;
+
 logic bin_maze_pixel;
 logic eroded_pixel;
 logic dilated_pixel;
@@ -221,6 +233,9 @@ generate
     end
 endgenerate
 
+logic [16:0] h;
+logic [7:0] s;
+logic [7:0] v;
 assign h = hsv_buffer[rgb_2_hsv_sel][32:16];
 assign s = hsv_buffer[rgb_2_hsv_sel][15:8];
 assign v = hsv_buffer[rgb_2_hsv_sel][7:0];

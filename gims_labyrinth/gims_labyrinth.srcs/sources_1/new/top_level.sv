@@ -89,6 +89,8 @@ module top_level(
     blk_mem_gen_1 bram1(.clka(clk_25mhz), .wea(my_wea1), .addra(addr1),  
                 .dina(data_to_bram1), .douta(data_from_bram1));  
                 
+    parameter IMG_W = 320;
+    parameter IMG_H = 240;
     
     parameter IDLE = 3'b000;
     parameter BINARY_MAZE_FILTERING = 3'b001;
@@ -138,24 +140,55 @@ module top_level(
         .done(colored_maze_filt_done)
     );
     
-    pixel_type_map p_tmap(.clka(clock),
+    pixel_type_map p_tmap(.clka(clk_25mhz),
                           .addra(pixel_r_addr),
                           .douta(pixel_type),
                           .wea(0));
                           
                           
-    pixel_backpointers p_bp(.clka(clock),
+    pixel_backpointers p_bp(.clka(clk_25mhz),
                             .addra(pixel_wr_addr),
                             .dina(backpointer_wr),
                             .wea(write_bp),
-                            .clkb(clock),
+                            .clkb(clk_25mhz),
                             .addrb(bp_tracer_addr),
                             .doutb(backpointer_r));
     
-    path_bram pb(.clka(clock),
+
+                 
+    lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),
+                     .IMG_W(IMG_W),.IMG_H(IMG_H)) maze_solver
+                 (
+                  .clk(clk_25mhz),
+                  .rst(reset),
+                  .start(),
+                  .start_pos(start_pos),
+                  .skel_pixel(skel_pixel),
+                  .pixel_type(pixel_type),
+                  .pixel_r_addr(),
+                  .pixel_wr_addr(),
+                  .backpointer(),
+                  .write_bp(write_bp),
+                  .done(),
+                  .end_pos()
+                  );
+                  
+    path_bram pb(.clka(clk_25mhz),
                  .addra(bp_tracer_addr),
                  .dina(write_path),
-                 .wea(write_path));
+                 .wea(write_path));   
+                     
+    backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240)) bp_tracer(
+                      .clk(clock),
+                      .rst(rst),
+                      .start(start_bp_tracer),
+                      .start_pos(start_pos),
+                      .end_pos(end_pos),
+                      .bp(backpointer_r),
+                      .pixel_addr(bp_tracer_addr),
+                      .write_path(write_path),
+                      .done(bp_tracer_done)
+                      );
          
     always_ff @(posedge clk_25mhz)begin
         if(reset)begin

@@ -30,12 +30,9 @@ logic [16:0] pixel_r_addr;
 logic [16:0] pixel_wr_addr;
 logic skel_pixel;
 logic [1:0] pixel_type;
-logic visited;
 
 logic write_bp;
-logic write_visited;
 logic [1:0] backpointer_wr;
-logic visit;
 logic lee_alg_done;
 
 logic start_bp_tracer;
@@ -73,14 +70,6 @@ pixel_type_map p_tmap(.clka(clock),
                       .addra(pixel_r_addr),
                       .douta(pixel_type),
                       .wea(0));
-                      
-visited_map visited_map(.clka(clock),
-                      .addra(pixel_wr_addr),
-                      .dina(visit),
-                      .wea(write_visited),
-                      .clkb(clock),
-                      .addrb(pixel_r_addr),
-                      .doutb(visited));
     
 lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240)) l_a
                       (
@@ -91,13 +80,10 @@ lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240
                           
                       .skel_pixel(skel_pixel),
                       .pixel_type(pixel_type),
-                      .visited(visited),
                       .pixel_r_addr(pixel_r_addr),
                       .pixel_wr_addr(pixel_wr_addr),
                       .backpointer(backpointer_wr),
                       .write_bp(write_bp),
-                      .write_visited(write_visited),
-                      .visit(visit),
                       .done(lee_alg_done),
                       .end_pos(end_pos),
                           

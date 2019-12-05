@@ -1,3 +1,4 @@
+`define SIM 1
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -26,7 +27,7 @@ module dilation #(K = 5, IMG_W=320, IMG_H=240)(
 	input start,
 	input pixel_in,
 	
-	output logic pixel_addr,
+	output logic [16:0] pixel_addr,
     output logic pixel_valid,
 	output logic processed_pixel,
 	output logic done									// flag for when erosion is done

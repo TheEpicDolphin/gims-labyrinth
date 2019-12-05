@@ -1,24 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/01/2019 05:55:56 PM
-// Design Name: 
-// Module Name: image_processing_tb
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
@@ -65,16 +44,13 @@ integer i;
 logic [23:0] rgb;
 
 // Instantiate the Unit Under Test (UUT)
-signal_processing uut(
+binary_maze_filtering uut(
     .clk(clock),
     .rst(rst),
     .start(start),
     .r(r_in),
     .g(g_in),
-    .b(b_in),
-    .h(h),   //Q9.8
-    .s(s),  //Q8
-    .v(v)   //Q8
+    .b(b_in)
     );
 
 always #5 clock = !clock;

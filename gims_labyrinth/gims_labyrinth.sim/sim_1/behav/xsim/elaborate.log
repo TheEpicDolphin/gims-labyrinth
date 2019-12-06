@@ -1,11 +1,8 @@
 Vivado Simulator 2018.2
 Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 63f4ac95999441e884144af7c253e89f --incr --debug typical --relax --mt 2 -L blk_mem_gen_v8_4_1 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot image_processing_tb_behav xil_defaultlib.image_processing_tb xil_defaultlib.glbl -log elaborate.log 
+Running: C:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 63f4ac95999441e884144af7c253e89f --incr --debug typical --relax --mt 2 -L blk_mem_gen_v8_4_1 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot skeletonizer_tb_behav xil_defaultlib.skeletonizer_tb xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
-WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 1 for port sign [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/rgb_2_hsv.sv:67]
-WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 1 for port sign [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/rgb_2_hsv.sv:77]
-WARNING: [VRFC 10-278] actual bit length 32 differs from formal bit length 1 for port sign [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/rgb_2_hsv.sv:86]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
@@ -16,13 +13,8 @@ Compiling module blk_mem_gen_v8_4_1.blk_mem_gen_v8_4_1_softecc_outpu...
 Compiling module blk_mem_gen_v8_4_1.blk_mem_gen_v8_4_1_mem_module(C_...
 Compiling module blk_mem_gen_v8_4_1.blk_mem_axi_regs_fwd_v8_4(C_DATA...
 Compiling module blk_mem_gen_v8_4_1.blk_mem_gen_v8_4_1(C_FAMILY="art...
-Compiling module xil_defaultlib.cam_image_buffer
-Compiling module xil_defaultlib.divider(WIDTH=16)
-Compiling module xil_defaultlib.rgb_2_hsv
-Compiling module xil_defaultlib.thresholder(H_LOW=17'b0,H_HIGH=1...
-Compiling module xil_defaultlib.erosion
-Compiling module xil_defaultlib.dilation
-Compiling module xil_defaultlib.binary_maze_filtering_default
-Compiling module xil_defaultlib.image_processing_tb
+Compiling module xil_defaultlib.binary_maze
+Compiling module xil_defaultlib.skeletonizer
+Compiling module xil_defaultlib.skeletonizer_tb
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot image_processing_tb_behav
+Built simulation snapshot skeletonizer_tb_behav

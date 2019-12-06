@@ -26,12 +26,13 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
     input start,
     input pixel_in,										// read data from bram
     
-    output logic [16:0] read_address,
-    output logic [16:0] write_address,
-	output logic write_pixel,							// bram write enable
+    output logic [16:0] pixel_r_addr,
+    output logic [16:0] pixel_wr_addr,
+	output logic pixel_we,							// bram write enable
 	output logic pixel_out,								// write data to bram
     
-    output done);
+    output logic done
+    );
     
     parameter IDLE = 2'b00;
     parameter INITIAL_READ_DELAY = 2'b01;
@@ -41,8 +42,11 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
     
     logic [2*IMG_WIDTH + 2:0] unmod_pixel_buffer, mod_pixel_buffer, temp;
 	logic [8:0] unmod_window, mod_window;
-	logic [6:0] disc_check_buffer1, disc_check_buffer2;	//used to check for discontinuity
+	logic [7:0] disc_check_buffer1, disc_check_buffer2;	//used to check for discontinuity
+	logic [7:0] xored_disc_buffers;
 	logic [3:0] num_transitions;						// number of transitions for discontinuity check
+	logic causes_discontinuity;
+	
 	logic [1:0] state;
 	logic changes_made;									// flag to see if changes were made while skeletonizing
 	integer i;
@@ -50,6 +54,10 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
     
 	logic [8:0] center_x;								// x location of the center pixel of the windows
 	logic [7:0] center_y;								// y location of the center pixel of the windows
+	
+	logic h0, h1, h2, h3, h4, h5, h6, h7, h0_7;
+	logic skeletonized_pixel;
+	integer skel_maze_f;
     
     always_comb begin
 		//This constructs the windows from our pixel buffers
@@ -59,8 +67,8 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
 				mod_window[3*i + j] = mod_pixel_buffer[i*IMG_WIDTH + j];
 			end
 		end
-		write_address = IMG_WIDTH*center_y + center_x;
-		write_pixel = (state == SKELETONIZING);
+		pixel_wr_addr = IMG_WIDTH*center_y + center_x;
+		pixel_we = (state == SKELETONIZING);
 		done = (state == DONE);
 		
 		// check for discontinuity
@@ -74,7 +82,7 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
 		
 		
 		// skeletonizing logic
-		h0 = (unmod_window[8] == 0) & (unmod_window[7] == 0) & (unmod_window[2] == 0) & (unmod_window[4] == 1) & (unmod_window[6] == 1) 
+		h0 = (unmod_window[8] == 0) & (unmod_window[5] == 0) & (unmod_window[2] == 0) & (unmod_window[4] == 1) & (unmod_window[6] == 1) 
             & (unmod_window[3] == 1) & (unmod_window[0] == 1);
         h1 = (unmod_window[5] == 0) & (unmod_window[2] == 0) & (unmod_window[1] == 0) & (unmod_window[7] == 1) & (unmod_window[4] == 1) 
             & (unmod_window[3] == 1);
@@ -106,34 +114,35 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
             state <= IDLE;
 			unmod_pixel_buffer <= 0;
 			mod_pixel_buffer <= 0;
-			read_address <= 19'b0;
-			changes_made <= 1'b0;
         end
         else begin
 			// always shift what we read from bram into unmod_pixel_buffer
 			unmod_pixel_buffer <= {unmod_pixel_buffer[2*IMG_WIDTH + 1: 0], pixel_in};
+			// Update mod_pixel_buffer by shifting temp
+            mod_pixel_buffer <=  {temp[2*IMG_WIDTH + 1:0], pixel_in};
+            
             case(state)
                 IDLE: begin
                     if(start)begin
                         state <= INITIAL_READ_DELAY;
-                        read_address <= 19'b0;
+                        pixel_r_addr <= 17'b0;
 						changes_made <= 1'b0;
+						
                     end
                 end
                 INITIAL_READ_DELAY: begin
                     // read_address reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
-                    read_address <= read_address + 1;
+                    pixel_r_addr <= pixel_r_addr + 1;
 					// wait until buffer is half full before starting skeletonization
-                    if(read_address == (BRAM_READ_DELAY + IMG_WIDTH + 2))begin
+                    if(pixel_r_addr == ((BRAM_READ_DELAY - 1) + (IMG_WIDTH + 2)))begin
                         center_x <= 9'b0;
                         center_y <= 8'b0;
                         state <= SKELETONIZING;
+                        skel_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/maze_skel.txt","w");
                     end
                 end
                 SKELETONIZING: begin
-                    // Update mod_pixel_buffer by shifting temp
-					mod_pixel_buffer <=  {temp[2*IMG_WIDTH + 1:0], pixel_in};
-                    
+                    $fwrite(skel_maze_f,"%b\n",pixel_out);
                     //Increment center pixel coordinates
                     if(center_x == IMG_WIDTH - 1)begin
                         center_x <= 9'b0;
@@ -143,19 +152,27 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
                         center_x <= center_x + 1;
                     end
                     
+                    if(pixel_r_addr == IMG_WIDTH * IMG_HEIGHT - 1)begin
+                        pixel_r_addr <= 17'b0;
+                    end
+                    else begin
+                        pixel_r_addr <= pixel_r_addr + 1;
+                    end
+                    
                     //Have processed all the pixels
                     if(center_x == IMG_WIDTH - 1 && center_y == IMG_HEIGHT - 1)begin
 						if(changes_made) begin				// repeat if any changes were made
-							read_address <= 19'b0;
-							state <= INITIAL_READ_DELAY;
+							center_x <= 9'b0;
+                            center_y <= 8'b0;
 							changes_made <= 1'b0;
+							$fclose(skel_maze_f);
+							skel_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/maze_skel.txt","w");
 						end else begin						// otherwise we are done
-							state <= done;
+							state <= DONE;
+							$fclose(skel_maze_f);
 						end
                     end
 					else begin
-						// window has not reached the end, so read next pixel and write the current one
-						read_address <= read_address + 1;
 						changes_made <= changes_made | (pixel_out != unmod_window[4]);
 					end
                 end

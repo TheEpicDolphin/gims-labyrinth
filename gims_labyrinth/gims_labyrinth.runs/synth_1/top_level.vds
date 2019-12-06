@@ -2,8 +2,8 @@
 # Vivado v2018.2 (64-bit)
 # SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
 # IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
-# Start of session at: Thu Dec  5 20:37:51 2019
-# Process ID: 30984
+# Start of session at: Thu Dec  5 23:27:19 2019
+# Process ID: 29924
 # Current directory: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1
 # Command line: vivado.exe -log top_level.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_level.tcl
 # Log file: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/top_level.vds
@@ -15,7 +15,7 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 24472 
+INFO: Helper process launched with PID 34180 
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:50]
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:51]
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:52]
@@ -29,14 +29,14 @@ WARNING: [Synth 8-2507] parameter declaration becomes local in binary_maze_filte
 WARNING: [Synth 8-2507] parameter declaration becomes local in binary_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:48]
 WARNING: [Synth 8-2507] parameter declaration becomes local in binary_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:49]
 WARNING: [Synth 8-2507] parameter declaration becomes local in binary_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:52]
-WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:216]
-WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:217]
-WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:218]
-WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:219]
-WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:222]
-WARNING: [Synth 8-2368] multiple overrides for parameter IMG_W [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:155]
+WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:239]
+WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:240]
+WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:241]
+WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:242]
+WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:245]
+WARNING: [Synth 8-2368] multiple overrides for parameter IMG_W [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:157]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 398.996 ; gain = 111.418
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 398.863 ; gain = 111.738
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'top_level' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:24]
 	Parameter IMG_W bound to: 320 - type: integer 
@@ -48,10 +48,10 @@ INFO: [Synth 8-6157] synthesizing module 'top_level' [C:/Users/giand/Documents/M
 	Parameter COLORED_MAZE_FILTERING bound to: 3'b100 
 	Parameter SOLVING bound to: 3'b101 
 	Parameter TRACING_BACKPOINTERS bound to: 3'b110 
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
 WARNING: [Synth 8-350] instance 'clkdivider' of module 'clk_wiz_0' requires 4 connections, but only 3 given [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:46]
-INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:540]
+INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:542]
 	Parameter DISPLAY_WIDTH bound to: 640 - type: integer 
 	Parameter DISPLAY_HEIGHT bound to: 480 - type: integer 
 	Parameter H_FP bound to: 16 - type: integer 
@@ -60,16 +60,16 @@ INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Sen
 	Parameter V_FP bound to: 11 - type: integer 
 	Parameter V_SYNC_PULSE bound to: 2 - type: integer 
 	Parameter V_BP bound to: 31 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'vga' (2#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:540]
-INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:409]
-INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:409]
-INFO: [Synth 8-6157] synthesizing module 'display_8hex' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:442]
+INFO: [Synth 8-6155] done synthesizing module 'vga' (2#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:542]
+INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:411]
+INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:411]
+INFO: [Synth 8-6157] synthesizing module 'display_8hex' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:444]
 	Parameter bits bound to: 13 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'display_8hex' (4#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:442]
-INFO: [Synth 8-6157] synthesizing module 'cam_image_buffer' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cam_image_buffer' (5#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'binary_maze' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'binary_maze' (6#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'display_8hex' (4#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:444]
+INFO: [Synth 8-6157] synthesizing module 'cam_image_buffer' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cam_image_buffer' (5#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'binary_maze' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'binary_maze' (6#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'binary_maze_filtering' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:24]
 	Parameter IMG_W bound to: 240 - type: integer 
 	Parameter IMG_H bound to: 240 - type: integer 
@@ -115,12 +115,20 @@ WARNING: [Synth 8-350] instance 'inst' of module 'rgb_2_hsv' requires 11 connect
 WARNING: [Synth 8-350] instance 'inst' of module 'rgb_2_hsv' requires 11 connections, but only 9 given [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:60]
 INFO: [Synth 8-6157] synthesizing module 'thresholder' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/thresholder.sv:23]
 	Parameter H_LOW bound to: 17'b00000000000000000 
-	Parameter H_HIGH bound to: 17'b11111111111111111 
-	Parameter S_LOW bound to: 8'b00000000 
-	Parameter S_HIGH bound to: 8'b00011000 
-	Parameter V_LOW bound to: 8'b11101000 
+	Parameter H_HIGH bound to: 17'b00001010000000000 
+	Parameter S_LOW bound to: 8'b10000000 
+	Parameter S_HIGH bound to: 8'b11111111 
+	Parameter V_LOW bound to: 8'b00000000 
 	Parameter V_HIGH bound to: 8'b11111111 
 INFO: [Synth 8-6155] done synthesizing module 'thresholder' (9#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/thresholder.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'thresholder__parameterized0' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/thresholder.sv:23]
+	Parameter H_LOW bound to: 17'b10101010000000000 
+	Parameter H_HIGH bound to: 17'b11111111111111111 
+	Parameter S_LOW bound to: 8'b10000000 
+	Parameter S_HIGH bound to: 8'b11111111 
+	Parameter V_LOW bound to: 8'b00000000 
+	Parameter V_HIGH bound to: 8'b11111111 
+INFO: [Synth 8-6155] done synthesizing module 'thresholder__parameterized0' (9#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/thresholder.sv:23]
 INFO: [Synth 8-6157] synthesizing module 'erosion' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/erosion.sv:24]
 	Parameter K bound to: 5 - type: integer 
 	Parameter IMG_W bound to: 320 - type: integer 
@@ -132,7 +140,7 @@ INFO: [Synth 8-6157] synthesizing module 'erosion' [C:/Users/giand/Documents/MIT
 WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/erosion.sv:94]
 WARNING: [Synth 8-6014] Unused sequential element bin_maze_eroded_f_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/erosion.sv:94]
 INFO: [Synth 8-6155] done synthesizing module 'erosion' (10#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/erosion.sv:24]
-WARNING: [Synth 8-350] instance 'bin_erosion' of module 'erosion' requires 7 connections, but only 6 given [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:117]
+WARNING: [Synth 8-350] instance 'bin_erosion' of module 'erosion' requires 7 connections, but only 6 given [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:140]
 INFO: [Synth 8-6157] synthesizing module 'dilation' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:24]
 	Parameter K bound to: 5 - type: integer 
 	Parameter IMG_W bound to: 320 - type: integer 
@@ -145,17 +153,17 @@ WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/gian
 WARNING: [Synth 8-6014] Unused sequential element bin_maze_dilated_f_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:104]
 WARNING: [Synth 8-3936] Found unconnected internal register 'temp_reg' and it is trimmed from '1285' to '1284' bits. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:70]
 INFO: [Synth 8-6155] done synthesizing module 'dilation' (11#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:24]
-WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:166]
-WARNING: [Synth 8-6014] Unused sequential element bin_maze_f_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:166]
+WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:189]
+WARNING: [Synth 8-6014] Unused sequential element bin_maze_f_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:189]
 INFO: [Synth 8-6155] done synthesizing module 'binary_maze_filtering' (12#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:24]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:235]
-INFO: [Synth 8-6157] synthesizing module 'camera_read' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:354]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:237]
+INFO: [Synth 8-6157] synthesizing module 'camera_read' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:356]
 	Parameter WAIT_FRAME_START bound to: 0 - type: integer 
 	Parameter ROW_CAPTURE bound to: 1 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:379]
-INFO: [Synth 8-6155] done synthesizing module 'camera_read' (13#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:354]
-WARNING: [Synth 8-6014] Unused sequential element processed_pixels_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:295]
-WARNING: [Synth 8-3848] Net colored_maze_filt_done in module/entity top_level does not have driver. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:157]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:381]
+INFO: [Synth 8-6155] done synthesizing module 'camera_read' (13#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:356]
+WARNING: [Synth 8-6014] Unused sequential element processed_pixels_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:297]
+WARNING: [Synth 8-3848] Net colored_maze_filt_done in module/entity top_level does not have driver. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:159]
 INFO: [Synth 8-6155] done synthesizing module 'top_level' (14#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:24]
 WARNING: [Synth 8-3917] design top_level has port dp driven by constant 1
 WARNING: [Synth 8-3331] design top_level has unconnected port btnu
@@ -164,7 +172,7 @@ WARNING: [Synth 8-3331] design top_level has unconnected port jd[2]
 WARNING: [Synth 8-3331] design top_level has unconnected port jd[1]
 WARNING: [Synth 8-3331] design top_level has unconnected port jd[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 442.109 ; gain = 154.531
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 441.902 ; gain = 154.777
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -177,10 +185,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 442.109 ; gain = 154.531
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 441.902 ; gain = 154.777
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 442.109 ; gain = 154.531
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 441.902 ; gain = 154.777
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a100tcsg324-3
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -202,16 +210,16 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 843.121 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 842.895 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 843.121 ; gain = 555.543
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 842.895 ; gain = 555.770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-3
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 843.121 ; gain = 555.543
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 842.895 ; gain = 555.770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -222,7 +230,7 @@ Applied set_property DONT_TOUCH = true for skel_maze. (constraint file  auto gen
 Applied set_property DONT_TOUCH = true for cam_img_buf. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for clkdivider. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 843.121 ; gain = 555.543
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 842.895 ; gain = 555.770
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "clean_out" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "count" won't be mapped to RAM because it is too sparse
@@ -285,7 +293,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'FSM_state_reg' using encod
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'top_level'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 843.121 ; gain = 555.543
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 842.895 ; gain = 555.770
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -293,7 +301,7 @@ Report RTL Partitions:
 |      |RTL Partition              |Replication |Instances |
 +------+---------------------------+------------+----------+
 |1     |rgb_2_hsv                  |          19|      3982|
-|2     |binary_maze_filtering__GC0 |           1|      6013|
+|2     |binary_maze_filtering__GC0 |           1|      6029|
 |3     |top_level__GC0             |           1|      1625|
 +------+---------------------------+------------+----------+
 ---------------------------------------------------------------------------------
@@ -554,6 +562,8 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5544] ROM "done0" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
 WARNING: [Synth 8-6014] Unused sequential element h_div1/quotient_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/divider.sv:40]
 DSP Report: Generating DSP h0, operation Mode is: A2*(B:0x3c00).
 DSP Report: register h_div1/quotient_reg is absorbed into DSP h0.
@@ -699,19 +709,19 @@ INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[9]' (FD) to 'i_0/rgb_reg[10]'
 INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[10]' (FD) to 'i_0/rgb_reg[11]'
 INFO: [Synth 8-3886] merging instance 'i_0/display/seg_out_reg[0]' (FD) to 'i_0/display/seg_out_reg[3]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (i_0/\display/seg_out_reg[1] )
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[0]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[1]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[2]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[3]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[0]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[1]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[2]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[3]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[0]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[1]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[2]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[3]' (FDE) to 'rgb_2_hsv:/min_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/min_reg[0]' (FDE) to 'rgb_2_hsv:/max_reg[0]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/min_reg[0]' (FDE) to 'rgb_2_hsv:/b_reg[0]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[0]' (FDE) to 'rgb_2_hsv:/b_reg[1]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[1]' (FDE) to 'rgb_2_hsv:/b_reg[2]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[2]' (FDE) to 'rgb_2_hsv:/b_reg[3]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[3]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[0]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[1]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[2]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[3]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[0]' (FDE) to 'rgb_2_hsv:/r_reg[1]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[1]' (FDE) to 'rgb_2_hsv:/r_reg[2]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[2]' (FDE) to 'rgb_2_hsv:/r_reg[3]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[3]' (FDE) to 'rgb_2_hsv:/max_reg[0]'
 INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[0]' (FDE) to 'rgb_2_hsv:/max_reg[1]'
 INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[1]' (FDE) to 'rgb_2_hsv:/max_reg[2]'
 INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/min_reg[1]' (FDE) to 'rgb_2_hsv:/max_reg[2]'
@@ -719,68 +729,71 @@ INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[2]' (FDE) to 'rgb_2_hs
 INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/min_reg[2]' (FDE) to 'rgb_2_hsv:/max_reg[3]'
 INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[3]' (FDE) to 'rgb_2_hsv:/min_reg[3]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (rgb_2_hsv:/\min_reg[3] )
-WARNING: [Synth 8-3332] Sequential element (h_reg[16]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[15]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[14]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[13]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[12]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[11]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[10]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[9]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[8]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[7]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[6]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[5]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[4]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[3]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[2]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[1]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_reg[0]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[15]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[14]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[13]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[12]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[11]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[10]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[9]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_dividend_reg[8]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[22]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[21]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[20]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[19]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[18]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[17]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[16]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[15]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[14]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[13]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[12]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[11]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[10]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[9]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[8]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[7]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[6]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[5]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[4]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[3]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[2]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[1]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/divider_copy_reg[0]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[31]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[30]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[29]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[28]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[27]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[26]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[25]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[24]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[23]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[22]) is unused and will be removed from module rgb_2_hsv.
-WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[21]) is unused and will be removed from module rgb_2_hsv.
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/h_dividend_reg[9]' (LDC) to 'rgb_2_hsv:/h_dividend_reg[10]'
+INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/h_dividend_reg[10]' (LDC) to 'rgb_2_hsv:/h_dividend_reg[11]'
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[22]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[21]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[20]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[19]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[18]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[17]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[16]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[15]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[14]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[13]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[12]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[11]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[10]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[9]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[8]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[7]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[6]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[5]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[4]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[3]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[2]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[1]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[0]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[31]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[30]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[29]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[28]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[27]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[26]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[25]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[24]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[23]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[22]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[21]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[20]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[19]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[18]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[17]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[16]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[15]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[14]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[13]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[12]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[11]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[10]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[9]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[8]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[7]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[6]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[5]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[4]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[3]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[2]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[1]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/dividend_copy_reg[0]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/quotient_reg[0]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/quotient_reg[1]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/quotient_reg[2]) is unused and will be removed from module rgb_2_hsv.
+WARNING: [Synth 8-3332] Sequential element (v_div1/quotient_reg[3]) is unused and will be removed from module rgb_2_hsv.
 INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rgb_2_hsv:/\h_dividend_reg[8] )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 843.121 ; gain = 555.543
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 842.895 ; gain = 555.770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -802,8 +815,8 @@ Report RTL Partitions:
 +------+---------------------------+------------+----------+
 |      |RTL Partition              |Replication |Instances |
 +------+---------------------------+------------+----------+
-|1     |rgb_2_hsv                  |          19|       753|
-|2     |binary_maze_filtering__GC0 |           1|      4189|
+|1     |rgb_2_hsv                  |          19|      1172|
+|2     |binary_maze_filtering__GC0 |           1|      4287|
 |3     |top_level__GC0             |           1|       451|
 +------+---------------------------+------------+----------+
 ---------------------------------------------------------------------------------
@@ -812,28 +825,28 @@ Start Applying XDC Timing Constraints
 INFO: [Synth 8-5578] Moved timing constraint from pin 'clkdivider/clk_out1' to pin 'clkdivider/bbstub_clk_out1/O'
 INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:35 . Memory (MB): peak = 843.121 ; gain = 555.543
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 842.895 ; gain = 555.770
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 843.121 ; gain = 555.543
+Finished Timing Optimization : Time (s): cpu = 00:00:37 ; elapsed = 00:00:40 . Memory (MB): peak = 866.031 ; gain = 578.906
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
 +------+---------------------------+------------+----------+
 |      |RTL Partition              |Replication |Instances |
 +------+---------------------------+------------+----------+
-|1     |rgb_2_hsv                  |          19|       753|
-|2     |binary_maze_filtering__GC0 |           1|      4189|
+|1     |rgb_2_hsv                  |          19|      1172|
+|2     |binary_maze_filtering__GC0 |           1|      4287|
 |3     |top_level__GC0             |           1|       451|
 +------+---------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:37 ; elapsed = 00:00:41 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished Technology Mapping : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 873.199 ; gain = 586.074
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -857,7 +870,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished IO Insertion : Time (s): cpu = 00:00:41 ; elapsed = 00:00:45 . Memory (MB): peak = 874.664 ; gain = 587.539
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -870,7 +883,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:41 ; elapsed = 00:00:45 . Memory (MB): peak = 874.664 ; gain = 587.539
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -882,41 +895,41 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
 ---------------------------------------------------------------------------------
 
 Static Shift Register Report:
-+------------+-----------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
-|Module Name | RTL Name                                                  | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
-+------------+-----------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
-|top_level   | bin_maze_filt/bin_erosion/pixel_buffer_reg[1280]          | 316    | 4     | YES          | NO                 | YES               | 0      | 40      | 
-|top_level   | bin_maze_filt/bin_dilation/pixel_buffer_reg[642]          | 642    | 1     | YES          | NO                 | YES               | 0      | 20      | 
-|top_level   | bin_maze_filt/bin_dilation/pixel_buffer_dilated_reg[1280] | 316    | 4     | YES          | NO                 | YES               | 0      | 40      | 
-|top_level   | bin_maze_filt/genblk1[0].inst/v_div1/quotient_reg[3]      | 4      | 19    | YES          | NO                 | YES               | 19     | 0       | 
-|top_level   | bin_maze_filt/bin_dilation/pixel_buffer_reg_r_313         | 315    | 1     | YES          | NO                 | YES               | 0      | 10      | 
-|top_level   | bin_maze_filt/bin_dilation/pixel_buffer_reg_r_639         | 326    | 1     | YES          | NO                 | YES               | 0      | 11      | 
-+------------+-----------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
++---------------------------+------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name                | RTL Name                                             | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++---------------------------+------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|binary_maze_filtering__GC0 | bin_erosion/pixel_buffer_reg[1280]                   | 316    | 4     | YES          | NO                 | YES               | 0      | 40      | 
+|binary_maze_filtering__GC0 | bin_dilation/pixel_buffer_reg[642]                   | 642    | 1     | YES          | NO                 | YES               | 0      | 20      | 
+|binary_maze_filtering__GC0 | bin_dilation/pixel_buffer_dilated_reg[1280]          | 316    | 4     | YES          | NO                 | YES               | 0      | 40      | 
+|top_level                  | bin_maze_filt/genblk1[0].inst/s_div1/quotient_reg[7] | 8      | 19    | YES          | NO                 | YES               | 19     | 0       | 
+|top_level                  | bin_maze_filt/bin_dilation/pixel_buffer_reg_r_313    | 315    | 1     | YES          | NO                 | YES               | 0      | 10      | 
+|top_level                  | bin_maze_filt/bin_dilation/pixel_buffer_reg_r_639    | 326    | 1     | YES          | NO                 | YES               | 0      | 11      | 
++---------------------------+------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP and Shift Register Reporting
@@ -941,132 +954,117 @@ Report Cell Usage:
 |1     |binary_maze      |     1|
 |2     |cam_image_buffer |     1|
 |3     |clk_wiz_0        |     1|
-|4     |CARRY4           |   843|
-|5     |LUT1             |   773|
-|6     |LUT2             |  2371|
-|7     |LUT3             |   905|
-|8     |LUT4             |   939|
-|9     |LUT5             |   366|
-|10    |LUT6             |   471|
-|11    |MUXF7            |    82|
-|12    |MUXF8            |    31|
-|13    |SRL16E           |    19|
-|14    |SRLC32E          |   121|
-|15    |FDRE             |  3385|
-|16    |FDSE             |   196|
-|17    |IBUF             |    30|
-|18    |OBUF             |    54|
+|4     |BUFG             |     1|
+|5     |CARRY4           |  1432|
+|6     |DSP48E1          |    19|
+|7     |LUT1             |  1782|
+|8     |LUT2             |  2934|
+|9     |LUT3             |   958|
+|10    |LUT4             |  1636|
+|11    |LUT5             |   457|
+|12    |LUT6             |   782|
+|13    |MUXF7            |    16|
+|14    |MUXF8            |     7|
+|15    |SRL16E           |    19|
+|16    |SRLC32E          |   121|
+|17    |FDRE             |  3841|
+|18    |FDSE             |    44|
+|19    |LDC              |   399|
+|20    |IBUF             |    30|
+|21    |OBUF             |    54|
 +------+-----------------+------+
 
 Report Instance Areas: 
 +------+-----------------------+----------------------+------+
 |      |Instance               |Module                |Cells |
 +------+-----------------------+----------------------+------+
-|1     |top                    |                      | 10601|
-|2     |  bin_maze_filt        |binary_maze_filtering | 10220|
-|3     |    bin_dilation       |dilation              |   598|
-|4     |    bin_erosion        |erosion               |   196|
-|5     |    \genblk1[0].inst   |rgb_2_hsv             |   492|
-|6     |      h_div1           |divider_71            |    14|
-|7     |      s_div1           |divider_72            |   156|
-|8     |      v_div1           |divider_73            |   126|
-|9     |    \genblk1[10].inst  |rgb_2_hsv_0           |   486|
-|10    |      h_div1           |divider_68            |    14|
-|11    |      s_div1           |divider_69            |   150|
-|12    |      v_div1           |divider_70            |   126|
-|13    |    \genblk1[11].inst  |rgb_2_hsv_1           |   493|
-|14    |      h_div1           |divider_65            |    14|
-|15    |      s_div1           |divider_66            |   144|
-|16    |      v_div1           |divider_67            |   136|
-|17    |    \genblk1[12].inst  |rgb_2_hsv_2           |   499|
-|18    |      h_div1           |divider_62            |    14|
-|19    |      s_div1           |divider_63            |   162|
-|20    |      v_div1           |divider_64            |   126|
-|21    |    \genblk1[13].inst  |rgb_2_hsv_3           |   486|
-|22    |      h_div1           |divider_59            |    14|
-|23    |      s_div1           |divider_60            |   148|
-|24    |      v_div1           |divider_61            |   126|
-|25    |    \genblk1[14].inst  |rgb_2_hsv_4           |   487|
-|26    |      h_div1           |divider_56            |    14|
-|27    |      s_div1           |divider_57            |   150|
-|28    |      v_div1           |divider_58            |   126|
-|29    |    \genblk1[15].inst  |rgb_2_hsv_5           |   487|
-|30    |      h_div1           |divider_53            |    14|
-|31    |      s_div1           |divider_54            |   144|
-|32    |      v_div1           |divider_55            |   131|
-|33    |    \genblk1[16].inst  |rgb_2_hsv_6           |   489|
-|34    |      h_div1           |divider_50            |    14|
-|35    |      s_div1           |divider_51            |   152|
-|36    |      v_div1           |divider_52            |   126|
-|37    |    \genblk1[17].inst  |rgb_2_hsv_7           |   475|
-|38    |      h_div1           |divider_47            |    14|
-|39    |      s_div1           |divider_48            |   138|
-|40    |      v_div1           |divider_49            |   126|
-|41    |    \genblk1[18].inst  |rgb_2_hsv_8           |   484|
-|42    |      h_div1           |divider_44            |    14|
-|43    |      s_div1           |divider_45            |   146|
-|44    |      v_div1           |divider_46            |   126|
-|45    |    \genblk1[1].inst   |rgb_2_hsv_9           |   483|
-|46    |      h_div1           |divider_41            |    14|
-|47    |      s_div1           |divider_42            |   146|
-|48    |      v_div1           |divider_43            |   126|
-|49    |    \genblk1[2].inst   |rgb_2_hsv_10          |   486|
-|50    |      h_div1           |divider_38            |    14|
-|51    |      s_div1           |divider_39            |   150|
-|52    |      v_div1           |divider_40            |   126|
-|53    |    \genblk1[3].inst   |rgb_2_hsv_11          |   503|
-|54    |      h_div1           |divider_35            |    14|
-|55    |      s_div1           |divider_36            |   144|
-|56    |      v_div1           |divider_37            |   147|
-|57    |    \genblk1[4].inst   |rgb_2_hsv_12          |   493|
-|58    |      h_div1           |divider_32            |    14|
-|59    |      s_div1           |divider_33            |   156|
-|60    |      v_div1           |divider_34            |   126|
-|61    |    \genblk1[5].inst   |rgb_2_hsv_13          |   484|
-|62    |      h_div1           |divider_29            |    14|
-|63    |      s_div1           |divider_30            |   146|
-|64    |      v_div1           |divider_31            |   126|
-|65    |    \genblk1[6].inst   |rgb_2_hsv_14          |   487|
-|66    |      h_div1           |divider_26            |    14|
-|67    |      s_div1           |divider_27            |   150|
-|68    |      v_div1           |divider_28            |   126|
-|69    |    \genblk1[7].inst   |rgb_2_hsv_15          |   486|
-|70    |      h_div1           |divider_23            |    14|
-|71    |      s_div1           |divider_24            |   144|
-|72    |      v_div1           |divider_25            |   131|
-|73    |    \genblk1[8].inst   |rgb_2_hsv_16          |   492|
-|74    |      h_div1           |divider_20            |    14|
-|75    |      s_div1           |divider_21            |   156|
-|76    |      v_div1           |divider_22            |   126|
-|77    |    \genblk1[9].inst   |rgb_2_hsv_17          |   483|
-|78    |      h_div1           |divider               |    14|
-|79    |      s_div1           |divider_18            |   146|
-|80    |      v_div1           |divider_19            |   126|
-|81    |  db1                  |debounce              |    37|
-|82    |  display              |display_8hex          |    45|
-|83    |  my_camera            |camera_read           |    26|
-|84    |  vga1                 |vga                   |    92|
+|1     |top                    |                      | 14547|
+|2     |  bin_maze_filt        |binary_maze_filtering | 14166|
+|3     |    bin_dilation       |dilation              |   591|
+|4     |    bin_erosion        |erosion               |   194|
+|5     |    \genblk1[0].inst   |rgb_2_hsv             |   689|
+|6     |      h_div1           |divider_53            |   109|
+|7     |      s_div1           |divider_54            |    98|
+|8     |    \genblk1[10].inst  |rgb_2_hsv_0           |   688|
+|9     |      h_div1           |divider_51            |   109|
+|10    |      s_div1           |divider_52            |    98|
+|11    |    \genblk1[11].inst  |rgb_2_hsv_1           |   705|
+|12    |      h_div1           |divider_49            |   109|
+|13    |      s_div1           |divider_50            |   100|
+|14    |    \genblk1[12].inst  |rgb_2_hsv_2           |   688|
+|15    |      h_div1           |divider_47            |   109|
+|16    |      s_div1           |divider_48            |    98|
+|17    |    \genblk1[13].inst  |rgb_2_hsv_3           |   689|
+|18    |      h_div1           |divider_45            |   109|
+|19    |      s_div1           |divider_46            |    98|
+|20    |    \genblk1[14].inst  |rgb_2_hsv_4           |   688|
+|21    |      h_div1           |divider_43            |   109|
+|22    |      s_div1           |divider_44            |    98|
+|23    |    \genblk1[15].inst  |rgb_2_hsv_5           |   696|
+|24    |      h_div1           |divider_41            |   109|
+|25    |      s_div1           |divider_42            |    99|
+|26    |    \genblk1[16].inst  |rgb_2_hsv_6           |   698|
+|27    |      h_div1           |divider_39            |   109|
+|28    |      s_div1           |divider_40            |   100|
+|29    |    \genblk1[17].inst  |rgb_2_hsv_7           |   688|
+|30    |      h_div1           |divider_37            |   109|
+|31    |      s_div1           |divider_38            |    98|
+|32    |    \genblk1[18].inst  |rgb_2_hsv_8           |   691|
+|33    |      h_div1           |divider_35            |   109|
+|34    |      s_div1           |divider_36            |    98|
+|35    |    \genblk1[1].inst   |rgb_2_hsv_9           |   689|
+|36    |      h_div1           |divider_33            |   109|
+|37    |      s_div1           |divider_34            |    98|
+|38    |    \genblk1[2].inst   |rgb_2_hsv_10          |   688|
+|39    |      h_div1           |divider_31            |   109|
+|40    |      s_div1           |divider_32            |    98|
+|41    |    \genblk1[3].inst   |rgb_2_hsv_11          |   715|
+|42    |      h_div1           |divider_29            |   109|
+|43    |      s_div1           |divider_30            |   101|
+|44    |    \genblk1[4].inst   |rgb_2_hsv_12          |   687|
+|45    |      h_div1           |divider_27            |   109|
+|46    |      s_div1           |divider_28            |    98|
+|47    |    \genblk1[5].inst   |rgb_2_hsv_13          |   688|
+|48    |      h_div1           |divider_25            |   109|
+|49    |      s_div1           |divider_26            |    98|
+|50    |    \genblk1[6].inst   |rgb_2_hsv_14          |   690|
+|51    |      h_div1           |divider_23            |   109|
+|52    |      s_div1           |divider_24            |    98|
+|53    |    \genblk1[7].inst   |rgb_2_hsv_15          |   697|
+|54    |      h_div1           |divider_21            |   109|
+|55    |      s_div1           |divider_22            |    99|
+|56    |    \genblk1[8].inst   |rgb_2_hsv_16          |   689|
+|57    |      h_div1           |divider_19            |   109|
+|58    |      s_div1           |divider_20            |    98|
+|59    |    \genblk1[9].inst   |rgb_2_hsv_17          |   689|
+|60    |      h_div1           |divider               |   109|
+|61    |      s_div1           |divider_18            |    98|
+|62    |  db1                  |debounce              |    38|
+|63    |  display              |display_8hex          |    45|
+|64    |  my_camera            |camera_read           |    24|
+|65    |  vga1                 |vga                   |    92|
 +------+-----------------------+----------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 160 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:32 . Memory (MB): peak = 865.223 ; gain = 176.633
-Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:44 . Memory (MB): peak = 865.223 ; gain = 577.645
+Synthesis finished with 0 errors, 0 critical warnings and 118 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:35 . Memory (MB): peak = 874.664 ; gain = 186.547
+Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 874.664 ; gain = 587.539
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 986 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 1903 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 399 instances were transformed.
+  LDC => LDCE: 399 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-183 Infos, 172 Warnings, 0 Critical Warnings and 0 Errors encountered.
+190 Infos, 172 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:48 . Memory (MB): peak = 865.223 ; gain = 589.117
+synth_design: Time (s): cpu = 00:00:48 ; elapsed = 00:00:52 . Memory (MB): peak = 874.664 ; gain = 599.012
 WARNING: [Constraints 18-5210] No constraint will be written out.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/top_level.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_level_utilization_synth.rpt -pb top_level_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.181 . Memory (MB): peak = 865.223 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Thu Dec  5 20:38:47 2019...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.151 . Memory (MB): peak = 874.664 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  5 23:28:20 2019...

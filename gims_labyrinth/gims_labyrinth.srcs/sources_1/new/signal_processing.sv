@@ -79,29 +79,52 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
     assign v = hsv_buffer[rgb_2_hsv_sel][7:0];
     
     logic bin_maze_pixel;
-    //Threshold for white path
-    
-    thresholder #(.H_LOW(17'h0),.H_HIGH(17'h1_FF_FF),
-                  .S_LOW(8'b0000_0000),.S_HIGH(8'b0001_1000),
-                  .V_LOW(8'b1110_1000),.V_HIGH(8'b1111_1111)) skel_thresh
-            (
-                .h(h),   //Q9.8
-                .s(s),  //Q8
-                .v(v),  //Q8
-                .b(bin_maze_pixel)
-            );
-    
     /*
-        thresholder #(.H_LOW(17'h0),.H_HIGH(17'h1_FF_FF),
-                  .S_LOW(8'b0000_0000),.S_HIGH(8'b1111_1111),
-                  .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh
+    //Threshold for white path
+    thresholder #(.H_LOW(17'h0),.H_HIGH(17'h1_FF_FF),
+                  .S_LOW(8'b0000_0000),.S_HIGH(8'b0110_0000),
+                  .V_LOW(8'b1001_1111),.V_HIGH(8'b1111_1111)) skel_thresh
             (
                 .h(h),   //Q9.8
                 .s(s),  //Q8
                 .v(v),  //Q8
                 .b(bin_maze_pixel)
             );
-        */    
+    */
+    logic r1;
+        thresholder #(.H_LOW(17'h0_00_00),.H_HIGH(17'h0_14_00),
+                      .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
+                      .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh1
+                (
+                    .h(h),   //Q9.8
+                    .s(s),  //Q8
+                    .v(v),  //Q8
+                    .b(r1)
+                );
+    logic r2;
+       thresholder #(.H_LOW(17'h1_54_00),.H_HIGH(17'h1_FF_FF),
+                              .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
+                              .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh2
+                        (
+                            .h(h),   //Q9.8
+                            .s(s),  //Q8
+                            .v(v),  //Q8
+                            .b(r2)
+                        );
+    assign bin_maze_pixel = r1 || r2;
+    /*
+    //Threshold for blue
+    thresholder #(.H_LOW(17'h0_C8_00),.H_HIGH(17'h1_08_00),
+                      .S_LOW(8'b0000_0000),.S_HIGH(8'b1111_1111),
+                      .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh
+                (
+                    .h(h),   //Q9.8
+                    .s(s),  //Q8
+                    .v(v),  //Q8
+                    .b(bin_maze_pixel)
+                );
+    */
+ 
     logic [23:0] cycles;
     logic eroded_pixel;
     logic dilated_pixel;

@@ -114,13 +114,15 @@ module top_level(
     
     logic cam_pixel_wea;
     assign cam_pixel_wea = (valid_pixel && (state == CAPTURING_IMG));
+    //assign cam_pixel_wea = valid_pixel;
     logic [11:0] rgb_pixel;
+
     
     cam_image_buffer cam_img_buf(.clka(pclk_in),
                                 .addra(cam_pixel_wr_addr),
                                 .dina({output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]}),
                                 .wea(cam_pixel_wea),
-                                .clkb(clk_25mhz),
+                                .clkb(pclk_in),
                                 .addrb(cam_pixel_r_addr),
                                 .doutb(rgb_pixel));
     
@@ -130,7 +132,7 @@ module top_level(
     logic [16:0] filt_bin_pixel_r_addr;
     logic filt_bin_pixel_out;
                                     
-    binary_maze skel_maze(.clka(clk_25mhz),
+    binary_maze skel_maze(.clka(pclk_in),
                           .addra(filt_bin_pixel_wr_addr),
                           .dina(filt_bin_pixel_in),
                           .wea(filt_bin_pixel_wea),
@@ -143,7 +145,7 @@ module top_level(
     
     binary_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) bin_maze_filt
         (
-         .clk(clk_25mhz),
+         .clk(pclk_in),
          .rst(reset),
          .start(bin_maze_filt_start),
          .rgb_pixel(rgb_pixel),  
@@ -227,7 +229,7 @@ module top_level(
                  .wea(write_path));   
     */
                  
-    always_ff @(posedge clk_25mhz)begin
+    always_ff @(posedge pclk_in)begin
         if(reset)begin
             state <= IDLE;
         end

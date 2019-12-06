@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Thu Dec  5 20:40:30 2019
+| Date         : Thu Dec  5 23:30:04 2019
 | Host         : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_level_control_sets_placed.rpt
 | Design       : top_level
@@ -23,8 +23,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Number of unique control sets                            |   194 |
-| Unused register locations in slices containing registers |   648 |
+| Number of unique control sets                            |   233 |
+| Unused register locations in slices containing registers |   570 |
 +----------------------------------------------------------+-------+
 
 
@@ -34,13 +34,13 @@ Table of Contents
 +--------+--------------+
 | Fanout | Control Sets |
 +--------+--------------+
-|      2 |            1 |
+|      2 |           38 |
 |      4 |           19 |
-|      8 |            4 |
-|     10 |           20 |
-|     12 |            1 |
-|     14 |            1 |
-|    16+ |          148 |
+|      8 |            5 |
+|     10 |            4 |
+|     12 |            2 |
+|     14 |           20 |
+|    16+ |          145 |
 +--------+--------------+
 
 
@@ -50,215 +50,254 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             450 |          133 |
+| No           | No                    | No                     |             468 |          134 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |             826 |          106 |
-| Yes          | No                    | No                     |            2834 |          376 |
+| No           | Yes                   | No                     |            1586 |          334 |
+| Yes          | No                    | No                     |            3572 |          523 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |            3090 |          506 |
+| Yes          | Yes                   | No                     |            2980 |          489 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+---------------------------+---------------------------------------------------------------------+------------------------------------------------------+------------------+----------------+
-|        Clock Signal       |                            Enable Signal                            |                   Set/Reset Signal                   | Slice Load Count | Bel Load Count |
-+---------------------------+---------------------------------------------------------------------+------------------------------------------------------+------------------+----------------+
-|  clkdivider/inst/clk_out1 | db1/new_input_i_1_n_0                                               |                                                      |                1 |              2 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/v_div1/quotient_reg[3]_0              |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/v_div1/quotient_reg[3]_0             |                                                      |                2 |              4 |
-|  clkdivider/inst/clk_out1 |                                                                     | display/counter_reg[12]                              |                1 |              8 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_dilation/state_0                                  | db1/reset                                            |                2 |              8 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_erosion/FSM_onehot_state[3]_i_1_n_0               | db1/reset                                            |                2 |              8 |
-|  pclk_in_BUFG             |                                                                     |                                                      |                4 |              8 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/h_div1/bit_n[4]_i_1__44_n_0          | bin_maze_filt/genblk1[15].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/h_div1/bit_n[4]_i_1__11_n_0           | bin_maze_filt/genblk1[4].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/h_div1/bit_n[4]_i_1__29_n_0          | bin_maze_filt/genblk1[10].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/h_div1/bit_n[4]_i_1__47_n_0          | bin_maze_filt/genblk1[16].inst/div_start             |                2 |             10 |
-|  pclk_in_BUFG             | my_camera/pixel_data_out[7]                                         |                                                      |                2 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/h_div1/bit_n[4]_i_1__17_n_0           | bin_maze_filt/genblk1[6].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/h_div1/bit_n[4]_i_1__14_n_0           | bin_maze_filt/genblk1[5].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/h_div1/bit_n[4]_i_1__32_n_0          | bin_maze_filt/genblk1[11].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/h_div1/bit_n[4]_i_1__38_n_0          | bin_maze_filt/genblk1[13].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/h_div1/bit_n[4]_i_1_n_0               | bin_maze_filt/genblk1[0].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/h_div1/bit_n[4]_i_1__23_n_0           | bin_maze_filt/genblk1[8].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/h_div1/bit_n[4]_i_1__41_n_0          | bin_maze_filt/genblk1[14].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/h_div1/bit_n[4]_i_1__20_n_0           | bin_maze_filt/genblk1[7].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/h_div1/bit_n[4]_i_1__2_n_0            | bin_maze_filt/genblk1[1].inst/div_start              |                2 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/h_div1/bit_n[4]_i_1__5_n_0            | bin_maze_filt/genblk1[2].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/h_div1/bit_n[4]_i_1__26_n_0           | bin_maze_filt/genblk1[9].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/h_div1/bit_n[4]_i_1__53_n_0          | bin_maze_filt/genblk1[18].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/h_div1/bit_n[4]_i_1__50_n_0          | bin_maze_filt/genblk1[17].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/h_div1/bit_n[4]_i_1__8_n_0            | bin_maze_filt/genblk1[3].inst/div_start              |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/h_div1/bit_n[4]_i_1__35_n_0          | bin_maze_filt/genblk1[12].inst/div_start             |                1 |             10 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/E[0]                                                  | db1/reset                                            |                2 |             12 |
-|  pclk_in_BUFG             | my_camera/pixel_data_out[15]                                        |                                                      |                3 |             14 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/max                                  |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/max                                  |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_dilation/oldest_pixel_y[7]_i_2_n_0                | bin_maze_filt/bin_dilation/oldest_pixel_y[7]_i_1_n_0 |                4 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/max                                  |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/max                                  |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/max                                   |                                                      |                3 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/max                                  |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_erosion/center_y[7]_i_2_n_0                       | bin_maze_filt/bin_erosion/center_y[7]_i_1_n_0        |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/max                                  |                                                      |                3 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/max                                  |                                                      |                3 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/max                                   |                                                      |                3 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/max                                  |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/max                                  |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/max                                   |                                                      |                2 |             16 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_erosion/center_x[8]_i_2_n_0                       | bin_maze_filt/bin_erosion/center_x[8]_i_1_n_0        |                2 |             18 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_dilation/oldest_pixel_x[8]_i_2_n_0                | bin_maze_filt/bin_dilation/oldest_pixel_x[8]_i_1_n_0 |                3 |             18 |
-|  clkdivider/inst/clk_out1 |                                                                     | vga1/hreset                                          |                4 |             20 |
-|  clkdivider/inst/clk_out1 | vga1/hreset                                                         | vga1/vcount_out0                                     |                4 |             20 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/s_div1/quotient[0]_i_1__16_n_0       | bin_maze_filt/genblk1[17].inst/div_start             |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[17].inst/div_start             |                3 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/s_div1/quotient[0]_i_1__0_n_0         | bin_maze_filt/genblk1[1].inst/div_start              |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/s_div1/quotient[0]_i_1__9_n_0        | bin_maze_filt/genblk1[10].inst/div_start             |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[18].inst/div_start             |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[10].inst/div_start             |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[1].inst/div_start              |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/s_div1/quotient[0]_i_1__17_n_0       | bin_maze_filt/genblk1[18].inst/div_start             |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/s_div1/quotient[0]_i_1__10_n_0       | bin_maze_filt/genblk1[11].inst/div_start             |                7 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[0].inst/div_start              |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[12].inst/div_start             |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/s_div1/quotient[0]_i_1_n_0            | bin_maze_filt/genblk1[0].inst/div_start              |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[11].inst/div_start             |                3 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/s_div1/quotient[0]_i_1__1_n_0         | bin_maze_filt/genblk1[2].inst/div_start              |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[2].inst/div_start              |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/s_div1/quotient[0]_i_1__2_n_0         | bin_maze_filt/genblk1[3].inst/div_start              |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[3].inst/div_start              |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/s_div1/quotient[0]_i_1__3_n_0         | bin_maze_filt/genblk1[4].inst/div_start              |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[4].inst/div_start              |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/s_div1/quotient[0]_i_1__4_n_0         | bin_maze_filt/genblk1[5].inst/div_start              |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[5].inst/div_start              |                3 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/s_div1/quotient[0]_i_1__5_n_0         | bin_maze_filt/genblk1[6].inst/div_start              |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[6].inst/div_start              |                3 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/s_div1/quotient[0]_i_1__6_n_0         | bin_maze_filt/genblk1[7].inst/div_start              |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[7].inst/div_start              |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/s_div1/quotient[0]_i_1__7_n_0         | bin_maze_filt/genblk1[8].inst/div_start              |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[15].inst/div_start             |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[8].inst/div_start              |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/s_div1/quotient[0]_i_1__8_n_0         | bin_maze_filt/genblk1[9].inst/div_start              |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/v_div1/quotient_reg[3]_0              | bin_maze_filt/genblk1[9].inst/div_start              |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/s_div1/quotient[0]_i_1__12_n_0       | bin_maze_filt/genblk1[13].inst/div_start             |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/s_div1/quotient[0]_i_1__11_n_0       | bin_maze_filt/genblk1[12].inst/div_start             |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[13].inst/div_start             |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/s_div1/quotient[0]_i_1__13_n_0       | bin_maze_filt/genblk1[14].inst/div_start             |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[14].inst/div_start             |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/s_div1/quotient[0]_i_1__14_n_0       | bin_maze_filt/genblk1[15].inst/div_start             |                6 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/s_div1/quotient[0]_i_1__15_n_0       | bin_maze_filt/genblk1[16].inst/div_start             |                4 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/v_div1/quotient_reg[3]_0             | bin_maze_filt/genblk1[16].inst/div_start             |                5 |             26 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/cam_pixel_r_addr[16]_i_2_n_0                          | bin_maze_filt/cam_pixel_r_addr[16]_i_1_n_0           |                5 |             34 |
-|  clkdivider/inst/clk_out1 | filt_bin_pixel_r_addr                                               |                                                      |                5 |             34 |
-|  clkdivider/inst/clk_out1 | my_camera/cam_pixel_wr_addr_reg[16]                                 | my_camera/cam_pixel_wr_addr_reg[16]_0                |                5 |             34 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_dilation/pixel_counter[17]_i_1__0_n_0             | db1/reset                                            |                8 |             36 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/bin_erosion/pixel_counter                             | db1/reset                                            |                7 |             36 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/s_div1/divider_copy[14]_i_1_n_0       | bin_maze_filt/genblk1[0].inst/div_start              |                7 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/s_div1/divider_copy[14]_i_1__19_n_0  | bin_maze_filt/genblk1[10].inst/div_start             |                6 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/s_div1/divider_copy[14]_i_1__15_n_0   | bin_maze_filt/genblk1[8].inst/div_start              |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/s_div1/divider_copy[14]_i_1__35_n_0  | bin_maze_filt/genblk1[18].inst/div_start             |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/s_div1/divider_copy[14]_i_1__23_n_0  | bin_maze_filt/genblk1[12].inst/div_start             |                7 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/s_div1/divider_copy[14]_i_1__1_n_0    | bin_maze_filt/genblk1[1].inst/div_start              |                6 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/s_div1/divider_copy[14]_i_1__5_n_0    | bin_maze_filt/genblk1[3].inst/div_start              |                6 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/s_div1/divider_copy[14]_i_1__29_n_0  | bin_maze_filt/genblk1[15].inst/div_start             |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/s_div1/divider_copy[14]_i_1__25_n_0  | bin_maze_filt/genblk1[13].inst/div_start             |                7 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/s_div1/divider_copy[14]_i_1__33_n_0  | bin_maze_filt/genblk1[17].inst/div_start             |                6 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/s_div1/divider_copy[14]_i_1__31_n_0  | bin_maze_filt/genblk1[16].inst/div_start             |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/s_div1/divider_copy[14]_i_1__11_n_0   | bin_maze_filt/genblk1[6].inst/div_start              |                6 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/s_div1/divider_copy[14]_i_1__13_n_0   | bin_maze_filt/genblk1[7].inst/div_start              |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/s_div1/divider_copy[14]_i_1__21_n_0  | bin_maze_filt/genblk1[11].inst/div_start             |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/s_div1/divider_copy[14]_i_1__3_n_0    | bin_maze_filt/genblk1[2].inst/div_start              |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/s_div1/divider_copy[14]_i_1__7_n_0    | bin_maze_filt/genblk1[4].inst/div_start              |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/s_div1/divider_copy[14]_i_1__17_n_0   | bin_maze_filt/genblk1[9].inst/div_start              |                6 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/s_div1/divider_copy[14]_i_1__9_n_0    | bin_maze_filt/genblk1[5].inst/div_start              |                5 |             38 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/s_div1/divider_copy[14]_i_1__27_n_0  | bin_maze_filt/genblk1[14].inst/div_start             |                5 |             38 |
-|  clkdivider/inst/clk_out1 | db1/count                                                           | db1/new_input_i_1_n_0                                |                5 |             40 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/v_div1/divider_copy[14]_i_1__4_n_0    | bin_maze_filt/genblk1[2].inst/div_start              |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/v_div1/divider_copy[14]_i_1__36_n_0  | bin_maze_filt/genblk1[18].inst/div_start             |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/v_div1/divider_copy[14]_i_1__22_n_0  | bin_maze_filt/genblk1[11].inst/div_start             |                8 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/v_div1/divider_copy[14]_i_1__20_n_0  | bin_maze_filt/genblk1[10].inst/div_start             |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/v_div1/divider_copy[14]_i_1__2_n_0    | bin_maze_filt/genblk1[1].inst/div_start              |                6 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/v_div1/divider_copy[14]_i_1__14_n_0   | bin_maze_filt/genblk1[7].inst/div_start              |                8 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/v_div1/divider_copy[14]_i_1__34_n_0  | bin_maze_filt/genblk1[17].inst/div_start             |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/v_div1/divider_copy[14]_i_1__0_n_0    | bin_maze_filt/genblk1[0].inst/div_start              |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/v_div1/divider_copy[14]_i_1__16_n_0   | bin_maze_filt/genblk1[8].inst/div_start              |                6 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/v_div1/divider_copy[14]_i_1__12_n_0   | bin_maze_filt/genblk1[6].inst/div_start              |                6 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/v_div1/divider_copy[14]_i_1__26_n_0  | bin_maze_filt/genblk1[13].inst/div_start             |                8 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/v_div1/divider_copy[14]_i_1__10_n_0   | bin_maze_filt/genblk1[5].inst/div_start              |                6 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/v_div1/divider_copy[14]_i_1__28_n_0  | bin_maze_filt/genblk1[14].inst/div_start             |                8 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/v_div1/divider_copy[14]_i_1__8_n_0    | bin_maze_filt/genblk1[4].inst/div_start              |                6 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/v_div1/divider_copy[14]_i_1__32_n_0  | bin_maze_filt/genblk1[16].inst/div_start             |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/v_div1/divider_copy[14]_i_1__30_n_0  | bin_maze_filt/genblk1[15].inst/div_start             |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/v_div1/divider_copy[14]_i_1__6_n_0    | bin_maze_filt/genblk1[3].inst/div_start              |                8 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/v_div1/divider_copy[14]_i_1__24_n_0  | bin_maze_filt/genblk1[12].inst/div_start             |                7 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/v_div1/divider_copy[14]_i_1__18_n_0   | bin_maze_filt/genblk1[9].inst/div_start              |               10 |             44 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/rgb_2_hsv_sel[4]_i_2_n_0                              | bin_maze_filt/rgb_2_hsv_sel[4]_i_1_n_0               |                7 |             58 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/s_div1/dividend_copy[31]_i_1__19_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[10].inst/v_div1/dividend_copy[31]_i_1__20_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/s_div1/dividend_copy[31]_i_1__23_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[12].inst/v_div1/dividend_copy[31]_i_1__24_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/v_div1/dividend_copy[31]_i_1__12_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/v_div1/dividend_copy[31]_i_1__16_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/v_div1/dividend_copy[31]_i_1__34_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/v_div1/dividend_copy[31]_i_1__14_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/v_div1/dividend_copy[31]_i_1__4_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/s_div1/dividend_copy[31]_i_1__25_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/v_div1/dividend_copy[31]_i_1__6_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[2].inst/s_div1/dividend_copy[31]_i_1__3_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/s_div1/dividend_copy[31]_i_1__35_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/s_div1/dividend_copy[31]_i_1__7_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[8].inst/s_div1/dividend_copy[31]_i_1__15_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[3].inst/s_div1/dividend_copy[31]_i_1__5_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[18].inst/v_div1/dividend_copy[31]_i_1__36_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/v_div1/dividend_copy[31]_i_1__32_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[4].inst/v_div1/dividend_copy[31]_i_1__8_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[6].inst/s_div1/dividend_copy[31]_i_1__11_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/v_div1/dividend_copy[31]_i_1__22_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[16].inst/s_div1/dividend_copy[31]_i_1__31_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/s_div1/dividend_copy[31]_i_1__1_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/s_div1/dividend_copy[31]_i_1__29_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/s_div1/dividend_copy[31]_i_1__9_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/s_div1/dividend_copy[31]_i_1_n_0      |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[7].inst/s_div1/dividend_copy[31]_i_1__13_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[1].inst/v_div1/dividend_copy[31]_i_1__2_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[17].inst/s_div1/dividend_copy[31]_i_1__33_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/v_div1/dividend_copy[31]_i_1__28_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/v_div1/dividend_copy[31]_i_1__18_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[15].inst/v_div1/dividend_copy[31]_i_1__30_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[14].inst/s_div1/dividend_copy[31]_i_1__27_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[9].inst/s_div1/dividend_copy[31]_i_1__17_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[0].inst/v_div1/dividend_copy[31]_i_1__0_n_0   |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[5].inst/v_div1/dividend_copy[31]_i_1__10_n_0  |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[13].inst/v_div1/dividend_copy[31]_i_1__26_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 | bin_maze_filt/genblk1[11].inst/s_div1/dividend_copy[31]_i_1__21_n_0 |                                                      |                8 |             64 |
-|  clkdivider/inst/clk_out1 |                                                                     |                                                      |              164 |            684 |
-|  clkdivider/inst/clk_out1 |                                                                     | db1/reset                                            |              101 |            798 |
-+---------------------------+---------------------------------------------------------------------+------------------------------------------------------+------------------+----------------+
++-------------------------------------------------------+---------------------------------------------------------------------+------------------------------------------------------+------------------+----------------+
+|                      Clock Signal                     |                            Enable Signal                            |                   Set/Reset Signal                   | Slice Load Count | Bel Load Count |
++-------------------------------------------------------+---------------------------------------------------------------------+------------------------------------------------------+------------------+----------------+
+|  bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2_n_0      |                                                                     | bin_maze_filt/genblk1[0].inst/h_reg[16]_i_3_n_0      |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/h_div1/divider_copy[21]_i_1__17_n_0  | bin_maze_filt/genblk1[18].inst/i___4_n_0             |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/h_div1/divider_copy[21]_i_1__15_n_0  | bin_maze_filt/genblk1[16].inst/i___4_n_0             |                1 |              2 |
+|  bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9_n_0  |                                                                     | bin_maze_filt/genblk1[10].inst/h_reg[16]_i_3__9_n_0  |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/h_div1/divider_copy[21]_i_1__4_n_0    | bin_maze_filt/genblk1[5].inst/i___4_n_0              |                1 |              2 |
+|  bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10_n_0 |                                                                     | bin_maze_filt/genblk1[11].inst/h_reg[16]_i_3__10_n_0 |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/h_div1/divider_copy[21]_i_1__16_n_0  | bin_maze_filt/genblk1[17].inst/i___4_n_0             |                1 |              2 |
+|  bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1_n_0   |                                                                     | bin_maze_filt/genblk1[2].inst/h_reg[16]_i_3__1_n_0   |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/h_div1/divider_copy[21]_i_1__8_n_0    | bin_maze_filt/genblk1[9].inst/i___4_n_0              |                1 |              2 |
+|  bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2_n_0   |                                                                     | bin_maze_filt/genblk1[3].inst/h_reg[16]_i_3__2_n_0   |                1 |              2 |
+|  bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3_n_0   |                                                                     | bin_maze_filt/genblk1[4].inst/h_reg[16]_i_3__3_n_0   |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/h_div1/divider_copy[21]_i_1__7_n_0    | bin_maze_filt/genblk1[8].inst/i___4_n_0              |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/h_div1/divider_copy[21]_i_1__0_n_0    | bin_maze_filt/genblk1[1].inst/i___4_n_0              |                1 |              2 |
+|  bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13_n_0 |                                                                     | bin_maze_filt/genblk1[14].inst/h_reg[16]_i_3__13_n_0 |                1 |              2 |
+|  bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4_n_0   |                                                                     | bin_maze_filt/genblk1[5].inst/h_reg[16]_i_3__4_n_0   |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/h_div1/divider_copy[21]_i_1_n_0       | bin_maze_filt/genblk1[0].inst/i___4_n_0              |                1 |              2 |
+|  bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5_n_0   |                                                                     | bin_maze_filt/genblk1[6].inst/h_reg[16]_i_3__5_n_0   |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/h_div1/divider_copy[21]_i_1__14_n_0  | bin_maze_filt/genblk1[15].inst/i___4_n_0             |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/h_div1/divider_copy[21]_i_1__13_n_0  | bin_maze_filt/genblk1[14].inst/i___4_n_0             |                1 |              2 |
+|  bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6_n_0   |                                                                     | bin_maze_filt/genblk1[7].inst/h_reg[16]_i_3__6_n_0   |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/h_div1/divider_copy[21]_i_1__6_n_0    | bin_maze_filt/genblk1[7].inst/i___4_n_0              |                1 |              2 |
+|  bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7_n_0   |                                                                     | bin_maze_filt/genblk1[8].inst/h_reg[16]_i_3__7_n_0   |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/h_div1/divider_copy[21]_i_1__10_n_0  | bin_maze_filt/genblk1[11].inst/i___4_n_0             |                1 |              2 |
+|  bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8_n_0   |                                                                     | bin_maze_filt/genblk1[9].inst/h_reg[16]_i_3__8_n_0   |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/h_div1/divider_copy[21]_i_1__1_n_0    | bin_maze_filt/genblk1[2].inst/i___4_n_0              |                1 |              2 |
+|  bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11_n_0 |                                                                     | bin_maze_filt/genblk1[12].inst/h_reg[16]_i_3__11_n_0 |                1 |              2 |
+|  bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12_n_0 |                                                                     | bin_maze_filt/genblk1[13].inst/h_reg[16]_i_3__12_n_0 |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/h_div1/divider_copy[21]_i_1__5_n_0    | bin_maze_filt/genblk1[6].inst/i___4_n_0              |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/h_div1/divider_copy[21]_i_1__3_n_0    | bin_maze_filt/genblk1[4].inst/i___4_n_0              |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/h_div1/divider_copy[21]_i_1__2_n_0    | bin_maze_filt/genblk1[3].inst/i___4_n_0              |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/h_div1/divider_copy[21]_i_1__11_n_0  | bin_maze_filt/genblk1[12].inst/i___4_n_0             |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/h_div1/divider_copy[21]_i_1__9_n_0   | bin_maze_filt/genblk1[10].inst/i___4_n_0             |                1 |              2 |
+|  bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0_n_0   |                                                                     | bin_maze_filt/genblk1[1].inst/h_reg[16]_i_3__0_n_0   |                1 |              2 |
+|  bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17_n_0 |                                                                     | bin_maze_filt/genblk1[18].inst/h_reg[16]_i_3__17_n_0 |                1 |              2 |
+|  bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16_n_0 |                                                                     | bin_maze_filt/genblk1[17].inst/h_reg[16]_i_3__16_n_0 |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/h_div1/divider_copy[21]_i_1__12_n_0  | bin_maze_filt/genblk1[13].inst/i___4_n_0             |                1 |              2 |
+|  bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15_n_0 |                                                                     | bin_maze_filt/genblk1[16].inst/h_reg[16]_i_3__15_n_0 |                1 |              2 |
+|  bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14_n_0 |                                                                     | bin_maze_filt/genblk1[15].inst/h_reg[16]_i_3__14_n_0 |                1 |              2 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/s_div1/E[0]                          |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/s_div1/E[0]                           |                                                      |                2 |              4 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_dilation/oldest_pixel_x[8]_i_1_n_0                | bin_maze_filt/bin_dilation/oldest_pixel_x[7]_i_1_n_0 |                1 |              8 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_erosion/center_x[6]_i_1_n_0                       |                                                      |                2 |              8 |
+|  clkdivider/inst/clk_out1                             |                                                                     | display/counter_reg[12]                              |                1 |              8 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_erosion/FSM_onehot_state[3]_i_1__0_n_0            | db1/SR[0]                                            |                1 |              8 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_dilation/state                                    | db1/SR[0]                                            |                2 |              8 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_dilation/oldest_pixel_x[8]_i_1_n_0                |                                                      |                2 |             10 |
+|  pclk_in_BUFG                                         | my_camera/pixel_data_out[7]                                         |                                                      |                4 |             10 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_dilation/oldest_pixel_y[7]_i_2_n_0                | bin_maze_filt/bin_dilation/oldest_pixel_y[7]_i_1_n_0 |                2 |             10 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_erosion/center_x[6]_i_1_n_0                       | bin_maze_filt/bin_erosion/center_x[8]_i_1_n_0        |                2 |             10 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_erosion/center_y[7]_i_2_n_0                       | bin_maze_filt/bin_erosion/center_y[7]_i_1_n_0        |                3 |             12 |
+|  pclk_in_BUFG                                         | bin_maze_filt/E[0]                                                  | db1/SR[0]                                            |                2 |             12 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/h_div1/divider_copy[21]_i_1__2_n_0    |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/h_div1/divider_copy[21]_i_1__4_n_0    |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | my_camera/pixel_data_out[15]                                        |                                                      |                3 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/h_div1/divider_copy[21]_i_1__6_n_0    |                                                      |                1 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/h_div1/divider_copy[21]_i_1__7_n_0    |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/h_div1/divider_copy[21]_i_1__5_n_0    |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/h_div1/divider_copy[21]_i_1__13_n_0  |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/h_div1/divider_copy[21]_i_1__10_n_0  |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/h_div1/divider_copy[21]_i_1__12_n_0  |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/h_div1/divider_copy[21]_i_1__8_n_0    |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/h_div1/divider_copy[21]_i_1__3_n_0    |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/h_div1/divider_copy[21]_i_1__16_n_0  |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/h_div1/divider_copy[21]_i_1__14_n_0  |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/h_div1/divider_copy[21]_i_1__11_n_0  |                                                      |                1 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/h_div1/divider_copy[21]_i_1_n_0       |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/h_div1/divider_copy[21]_i_1__1_n_0    |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/h_div1/divider_copy[21]_i_1__15_n_0  |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/h_div1/divider_copy[21]_i_1__9_n_0   |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/h_div1/divider_copy[21]_i_1__17_n_0  |                                                      |                2 |             14 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/h_div1/divider_copy[21]_i_1__0_n_0    |                                                      |                2 |             14 |
+|  clkdivider/inst/clk_out1                             |                                                                     | vga1/hreset                                          |                3 |             20 |
+|  clkdivider/inst/clk_out1                             | vga1/hreset                                                         | vga1/vcount_out0                                     |                3 |             20 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[5].inst/div_start              |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[12].inst/div_start             |                4 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[18].inst/div_start             |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[11].inst/div_start             |                3 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[17].inst/div_start             |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[9].inst/div_start              |                6 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[4].inst/div_start              |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[15].inst/div_start             |                6 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[14].inst/div_start             |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[1].inst/div_start              |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[8].inst/div_start              |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[16].inst/div_start             |                4 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[7].inst/div_start              |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[6].inst/div_start              |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[13].inst/div_start             |                4 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[3].inst/div_start              |                7 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/s_div1/E[0]                          | bin_maze_filt/genblk1[10].inst/div_start             |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[0].inst/div_start              |                5 |             28 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/s_div1/E[0]                           | bin_maze_filt/genblk1[2].inst/div_start              |                5 |             28 |
+|  clkdivider/inst/clk_out1                             | filt_bin_pixel_r_addr                                               |                                                      |                6 |             34 |
+|  pclk_in_BUFG                                         | bin_maze_filt/cam_pixel_r_addr[16]_i_2_n_0                          | bin_maze_filt/cam_pixel_r_addr[16]_i_1_n_0           |                5 |             34 |
+|  pclk_in_BUFG                                         | my_camera/cam_pixel_wr_addr_reg[16]                                 | my_camera/cam_pixel_wr_addr_reg[16]_0                |                5 |             34 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_erosion/pixel_counter                             | db1/SR[0]                                            |                8 |             36 |
+|  pclk_in_BUFG                                         | bin_maze_filt/bin_dilation/pixel_counter[17]_i_1_n_0                | db1/SR[0]                                            |                8 |             36 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/s_div1/divider_copy[18]_i_1__7_n_0    | bin_maze_filt/genblk1[8].inst/div_start              |                5 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/s_div1/divider_copy[18]_i_1__8_n_0    | bin_maze_filt/genblk1[9].inst/div_start              |                7 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/s_div1/divider_copy[18]_i_1__6_n_0    | bin_maze_filt/genblk1[7].inst/div_start              |                5 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/s_div1/divider_copy[18]_i_1__14_n_0  | bin_maze_filt/genblk1[15].inst/div_start             |                5 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/s_div1/divider_copy[18]_i_1__5_n_0    | bin_maze_filt/genblk1[6].inst/div_start              |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/s_div1/divider_copy[18]_i_1__10_n_0  | bin_maze_filt/genblk1[11].inst/div_start             |                5 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/s_div1/divider_copy[18]_i_1__2_n_0    | bin_maze_filt/genblk1[3].inst/div_start              |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/s_div1/divider_copy[18]_i_1__11_n_0  | bin_maze_filt/genblk1[12].inst/div_start             |                4 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/s_div1/divider_copy[18]_i_1__3_n_0    | bin_maze_filt/genblk1[4].inst/div_start              |                5 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/s_div1/divider_copy[18]_i_1__9_n_0   | bin_maze_filt/genblk1[10].inst/div_start             |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/s_div1/divider_copy[18]_i_1__13_n_0  | bin_maze_filt/genblk1[14].inst/div_start             |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/s_div1/divider_copy[18]_i_1_n_0       | bin_maze_filt/genblk1[0].inst/div_start              |                5 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/s_div1/divider_copy[18]_i_1__15_n_0  | bin_maze_filt/genblk1[16].inst/div_start             |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/s_div1/divider_copy[18]_i_1__12_n_0  | bin_maze_filt/genblk1[13].inst/div_start             |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/s_div1/divider_copy[18]_i_1__1_n_0    | bin_maze_filt/genblk1[2].inst/div_start              |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/s_div1/divider_copy[18]_i_1__17_n_0  | bin_maze_filt/genblk1[18].inst/div_start             |                6 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/s_div1/divider_copy[18]_i_1__16_n_0  | bin_maze_filt/genblk1[17].inst/div_start             |                7 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/s_div1/divider_copy[18]_i_1__4_n_0    | bin_maze_filt/genblk1[5].inst/div_start              |                5 |             38 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/s_div1/divider_copy[18]_i_1__0_n_0    | bin_maze_filt/genblk1[1].inst/div_start              |                6 |             38 |
+|  bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8_n_0   |                                                                     | bin_maze_filt/genblk1[9].inst/h_reg[15]_i_2__8_n_0   |               14 |             40 |
+|  bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11_n_0 |                                                                     | bin_maze_filt/genblk1[12].inst/h_reg[15]_i_2__11_n_0 |               11 |             40 |
+|  bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12_n_0 |                                                                     | bin_maze_filt/genblk1[13].inst/h_reg[15]_i_2__12_n_0 |               14 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/max                                   |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/max                                  |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/max                                  |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/max                                  |                                                      |                8 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/max                                   |                                                      |                8 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/max                                   |                                                      |                9 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/max                                   |                                                      |               10 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/max                                  |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/max                                  |                                                      |                9 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/max                                   |                                                      |                8 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/max                                  |                                                      |                8 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/max                                   |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/max                                  |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/max                                   |                                                      |                8 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/max                                   |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/max                                   |                                                      |                7 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/max                                   |                                                      |                8 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/max                                  |                                                      |                8 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/max                                  |                                                      |                7 |             40 |
+|  bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2_n_0      |                                                                     | bin_maze_filt/genblk1[0].inst/h_reg[15]_i_2_n_0      |                9 |             40 |
+|  bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9_n_0  |                                                                     | bin_maze_filt/genblk1[10].inst/h_reg[15]_i_2__9_n_0  |               10 |             40 |
+|  bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14_n_0 |                                                                     | bin_maze_filt/genblk1[15].inst/h_reg[15]_i_2__14_n_0 |                9 |             40 |
+|  bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10_n_0 |                                                                     | bin_maze_filt/genblk1[11].inst/h_reg[15]_i_2__10_n_0 |                9 |             40 |
+|  bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15_n_0 |                                                                     | bin_maze_filt/genblk1[16].inst/h_reg[15]_i_2__15_n_0 |                9 |             40 |
+|  bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1_n_0   |                                                                     | bin_maze_filt/genblk1[2].inst/h_reg[15]_i_2__1_n_0   |                9 |             40 |
+|  bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2_n_0   |                                                                     | bin_maze_filt/genblk1[3].inst/h_reg[15]_i_2__2_n_0   |                9 |             40 |
+|  bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16_n_0 |                                                                     | bin_maze_filt/genblk1[17].inst/h_reg[15]_i_2__16_n_0 |                8 |             40 |
+|  bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17_n_0 |                                                                     | bin_maze_filt/genblk1[18].inst/h_reg[15]_i_2__17_n_0 |               11 |             40 |
+|  bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3_n_0   |                                                                     | bin_maze_filt/genblk1[4].inst/h_reg[15]_i_2__3_n_0   |                8 |             40 |
+|  bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0_n_0   |                                                                     | bin_maze_filt/genblk1[1].inst/h_reg[15]_i_2__0_n_0   |               11 |             40 |
+|  bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13_n_0 |                                                                     | bin_maze_filt/genblk1[14].inst/h_reg[15]_i_2__13_n_0 |               11 |             40 |
+|  bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4_n_0   |                                                                     | bin_maze_filt/genblk1[5].inst/h_reg[15]_i_2__4_n_0   |               12 |             40 |
+|  bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5_n_0   |                                                                     | bin_maze_filt/genblk1[6].inst/h_reg[15]_i_2__5_n_0   |               16 |             40 |
+|  bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6_n_0   |                                                                     | bin_maze_filt/genblk1[7].inst/h_reg[15]_i_2__6_n_0   |               11 |             40 |
+|  bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7_n_0   |                                                                     | bin_maze_filt/genblk1[8].inst/h_reg[15]_i_2__7_n_0   |               12 |             40 |
+|  clkdivider/inst/clk_out1                             | db1/count                                                           | db1/count[0]_i_1_n_0                                 |                5 |             40 |
+|  pclk_in_BUFG                                         | bin_maze_filt/cycles[23]_i_2_n_0                                    | bin_maze_filt/cycles[23]_i_1_n_0                     |                8 |             52 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/h_div1/dividend_copy[31]_i_1__31_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/s_div1/dividend_copy[31]_i_1__16_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/h_div1/dividend_copy[31]_i_1_n_0      |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/h_div1/dividend_copy[31]_i_1__9_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/s_div1/dividend_copy[31]_i_1__14_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/h_div1/dividend_copy[31]_i_1__17_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/h_div1/dividend_copy[31]_i_1__7_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/s_div1/dividend_copy[31]_i_1__4_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/h_div1/dividend_copy[31]_i_1__27_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/s_div1/dividend_copy[31]_i_1__6_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/s_div1/dividend_copy[31]_i_1__32_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/h_div1/dividend_copy[31]_i_1__13_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/h_div1/dividend_copy[31]_i_1__5_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/s_div1/dividend_copy[31]_i_1__18_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/s_div1/dividend_copy[31]_i_1__10_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/h_div1/dividend_copy[31]_i_1__29_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/h_div1/dividend_copy[31]_i_1__33_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/s_div1/dividend_copy[31]_i_1__36_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/s_div1/dividend_copy[31]_i_1__12_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/h_div1/dividend_copy[31]_i_1__15_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/s_div1/dividend_copy[31]_i_1__34_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/h_div1/dividend_copy[31]_i_1__3_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/s_div1/dividend_copy[31]_i_1__8_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/h_div1/dividend_copy[31]_i_1__23_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/h_div1/dividend_copy[31]_i_1__11_n_0  |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/h_div1/dividend_copy[31]_i_1__35_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/s_div1/dividend_copy[31]_i_1__22_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/s_div1/dividend_copy[31]_i_1__30_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/s_div1/dividend_copy[31]_i_1__24_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/h_div1/dividend_copy[31]_i_1__1_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/s_div1/dividend_copy[31]_i_1__2_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/h_div1/dividend_copy[31]_i_1__21_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/h_div1/dividend_copy[31]_i_1__25_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/s_div1/dividend_copy[31]_i_1__20_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/h_div1/dividend_copy[31]_i_1__19_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/s_div1/dividend_copy[31]_i_1__28_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/s_div1/dividend_copy[31]_i_1__26_n_0 |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/s_div1/dividend_copy[31]_i_1__0_n_0   |                                                      |                8 |             64 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[5].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[5].inst/div_start              |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[4].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[4].inst/div_start              |               11 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[16].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[16].inst/div_start             |               11 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[9].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[9].inst/div_start              |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[8].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[8].inst/div_start              |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[2].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[2].inst/div_start              |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[17].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[17].inst/div_start             |               10 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[3].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[3].inst/div_start              |               11 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[12].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[12].inst/div_start             |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[7].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[7].inst/div_start              |               13 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[18].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[18].inst/div_start             |                9 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[10].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[10].inst/div_start             |               11 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[11].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[11].inst/div_start             |               11 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[13].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[13].inst/div_start             |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[6].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[6].inst/div_start              |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[1].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[1].inst/div_start              |               12 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[15].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[15].inst/div_start             |               11 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[0].inst/h_div1/E[0]                           | bin_maze_filt/genblk1[0].inst/div_start              |               10 |             72 |
+|  pclk_in_BUFG                                         | bin_maze_filt/genblk1[14].inst/h_div1/E[0]                          | bin_maze_filt/genblk1[14].inst/div_start             |               10 |             72 |
+|  clkdivider/inst/clk_out1                             |                                                                     |                                                      |               32 |            132 |
+|  pclk_in_BUFG                                         |                                                                     |                                                      |              137 |            578 |
+|  pclk_in_BUFG                                         |                                                                     | db1/SR[0]                                            |              108 |            760 |
++-------------------------------------------------------+---------------------------------------------------------------------+------------------------------------------------------+------------------+----------------+
 
 

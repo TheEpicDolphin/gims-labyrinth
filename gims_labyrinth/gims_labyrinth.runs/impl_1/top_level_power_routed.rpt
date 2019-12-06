@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Thu Dec  5 19:53:51 2019
+| Date             : Thu Dec  5 20:41:30 2019
 | Host             : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 | Command          : report_power -file top_level_power_routed.rpt -pb top_level_power_summary_routed.pb -rpx top_level_power_routed.rpx
 | Design           : top_level
@@ -53,14 +53,15 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.006 |        8 |       --- |             --- |
-| Slice Logic             |     0.006 |    10933 |       --- |             --- |
+| Slice Logic             |     0.006 |    10934 |       --- |             --- |
 |   LUT as Logic          |     0.005 |     4307 |     63400 |            6.79 |
 |   CARRY4                |    <0.001 |      843 |     15850 |            5.32 |
 |   Register              |    <0.001 |     3600 |    126800 |            2.84 |
 |   F7/F8 Muxes           |    <0.001 |      131 |     63400 |            0.21 |
 |   LUT as Shift Register |    <0.001 |      140 |     19000 |            0.74 |
+|   BUFG                  |    <0.001 |        1 |        32 |            3.13 |
 |   Others                |     0.000 |      254 |       --- |             --- |
-| Signals                 |     0.004 |     5495 |       --- |             --- |
+| Signals                 |     0.004 |     5505 |       --- |             --- |
 | Block RAM               |     0.003 |       29 |       135 |           21.48 |
 | MMCM                    |     0.116 |        1 |         6 |           16.67 |
 | I/O                     |     0.021 |       85 |       210 |           40.48 |

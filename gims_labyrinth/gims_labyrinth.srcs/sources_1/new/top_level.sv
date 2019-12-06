@@ -113,10 +113,10 @@ module top_level(
     logic [16:0] cam_pixel_r_addr;
     
     logic cam_pixel_wea;
-    assign cam_pixel_wea = (valid_pixel && state == CAPTURING_IMG);
+    assign cam_pixel_wea = (valid_pixel && (state == CAPTURING_IMG));
     logic [11:0] rgb_pixel;
     
-    cam_image_buffer cam_img_buf(.clka(clk_25mhz),
+    cam_image_buffer cam_img_buf(.clka(pclk_in),
                                 .addra(cam_pixel_wr_addr),
                                 .dina({output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]}),
                                 .wea(cam_pixel_wea),
@@ -244,11 +244,13 @@ module top_level(
                     if (valid_pixel)begin
                         cam_pixel_wr_addr <= cam_pixel_wr_addr + 1;        
                     end
+                    
                     if(frame_done_out)begin
                         //camera image is now stored in bram
                         state <= BINARY_MAZE_FILTERING;
                         bin_maze_filt_start <= 1;
                     end
+                    
                 end
                 BINARY_MAZE_FILTERING: begin
                     bin_maze_filt_start <= 0;
@@ -329,6 +331,7 @@ module top_level(
          b <= blank;
          filt_bin_pixel_r_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
          rgb <= filt_bin_pixel_out ? 12'hFFF : 12'b0;
+         //rgb <= rgb_pixel;
        end
     end
 

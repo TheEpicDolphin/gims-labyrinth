@@ -2,8 +2,8 @@
 # Vivado v2018.2 (64-bit)
 # SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
 # IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
-# Start of session at: Thu Dec  5 19:50:15 2019
-# Process ID: 32452
+# Start of session at: Thu Dec  5 20:37:51 2019
+# Process ID: 30984
 # Current directory: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1
 # Command line: vivado.exe -log top_level.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_level.tcl
 # Log file: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/top_level.vds
@@ -15,7 +15,7 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 22348 
+INFO: Helper process launched with PID 24472 
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:50]
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:51]
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:52]
@@ -36,7 +36,7 @@ WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filt
 WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:222]
 WARNING: [Synth 8-2368] multiple overrides for parameter IMG_W [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:155]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 399.547 ; gain = 111.973
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 398.996 ; gain = 111.418
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'top_level' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:24]
 	Parameter IMG_W bound to: 320 - type: integer 
@@ -48,10 +48,10 @@ INFO: [Synth 8-6157] synthesizing module 'top_level' [C:/Users/giand/Documents/M
 	Parameter COLORED_MAZE_FILTERING bound to: 3'b100 
 	Parameter SOLVING bound to: 3'b101 
 	Parameter TRACING_BACKPOINTERS bound to: 3'b110 
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-32452-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-32452-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
 WARNING: [Synth 8-350] instance 'clkdivider' of module 'clk_wiz_0' requires 4 connections, but only 3 given [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:46]
-INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:537]
+INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:540]
 	Parameter DISPLAY_WIDTH bound to: 640 - type: integer 
 	Parameter DISPLAY_HEIGHT bound to: 480 - type: integer 
 	Parameter H_FP bound to: 16 - type: integer 
@@ -60,16 +60,16 @@ INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Sen
 	Parameter V_FP bound to: 11 - type: integer 
 	Parameter V_SYNC_PULSE bound to: 2 - type: integer 
 	Parameter V_BP bound to: 31 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'vga' (2#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:537]
-INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:406]
-INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:406]
-INFO: [Synth 8-6157] synthesizing module 'display_8hex' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:439]
+INFO: [Synth 8-6155] done synthesizing module 'vga' (2#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:540]
+INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:409]
+INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:409]
+INFO: [Synth 8-6157] synthesizing module 'display_8hex' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:442]
 	Parameter bits bound to: 13 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'display_8hex' (4#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:439]
-INFO: [Synth 8-6157] synthesizing module 'cam_image_buffer' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-32452-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cam_image_buffer' (5#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-32452-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'binary_maze' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-32452-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'binary_maze' (6#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-32452-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'display_8hex' (4#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:442]
+INFO: [Synth 8-6157] synthesizing module 'cam_image_buffer' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cam_image_buffer' (5#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'binary_maze' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'binary_maze' (6#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-30984-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'binary_maze_filtering' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:24]
 	Parameter IMG_W bound to: 240 - type: integer 
 	Parameter IMG_H bound to: 240 - type: integer 
@@ -149,12 +149,12 @@ WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/gian
 WARNING: [Synth 8-6014] Unused sequential element bin_maze_f_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:166]
 INFO: [Synth 8-6155] done synthesizing module 'binary_maze_filtering' (12#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:24]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:235]
-INFO: [Synth 8-6157] synthesizing module 'camera_read' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:351]
+INFO: [Synth 8-6157] synthesizing module 'camera_read' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:354]
 	Parameter WAIT_FRAME_START bound to: 0 - type: integer 
 	Parameter ROW_CAPTURE bound to: 1 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:376]
-INFO: [Synth 8-6155] done synthesizing module 'camera_read' (13#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:351]
-WARNING: [Synth 8-6014] Unused sequential element processed_pixels_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:293]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:379]
+INFO: [Synth 8-6155] done synthesizing module 'camera_read' (13#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:354]
+WARNING: [Synth 8-6014] Unused sequential element processed_pixels_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:295]
 WARNING: [Synth 8-3848] Net colored_maze_filt_done in module/entity top_level does not have driver. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:157]
 INFO: [Synth 8-6155] done synthesizing module 'top_level' (14#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:24]
 WARNING: [Synth 8-3917] design top_level has port dp driven by constant 1
@@ -164,7 +164,7 @@ WARNING: [Synth 8-3331] design top_level has unconnected port jd[2]
 WARNING: [Synth 8-3331] design top_level has unconnected port jd[1]
 WARNING: [Synth 8-3331] design top_level has unconnected port jd[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 442.668 ; gain = 155.094
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 442.109 ; gain = 154.531
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -177,10 +177,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 442.668 ; gain = 155.094
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 442.109 ; gain = 154.531
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 442.668 ; gain = 155.094
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 442.109 ; gain = 154.531
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a100tcsg324-3
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -202,16 +202,16 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 842.520 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 843.121 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 842.520 ; gain = 554.945
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 843.121 ; gain = 555.543
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-3
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 842.520 ; gain = 554.945
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 843.121 ; gain = 555.543
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -222,7 +222,7 @@ Applied set_property DONT_TOUCH = true for skel_maze. (constraint file  auto gen
 Applied set_property DONT_TOUCH = true for cam_img_buf. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for clkdivider. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 842.520 ; gain = 554.945
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 843.121 ; gain = 555.543
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "clean_out" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "count" won't be mapped to RAM because it is too sparse
@@ -285,7 +285,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'FSM_state_reg' using encod
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'top_level'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 842.520 ; gain = 554.945
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 843.121 ; gain = 555.543
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -780,7 +780,7 @@ WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[22]) is unu
 WARNING: [Synth 8-3332] Sequential element (h_div1/dividend_copy_reg[21]) is unused and will be removed from module rgb_2_hsv.
 INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 842.520 ; gain = 554.945
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 843.121 ; gain = 555.543
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -812,13 +812,13 @@ Start Applying XDC Timing Constraints
 INFO: [Synth 8-5578] Moved timing constraint from pin 'clkdivider/clk_out1' to pin 'clkdivider/bbstub_clk_out1/O'
 INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 842.520 ; gain = 554.945
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:35 . Memory (MB): peak = 843.121 ; gain = 555.543
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:35 . Memory (MB): peak = 842.520 ; gain = 554.945
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 843.121 ; gain = 555.543
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -833,7 +833,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:37 ; elapsed = 00:00:40 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished Technology Mapping : Time (s): cpu = 00:00:37 ; elapsed = 00:00:41 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -857,7 +857,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished IO Insertion : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -870,7 +870,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -882,25 +882,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1048,11 +1048,11 @@ Report Instance Areas:
 |84    |  vga1                 |vga                   |    92|
 +------+-----------------------+----------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 862.902 ; gain = 575.328
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 865.223 ; gain = 577.645
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 160 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:32 . Memory (MB): peak = 862.902 ; gain = 175.477
-Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 862.902 ; gain = 575.328
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:32 . Memory (MB): peak = 865.223 ; gain = 176.633
+Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:44 . Memory (MB): peak = 865.223 ; gain = 577.645
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 986 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -1064,9 +1064,9 @@ No Unisim elements were transformed.
 INFO: [Common 17-83] Releasing license: Synthesis
 183 Infos, 172 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:48 . Memory (MB): peak = 862.902 ; gain = 586.801
+synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:48 . Memory (MB): peak = 865.223 ; gain = 589.117
 WARNING: [Constraints 18-5210] No constraint will be written out.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/top_level.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_level_utilization_synth.rpt -pb top_level_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.128 . Memory (MB): peak = 862.902 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Thu Dec  5 19:51:11 2019...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.181 . Memory (MB): peak = 865.223 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  5 20:38:47 2019...

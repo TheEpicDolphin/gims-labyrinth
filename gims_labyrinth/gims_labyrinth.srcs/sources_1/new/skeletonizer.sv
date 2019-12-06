@@ -72,8 +72,8 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
 		done = (state == DONE);
 		
 		// check for discontinuity
-		disc_check_buffer1 = {mod_window[8:5], mod_window[3:0]};
-		disc_check_buffer2 = {mod_window[0], mod_window[8:5], mod_window[3:1]};
+		disc_check_buffer1 = {mod_window[8], mod_window[7], mod_window[6], mod_window[3], mod_window[0], mod_window[1], mod_window[2], mod_window[5]};
+		disc_check_buffer2 = {mod_window[7], mod_window[6], mod_window[3], mod_window[0], mod_window[1], mod_window[2], mod_window[5], mod_window[8]};
 		xored_disc_buffers = disc_check_buffer1 ^ disc_check_buffer2;
 		num_transitions = xored_disc_buffers[7] + xored_disc_buffers[6] + + xored_disc_buffers[5] + xored_disc_buffers[4] +
 							xored_disc_buffers[3] + xored_disc_buffers[2] + xored_disc_buffers[1] + xored_disc_buffers[0];

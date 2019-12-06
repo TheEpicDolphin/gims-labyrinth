@@ -31,8 +31,7 @@ module skeletonizer #(IMG_WIDTH=320, IMG_HEIGHT=240, BRAM_READ_DELAY=2)(
 	output logic write_pixel,							// bram write enable
 	output logic pixel_out,								// write data to bram
     
-    output done
-    );
+    output done);
     
     parameter IDLE = 2'b00;
     parameter INITIAL_READ_DELAY = 2'b01;

@@ -1,10 +1,10 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
--- Date        : Thu Nov 21 00:54:14 2019
+-- Date        : Sat Nov 16 15:35:08 2019
 -- Host        : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/adjacency_list/adjacency_list_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top adjacency_list -prefix
+--               adjacency_list_ adjacency_list_sim_netlist.vhdl
 -- Design      : adjacency_list
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -14,7 +14,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity adjacency_list_blk_mem_gen_prim_wrapper_init is
+entity adjacency_list_blk_mem_gen_prim_wrapper is
   port (
     douta : out STD_LOGIC_VECTOR ( 35 downto 0 );
     clka : in STD_LOGIC;
@@ -22,11 +22,9 @@ entity adjacency_list_blk_mem_gen_prim_wrapper_init is
     dina : in STD_LOGIC_VECTOR ( 35 downto 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of adjacency_list_blk_mem_gen_prim_wrapper_init : entity is "blk_mem_gen_prim_wrapper_init";
-end adjacency_list_blk_mem_gen_prim_wrapper_init;
+end adjacency_list_blk_mem_gen_prim_wrapper;
 
-architecture STRUCTURE of adjacency_list_blk_mem_gen_prim_wrapper_init is
+architecture STRUCTURE of adjacency_list_blk_mem_gen_prim_wrapper is
   signal \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED\ : STD_LOGIC;
   signal \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED\ : STD_LOGIC;
   signal \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED\ : STD_LOGIC;
@@ -44,7 +42,7 @@ begin
       DOB_REG => 0,
       EN_ECC_READ => false,
       EN_ECC_WRITE => false,
-      INITP_00 => X"000000000000000000000000000000000000000000000000000000280B113000",
+      INITP_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -60,8 +58,8 @@ begin
       INITP_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_0F => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_00 => X"40808146C05200C20042808AE052808EE09000848032010B0021010800000000",
-      INIT_01 => X"0000000000000000000000000000000000000000000000004071010760708147",
+      INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -272,7 +270,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity \adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0\ is
+entity \adjacency_list_blk_mem_gen_prim_wrapper__parameterized0\ is
   port (
     douta : out STD_LOGIC_VECTOR ( 27 downto 0 );
     clka : in STD_LOGIC;
@@ -281,10 +279,10 @@ entity \adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0\ is
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of \adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0\ : entity is "blk_mem_gen_prim_wrapper_init";
-end \adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0\;
+  attribute ORIG_REF_NAME of \adjacency_list_blk_mem_gen_prim_wrapper__parameterized0\ : entity is "blk_mem_gen_prim_wrapper";
+end \adjacency_list_blk_mem_gen_prim_wrapper__parameterized0\;
 
-architecture STRUCTURE of \adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0\ is
+architecture STRUCTURE of \adjacency_list_blk_mem_gen_prim_wrapper__parameterized0\ is
   signal \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_n_12\ : STD_LOGIC;
   signal \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_n_20\ : STD_LOGIC;
   signal \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_n_28\ : STD_LOGIC;
@@ -326,8 +324,8 @@ begin
       INITP_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_0F => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_00 => X"0000001800310010000000000000000C00220010000000040000000000000000",
-      INIT_01 => X"0000000000000000000000000000000000000000000000000000000C00120008",
+      INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
       INIT_04 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -551,13 +549,11 @@ entity adjacency_list_blk_mem_gen_prim_width is
     dina : in STD_LOGIC_VECTOR ( 35 downto 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of adjacency_list_blk_mem_gen_prim_width : entity is "blk_mem_gen_prim_width";
 end adjacency_list_blk_mem_gen_prim_width;
 
 architecture STRUCTURE of adjacency_list_blk_mem_gen_prim_width is
 begin
-\prim_init.ram\: entity work.adjacency_list_blk_mem_gen_prim_wrapper_init
+\prim_noinit.ram\: entity work.adjacency_list_blk_mem_gen_prim_wrapper
      port map (
       addra(9 downto 0) => addra(9 downto 0),
       clka => clka,
@@ -584,7 +580,7 @@ end \adjacency_list_blk_mem_gen_prim_width__parameterized0\;
 
 architecture STRUCTURE of \adjacency_list_blk_mem_gen_prim_width__parameterized0\ is
 begin
-\prim_init.ram\: entity work.\adjacency_list_blk_mem_gen_prim_wrapper_init__parameterized0\
+\prim_noinit.ram\: entity work.\adjacency_list_blk_mem_gen_prim_wrapper__parameterized0\
      port map (
       addra(9 downto 0) => addra(9 downto 0),
       clka => clka,
@@ -605,8 +601,6 @@ entity adjacency_list_blk_mem_gen_generic_cstr is
     dina : in STD_LOGIC_VECTOR ( 63 downto 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of adjacency_list_blk_mem_gen_generic_cstr : entity is "blk_mem_gen_generic_cstr";
 end adjacency_list_blk_mem_gen_generic_cstr;
 
 architecture STRUCTURE of adjacency_list_blk_mem_gen_generic_cstr is
@@ -640,8 +634,6 @@ entity adjacency_list_blk_mem_gen_top is
     dina : in STD_LOGIC_VECTOR ( 63 downto 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of adjacency_list_blk_mem_gen_top : entity is "blk_mem_gen_top";
 end adjacency_list_blk_mem_gen_top;
 
 architecture STRUCTURE of adjacency_list_blk_mem_gen_top is
@@ -667,8 +659,6 @@ entity adjacency_list_blk_mem_gen_v8_4_1_synth is
     dina : in STD_LOGIC_VECTOR ( 63 downto 0 );
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of adjacency_list_blk_mem_gen_v8_4_1_synth : entity is "blk_mem_gen_v8_4_1_synth";
 end adjacency_list_blk_mem_gen_v8_4_1_synth;
 
 architecture STRUCTURE of adjacency_list_blk_mem_gen_v8_4_1_synth is
@@ -837,11 +827,11 @@ entity adjacency_list_blk_mem_gen_v8_4_1 is
   attribute C_INIT_FILE : string;
   attribute C_INIT_FILE of adjacency_list_blk_mem_gen_v8_4_1 : entity is "adjacency_list.mem";
   attribute C_INIT_FILE_NAME : string;
-  attribute C_INIT_FILE_NAME of adjacency_list_blk_mem_gen_v8_4_1 : entity is "adjacency_list.mif";
+  attribute C_INIT_FILE_NAME of adjacency_list_blk_mem_gen_v8_4_1 : entity is "no_coe_file_loaded";
   attribute C_INTERFACE_TYPE : integer;
   attribute C_INTERFACE_TYPE of adjacency_list_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_LOAD_INIT_FILE : integer;
-  attribute C_LOAD_INIT_FILE of adjacency_list_blk_mem_gen_v8_4_1 : entity is 1;
+  attribute C_LOAD_INIT_FILE of adjacency_list_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_MEM_TYPE : integer;
   attribute C_MEM_TYPE of adjacency_list_blk_mem_gen_v8_4_1 : entity is 0;
   attribute C_MUX_PIPELINE_STAGES : integer;
@@ -898,8 +888,6 @@ entity adjacency_list_blk_mem_gen_v8_4_1 is
   attribute C_WRITE_WIDTH_B of adjacency_list_blk_mem_gen_v8_4_1 : entity is 64;
   attribute C_XDEVICEFAMILY : string;
   attribute C_XDEVICEFAMILY of adjacency_list_blk_mem_gen_v8_4_1 : entity is "artix7";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of adjacency_list_blk_mem_gen_v8_4_1 : entity is "blk_mem_gen_v8_4_1";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of adjacency_list_blk_mem_gen_v8_4_1 : entity is "yes";
 end adjacency_list_blk_mem_gen_v8_4_1;
@@ -1220,11 +1208,11 @@ architecture STRUCTURE of adjacency_list is
   attribute C_INIT_FILE : string;
   attribute C_INIT_FILE of U0 : label is "adjacency_list.mem";
   attribute C_INIT_FILE_NAME : string;
-  attribute C_INIT_FILE_NAME of U0 : label is "adjacency_list.mif";
+  attribute C_INIT_FILE_NAME of U0 : label is "no_coe_file_loaded";
   attribute C_INTERFACE_TYPE : integer;
   attribute C_INTERFACE_TYPE of U0 : label is 0;
   attribute C_LOAD_INIT_FILE : integer;
-  attribute C_LOAD_INIT_FILE of U0 : label is 1;
+  attribute C_LOAD_INIT_FILE of U0 : label is 0;
   attribute C_MEM_TYPE : integer;
   attribute C_MEM_TYPE of U0 : label is 0;
   attribute C_MUX_PIPELINE_STAGES : integer;

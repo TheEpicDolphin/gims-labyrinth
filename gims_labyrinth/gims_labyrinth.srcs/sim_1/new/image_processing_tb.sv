@@ -1,24 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/01/2019 05:55:56 PM
-// Design Name: 
-// Module Name: image_processing_tb
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
@@ -64,17 +43,20 @@ integer hsv_f;
 integer i;
 logic [23:0] rgb;
 
+logic [11:0] rgb_pixel;
+logic [16:0] cam_pixel_r_addr;
+
+cam_image_buffer cam_img_buf(.clkb(clock),
+                             .addrb(cam_pixel_r_addr),
+                             .doutb(rgb_pixel));
+
 // Instantiate the Unit Under Test (UUT)
-signal_processing uut(
+binary_maze_filtering uut(
     .clk(clock),
     .rst(rst),
     .start(start),
-    .r(r_in),
-    .g(g_in),
-    .b(b_in),
-    .h(h),   //Q9.8
-    .s(s),  //Q8
-    .v(v)   //Q8
+    .rgb_pixel(rgb_pixel),
+    .cam_pixel_r_addr(cam_pixel_r_addr)
     );
 
 always #5 clock = !clock;
@@ -109,6 +91,7 @@ initial begin
    $fclose(rgb_f);
    */
    
+   /*
    rgb_f=$fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/maze_img.txt","r");
    for(i = 0; i < 320*240; i = i + 1)begin
         $fscanf(rgb_f,"%h\n",rgb);
@@ -118,6 +101,7 @@ initial begin
         #10;
    end
    $fclose(rgb_f);
+   */
    #200;
    
 end

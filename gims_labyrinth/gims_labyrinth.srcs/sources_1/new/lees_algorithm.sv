@@ -30,7 +30,6 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     
     input skel_pixel,
     input [1:0] pixel_type,
-    input visited,
         
     //Used to index into the maze
     output logic [16:0] pixel_r_addr,
@@ -40,14 +39,10 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     output logic [1:0] backpointer,
     //These are set high when writing to the appropriate bram
     output logic write_bp,
-
-    output logic visit,
-    output logic write_visited,
-    
     output logic done,
     output logic [16:0] end_pos,
     
-    output logic [1:0] state
+    output logic [2:0] state
     );
     
     parameter NORMAL_PIXEL = 2'b00;
@@ -57,10 +52,11 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     
     parameter QUEUE_SIZE = 64;
     
-    parameter IDLE = 2'b00;
-    parameter FETCH_NEIGHBORS = 2'b01;
-    parameter VALIDATE_NEIGHBORS = 2'b10;
-    parameter DONE = 2'b11;
+    parameter IDLE = 3'b000;
+    parameter FETCH_NEIGHBORS = 3'b001;
+    parameter VALIDATE_NEIGHBORS = 3'b010;
+    parameter DONE = 3'b011;
+    parameter CLEAR_VISITED_MAP = 3'b100;
     
     logic [5:0] q_idx;
     reg [16:0] queue[0:QUEUE_SIZE - 1];
@@ -73,7 +69,16 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     
     assign done = state == DONE;
     
-    assign visit = 1;
+    logic write_visited;
+    logic visit_val;
+    logic visited;
+    visited_map visited_map(.clka(clk),
+                          .addra(pixel_wr_addr),
+                          .dina(visit_val),
+                          .wea(write_visited),
+                          .clkb(clk),
+                          .addrb(pixel_r_addr),
+                          .doutb(visited));
     
     logic neighbor_within_bounds;
     
@@ -93,6 +98,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                         queue[0] <= start_pos;
                         q_idx <= 1;
                         write_visited <= 1;
+                        visit_val <= 1;
                         pixel_wr_addr <= start_pos[7:0] * IMG_W + start_pos[16:8];
                     end
                 end
@@ -165,12 +171,30 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                     end
                     i <= i + 1;
                 end
+                
                 DONE: begin
                     write_bp <= 0;
-                    write_visited <= 0;
-                    state <= IDLE;
+                    
+                    state <= CLEAR_VISITED_MAP;
+                    pixel_wr_addr <= 0;
+                    write_visited <= 1;
+                    visit_val <= 0;
                 end
-            
+                
+                CLEAR_VISITED_MAP: begin
+                    if(pixel_wr_addr == IMG_W * IMG_H)begin
+                        state <= IDLE;
+                        write_visited <= 0;
+                    end
+                    else begin
+                        pixel_wr_addr <= pixel_wr_addr + 1;
+                    end
+                end
+                
+                default: begin
+                    //Do nothing
+                end
+                
             endcase
         end
     end

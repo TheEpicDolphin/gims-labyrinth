@@ -21,5 +21,22 @@ def maze_file_gen(maze_im):
         f.write(f_contents)
     return None
 
+def maze_coe_gen(maze_im):
+    coe_contents = "memory_initialization_radix=2;\nmemory_initialization_vector=\n"
+    r, c, ch = maze_im.shape
+    for i in range(r):
+        for j in range(c):    
+            coe_contents += '{:04b}'.format(maze_im[i,j,0] >> 4) + \
+                            '{:04b}'.format(maze_im[i,j,1] >> 4) + \
+                            '{:04b}'.format(maze_im[i,j,2] >> 4)
+            if(i == r - 1 and j == c - 1):
+                coe_contents += ";\n"
+            else:
+                coe_contents += ",\n"
+                
+    with open("maze_img.coe", 'w') as f:
+        f.write(coe_contents)
+    return None
+
 maze_im = imageio.imread("../test_imgs/real_maze.png")
-maze_file_gen(maze_im)
+maze_coe_gen(maze_im)

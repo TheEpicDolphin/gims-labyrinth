@@ -80,6 +80,7 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
     
     logic bin_maze_pixel;
     //Threshold for white path
+    
     thresholder #(.H_LOW(17'h0),.H_HIGH(17'h1_FF_FF),
                   .S_LOW(8'b0000_0000),.S_HIGH(8'b0001_1000),
                   .V_LOW(8'b1110_1000),.V_HIGH(8'b1111_1111)) skel_thresh
@@ -90,10 +91,22 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                 .b(bin_maze_pixel)
             );
     
-        
+    /*
+        thresholder #(.H_LOW(17'h0),.H_HIGH(17'h1_FF_FF),
+                  .S_LOW(8'b0000_0000),.S_HIGH(8'b1111_1111),
+                  .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh
+            (
+                .h(h),   //Q9.8
+                .s(s),  //Q8
+                .v(v),  //Q8
+                .b(bin_maze_pixel)
+            );
+        */    
     logic [23:0] cycles;
     logic eroded_pixel;
     logic dilated_pixel;
+    
+    assign pixel_out = dilated_pixel;
          
     logic start_erosion;
     logic start_dilation;

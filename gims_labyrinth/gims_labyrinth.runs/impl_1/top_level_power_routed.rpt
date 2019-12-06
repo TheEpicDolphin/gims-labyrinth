@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Thu Dec  5 23:31:04 2019
+| Date             : Fri Dec  6 14:57:55 2019
 | Host             : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 | Command          : report_power -file top_level_power_routed.rpt -pb top_level_power_summary_routed.pb -rpx top_level_power_routed.rpx
 | Design           : top_level
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.321        |
+| Total On-Chip Power (W)  | 0.262        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.223        |
-| Device Static (W)        | 0.099        |
+| Dynamic (W)              | 0.164        |
+| Device Static (W)        | 0.098        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 98.5         |
-| Junction Temperature (C) | 26.5         |
+| Max Ambient (C)          | 98.8         |
+| Junction Temperature (C) | 26.2         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,22 +52,22 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.001 |        8 |       --- |             --- |
-| Slice Logic             |     0.036 |    14860 |       --- |             --- |
-|   LUT as Logic          |     0.030 |     6885 |     63400 |           10.86 |
-|   CARRY4                |     0.004 |     1432 |     15850 |            9.03 |
-|   Register              |     0.001 |     4303 |    126800 |            3.39 |
-|   LUT as Shift Register |    <0.001 |      140 |     19000 |            0.74 |
-|   F7/F8 Muxes           |    <0.001 |       41 |     63400 |            0.06 |
+| Clocks                  |     0.006 |        8 |       --- |             --- |
+| Slice Logic             |     0.007 |    15174 |       --- |             --- |
+|   LUT as Logic          |     0.006 |     6998 |     63400 |           11.04 |
+|   CARRY4                |    <0.001 |     1448 |     15850 |            9.14 |
+|   Register              |    <0.001 |     4419 |    126800 |            3.49 |
+|   LUT as Shift Register |    <0.001 |      180 |     19000 |            0.95 |
+|   F7/F8 Muxes           |    <0.001 |       39 |     63400 |            0.06 |
 |   BUFG                  |    <0.001 |        1 |        32 |            3.13 |
-|   Others                |     0.000 |      254 |       --- |             --- |
-| Signals                 |     0.030 |     9518 |       --- |             --- |
-| Block RAM               |    <0.001 |       29 |       135 |           21.48 |
+|   Others                |     0.000 |      260 |       --- |             --- |
+| Signals                 |     0.006 |     9787 |       --- |             --- |
+| Block RAM               |     0.003 |       29 |       135 |           21.48 |
 | MMCM                    |     0.116 |        1 |         6 |           16.67 |
-| DSPs                    |     0.018 |       19 |       240 |            7.92 |
+| DSPs                    |     0.004 |       19 |       240 |            7.92 |
 | I/O                     |     0.021 |       85 |       210 |           40.48 |
-| Static Power            |     0.099 |          |           |                 |
-| Total                   |     0.321 |          |           |                 |
+| Static Power            |     0.098 |          |           |                 |
+| Total                   |     0.262 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -77,7 +77,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.102 |       0.086 |      0.016 |
+| Vccint    |       1.000 |     0.043 |       0.027 |      0.016 |
 | Vccaux    |       1.800 |     0.083 |       0.065 |      0.018 |
 | Vcco33    |       3.300 |     0.010 |       0.006 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -100,7 +100,7 @@ Table of Contents
 | User Input Data             | Confidence | Details                                                | Action                                                                                                             |
 +-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 | Design implementation state | High       | Design is routed                                       |                                                                                                                    |
-| Clock nodes activity        | Low        | User specified less than 75% of clocks                 | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
+| Clock nodes activity        | Medium     | More than 5% of clocks are missing user specification  | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
 | I/O nodes activity          | Low        | More than 75% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view           |
 | Internal nodes activity     | Medium     | User specified less than 25% of internal nodes         | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views         |
 | Device models               | High       | Device models are Production                           |                                                                                                                    |
@@ -151,75 +151,75 @@ Table of Contents
 +----------------------------------------------+-----------+
 | Name                                         | Power (W) |
 +----------------------------------------------+-----------+
-| top_level                                    |     0.223 |
-|   bin_maze_filt                              |     0.080 |
+| top_level                                    |     0.164 |
+|   bin_maze_filt                              |     0.022 |
 |     bin_dilation                             |    <0.001 |
 |     bin_erosion                              |    <0.001 |
-|     genblk1[0].inst                          |     0.004 |
+|     genblk1[0].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[10].inst                         |     0.004 |
+|     genblk1[10].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[11].inst                         |     0.004 |
+|     genblk1[11].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[12].inst                         |     0.005 |
+|     genblk1[12].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[13].inst                         |     0.004 |
+|     genblk1[13].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[14].inst                         |     0.004 |
+|     genblk1[14].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[15].inst                         |     0.004 |
+|     genblk1[15].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[16].inst                         |     0.004 |
+|     genblk1[16].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[17].inst                         |     0.004 |
+|     genblk1[17].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[18].inst                         |     0.004 |
+|     genblk1[18].inst                         |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[1].inst                          |     0.004 |
+|     genblk1[1].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[2].inst                          |     0.004 |
+|     genblk1[2].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[3].inst                          |     0.004 |
+|     genblk1[3].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[4].inst                          |     0.004 |
+|     genblk1[4].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[5].inst                          |     0.004 |
+|     genblk1[5].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[6].inst                          |     0.004 |
+|     genblk1[6].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[7].inst                          |     0.004 |
+|     genblk1[7].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[8].inst                          |     0.004 |
+|     genblk1[8].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|     genblk1[9].inst                          |     0.004 |
+|     genblk1[9].inst                          |     0.001 |
 |       h_div1                                 |    <0.001 |
 |       s_div1                                 |    <0.001 |
-|   cam_img_buf                                |     0.004 |
-|     U0                                       |     0.004 |
-|       inst_blk_mem_gen                       |     0.004 |
-|         gnbram.gnativebmg.native_blk_mem_gen |     0.004 |
-|           valid.cstr                         |     0.004 |
+|   cam_img_buf                                |     0.003 |
+|     U0                                       |     0.003 |
+|       inst_blk_mem_gen                       |     0.003 |
+|         gnbram.gnativebmg.native_blk_mem_gen |     0.003 |
+|           valid.cstr                         |     0.003 |
 |             bindec_a.bindec_inst_a           |    <0.001 |
 |             bindec_b.bindec_inst_b           |    <0.001 |
-|             has_mux_b.B                      |     0.003 |
+|             has_mux_b.B                      |    <0.001 |
 |             ramloop[0].ram.r                 |    <0.001 |
 |               prim_init.ram                  |    <0.001 |
 |             ramloop[10].ram.r                |    <0.001 |
@@ -271,8 +271,10 @@ Table of Contents
 |   clkdivider                                 |     0.116 |
 |     inst                                     |     0.116 |
 |   db1                                        |    <0.001 |
+|   db2                                        |    <0.001 |
 |   display                                    |    <0.001 |
 |   my_camera                                  |    <0.001 |
+|   skel                                       |    <0.001 |
 |   skel_maze                                  |    <0.001 |
 |     U0                                       |    <0.001 |
 |       inst_blk_mem_gen                       |    <0.001 |

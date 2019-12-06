@@ -56,11 +56,14 @@ module top_level(
 
     // btnc button is user reset
     wire reset;
+    wire reset_cam;
     wire up,down;
-    debounce db1(.reset_in(0),.clock_in(clk_25mhz),.noisy_in(btnc),.clean_out(reset));             
+    debounce db1(.reset_in(0),.clock_in(clk_25mhz),.noisy_in(btnc),.clean_out(reset));         
+     
     logic xclk;
     
     logic pclk_buff, pclk_in;
+    debounce db2(.reset_in(0),.clock_in(pclk_in),.noisy_in(btnc),.clean_out(reset_cam));
     logic vsync_buff, vsync_in;
     logic href_buff, href_in;
     logic[7:0] pixel_buff, pixel_in;
@@ -83,7 +86,7 @@ module top_level(
     parameter IMG_H = 240;
     
     parameter IDLE = 3'b000;
-    parameter CAPTURING_IMG = 3'b001;
+    parameter CAPTURE_IMAGE = 3'b001;
     parameter BINARY_MAZE_FILTERING = 3'b010;
     parameter SKELETONIZING = 3'b011;
     
@@ -112,50 +115,68 @@ module top_level(
     logic [16:0] cam_pixel_wr_addr;
     logic [16:0] cam_pixel_r_addr;
     
-    logic cam_pixel_wea;
-    assign cam_pixel_wea = (valid_pixel && (state == CAPTURING_IMG));
-    //assign cam_pixel_wea = valid_pixel;
+    logic cam_pixel_we;
     logic [11:0] rgb_pixel;
-
     
     cam_image_buffer cam_img_buf(.clka(pclk_in),
                                 .addra(cam_pixel_wr_addr),
                                 .dina({output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]}),
-                                .wea(cam_pixel_wea),
-                                .clkb(pclk_in),
+                                .wea(cam_pixel_we),
+                                .clkb(clk_25mhz),
                                 .addrb(cam_pixel_r_addr),
                                 .doutb(rgb_pixel));
     
-    logic [16:0] filt_bin_pixel_wr_addr;
-    logic filt_bin_pixel_in;
-    logic filt_bin_pixel_wea;
-    logic [16:0] filt_bin_pixel_r_addr;
-    logic filt_bin_pixel_out;
+    logic [16:0] bin_pixel_wr_addr;
+    logic bin_pixel_in;
+    logic bin_pixel_we;
+    logic [16:0] bin_pixel_r_addr;
+    logic bin_pixel_out;
                                     
-    binary_maze skel_maze(.clka(pclk_in),
-                          .addra(filt_bin_pixel_wr_addr),
-                          .dina(filt_bin_pixel_in),
-                          .wea(filt_bin_pixel_wea),
+    binary_maze skel_maze(.clka(clk_25mhz),
+                          .addra(bin_pixel_wr_addr),
+                          .dina(bin_pixel_in),
+                          .wea(bin_pixel_we),
                           .clkb(clk_25mhz),
-                          .addrb(filt_bin_pixel_r_addr),
-                          .doutb(filt_bin_pixel_out)
+                          .addrb(bin_pixel_r_addr),
+                          .doutb(bin_pixel_out)
                           );
     logic bin_maze_filt_start;
     logic bin_maze_filt_done;
-    
+    logic [16:0] filt_pixel_wr_addr;
+    logic filt_pixel;
+    logic filt_pixel_we;
+        
     binary_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) bin_maze_filt
         (
-         .clk(pclk_in),
+         .clk(clk_25mhz),
          .rst(reset),
          .start(bin_maze_filt_start),
          .rgb_pixel(rgb_pixel),  
          .cam_pixel_r_addr(cam_pixel_r_addr), 
          .done(bin_maze_filt_done),
-         .pixel_wr_addr(filt_bin_pixel_wr_addr),
-         .pixel_wea(filt_bin_pixel_wea),
-         .pixel_out(filt_bin_pixel_in)
+         .pixel_wr_addr(filt_pixel_wr_addr),
+         .pixel_wea(filt_pixel_we),
+         .pixel_out(filt_pixel)
          );
-         
+    
+    logic start_skeletonizer;
+    logic skeletonizer_done;
+    logic [16:0] skel_pixel_wr_addr;
+    logic skel_pixel;
+    logic skel_pixel_we;
+    logic [16:0] skel_pixel_r_addr;
+    skeletonizer #(.IMG_WIDTH(IMG_W),.IMG_HEIGHT(IMG_H),.BRAM_READ_DELAY(2)) skel
+    (
+             .clk(clk_25mhz),
+             .rst(reset),
+             .start(start_skeletonizer),
+             .pixel_in(bin_pixel_out),
+             .pixel_r_addr(skel_pixel_r_addr),
+             .pixel_wr_addr(skel_pixel_wr_addr),
+             .pixel_we(skel_pixel_we),
+             .pixel_out(skel_pixel),
+             .done(skeletonizer_done)
+             );
     logic colored_maze_filt_done;
     logic [16:0] start_pos;
     /*
@@ -228,46 +249,65 @@ module top_level(
                  .dina(write_path),
                  .wea(write_path));   
     */
-                 
-    always_ff @(posedge pclk_in)begin
+    
+    logic [16:0] fpga_read_addr;
+    
+    always_comb begin
+        case(state)
+            BINARY_MAZE_FILTERING: begin
+                bin_pixel_wr_addr = filt_pixel_wr_addr;
+                bin_pixel_in = filt_pixel;
+                bin_pixel_we = filt_pixel_we;
+            end
+            SKELETONIZING: begin
+                bin_pixel_wr_addr = skel_pixel_wr_addr;
+                bin_pixel_in = skel_pixel;
+                bin_pixel_we = skel_pixel_we;
+                bin_pixel_r_addr = skel_pixel_r_addr;
+            end
+            IDLE: begin
+                bin_pixel_r_addr = fpga_read_addr;
+            end
+        endcase
+    end
+    
+    logic frame_done;                   
+    always_ff @(posedge clk_25mhz)begin
         if(reset)begin
             state <= IDLE;
         end
         else begin
             case(state)
-                IDLE: begin
-                    //Wait for current frame to be finished
-                    if(frame_done_out)begin
-                        state <= CAPTURING_IMG;
-                        cam_pixel_wr_addr <= 17'b0;
+                IDLE: begin                                    
+                    if(frame_done)begin
+                        //Wait for camera to finish current incomplete frame
+                        state <= CAPTURE_IMAGE;
                     end
                 end
-                CAPTURING_IMG: begin
-                    if (valid_pixel)begin
-                        cam_pixel_wr_addr <= cam_pixel_wr_addr + 1;        
-                    end
-                    
-                    if(frame_done_out)begin
+                CAPTURE_IMAGE: begin
+                    if(frame_done)begin
                         //camera image is now stored in bram
                         state <= BINARY_MAZE_FILTERING;
                         bin_maze_filt_start <= 1;
                     end
-                    
                 end
                 BINARY_MAZE_FILTERING: begin
                     bin_maze_filt_start <= 0;
                     if(bin_maze_filt_done)begin
                         state <= SKELETONIZING;
+                        start_skeletonizer <= 1;
                     end
                 end
                 SKELETONIZING: begin
+                    start_skeletonizer <= 0;
                     //get stuck in here for now
-                    state <= IDLE;
+                    if(skeletonizer_done)begin
+                        state <= IDLE;
+                    end
                 end
                 COLORED_MAZE_FILTERING: begin
                     if(colored_maze_filt_done)begin
                         state <= SOLVING;
-                        
                     end
                 end
                 SOLVING: begin
@@ -282,20 +322,51 @@ module top_level(
         end
     end
     
-    
+    logic frame_done_buff;
     always_ff @(posedge clk_25mhz) begin
-        //Comes from camera sensor
-        pclk_buff <= jb[0];//WAS JB
-        vsync_buff <= jb[1]; //WAS JB
-        href_buff <= jb[2]; //WAS JB
-        pixel_buff <= ja;
+        if(reset)begin
+            frame_done_buff <= 0;
+            frame_done <= 0;
+        end
+        else begin
+            //Comes from camera sensor
+            pclk_buff <= jb[0];//WAS JB
+            vsync_buff <= jb[1]; //WAS JB
+            href_buff <= jb[2]; //WAS JB
+            pixel_buff <= ja;
+                
+            pclk_in <= pclk_buff;
+            vsync_in <= vsync_buff;
+            href_in <= href_buff;
+            pixel_in <= pixel_buff;
+                
+            frame_done_buff <= frame_done_out;
+            frame_done <= frame_done_buff;
+        end
         
-        pclk_in <= pclk_buff;
-        vsync_in <= vsync_buff;
-        href_in <= href_buff;
-        pixel_in <= pixel_buff;
-        processed_pixels = {output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]};
     end
+    
+    logic sync_state;
+    logic state_buff;
+    always_ff @(posedge pclk_in) begin
+        if(reset_cam)begin
+            sync_state <= IDLE;
+            state_buff <= IDLE;
+        end
+        else begin
+            state_buff <= state;
+            sync_state <= state_buff;
+            if(frame_done_out)begin
+                cam_pixel_wr_addr <= 0;
+            end
+            else if(valid_pixel)begin
+                cam_pixel_wr_addr <= cam_pixel_wr_addr + 1; 
+            end
+        end
+        
+    end
+    
+    assign cam_pixel_we = valid_pixel && (sync_state == CAPTURE_IMAGE);
     
     camera_read  my_camera(.p_clock_in(pclk_in),
                             .rst(reset),
@@ -305,36 +376,46 @@ module top_level(
                           .pixel_data_out(output_pixels),
                           .pixel_valid_out(valid_pixel),
                           .frame_done_out(frame_done_out),
-                          .FSM_state(cam_state));   
+                          .FSM_state(cam_state));
+       
 
     wire border = (hcount==0 | hcount==639 | vcount==0 | vcount==479 |
                    hcount == 320 | vcount == 240);
 
     reg b,hs,vs;
     always_ff @(posedge clk_25mhz) begin
-      if (sw[1:0] == 2'b01) begin
-         // 1 pixel outline of visible area (white)
-         hs <= hsync;
-         vs <= vsync;
-         b <= blank;
-         rgb <= {12{border}};
-      end 
-      else if (sw[1:0] == 2'b10) begin
-         // color bars
-         hs <= hsync;
-         vs <= vsync;
-         b <= blank;
-         rgb <= {{4{hcount[7]}}, {4{hcount[6]}}, {4{hcount[5]}}} ;
-      end 
+      if(reset)begin
+        
+      end
       else begin
-         
-         hs <= hsync;
-         vs <= vsync;
-         b <= blank;
-         filt_bin_pixel_r_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
-         rgb <= filt_bin_pixel_out ? 12'hFFF : 12'b0;
-         //rgb <= rgb_pixel;
-       end
+          if (sw[1:0] == 2'b01) begin
+             // 1 pixel outline of visible area (white)
+             hs <= hsync;
+             vs <= vsync;
+             b <= blank;
+             rgb <= {12{border}};
+          end 
+          else if (sw[1:0] == 2'b10) begin
+             // color bars
+             hs <= hsync;
+             vs <= vsync;
+             b <= blank;
+             rgb <= {{4{hcount[7]}}, {4{hcount[6]}}, {4{hcount[5]}}} ;
+          end 
+          else begin
+             
+             hs <= hsync;
+             vs <= vsync;
+             b <= blank;
+             
+             if(state == IDLE)begin
+                fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
+                rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
+             end
+             
+           end
+      end
+
     end
 
     // the following lines are required for the Nexys4 VGA circuit - do not change

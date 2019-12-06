@@ -2,8 +2,8 @@
 # Vivado v2018.2 (64-bit)
 # SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
 # IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
-# Start of session at: Thu Dec  5 23:27:19 2019
-# Process ID: 29924
+# Start of session at: Fri Dec  6 14:53:54 2019
+# Process ID: 11544
 # Current directory: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1
 # Command line: vivado.exe -log top_level.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_level.tcl
 # Log file: C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/top_level.vds
@@ -15,7 +15,7 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 34180 
+INFO: Helper process launched with PID 25620 
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:50]
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:51]
 WARNING: [Synth 8-2507] parameter declaration becomes local in dilation with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:52]
@@ -34,24 +34,28 @@ WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filt
 WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:241]
 WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:242]
 WARNING: [Synth 8-2507] parameter declaration becomes local in colored_maze_filtering with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:245]
-WARNING: [Synth 8-2368] multiple overrides for parameter IMG_W [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:157]
+WARNING: [Synth 8-2507] parameter declaration becomes local in skeletonizer with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:37]
+WARNING: [Synth 8-2507] parameter declaration becomes local in skeletonizer with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:38]
+WARNING: [Synth 8-2507] parameter declaration becomes local in skeletonizer with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:39]
+WARNING: [Synth 8-2507] parameter declaration becomes local in skeletonizer with formal parameter declaration list [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:40]
+WARNING: [Synth 8-2368] multiple overrides for parameter IMG_W [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:160]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 398.863 ; gain = 111.738
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 398.832 ; gain = 111.180
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'top_level' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:24]
 	Parameter IMG_W bound to: 320 - type: integer 
 	Parameter IMG_H bound to: 240 - type: integer 
 	Parameter IDLE bound to: 3'b000 
-	Parameter CAPTURING_IMG bound to: 3'b001 
+	Parameter CAPTURE_IMAGE bound to: 3'b001 
 	Parameter BINARY_MAZE_FILTERING bound to: 3'b010 
 	Parameter SKELETONIZING bound to: 3'b011 
 	Parameter COLORED_MAZE_FILTERING bound to: 3'b100 
 	Parameter SOLVING bound to: 3'b101 
 	Parameter TRACING_BACKPOINTERS bound to: 3'b110 
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-11544-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-11544-LAPTOP-9CDK2BBH/realtime/clk_wiz_0_stub.v:5]
 WARNING: [Synth 8-350] instance 'clkdivider' of module 'clk_wiz_0' requires 4 connections, but only 3 given [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:46]
-INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:542]
+INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:623]
 	Parameter DISPLAY_WIDTH bound to: 640 - type: integer 
 	Parameter DISPLAY_HEIGHT bound to: 480 - type: integer 
 	Parameter H_FP bound to: 16 - type: integer 
@@ -60,16 +64,16 @@ INFO: [Synth 8-6157] synthesizing module 'vga' [C:/Users/giand/Documents/MIT/Sen
 	Parameter V_FP bound to: 11 - type: integer 
 	Parameter V_SYNC_PULSE bound to: 2 - type: integer 
 	Parameter V_BP bound to: 31 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'vga' (2#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:542]
-INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:411]
-INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:411]
-INFO: [Synth 8-6157] synthesizing module 'display_8hex' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:444]
+INFO: [Synth 8-6155] done synthesizing module 'vga' (2#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:623]
+INFO: [Synth 8-6157] synthesizing module 'debounce' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:492]
+INFO: [Synth 8-6155] done synthesizing module 'debounce' (3#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:492]
+INFO: [Synth 8-6157] synthesizing module 'display_8hex' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:525]
 	Parameter bits bound to: 13 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'display_8hex' (4#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:444]
-INFO: [Synth 8-6157] synthesizing module 'cam_image_buffer' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cam_image_buffer' (5#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'binary_maze' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'binary_maze' (6#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-29924-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'display_8hex' (4#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:525]
+INFO: [Synth 8-6157] synthesizing module 'cam_image_buffer' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-11544-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cam_image_buffer' (5#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-11544-LAPTOP-9CDK2BBH/realtime/cam_image_buffer_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'binary_maze' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-11544-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'binary_maze' (6#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/.Xil/Vivado-11544-LAPTOP-9CDK2BBH/realtime/binary_maze_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'binary_maze_filtering' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:24]
 	Parameter IMG_W bound to: 240 - type: integer 
 	Parameter IMG_H bound to: 240 - type: integer 
@@ -156,15 +160,33 @@ INFO: [Synth 8-6155] done synthesizing module 'dilation' (11#1) [C:/Users/giand/
 WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:189]
 WARNING: [Synth 8-6014] Unused sequential element bin_maze_f_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:189]
 INFO: [Synth 8-6155] done synthesizing module 'binary_maze_filtering' (12#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/signal_processing.sv:24]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:237]
-INFO: [Synth 8-6157] synthesizing module 'camera_read' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:356]
+INFO: [Synth 8-6157] synthesizing module 'skeletonizer' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:23]
+	Parameter IMG_WIDTH bound to: 320 - type: integer 
+	Parameter IMG_HEIGHT bound to: 240 - type: integer 
+	Parameter BRAM_READ_DELAY bound to: 2 - type: integer 
+	Parameter IDLE bound to: 2'b00 
+	Parameter INITIAL_READ_DELAY bound to: 2'b01 
+	Parameter SKELETONIZING bound to: 2'b10 
+	Parameter DONE bound to: 2'b11 
+WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:141]
+WARNING: [Synth 8-639] system function call 'fopen' not supported [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:169]
+WARNING: [Synth 8-6014] Unused sequential element skel_maze_f_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:141]
+WARNING: [Synth 8-3936] Found unconnected internal register 'temp_reg' and it is trimmed from '643' to '642' bits. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:108]
+WARNING: [Synth 8-3936] Found unconnected internal register 'unmod_window_reg' and it is trimmed from '9' to '5' bits. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:66]
+INFO: [Synth 8-6155] done synthesizing module 'skeletonizer' (13#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:23]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:256]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:280]
+INFO: [Synth 8-6157] synthesizing module 'camera_read' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:437]
 	Parameter WAIT_FRAME_START bound to: 0 - type: integer 
 	Parameter ROW_CAPTURE bound to: 1 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:381]
-INFO: [Synth 8-6155] done synthesizing module 'camera_read' (13#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:356]
-WARNING: [Synth 8-6014] Unused sequential element processed_pixels_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:297]
-WARNING: [Synth 8-3848] Net colored_maze_filt_done in module/entity top_level does not have driver. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:159]
-INFO: [Synth 8-6155] done synthesizing module 'top_level' (14#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:24]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:462]
+INFO: [Synth 8-6155] done synthesizing module 'camera_read' (14#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:437]
+WARNING: [Synth 8-87] always_comb on 'bin_pixel_wr_addr_reg' did not result in combinational logic [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:136]
+WARNING: [Synth 8-87] always_comb on 'bin_pixel_in_reg' did not result in combinational logic [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:137]
+WARNING: [Synth 8-87] always_comb on 'bin_pixel_we_reg' did not result in combinational logic [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:138]
+WARNING: [Synth 8-87] always_comb on 'bin_pixel_r_addr_reg' did not result in combinational logic [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:140]
+WARNING: [Synth 8-3848] Net colored_maze_filt_done in module/entity top_level does not have driver. [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:180]
+INFO: [Synth 8-6155] done synthesizing module 'top_level' (15#1) [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:24]
 WARNING: [Synth 8-3917] design top_level has port dp driven by constant 1
 WARNING: [Synth 8-3331] design top_level has unconnected port btnu
 WARNING: [Synth 8-3331] design top_level has unconnected port btnd
@@ -172,7 +194,7 @@ WARNING: [Synth 8-3331] design top_level has unconnected port jd[2]
 WARNING: [Synth 8-3331] design top_level has unconnected port jd[1]
 WARNING: [Synth 8-3331] design top_level has unconnected port jd[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 441.902 ; gain = 154.777
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 444.977 ; gain = 157.324
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -185,10 +207,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 441.902 ; gain = 154.777
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 444.977 ; gain = 157.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 441.902 ; gain = 154.777
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 444.977 ; gain = 157.324
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a100tcsg324-3
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -210,16 +232,16 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 842.895 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 848.199 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 842.895 ; gain = 555.770
+Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 848.199 ; gain = 560.547
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-3
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 842.895 ; gain = 555.770
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 848.199 ; gain = 560.547
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -230,7 +252,7 @@ Applied set_property DONT_TOUCH = true for skel_maze. (constraint file  auto gen
 Applied set_property DONT_TOUCH = true for cam_img_buf. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for clkdivider. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 842.895 ; gain = 555.770
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 848.199 ; gain = 560.547
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "clean_out" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "count" won't be mapped to RAM because it is too sparse
@@ -241,11 +263,17 @@ INFO: [Synth 8-5546] ROM "oldest_pixel_y" won't be mapped to RAM because it is t
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'dilation'
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'binary_maze_filtering'
 INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "center_y" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'skeletonizer'
 INFO: [Synth 8-802] inferred FSM for state register 'FSM_state_reg' in module 'camera_read'
 INFO: [Synth 8-5544] ROM "FSM_state" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "pixel_valid_out" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "FSM_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "FSM_state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bin_pixel_wr_addr" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "bin_pixel_r_addr" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "rgb" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'top_level'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
@@ -279,6 +307,15 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+      INITIAL_READ_DELAY |                               01 |                               01
+           SKELETONIZING |                               10 |                               10
+                    DONE |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'skeletonizer'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
         WAIT_FRAME_START |                                0 |                               00
              ROW_CAPTURE |                                1 |                               01
 ---------------------------------------------------------------------------------------------------
@@ -287,13 +324,17 @@ INFO: [Synth 8-3354] encoded FSM with state register 'FSM_state_reg' using encod
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
                     IDLE |                             0001 |                              000
-           CAPTURING_IMG |                             0010 |                              001
+           CAPTURE_IMAGE |                             0010 |                              001
    BINARY_MAZE_FILTERING |                             0100 |                              010
            SKELETONIZING |                             1000 |                              011
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'top_level'
+WARNING: [Synth 8-327] inferring latch for variable 'bin_pixel_we_reg' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:138]
+WARNING: [Synth 8-327] inferring latch for variable 'bin_pixel_wr_addr_reg' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:136]
+WARNING: [Synth 8-327] inferring latch for variable 'bin_pixel_in_reg' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:137]
+WARNING: [Synth 8-327] inferring latch for variable 'bin_pixel_r_addr_reg' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv:140]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 842.895 ; gain = 555.770
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 848.199 ; gain = 560.547
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -302,7 +343,7 @@ Report RTL Partitions:
 +------+---------------------------+------------+----------+
 |1     |rgb_2_hsv                  |          19|      3982|
 |2     |binary_maze_filtering__GC0 |           1|      6029|
-|3     |top_level__GC0             |           1|      1625|
+|3     |top_level__GC0             |           1|      3874|
 +------+---------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -318,13 +359,17 @@ Detailed RTL Component Info :
 	   2 Input     17 Bit       Adders := 97    
 	   2 Input     16 Bit       Adders := 114   
 	   2 Input     10 Bit       Adders := 2     
-	   2 Input      9 Bit       Adders := 2     
+	   2 Input      9 Bit       Adders := 3     
 	   3 Input      8 Bit       Adders := 133   
-	   2 Input      8 Bit       Adders := 2     
+	   2 Input      8 Bit       Adders := 3     
 	   2 Input      6 Bit       Adders := 57    
 	   2 Input      5 Bit       Adders := 1     
+	   8 Input      4 Bit       Adders := 1     
++---XORs : 
+	   2 Input      8 Bit         XORs := 1     
 +---Registers : 
 	             1285 Bit    Registers := 3     
+	              643 Bit    Registers := 2     
 	               32 Bit    Registers := 114   
 	               24 Bit    Registers := 1     
 	               18 Bit    Registers := 2     
@@ -332,40 +377,39 @@ Detailed RTL Component Info :
 	               16 Bit    Registers := 115   
 	               12 Bit    Registers := 1     
 	               10 Bit    Registers := 2     
-	                9 Bit    Registers := 2     
-	                8 Bit    Registers := 100   
+	                9 Bit    Registers := 3     
+	                8 Bit    Registers := 101   
 	                7 Bit    Registers := 1     
 	                6 Bit    Registers := 57    
 	                5 Bit    Registers := 1     
-	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 20    
-	                1 Bit    Registers := 153   
+	                1 Bit    Registers := 161   
 +---Muxes : 
 	   2 Input     32 Bit        Muxes := 114   
 	   4 Input     24 Bit        Muxes := 1     
 	   4 Input     18 Bit        Muxes := 2     
-	   2 Input     17 Bit        Muxes := 114   
+	   2 Input     17 Bit        Muxes := 117   
 	   3 Input     17 Bit        Muxes := 19    
-	   4 Input     17 Bit        Muxes := 2     
+	   4 Input     17 Bit        Muxes := 4     
 	   2 Input     16 Bit        Muxes := 287   
 	   3 Input     16 Bit        Muxes := 1     
 	   3 Input     12 Bit        Muxes := 1     
-	   2 Input      9 Bit        Muxes := 2     
-	   4 Input      9 Bit        Muxes := 2     
-	   2 Input      8 Bit        Muxes := 171   
-	   4 Input      8 Bit        Muxes := 2     
+	   2 Input      9 Bit        Muxes := 5     
+	   4 Input      9 Bit        Muxes := 3     
+	   2 Input      8 Bit        Muxes := 173   
+	   4 Input      8 Bit        Muxes := 3     
 	   8 Input      8 Bit        Muxes := 1     
 	   2 Input      5 Bit        Muxes := 1     
 	   4 Input      5 Bit        Muxes := 1     
 	   4 Input      4 Bit        Muxes := 1     
 	   2 Input      4 Bit        Muxes := 4     
-	   8 Input      3 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 41    
-	   4 Input      2 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 380   
-	   4 Input      1 Bit        Muxes := 14    
+	   4 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 42    
+	   4 Input      2 Bit        Muxes := 4     
+	   2 Input      1 Bit        Muxes := 397   
+	   4 Input      1 Bit        Muxes := 23    
 	   5 Input      1 Bit        Muxes := 1     
-	   3 Input      1 Bit        Muxes := 1     
+	   3 Input      1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -378,21 +422,20 @@ INFO: [Synth 8-3538] Detected potentially large (wide) register pixel_buffer_dil
 Hierarchical RTL Component report 
 Module top_level 
 Detailed RTL Component Info : 
-+---Adders : 
-	   2 Input     17 Bit       Adders := 1     
 +---Registers : 
-	               17 Bit    Registers := 2     
+	               17 Bit    Registers := 1     
 	               12 Bit    Registers := 1     
 	                8 Bit    Registers := 2     
-	                3 Bit    Registers := 1     
-	                1 Bit    Registers := 10    
+	                1 Bit    Registers := 15    
 +---Muxes : 
-	   4 Input     17 Bit        Muxes := 1     
+	   2 Input     17 Bit        Muxes := 2     
+	   4 Input     17 Bit        Muxes := 2     
 	   3 Input     12 Bit        Muxes := 1     
 	   2 Input      4 Bit        Muxes := 3     
-	   8 Input      3 Bit        Muxes := 1     
-	   3 Input      1 Bit        Muxes := 1     
-	   4 Input      1 Bit        Muxes := 4     
+	   4 Input      3 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 7     
+	   3 Input      1 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 3     
 Module divider__1 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -524,6 +567,12 @@ Detailed RTL Component Info :
 	                1 Bit    Registers := 5     
 +---Muxes : 
 	   2 Input      1 Bit        Muxes := 2     
+Module debounce__1 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 6     
 Module debounce 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -537,6 +586,32 @@ Detailed RTL Component Info :
 	                7 Bit    Registers := 1     
 +---Muxes : 
 	   8 Input      8 Bit        Muxes := 1     
+Module skeletonizer 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     17 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
+	   8 Input      4 Bit       Adders := 1     
++---XORs : 
+	   2 Input      8 Bit         XORs := 1     
++---Registers : 
+	              643 Bit    Registers := 2     
+	               17 Bit    Registers := 1     
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     17 Bit        Muxes := 1     
+	   4 Input     17 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 3     
+	   4 Input      9 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 2     
+	   4 Input      8 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 8     
+	   4 Input      1 Bit        Muxes := 6     
 Module camera_read 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -574,8 +649,16 @@ WARNING: [Synth 8-6014] Unused sequential element bin_dilation/oldest_pixel_y_re
 WARNING: [Synth 8-6014] Unused sequential element bin_dilation/oldest_pixel_x_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv:55]
 INFO: [Synth 8-5546] ROM "bin_erosion/center_y" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-4471] merging register 'skel/center_y_reg[7:0]' into 'skel/center_y_reg[7:0]' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:139]
+INFO: [Synth 8-4471] merging register 'skel/center_x_reg[8:0]' into 'skel/center_x_reg[8:0]' [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:138]
+WARNING: [Synth 8-6014] Unused sequential element skel/center_y_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:139]
+WARNING: [Synth 8-6014] Unused sequential element skel/center_x_reg was removed.  [C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/skeletonizer.sv:138]
 INFO: [Synth 8-5546] ROM "db1/count" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "db1/clean_out" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "db2/count" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "db2/clean_out" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "skel/state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "skel/center_y" won't be mapped to RAM because it is too sparse
 WARNING: [Synth 8-3917] design top_level has port dp driven by constant 1
 WARNING: [Synth 8-3331] design top_level has unconnected port btnu
 WARNING: [Synth 8-3331] design top_level has unconnected port btnd
@@ -697,40 +780,62 @@ WARNING: [Synth 8-3332] Sequential element (v_div1/quotient_reg[9]) is unused an
 WARNING: [Synth 8-3332] Sequential element (v_div1/quotient_reg[8]) is unused and will be removed from module rgb_2_hsv.
 WARNING: [Synth 8-3332] Sequential element (h_div1/quotient_temp_reg[15]) is unused and will be removed from module rgb_2_hsv.
 INFO: [Synth 8-3886] merging instance 'bin_maze_filti_1/bin_dilation/pixel_buffer_dilated_reg[0]' (FDR) to 'bin_maze_filti_1/bin_dilation/pixel_buffer_reg[0]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (i_0/\state_reg[2] )
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[4]' (FD) to 'i_0/rgb_reg[5]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[5]' (FD) to 'i_0/rgb_reg[6]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[6]' (FD) to 'i_0/rgb_reg[7]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[0]' (FD) to 'i_0/rgb_reg[1]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[1]' (FD) to 'i_0/rgb_reg[2]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[2]' (FD) to 'i_0/rgb_reg[3]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[8]' (FD) to 'i_0/rgb_reg[9]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[9]' (FD) to 'i_0/rgb_reg[10]'
-INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[10]' (FD) to 'i_0/rgb_reg[11]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[0]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[0]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[1]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[1]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/mod_pixel_buffer_reg[2]' (FDR) to 'i_0/skel/unmod_pixel_buffer_reg[2]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[4]' (FDE) to 'i_0/rgb_reg[7]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[5]' (FDE) to 'i_0/rgb_reg[7]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[6]' (FDE) to 'i_0/rgb_reg[7]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[0]' (FDE) to 'i_0/rgb_reg[3]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[1]' (FDE) to 'i_0/rgb_reg[3]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[2]' (FDE) to 'i_0/rgb_reg[3]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[8]' (FDE) to 'i_0/rgb_reg[11]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[9]' (FDE) to 'i_0/rgb_reg[11]'
+INFO: [Synth 8-3886] merging instance 'i_0/rgb_reg[10]' (FDE) to 'i_0/rgb_reg[11]'
 INFO: [Synth 8-3886] merging instance 'i_0/display/seg_out_reg[0]' (FD) to 'i_0/display/seg_out_reg[3]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (i_0/\display/seg_out_reg[1] )
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/min_reg[0]' (FDE) to 'rgb_2_hsv:/b_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[0]' (FDE) to 'rgb_2_hsv:/b_reg[1]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[1]' (FDE) to 'rgb_2_hsv:/b_reg[2]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[2]' (FDE) to 'rgb_2_hsv:/b_reg[3]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/b_reg[3]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[0]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[1]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[2]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/g_reg[3]' (FDE) to 'rgb_2_hsv:/r_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[0]' (FDE) to 'rgb_2_hsv:/r_reg[1]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[1]' (FDE) to 'rgb_2_hsv:/r_reg[2]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[2]' (FDE) to 'rgb_2_hsv:/r_reg[3]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/r_reg[3]' (FDE) to 'rgb_2_hsv:/max_reg[0]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[0]' (FDE) to 'rgb_2_hsv:/max_reg[1]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[1]' (FDE) to 'rgb_2_hsv:/max_reg[2]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/min_reg[1]' (FDE) to 'rgb_2_hsv:/max_reg[2]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[2]' (FDE) to 'rgb_2_hsv:/max_reg[3]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/min_reg[2]' (FDE) to 'rgb_2_hsv:/max_reg[3]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/max_reg[3]' (FDE) to 'rgb_2_hsv:/min_reg[3]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[3]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[3]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[4]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[4]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[5]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[5]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[6]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[6]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[7]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[7]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[8]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[8]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[9]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[9]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[10]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[10]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[11]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[11]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[12]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[12]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[13]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[13]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[14]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[14]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[15]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[15]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[16]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[16]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[17]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[17]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[18]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[18]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[19]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[19]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[20]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[20]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[21]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[21]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[22]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[22]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[23]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[23]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[24]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[24]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[25]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[25]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[26]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[26]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[27]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[27]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[28]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[28]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[29]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[29]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[30]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[30]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[31]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[31]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[32]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[32]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[33]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[33]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[34]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[34]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[35]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[35]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[36]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[36]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[37]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[37]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[38]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[38]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[39]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[39]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[40]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[40]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[41]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[41]'
+INFO: [Synth 8-3886] merging instance 'i_0/skel/unmod_pixel_buffer_reg[42]' (FDR) to 'i_0/skel/mod_pixel_buffer_reg[42]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (rgb_2_hsv:/\min_reg[3] )
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/h_dividend_reg[9]' (LDC) to 'rgb_2_hsv:/h_dividend_reg[10]'
-INFO: [Synth 8-3886] merging instance 'rgb_2_hsv:/h_dividend_reg[10]' (LDC) to 'rgb_2_hsv:/h_dividend_reg[11]'
 WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[22]) is unused and will be removed from module rgb_2_hsv.
 WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[21]) is unused and will be removed from module rgb_2_hsv.
 WARNING: [Synth 8-3332] Sequential element (v_div1/divider_copy_reg[20]) is unused and will be removed from module rgb_2_hsv.
@@ -793,7 +898,7 @@ WARNING: [Synth 8-3332] Sequential element (v_div1/quotient_reg[3]) is unused an
 INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (rgb_2_hsv:/\h_dividend_reg[8] )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 842.895 ; gain = 555.770
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:30 . Memory (MB): peak = 848.199 ; gain = 560.547
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -817,7 +922,7 @@ Report RTL Partitions:
 +------+---------------------------+------------+----------+
 |1     |rgb_2_hsv                  |          19|      1172|
 |2     |binary_maze_filtering__GC0 |           1|      4287|
-|3     |top_level__GC0             |           1|       451|
+|3     |top_level__GC0             |           1|      1790|
 +------+---------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
@@ -825,13 +930,13 @@ Start Applying XDC Timing Constraints
 INFO: [Synth 8-5578] Moved timing constraint from pin 'clkdivider/clk_out1' to pin 'clkdivider/bbstub_clk_out1/O'
 INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 842.895 ; gain = 555.770
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:00:45 . Memory (MB): peak = 848.199 ; gain = 560.547
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:37 ; elapsed = 00:00:40 . Memory (MB): peak = 866.031 ; gain = 578.906
+Finished Timing Optimization : Time (s): cpu = 00:00:42 ; elapsed = 00:00:48 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -839,14 +944,14 @@ Report RTL Partitions:
 |      |RTL Partition              |Replication |Instances |
 +------+---------------------------+------------+----------+
 |1     |rgb_2_hsv                  |          19|      1172|
-|2     |binary_maze_filtering__GC0 |           1|      4287|
-|3     |top_level__GC0             |           1|       451|
+|2     |binary_maze_filtering__GC0 |           1|      4248|
+|3     |top_level__GC0             |           1|      1790|
 +------+---------------------------+------------+----------+
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 873.199 ; gain = 586.074
+Finished Technology Mapping : Time (s): cpu = 00:00:46 ; elapsed = 00:00:52 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -870,7 +975,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:41 ; elapsed = 00:00:45 . Memory (MB): peak = 874.664 ; gain = 587.539
+Finished IO Insertion : Time (s): cpu = 00:00:48 ; elapsed = 00:00:54 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -883,7 +988,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:41 ; elapsed = 00:00:45 . Memory (MB): peak = 874.664 ; gain = 587.539
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:48 ; elapsed = 00:00:54 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -895,25 +1000,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:49 ; elapsed = 00:00:55 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:49 ; elapsed = 00:00:56 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:49 ; elapsed = 00:00:56 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:50 ; elapsed = 00:00:56 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -926,9 +1031,12 @@ Static Shift Register Report:
 |binary_maze_filtering__GC0 | bin_erosion/pixel_buffer_reg[1280]                   | 316    | 4     | YES          | NO                 | YES               | 0      | 40      | 
 |binary_maze_filtering__GC0 | bin_dilation/pixel_buffer_reg[642]                   | 642    | 1     | YES          | NO                 | YES               | 0      | 20      | 
 |binary_maze_filtering__GC0 | bin_dilation/pixel_buffer_dilated_reg[1280]          | 316    | 4     | YES          | NO                 | YES               | 0      | 40      | 
+|top_level__GC0             | skel/unmod_pixel_buffer_reg[640]                     | 318    | 1     | YES          | NO                 | YES               | 0      | 10      | 
+|top_level__GC0             | skel/mod_pixel_buffer_reg[640]                       | 318    | 2     | YES          | NO                 | YES               | 0      | 20      | 
 |top_level                  | bin_maze_filt/genblk1[0].inst/s_div1/quotient_reg[7] | 8      | 19    | YES          | NO                 | YES               | 19     | 0       | 
 |top_level                  | bin_maze_filt/bin_dilation/pixel_buffer_reg_r_313    | 315    | 1     | YES          | NO                 | YES               | 0      | 10      | 
 |top_level                  | bin_maze_filt/bin_dilation/pixel_buffer_reg_r_639    | 326    | 1     | YES          | NO                 | YES               | 0      | 11      | 
+|top_level                  | skel/unmod_pixel_buffer_reg_r_955                    | 317    | 1     | YES          | NO                 | YES               | 0      | 10      | 
 +---------------------------+------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 
 ---------------------------------------------------------------------------------
@@ -955,116 +1063,120 @@ Report Cell Usage:
 |2     |cam_image_buffer |     1|
 |3     |clk_wiz_0        |     1|
 |4     |BUFG             |     1|
-|5     |CARRY4           |  1432|
+|5     |CARRY4           |  1448|
 |6     |DSP48E1          |    19|
-|7     |LUT1             |  1782|
-|8     |LUT2             |  2934|
-|9     |LUT3             |   958|
-|10    |LUT4             |  1636|
-|11    |LUT5             |   457|
-|12    |LUT6             |   782|
-|13    |MUXF7            |    16|
+|7     |LUT1             |  1786|
+|8     |LUT2             |  2953|
+|9     |LUT3             |   978|
+|10    |LUT4             |  1706|
+|11    |LUT5             |   468|
+|12    |LUT6             |   794|
+|13    |MUXF7            |    14|
 |14    |MUXF8            |     7|
 |15    |SRL16E           |    19|
-|16    |SRLC32E          |   121|
-|17    |FDRE             |  3841|
-|18    |FDSE             |    44|
-|19    |LDC              |   399|
-|20    |IBUF             |    30|
-|21    |OBUF             |    54|
+|16    |SRLC32E          |   161|
+|17    |FDRE             |  3920|
+|18    |FDSE             |    45|
+|19    |LD               |    36|
+|20    |LDC              |   399|
+|21    |IBUF             |    30|
+|22    |OBUF             |    54|
 +------+-----------------+------+
 
 Report Instance Areas: 
 +------+-----------------------+----------------------+------+
 |      |Instance               |Module                |Cells |
 +------+-----------------------+----------------------+------+
-|1     |top                    |                      | 14547|
-|2     |  bin_maze_filt        |binary_maze_filtering | 14166|
-|3     |    bin_dilation       |dilation              |   591|
-|4     |    bin_erosion        |erosion               |   194|
-|5     |    \genblk1[0].inst   |rgb_2_hsv             |   689|
-|6     |      h_div1           |divider_53            |   109|
-|7     |      s_div1           |divider_54            |    98|
-|8     |    \genblk1[10].inst  |rgb_2_hsv_0           |   688|
-|9     |      h_div1           |divider_51            |   109|
-|10    |      s_div1           |divider_52            |    98|
-|11    |    \genblk1[11].inst  |rgb_2_hsv_1           |   705|
-|12    |      h_div1           |divider_49            |   109|
-|13    |      s_div1           |divider_50            |   100|
-|14    |    \genblk1[12].inst  |rgb_2_hsv_2           |   688|
-|15    |      h_div1           |divider_47            |   109|
-|16    |      s_div1           |divider_48            |    98|
-|17    |    \genblk1[13].inst  |rgb_2_hsv_3           |   689|
-|18    |      h_div1           |divider_45            |   109|
-|19    |      s_div1           |divider_46            |    98|
-|20    |    \genblk1[14].inst  |rgb_2_hsv_4           |   688|
-|21    |      h_div1           |divider_43            |   109|
-|22    |      s_div1           |divider_44            |    98|
-|23    |    \genblk1[15].inst  |rgb_2_hsv_5           |   696|
-|24    |      h_div1           |divider_41            |   109|
-|25    |      s_div1           |divider_42            |    99|
-|26    |    \genblk1[16].inst  |rgb_2_hsv_6           |   698|
-|27    |      h_div1           |divider_39            |   109|
-|28    |      s_div1           |divider_40            |   100|
-|29    |    \genblk1[17].inst  |rgb_2_hsv_7           |   688|
-|30    |      h_div1           |divider_37            |   109|
-|31    |      s_div1           |divider_38            |    98|
-|32    |    \genblk1[18].inst  |rgb_2_hsv_8           |   691|
-|33    |      h_div1           |divider_35            |   109|
-|34    |      s_div1           |divider_36            |    98|
-|35    |    \genblk1[1].inst   |rgb_2_hsv_9           |   689|
-|36    |      h_div1           |divider_33            |   109|
-|37    |      s_div1           |divider_34            |    98|
-|38    |    \genblk1[2].inst   |rgb_2_hsv_10          |   688|
-|39    |      h_div1           |divider_31            |   109|
-|40    |      s_div1           |divider_32            |    98|
-|41    |    \genblk1[3].inst   |rgb_2_hsv_11          |   715|
-|42    |      h_div1           |divider_29            |   109|
-|43    |      s_div1           |divider_30            |   101|
-|44    |    \genblk1[4].inst   |rgb_2_hsv_12          |   687|
-|45    |      h_div1           |divider_27            |   109|
-|46    |      s_div1           |divider_28            |    98|
-|47    |    \genblk1[5].inst   |rgb_2_hsv_13          |   688|
-|48    |      h_div1           |divider_25            |   109|
-|49    |      s_div1           |divider_26            |    98|
-|50    |    \genblk1[6].inst   |rgb_2_hsv_14          |   690|
-|51    |      h_div1           |divider_23            |   109|
-|52    |      s_div1           |divider_24            |    98|
-|53    |    \genblk1[7].inst   |rgb_2_hsv_15          |   697|
-|54    |      h_div1           |divider_21            |   109|
-|55    |      s_div1           |divider_22            |    99|
-|56    |    \genblk1[8].inst   |rgb_2_hsv_16          |   689|
-|57    |      h_div1           |divider_19            |   109|
-|58    |      s_div1           |divider_20            |    98|
-|59    |    \genblk1[9].inst   |rgb_2_hsv_17          |   689|
+|1     |top                    |                      | 14853|
+|2     |  bin_maze_filt        |binary_maze_filtering | 14169|
+|3     |    bin_dilation       |dilation              |   596|
+|4     |    bin_erosion        |erosion               |   196|
+|5     |    \genblk1[0].inst   |rgb_2_hsv             |   688|
+|6     |      h_div1           |divider_54            |   109|
+|7     |      s_div1           |divider_55            |    98|
+|8     |    \genblk1[10].inst  |rgb_2_hsv_1           |   689|
+|9     |      h_div1           |divider_52            |   109|
+|10    |      s_div1           |divider_53            |    98|
+|11    |    \genblk1[11].inst  |rgb_2_hsv_2           |   705|
+|12    |      h_div1           |divider_50            |   109|
+|13    |      s_div1           |divider_51            |   100|
+|14    |    \genblk1[12].inst  |rgb_2_hsv_3           |   688|
+|15    |      h_div1           |divider_48            |   109|
+|16    |      s_div1           |divider_49            |    98|
+|17    |    \genblk1[13].inst  |rgb_2_hsv_4           |   688|
+|18    |      h_div1           |divider_46            |   109|
+|19    |      s_div1           |divider_47            |    98|
+|20    |    \genblk1[14].inst  |rgb_2_hsv_5           |   688|
+|21    |      h_div1           |divider_44            |   109|
+|22    |      s_div1           |divider_45            |    98|
+|23    |    \genblk1[15].inst  |rgb_2_hsv_6           |   697|
+|24    |      h_div1           |divider_42            |   109|
+|25    |      s_div1           |divider_43            |    99|
+|26    |    \genblk1[16].inst  |rgb_2_hsv_7           |   701|
+|27    |      h_div1           |divider_40            |   109|
+|28    |      s_div1           |divider_41            |   100|
+|29    |    \genblk1[17].inst  |rgb_2_hsv_8           |   688|
+|30    |      h_div1           |divider_38            |   109|
+|31    |      s_div1           |divider_39            |    98|
+|32    |    \genblk1[18].inst  |rgb_2_hsv_9           |   690|
+|33    |      h_div1           |divider_36            |   109|
+|34    |      s_div1           |divider_37            |    98|
+|35    |    \genblk1[1].inst   |rgb_2_hsv_10          |   688|
+|36    |      h_div1           |divider_34            |   109|
+|37    |      s_div1           |divider_35            |    98|
+|38    |    \genblk1[2].inst   |rgb_2_hsv_11          |   688|
+|39    |      h_div1           |divider_32            |   109|
+|40    |      s_div1           |divider_33            |    98|
+|41    |    \genblk1[3].inst   |rgb_2_hsv_12          |   715|
+|42    |      h_div1           |divider_30            |   109|
+|43    |      s_div1           |divider_31            |   101|
+|44    |    \genblk1[4].inst   |rgb_2_hsv_13          |   688|
+|45    |      h_div1           |divider_28            |   109|
+|46    |      s_div1           |divider_29            |    98|
+|47    |    \genblk1[5].inst   |rgb_2_hsv_14          |   688|
+|48    |      h_div1           |divider_26            |   109|
+|49    |      s_div1           |divider_27            |    98|
+|50    |    \genblk1[6].inst   |rgb_2_hsv_15          |   689|
+|51    |      h_div1           |divider_24            |   109|
+|52    |      s_div1           |divider_25            |    98|
+|53    |    \genblk1[7].inst   |rgb_2_hsv_16          |   696|
+|54    |      h_div1           |divider_22            |   109|
+|55    |      s_div1           |divider_23            |    99|
+|56    |    \genblk1[8].inst   |rgb_2_hsv_17          |   688|
+|57    |      h_div1           |divider_20            |   109|
+|58    |      s_div1           |divider_21            |    98|
+|59    |    \genblk1[9].inst   |rgb_2_hsv_18          |   687|
 |60    |      h_div1           |divider               |   109|
-|61    |      s_div1           |divider_18            |    98|
-|62    |  db1                  |debounce              |    38|
-|63    |  display              |display_8hex          |    45|
-|64    |  my_camera            |camera_read           |    24|
-|65    |  vga1                 |vga                   |    92|
+|61    |      s_div1           |divider_19            |    98|
+|62    |  db1                  |debounce              |    43|
+|63    |  db2                  |debounce_0            |    39|
+|64    |  display              |display_8hex          |    46|
+|65    |  my_camera            |camera_read           |    24|
+|66    |  skel                 |skeletonizer          |   204|
+|67    |  vga1                 |vga                   |    96|
 +------+-----------------------+----------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:43 ; elapsed = 00:00:46 . Memory (MB): peak = 874.664 ; gain = 587.539
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:50 ; elapsed = 00:00:56 . Memory (MB): peak = 907.227 ; gain = 619.574
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 118 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:35 . Memory (MB): peak = 874.664 ; gain = 186.547
-Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:47 . Memory (MB): peak = 874.664 ; gain = 587.539
+Synthesis finished with 0 errors, 0 critical warnings and 124 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:43 . Memory (MB): peak = 907.227 ; gain = 216.352
+Synthesis Optimization Complete : Time (s): cpu = 00:00:50 ; elapsed = 00:00:56 . Memory (MB): peak = 907.227 ; gain = 619.574
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 1903 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 1953 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 399 instances were transformed.
+  A total of 435 instances were transformed.
+  LD => LDCE: 36 instances
   LDC => LDCE: 399 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-190 Infos, 172 Warnings, 0 Critical Warnings and 0 Errors encountered.
+228 Infos, 190 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:48 ; elapsed = 00:00:52 . Memory (MB): peak = 874.664 ; gain = 599.012
+synth_design: Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 907.227 ; gain = 631.047
 WARNING: [Constraints 18-5210] No constraint will be written out.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.runs/synth_1/top_level.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_level_utilization_synth.rpt -pb top_level_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.151 . Memory (MB): peak = 874.664 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Thu Dec  5 23:28:20 2019...
+report_utilization: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.194 . Memory (MB): peak = 907.227 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Fri Dec  6 14:55:05 2019...

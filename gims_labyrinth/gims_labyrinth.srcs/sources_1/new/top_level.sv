@@ -43,7 +43,7 @@ module top_level(
    );
     logic clk_25mhz;
     // create 25mhz system clock, happens to match 640 x 480 VGA timing
-    clk_wiz_0 clkdivider(.clk_in1(clk_100mhz), .clk_out1(clk_25mhz));
+    clk_wiz_0 clkdivider(.reset(0),.clk_in1(clk_100mhz), .clk_out1(clk_25mhz));
 
     wire [9:0] hcount;    // pixel on current line
     wire [9:0] vcount;     // line number
@@ -92,7 +92,7 @@ module top_level(
     parameter TRACING_BACKPOINTERS = 3'b110;
 
     logic [2:0] state;
-    
+    logic [1:0] cam_state;
     wire [31:0] data;      //  instantiate 7-segment display; display (8) 4-bit hex
     wire [6:0] segments;
     assign {cg, cf, ce, cd, cc, cb, ca} = segments[6:0];
@@ -101,7 +101,7 @@ module top_level(
     assign  dp = 1'b1;  // turn off the period
 
     assign led = sw;                        // turn leds on
-    assign data = {29'h0, state};   // display 0123456 + sw[3:0]
+    assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
     assign led16_r = btnl;                  // left button -> red led
     assign led16_g = btnc;                  // center button -> green led
     assign led16_b = btnr;                  // right button -> blue led
@@ -143,7 +143,6 @@ module top_level(
     
     binary_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) bin_maze_filt
         (
-        
          .clk(clk_25mhz),
          .rst(reset),
          .start(bin_maze_filt_start),
@@ -291,24 +290,18 @@ module top_level(
         vsync_in <= vsync_buff;
         href_in <= href_buff;
         pixel_in <= pixel_buff;
-        old_output_pixels <= output_pixels;
         processed_pixels = {output_pixels[15:12],output_pixels[10:7],output_pixels[4:1]};
     end
     
     camera_read  my_camera(.p_clock_in(pclk_in),
+                            .rst(reset),
                           .vsync_in(vsync_in),
                           .href_in(href_in),
                           .p_data_in(pixel_in),
                           .pixel_data_out(output_pixels),
                           .pixel_valid_out(valid_pixel),
-                          .frame_done_out(frame_done_out));   
-    
-    wire phsync,pvsync,pblank;
-    pong_game pg(.vclock_in(clk_25mhz),.reset_in(reset),
-                .up_in(up),.down_in(down),.pspeed_in(sw[15:12]),
-                .hcount_in(hcount),.vcount_in(vcount),
-                .hsync_in(hsync),.vsync_in(vsync),.blank_in(blank),
-                .phsync_out(phsync),.pvsync_out(pvsync),.pblank_out(pblank),.pixel_out(pixel));
+                          .frame_done_out(frame_done_out),
+                          .FSM_state(cam_state));   
 
     wire border = (hcount==0 | hcount==639 | vcount==0 | vcount==479 |
                    hcount == 320 | vcount == 240);
@@ -331,9 +324,9 @@ module top_level(
       end 
       else begin
          
-         hs <= phsync;
-         vs <= pvsync;
-         b <= pblank;
+         hs <= hsync;
+         vs <= vsync;
+         b <= blank;
          filt_bin_pixel_r_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
          rgb <= filt_bin_pixel_out ? 12'hFFF : 12'b0;
        end
@@ -357,96 +350,51 @@ endmodule
 
 module camera_read(
 	input  p_clock_in,
+	input rst,
 	input  vsync_in,
 	input  href_in,
 	input  [7:0] p_data_in,
 	output logic [15:0] pixel_data_out,
 	output logic pixel_valid_out,
-	output logic frame_done_out
+	output logic frame_done_out,
+	output logic [1:0] FSM_state
     );
 	 
 	
-	logic [1:0] FSM_state = 0;
+	//logic [1:0] FSM_state = 0;
     logic pixel_half = 0;
 	
 	localparam WAIT_FRAME_START = 0;
 	localparam ROW_CAPTURE = 1;
 	
 	
-	always_ff@(posedge p_clock_in) begin 
-        case(FSM_state)
-            WAIT_FRAME_START: begin //wait for VSYNC
-               FSM_state <= (!vsync_in) ? ROW_CAPTURE : WAIT_FRAME_START;
-               frame_done_out <= 0;
-               pixel_half <= 0;
-            end
-            
-            ROW_CAPTURE: begin 
-               FSM_state <= vsync_in ? WAIT_FRAME_START : ROW_CAPTURE;
-               frame_done_out <= vsync_in ? 1 : 0;
-               pixel_valid_out <= (href_in && pixel_half) ? 1 : 0; 
-               if (href_in) begin
-                   pixel_half <= ~ pixel_half;
-                   if (pixel_half) pixel_data_out[7:0] <= p_data_in;
-                   else pixel_data_out[15:8] <= p_data_in;
-               end
-            end
-        endcase
+	always_ff@(posedge p_clock_in) begin
+	    if(rst)begin
+	       FSM_state <= WAIT_FRAME_START;
+	    end
+	    else begin
+	       case(FSM_state)
+                    WAIT_FRAME_START: begin //wait for VSYNC
+                       FSM_state <= (!vsync_in) ? ROW_CAPTURE : WAIT_FRAME_START;
+                       frame_done_out <= 0;
+                       pixel_half <= 0;
+                    end
+                    
+                    ROW_CAPTURE: begin 
+                       FSM_state <= vsync_in ? WAIT_FRAME_START : ROW_CAPTURE;
+                       frame_done_out <= vsync_in ? 1 : 0;
+                       pixel_valid_out <= (href_in && pixel_half) ? 1 : 0; 
+                       if (href_in) begin
+                           pixel_half <= ~ pixel_half;
+                           if (pixel_half) pixel_data_out[7:0] <= p_data_in;
+                           else pixel_data_out[15:8] <= p_data_in;
+                       end
+                    end
+                endcase
+	    end
+        
 	end
 	
-endmodule
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// pong_game: the game itself!
-//
-////////////////////////////////////////////////////////////////////////////////
-
-module pong_game (
-   input vclock_in,         // 25MHz clock
-   input reset_in,          // 1 to initialize module
-   input up_in,             // 1 when paddle should move up
-   input down_in,           // 1 when paddle should move down
-   input [3:0] pspeed_in,   // puck speed in pixels/tick 
-   input [9:0] hcount_in,   // horizontal index of current pixel (0..639)
-   input [9:0]  vcount_in,  // vertical index of current pixel (0..479)
-   input hsync_in,          // XVGA horizontal sync signal (active low)
-   input vsync_in,          // XVGA vertical sync signal (active low)
-   input blank_in,          // XVGA blanking (1 means output black pixel)
-        
-   output phsync_out,       // pong game's horizontal sync
-   output pvsync_out,       // pong game's vertical sync
-   output pblank_out,       // pong game's blanking
-   output [11:0] pixel_out  // pong game's pixel  // r=23:16, g=15:8, b=7:0 
-   );
-
-   wire [2:0] checkerboard;
-        
-   // REPLACE ME! The code below just generates a color checkerboard
-   // using 64 pixel by 64 pixel squares.
-   
-   assign phsync_out = hsync_in;
-   assign pvsync_out = vsync_in;
-   assign pblank_out = blank_in;
-   assign checkerboard = hcount_in[8:6] + vcount_in[8:6];
-
-   // here we use three bits from hcount and vcount to generate the
-   // checkerboard
-
-   assign pixel_out = {{4{checkerboard[2]}}, {4{checkerboard[1]}}, {4{checkerboard[0]}}} ;
-     
-endmodule
-
-module synchronize #(parameter NSYNC = 3)  // number of sync flops.  must be >= 2
-                   (input clk,in,
-                    output reg out);
-
-  reg [NSYNC-2:0] sync;
-
-  always_ff @ (posedge clk)
-  begin
-    {out,sync} <= {sync[NSYNC-2:0],in};
-  end
 endmodule
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -564,11 +512,6 @@ module display_8hex(
       end
 
 endmodule
-
-
-
-
-
 
 //////////////////////////////////////////////////////////////////////////////////
 // Update: 8/8/2019 GH 

@@ -1,0 +1,78 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Thu Dec  5 19:08:56 2019
+| Host         : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file final_proj_control_sets_placed.rpt
+| Design       : final_proj
+| Device       : xc7a100t
+---------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    11 |
+| Unused register locations in slices containing registers |    26 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      2 |            1 |
+|      6 |            1 |
+|      8 |            3 |
+|    16+ |            6 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             194 |           44 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              44 |           11 |
+| Yes          | No                    | No                     |              34 |            4 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |              54 |            8 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++---------------------------+-------------------------------------------+--------------------------+------------------+----------------+
+|        Clock Signal       |               Enable Signal               |     Set/Reset Signal     | Slice Load Count | Bel Load Count |
++---------------------------+-------------------------------------------+--------------------------+------------------+----------------+
+|  pclk_in_BUFG             | my_camera/FSM_sequential_FSM_state_reg__0 |                          |                1 |              2 |
+|  pclk_in_BUFG             |                                           |                          |                2 |              6 |
+|  clkdivider/inst/clk_out1 |                                           | vga1/rgb_reg[4]          |                2 |              8 |
+|  clkdivider/inst/clk_out1 |                                           | vga1/rgb_reg[8]          |                2 |              8 |
+|  clkdivider/inst/clk_out1 |                                           | vga1/rgb_reg[0]          |                3 |              8 |
+|  pclk_in_BUFG             | my_camera/pixel_data_out[7]_i_1_n_0       |                          |                2 |             16 |
+|  pclk_in_BUFG             | my_camera/pixel_data_out[15]_i_1_n_0      |                          |                1 |             16 |
+|  clkdivider/inst/clk_out1 |                                           | vga1/hreset              |                4 |             20 |
+|  clkdivider/inst/clk_out1 | vga1/hreset                               | vga1/vcount_out0         |                3 |             20 |
+|  pclk_in_BUFG             | my_camera/valid_pixel                     | my_camera/frame_done_out |                5 |             34 |
+|  clkdivider/inst/clk_out1 |                                           |                          |               42 |            188 |
++---------------------------+-------------------------------------------+--------------------------+------------------+----------------+
+
+

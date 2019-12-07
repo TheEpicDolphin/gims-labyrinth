@@ -1,5 +1,4 @@
 Breakpoint File Version 1.0
 108 true C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/backpointer_tracer.sv
-185 true C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv
-156 true C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv
-181 true C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv
+72 true C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/backpointer_tracer.sv
+141 true C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv

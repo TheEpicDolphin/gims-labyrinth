@@ -2,3 +2,6 @@ Running: xsim.dir/skeletonizer_tb_behav/xsimk.exe -simmode gui -wdb skeletonizer
 Design successfully loaded
 Design Loading Memory Usage: 5448 KB (Peak: 5448 KB)
 Design Loading CPU Usage: 77 ms
+Simulation completed
+Simulation Memory Usage: 741004 KB (Peak: 741004 KB)
+Simulation CPU Usage: 45203 ms

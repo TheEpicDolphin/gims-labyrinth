@@ -60,7 +60,12 @@ def pixel_type_map_coe_gen(bin_maze_im):
     plt.show()
     return None
 
-#bin_maze_im = (imageio.imread("../test_imgs/skel_real.png") > 0).astype(int)
-bin_maze_im = (imageio.imread("../test_imgs/maze_denoised.png") > 0).astype(int)
+bin_maze_im = (imageio.imread("../test_imgs/skel_real.png") > 0).astype(int)
+#bin_maze_im = (imageio.imread("../test_imgs/maze_denoised.png") > 0).astype(int)
 bin_maze_coe_gen(bin_maze_im)
-pixel_type_map_coe_gen(bin_maze_im)
+#pixel_type_map_coe_gen(bin_maze_im)
+
+plt.figure()
+#superimposed
+plt.imshow(bin_maze_im)
+plt.show()

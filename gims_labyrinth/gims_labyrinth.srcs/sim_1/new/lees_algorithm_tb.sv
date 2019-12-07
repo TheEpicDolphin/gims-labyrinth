@@ -29,9 +29,8 @@ logic [16:0] start_pos;
 logic [16:0] pixel_r_addr;
 logic [16:0] pixel_wr_addr;
 logic skel_pixel;
-logic [1:0] pixel_type;
 
-logic write_bp;
+logic bp_we;
 logic [1:0] backpointer_wr;
 logic lee_alg_done;
 
@@ -52,24 +51,19 @@ integer i;
 
 
 // Instantiate the Unit Under Test (UUT)
-binary_maze skel_maze(.clka(clock),
-                      .addra(pixel_r_addr),
-                      .douta(skel_pixel),
-                      .wea(0)
+binary_maze skel_maze(.clkb(clock),
+                      .addrb(pixel_r_addr),
+                      .doutb(skel_pixel)
                       );
                       
 pixel_backpointers p_bp(.clka(clock),
                         .addra(pixel_wr_addr),
                         .dina(backpointer_wr),
-                        .wea(write_bp),
+                        .wea(bp_we),
                         .clkb(clock),
                         .addrb(bp_tracer_addr),
                         .doutb(backpointer_r));
                         
-pixel_type_map p_tmap(.clka(clock),
-                      .addra(pixel_r_addr),
-                      .douta(pixel_type),
-                      .wea(0));
     
 lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240)) l_a
                       (
@@ -77,15 +71,13 @@ lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240
                       .rst(rst),
                       .start(start),
                       .start_pos(start_pos),
-                          
+                      .end_pos(end_pos),
                       .skel_pixel(skel_pixel),
-                      .pixel_type(pixel_type),
                       .pixel_r_addr(pixel_r_addr),
                       .pixel_wr_addr(pixel_wr_addr),
                       .backpointer(backpointer_wr),
-                      .write_bp(write_bp),
+                      .bp_we(bp_we),
                       .done(lee_alg_done),
-                      .end_pos(end_pos),
                           
                       .state(state)
                        );
@@ -125,6 +117,7 @@ rst = 0;
 
 //start_pos = {9'd49, 8'd15};
 start_pos = {9'd5, 8'd85};
+end_pos = {9'd250, 8'd227};
 start = 1;
 #15
 start = 0;

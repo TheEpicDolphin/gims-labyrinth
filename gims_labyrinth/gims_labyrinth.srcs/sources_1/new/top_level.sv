@@ -90,7 +90,7 @@ module top_level(
     parameter BINARY_MAZE_FILTERING = 3'b010;
     parameter SKELETONIZING = 3'b011;
     
-    parameter COLORED_MAZE_FILTERING = 3'b100;
+    parameter FIND_END_NODES = 3'b100;
     parameter SOLVING = 3'b101;
     parameter TRACING_BACKPOINTERS = 3'b110;
 
@@ -145,6 +145,7 @@ module top_level(
     logic [16:0] filt_pixel_wr_addr;
     logic filt_pixel;
     logic filt_pixel_we;
+    logic [16:0] filt_pixel_r_addr;
         
     binary_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) bin_maze_filt
         (
@@ -152,7 +153,7 @@ module top_level(
          .rst(reset),
          .start(bin_maze_filt_start),
          .rgb_pixel(rgb_pixel),  
-         .cam_pixel_r_addr(cam_pixel_r_addr), 
+         .cam_pixel_r_addr(filt_pixel_r_addr), 
          .done(bin_maze_filt_done),
          .pixel_wr_addr(filt_pixel_wr_addr),
          .pixel_wea(filt_pixel_we),
@@ -177,61 +178,60 @@ module top_level(
              .pixel_out(skel_pixel),
              .done(skeletonizer_done)
              );
+             
+    logic start_find_end_nodes;
+    logic find_end_nodes_done;
     logic colored_maze_filt_done;
     logic [16:0] start_pos;
-    /*
-    colored_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) c_maze_filt
+    logic [16:0] end_pos;
+    logic [16:0] maze_r_addr;
+    find_end_nodes #(.IMG_W(IMG_W),.IMG_H(IMG_H),.BRAM_READ_DELAY(2)) fse
         (
-        .clk(clk_25mhz),
-        .rst(reset),
-        .start(),
-        .r(),
-        .g(),
-        .b(),
-        .start_pos(start_pos),
-        .done(colored_maze_filt_done)
-    );
-    */
+            .clk(clk_25mhz),
+            .rst(reset),
+            .start(start_find_end_nodes),
+            .rgb_pixel(rgb_pixel),
+            .skel_pixel(bin_pixel_out),
+            .maze_r_addr(maze_r_addr),
+            .start_pos(start_pos),
+            .end_pos(end_pos),
+            .done(find_end_nodes_done)
+        );
     
-    /*
-    pixel_type_map p_tmap(.clka(clk_25mhz),
-                          .addra(pixel_r_addr),
-                          .douta(pixel_type),
-                          .wea(0));
-                          
-                          
+    
+    logic start_lees_alg;
+    logic lees_alg_done;
+    logic [16:0] bp_wr_addr;
+    logic [1:0] bp;
+    logic bp_we;
+    logic [16:0] solver_pixel_r_addr;
+                       
     pixel_backpointers p_bp(.clka(clk_25mhz),
-                            .addra(pixel_wr_addr),
-                            .dina(backpointer_wr),
-                            .wea(write_bp),
+                            .addra(bp_wr_addr),
+                            .dina(bp),
+                            .wea(bp_we),
                             .clkb(clk_25mhz),
                             .addrb(bp_tracer_addr),
                             .doutb(backpointer_r));
     
-
+    
                  
     lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),
                      .IMG_W(IMG_W),.IMG_H(IMG_H)) maze_solver
                  (
                   .clk(clk_25mhz),
                   .rst(reset),
-                  .start(),
+                  .start(start_lees_alg),
                   .start_pos(start_pos),
-                  .skel_pixel(skel_pixel),
-                  .pixel_type(pixel_type),
-                  .pixel_r_addr(),
-                  .pixel_wr_addr(),
-                  .backpointer(),
-                  .write_bp(write_bp),
-                  .done(),
-                  .end_pos()
+                  .skel_pixel(bin_pixel_out),
+                  .pixel_r_addr(solver_pixel_r_addr),
+                  .pixel_wr_addr(bp_wr_addr),
+                  .backpointer(bp),
+                  .bp_we(bp_we),
+                  .done(lees_alg_done)
                   );
                   
-    path_bram pb(.clka(clk_25mhz),
-                 .addra(bp_tracer_addr),
-                 .dina(write_path),
-                 .wea(write_path));   
-      
+    /*
     backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(IMG_W),.IMG_H(IMG_H)) bp_tracer(
                       .clk(clk_25mhz),
                       .rst(rst),
@@ -258,6 +258,7 @@ module top_level(
                 bin_pixel_wr_addr = filt_pixel_wr_addr;
                 bin_pixel_in = filt_pixel;
                 bin_pixel_we = filt_pixel_we;
+                cam_pixel_r_addr = filt_pixel_r_addr;
             end
             SKELETONIZING: begin
                 bin_pixel_wr_addr = skel_pixel_wr_addr;
@@ -268,6 +269,14 @@ module top_level(
             IDLE: begin
                 bin_pixel_r_addr = fpga_read_addr;
             end
+            FIND_END_NODES: begin
+                cam_pixel_r_addr = maze_r_addr;
+                bin_pixel_r_addr = maze_r_addr;
+            end
+            SOLVING: begin
+                bin_pixel_r_addr = solver_pixel_r_addr;
+            end
+            
         endcase
     end
     
@@ -302,21 +311,25 @@ module top_level(
                     start_skeletonizer <= 0;
                     //get stuck in here for now
                     if(skeletonizer_done)begin
-                        state <= IDLE;
+                        state <= FIND_END_NODES;
+                        start_find_end_nodes <= 1;
                     end
                 end
-                COLORED_MAZE_FILTERING: begin
-                    if(colored_maze_filt_done)begin
+                FIND_END_NODES: begin
+                    start_find_end_nodes <= 0;
+                    if(find_end_nodes_done)begin
                         state <= SOLVING;
+                        start_lees_alg <= 1;
                     end
                 end
                 SOLVING: begin
-                    //if(solving_done)begin
-                    //    state <= TRACING_BACKPOINTERS;
-                    //end
+                    start_lees_alg <= 0;
+                    if(lees_alg_done)begin
+                        state <= TRACING_BACKPOINTERS;
+                    end
                 end
                 TRACING_BACKPOINTERS: begin
-                    
+                    state <= IDLE;
                 end
             endcase
         end

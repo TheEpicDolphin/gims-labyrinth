@@ -3,5 +3,8 @@
 
 # XDC: imports/Desktop/nexys4_ddr_lab3.xdc
 
+# IP: ip/path_bram/path_bram.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==path_bram || ORIG_REF_NAME==path_bram} -quiet] -quiet
+
 # IP: ip/binary_maze/binary_maze.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==binary_maze || ORIG_REF_NAME==binary_maze} -quiet] -quiet

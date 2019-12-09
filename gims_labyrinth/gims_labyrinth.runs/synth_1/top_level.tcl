@@ -35,6 +35,7 @@ add_files C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_lab
 add_files C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/pixel_type_map.coe
 add_files C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/maze_img.coe
 read_verilog -library xil_defaultlib -sv {
+  C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/backpointer_tracer.sv
   C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/dilation.sv
   C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/divider.sv
   C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/erosion.sv
@@ -45,8 +46,14 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/thresholder.sv
   C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/top_level.sv
 }
+read_ip -quiet C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/path_bram/path_bram.xci
+set_property used_in_implementation false [get_files -all c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/path_bram/path_bram_ooc.xdc]
+
 read_ip -quiet C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/binary_maze/binary_maze.xci
 set_property used_in_implementation false [get_files -all c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/binary_maze/binary_maze_ooc.xdc]
+
+read_ip -quiet C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/pixel_backpointers/pixel_backpointers.xci
+set_property used_in_implementation false [get_files -all c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/pixel_backpointers/pixel_backpointers_ooc.xdc]
 
 read_ip -quiet C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/visited_map/visited_map.xci
 set_property used_in_implementation false [get_files -all c:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/ip/visited_map/visited_map_ooc.xdc]

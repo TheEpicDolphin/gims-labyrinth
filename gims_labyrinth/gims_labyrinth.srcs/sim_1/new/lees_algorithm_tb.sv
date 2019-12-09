@@ -78,7 +78,6 @@ lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),.IMG_W(320),.IMG_H(240
                       .backpointer(backpointer_wr),
                       .bp_we(bp_we),
                       .done(lee_alg_done),
-                          
                       .state(state)
                        );
 

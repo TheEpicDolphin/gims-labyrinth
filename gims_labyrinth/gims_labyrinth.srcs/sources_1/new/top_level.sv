@@ -109,8 +109,8 @@ module top_level(
     assign led = sw;                        // turn leds on
     
     
-    //assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
-    assign data = {15'b0, end_pos[16], end_pos[15:0]};
+    assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
+    //assign data = {15'b0, end_pos[16], end_pos[15:0]};
 
     assign led16_r = btnl;                  // left button -> red led
     assign led16_g = btnc;                  // center button -> green led
@@ -248,17 +248,19 @@ module top_level(
     logic [16:0] bp_wr_addr;
     logic [1:0] bp;
     logic bp_we;
+    logic [1:0] bp_r;
+    logic [16:0] bp_tracer_addr;
     logic [16:0] solver_pixel_r_addr;
     
-    /*                   
+                       
     pixel_backpointers p_bp(.clka(clk_25mhz),
                             .addra(bp_wr_addr),
                             .dina(bp),
                             .wea(bp_we),
                             .clkb(clk_25mhz),
                             .addrb(bp_tracer_addr),
-                            .doutb(backpointer_r));
-    */
+                            .doutb(bp_r));
+    
     
                  
     lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),
@@ -268,6 +270,7 @@ module top_level(
                   .rst(reset),
                   .start(start_lees_alg),
                   .start_pos(start_pos),
+                  .end_pos(end_pos),
                   .skel_pixel(bin_pixel_out),
                   .pixel_r_addr(solver_pixel_r_addr),
                   .pixel_wr_addr(bp_wr_addr),
@@ -276,8 +279,34 @@ module top_level(
                   .done(lees_alg_done),
                   .success(path_found)
                   );
-                  
+                      
+                
+                
+   logic start_bp_tracer;
+   logic bp_tracer_done;
+   logic write_path;
+   backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(IMG_W),.IMG_H(IMG_H)) bp_tracer
+                (
+                  .clk(clk_25mhz),
+                  .rst(reset),
+                  .start(start_bp_tracer),
+                  .start_pos(start_pos),
+                  .end_pos(end_pos),
+                  .bp(bp_r),
+                  .pixel_addr(bp_tracer_addr),
+                  .write_path(write_path),
+                  .done(bp_tracer_done)
+                 ); 
     
+    logic [16:0] path_r_addr;
+    logic path_pixel;
+    path_bram pb(.clka(clk_25mhz),
+                .addra(bp_tracer_addr),
+                .dina(write_path),
+                .wea(write_path),
+                .clkb(clk_25mhz),
+                .addrb(path_r_addr),
+                .doutb(path_pixel));
                             
     logic [16:0] fpga_read_addr;
     
@@ -287,11 +316,13 @@ module top_level(
                 //cam_pixel_r_addr = fpga_read_addr;
                 bin_pixel_r_addr = fpga_read_addr;
                 start_end_r_addr = fpga_read_addr;
+                path_r_addr = fpga_read_addr;
             end
             CAPTURE_IMAGE: begin
                 //cam_pixel_r_addr = fpga_read_addr;
                 bin_pixel_r_addr = fpga_read_addr;
                 start_end_r_addr = fpga_read_addr;
+                path_r_addr = fpga_read_addr;
             end
             BINARY_MAZE_FILTERING: begin
                 bin_pixel_wr_addr = filt_pixel_wr_addr;
@@ -313,6 +344,9 @@ module top_level(
             end
             SOLVING: begin
                 bin_pixel_r_addr = solver_pixel_r_addr;
+            end
+            TRACING_BACKPOINTERS: begin
+                
             end
             
         endcase
@@ -376,11 +410,15 @@ module top_level(
                     start_end_node_finder <= 0;
                     if(end_node_finder_done)begin
                         //If want to skip Lee's algorithm
-                        state <= IDLE;
-                        start_pos <= start_pos_out;
-                        end_pos <= end_pos_out;
-                        //state <= SOLVING;
-                        //start_lees_alg <= 1;
+                        if(sw[1:0] == 2'b11)begin
+                            state <= IDLE;
+                        end
+                        else begin
+                            state <= SOLVING;
+                            start_pos <= start_pos_out;
+                            end_pos <= end_pos_out;
+                            start_lees_alg <= 1;
+                        end
                     end
                     
                 end
@@ -390,6 +428,7 @@ module top_level(
                         if(path_found)begin
                             //Path found, now we can trace the backpointers and display the path
                             state <= TRACING_BACKPOINTERS;
+                            start_bp_tracer <= 1;
                         end
                         else begin
                             //no path found, take another image with the camera
@@ -399,7 +438,10 @@ module top_level(
                     end
                 end
                 TRACING_BACKPOINTERS: begin
-                    state <= IDLE;
+                    start_bp_tracer <= 0;
+                    if(bp_tracer_done)begin
+                        state <= IDLE;
+                    end
                 end
             endcase
         end
@@ -466,17 +508,19 @@ module top_level(
     wire border = (hcount==0 | hcount==639 | vcount==0 | vcount==479 |
                    hcount == 320 | vcount == 240);
 
+    parameter HALF_WIDTH = 5;
+    parameter HALF_HEIGHT = 5;
     reg b,hs,vs;
     always_ff @(posedge clk_25mhz) begin
       if(reset)begin
         
       end
       else begin
+          hs <= hsync;
+          vs <= vsync;
+          b <= blank;
           if (sw[1:0] == 2'b01 || sw[1:0] == 2'b10) begin
-             // 1 pixel outline of visible area (white)
-             hs <= hsync;
-             vs <= vsync;
-             b <= blank;
+
              if(state == IDLE || state == CAPTURE_IMAGE)begin
                 fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
                              
@@ -493,32 +537,51 @@ module top_level(
                 end
              end
           end
-          else begin
-             
-             hs <= hsync;
-             vs <= vsync;
-             b <= blank;
-             
-             //Camera images
-             //fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
-             //rgb <= rgb_pixel;
-             
+          else if(sw[1:0] == 2'b11) begin
+            //Display skeletonization with start and end blobs on top of skeletonized path
              if(state == IDLE || state == CAPTURE_IMAGE)begin
                 fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
                 
-                if((start_pos[16:8] == (hcount >> 1)) && (start_pos[7:0] == (vcount >> 1)))begin
+                
+                if (((hcount >> 1) >= (start_pos[16:8] - HALF_WIDTH) && (hcount >> 1) < (start_pos[16:8] + HALF_WIDTH)) && 
+                    ((vcount >> 1) >= (start_pos[7:0] - HALF_HEIGHT) && (vcount >> 1) < (start_pos[7:0] + HALF_HEIGHT)))begin
                     //yellow
                     rgb <= 12'hFF0;
                 end
-                else if((end_pos[16:8] == (hcount >> 1)) && (end_pos[7:0] == (vcount >> 1)))begin
+                else if (((hcount >> 1) >= (end_pos[16:8] - HALF_WIDTH) && (hcount >> 1) < (end_pos[16:8] + HALF_WIDTH)) && 
+                    ((vcount >> 1) >= (end_pos[7:0] - HALF_HEIGHT) && (vcount >> 1) < (end_pos[7:0] + HALF_HEIGHT)))begin
                     //red
                     rgb <= 12'hF30;
                 end
                 else begin
                     rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
                 end
+                
+                /*
+                if (((hcount >> 1) == start_pos[16:8]) && ((vcount >> 1) == start_pos[7:0]))begin
+                    //yellow
+                    rgb <= 12'hFF0;
+                end
+                else if (((hcount >> 1) == end_pos[16:8]) && ((vcount >> 1) == end_pos[7:0]))begin
+                    //red
+                    rgb <= 12'hF30;
+                end
+                else begin
+                    rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
+                end
+                */
              end
                 
+           end
+           else begin
+                //Display camera image with solved path drawn over it
+                fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
+                if(path_pixel)begin
+                    rgb <= 12'hFF0;
+                end
+                else begin
+                    rgb <= rgb_pixel;
+                end
            end
       end
 

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Sun Dec  8 22:43:33 2019
+| Date             : Sun Dec  8 23:53:46 2019
 | Host             : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 | Command          : report_power -file top_level_power_routed.rpt -pb top_level_power_summary_routed.pb -rpx top_level_power_routed.rpx
 | Design           : top_level
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.269        |
+| Total On-Chip Power (W)  | 0.274        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.171        |
+| Dynamic (W)              | 0.175        |
 | Device Static (W)        | 0.099        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 98.8         |
@@ -52,22 +52,22 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.008 |        8 |       --- |             --- |
-| Slice Logic             |     0.009 |    19655 |       --- |             --- |
-|   LUT as Logic          |     0.008 |     8648 |     63400 |           13.64 |
-|   CARRY4                |     0.001 |     1762 |     15850 |           11.12 |
-|   Register              |    <0.001 |     5955 |    126800 |            4.70 |
+| Clocks                  |     0.009 |        8 |       --- |             --- |
+| Slice Logic             |     0.011 |    22565 |       --- |             --- |
+|   LUT as Logic          |     0.009 |     9704 |     63400 |           15.31 |
+|   CARRY4                |     0.001 |     1786 |     15850 |           11.27 |
+|   Register              |    <0.001 |     7308 |    126800 |            5.76 |
 |   LUT as Shift Register |    <0.001 |      399 |     19000 |            2.10 |
-|   BUFG                  |    <0.001 |        2 |        32 |            6.25 |
-|   F7/F8 Muxes           |    <0.001 |       65 |     63400 |            0.10 |
-|   Others                |     0.000 |      323 |       --- |             --- |
-| Signals                 |     0.008 |    11924 |       --- |             --- |
-| Block RAM               |     0.004 |       34 |       135 |           25.19 |
+|   F7/F8 Muxes           |    <0.001 |       66 |     63400 |            0.10 |
+|   BUFG                  |    <0.001 |        1 |        32 |            3.13 |
+|   Others                |     0.000 |      336 |       --- |             --- |
+| Signals                 |     0.009 |    13616 |       --- |             --- |
+| Block RAM               |     0.006 |     36.5 |       135 |           27.04 |
 | MMCM                    |     0.116 |        1 |         6 |           16.67 |
 | DSPs                    |     0.004 |       19 |       240 |            7.92 |
 | I/O                     |     0.021 |       85 |       210 |           40.48 |
 | Static Power            |     0.099 |          |           |                 |
-| Total                   |     0.269 |          |           |                 |
+| Total                   |     0.274 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -77,7 +77,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.050 |       0.034 |      0.016 |
+| Vccint    |       1.000 |     0.054 |       0.038 |      0.016 |
 | Vccaux    |       1.800 |     0.083 |       0.065 |      0.018 |
 | Vcco33    |       3.300 |     0.010 |       0.006 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -86,7 +86,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.001 |       0.000 |      0.001 |
+| Vccbram   |       1.000 |     0.001 |       0.001 |      0.001 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
@@ -148,193 +148,207 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+----------------------------------------------+-----------+
-| Name                                         | Power (W) |
-+----------------------------------------------+-----------+
-| top_level                                    |     0.171 |
-|   bin_maze_filt                              |     0.028 |
-|     bin_dilation                             |    <0.001 |
-|     bin_erosion                              |    <0.001 |
-|     genblk1[0].inst                          |     0.002 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[10].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[11].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[12].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[13].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[14].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[15].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[16].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[17].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[18].inst                         |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[1].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[2].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[3].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[4].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[5].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[6].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[7].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[8].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     genblk1[9].inst                          |     0.001 |
-|       h_div1                                 |    <0.001 |
-|       s_div1                                 |    <0.001 |
-|       v_div1                                 |    <0.001 |
-|     red_dilation                             |    <0.001 |
-|     red_erosion                              |    <0.001 |
-|     yellow_dilation                          |    <0.001 |
-|     yellow_erosion                           |    <0.001 |
-|   cam_img_buf                                |     0.003 |
-|     U0                                       |     0.003 |
-|       inst_blk_mem_gen                       |     0.003 |
-|         gnbram.gnativebmg.native_blk_mem_gen |     0.003 |
-|           valid.cstr                         |     0.003 |
-|             bindec_a.bindec_inst_a           |    <0.001 |
-|             bindec_b.bindec_inst_b           |    <0.001 |
-|             has_mux_b.B                      |    <0.001 |
-|             ramloop[0].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[10].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[11].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[12].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[13].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[14].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[15].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[16].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[17].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[18].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[19].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[1].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[20].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[21].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[22].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[23].ram.r                |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[2].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[3].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[4].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[5].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[6].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[7].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[8].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[9].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|   clkdivider                                 |     0.116 |
-|     inst                                     |     0.116 |
-|   db1                                        |    <0.001 |
-|   db2                                        |    <0.001 |
-|   display                                    |    <0.001 |
-|   end_color_map                              |    <0.001 |
-|     U0                                       |    <0.001 |
-|       inst_blk_mem_gen                       |    <0.001 |
-|         gnbram.gnativebmg.native_blk_mem_gen |    <0.001 |
-|           valid.cstr                         |    <0.001 |
-|             bindec_a.bindec_inst_a           |    <0.001 |
-|             bindec_b.bindec_inst_b           |    <0.001 |
-|             has_mux_b.B                      |    <0.001 |
-|             ramloop[0].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[1].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|   my_camera                                  |    <0.001 |
-|   skel                                       |    <0.001 |
-|   skel_maze                                  |    <0.001 |
-|     U0                                       |    <0.001 |
-|       inst_blk_mem_gen                       |    <0.001 |
-|         gnbram.gnativebmg.native_blk_mem_gen |    <0.001 |
-|           valid.cstr                         |    <0.001 |
-|             bindec_a.bindec_inst_a           |    <0.001 |
-|             bindec_b.bindec_inst_b           |    <0.001 |
-|             has_mux_b.B                      |    <0.001 |
-|             ramloop[0].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[1].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|   start_color_map                            |    <0.001 |
-|     U0                                       |    <0.001 |
-|       inst_blk_mem_gen                       |    <0.001 |
-|         gnbram.gnativebmg.native_blk_mem_gen |    <0.001 |
-|           valid.cstr                         |    <0.001 |
-|             bindec_a.bindec_inst_a           |    <0.001 |
-|             bindec_b.bindec_inst_b           |    <0.001 |
-|             has_mux_b.B                      |    <0.001 |
-|             ramloop[0].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|             ramloop[1].ram.r                 |    <0.001 |
-|               prim_init.ram                  |    <0.001 |
-|   vga1                                       |    <0.001 |
-+----------------------------------------------+-----------+
++------------------------------------------------+-----------+
+| Name                                           | Power (W) |
++------------------------------------------------+-----------+
+| top_level                                      |     0.175 |
+|   bin_maze_filt                                |     0.026 |
+|     bin_dilation                               |    <0.001 |
+|     bin_erosion                                |    <0.001 |
+|     genblk1[0].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[10].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[11].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[12].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[13].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[14].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[15].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[16].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[17].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[18].inst                           |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[1].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[2].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[3].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[4].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[5].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[6].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[7].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[8].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     genblk1[9].inst                            |     0.001 |
+|       h_div1                                   |    <0.001 |
+|       s_div1                                   |    <0.001 |
+|       v_div1                                   |    <0.001 |
+|     red_dilation                               |    <0.001 |
+|     red_erosion                                |    <0.001 |
+|     yellow_dilation                            |    <0.001 |
+|     yellow_erosion                             |    <0.001 |
+|   cam_img_buf                                  |     0.003 |
+|     U0                                         |     0.003 |
+|       inst_blk_mem_gen                         |     0.003 |
+|         gnbram.gnativebmg.native_blk_mem_gen   |     0.003 |
+|           valid.cstr                           |     0.003 |
+|             bindec_a.bindec_inst_a             |    <0.001 |
+|             bindec_b.bindec_inst_b             |    <0.001 |
+|             has_mux_b.B                        |    <0.001 |
+|             ramloop[0].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[10].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[11].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[12].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[13].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[14].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[15].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[16].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[17].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[18].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[19].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[1].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[20].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[21].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[22].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[23].ram.r                  |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[2].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[3].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[4].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[5].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[6].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[7].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[8].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[9].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|   clkdivider                                   |     0.116 |
+|     inst                                       |     0.116 |
+|   db1                                          |    <0.001 |
+|   db2                                          |    <0.001 |
+|   display                                      |    <0.001 |
+|   end_color_map                                |    <0.001 |
+|     U0                                         |    <0.001 |
+|       inst_blk_mem_gen                         |    <0.001 |
+|         gnbram.gnativebmg.native_blk_mem_gen   |    <0.001 |
+|           valid.cstr                           |    <0.001 |
+|             bindec_a.bindec_inst_a             |    <0.001 |
+|             bindec_b.bindec_inst_b             |    <0.001 |
+|             has_mux_b.B                        |    <0.001 |
+|             ramloop[0].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[1].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|   maze_solver                                  |     0.005 |
+|     visited_map                                |    <0.001 |
+|       U0                                       |    <0.001 |
+|         inst_blk_mem_gen                       |    <0.001 |
+|           gnbram.gnativebmg.native_blk_mem_gen |    <0.001 |
+|             valid.cstr                         |    <0.001 |
+|               bindec_a.bindec_inst_a           |    <0.001 |
+|               bindec_b.bindec_inst_b           |    <0.001 |
+|               has_mux_b.B                      |    <0.001 |
+|               ramloop[0].ram.r                 |    <0.001 |
+|                 prim_noinit.ram                |    <0.001 |
+|               ramloop[1].ram.r                 |    <0.001 |
+|                 prim_noinit.ram                |    <0.001 |
+|   my_camera                                    |    <0.001 |
+|   nolabel_line232                              |    <0.001 |
+|   skel                                         |    <0.001 |
+|   skel_maze                                    |    <0.001 |
+|     U0                                         |    <0.001 |
+|       inst_blk_mem_gen                         |    <0.001 |
+|         gnbram.gnativebmg.native_blk_mem_gen   |    <0.001 |
+|           valid.cstr                           |    <0.001 |
+|             bindec_a.bindec_inst_a             |    <0.001 |
+|             bindec_b.bindec_inst_b             |    <0.001 |
+|             has_mux_b.B                        |    <0.001 |
+|             ramloop[0].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[1].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|   start_color_map                              |    <0.001 |
+|     U0                                         |    <0.001 |
+|       inst_blk_mem_gen                         |    <0.001 |
+|         gnbram.gnativebmg.native_blk_mem_gen   |    <0.001 |
+|           valid.cstr                           |    <0.001 |
+|             bindec_a.bindec_inst_a             |    <0.001 |
+|             bindec_b.bindec_inst_b             |    <0.001 |
+|             has_mux_b.B                        |    <0.001 |
+|             ramloop[0].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|             ramloop[1].ram.r                   |    <0.001 |
+|               prim_init.ram                    |    <0.001 |
+|   vga1                                         |    <0.001 |
++------------------------------------------------+-----------+
 
 

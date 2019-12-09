@@ -233,7 +233,7 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                     end
                 end
                 READ_DELAY: begin
-                    //window_end_i_read reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
+                    //cam_pixel_r_addr reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
                     cam_pixel_r_addr <= cam_pixel_r_addr + 1;
                     if(cam_pixel_r_addr == BRAM_READ_DELAY - 1)begin
                         state <= SMOOTHING;
@@ -280,76 +280,31 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
 endmodule
 
 
-module find_end_nodes #(parameter IMG_W = 320, parameter IMG_H = 240, parameter BRAM_READ_DELAY = 2)
+module end_node_finder #(parameter IMG_W = 320, parameter IMG_H = 240, parameter BRAM_READ_DELAY = 2)
     (
         input clk,
-        input rst,
         input start,
-        input [11:0] rgb_pixel,
-        input skel_pixel,
-        output logic [16:0] maze_r_addr,
-        output logic [16:0] start_pos,
-        output logic [16:0] end_pos,
-        output done
+        input rst,
+        input [11:0] skel_pixel, // added by viv
+        input [11:0] start_yellow_pixel, // added by viv
+        input [11:0] end_red_pixel, // added by viv
+        
+        output done,
+        output logic [16:0] maze_pixel_addr, 
+        output logic [16:0] start_pos, 
+        output logic [16:0] end_pos
     );
     
-    
-    logic [7:0] r;
-    logic [7:0] g;
-    logic [7:0] b;
-    assign r = {rgb_pixel[11:8], 4'b0};
-    assign g = {rgb_pixel[7:4], 4'b0};
-    assign b = {rgb_pixel[3:0], 4'b0}; 
-    
     parameter IDLE = 2'b00;
-    parameter DELAY = 2'b01;
-    parameter FIND_START_AND_END = 2'b10;
+    parameter READ_DELAY = 2'b01;
+    parameter PROCESSING = 2'b10;
     parameter DONE = 2'b11;
     logic [1:0] state;
-    
-    parameter RGB_2_HSV_CYCLES = 19;
-    
-    reg [32:0] hsv_buffer [0:RGB_2_HSV_CYCLES - 1];
-    logic [4:0] rgb_2_hsv_sel;
-    
-    genvar i;
-    generate
-        for(i = 0; i < RGB_2_HSV_CYCLES; i++)begin
-            rgb_2_hsv inst(
-                .clk(clk),
-                .rst(rst),
-                .start(rgb_2_hsv_sel == i),
-                .r_in(r),
-                .g_in(g),
-                .b_in(b),
-                .h(hsv_buffer[i][32:16]), //Q9.8
-                .s(hsv_buffer[i][15:8]),  //Q8
-                .v(hsv_buffer[i][7:0])    //Q8
-            );
-        end
-    endgenerate
-    
-    logic [8:0] x;
-    logic [7:0] y;
-    
-    logic [16:0] h;
-    logic [7:0] s;
-    logic [7:0] v;
-    assign h = hsv_buffer[rgb_2_hsv_sel][32:16];
-    assign s = hsv_buffer[rgb_2_hsv_sel][15:8];
-    assign v = hsv_buffer[rgb_2_hsv_sel][7:0];
-    
-    
-    
 
- 
-    logic [23:0] cycles;
-    assign done = state == DONE;
+    logic [8:0] x; 
+    logic [7:0] y; 
     
-    //Debugging
-    `ifdef SIM
-    integer bin_maze_f;
-    `endif
+    assign done = state == DONE;
     
     always_ff @(posedge clk)begin
         if(rst)begin
@@ -359,57 +314,39 @@ module find_end_nodes #(parameter IMG_W = 320, parameter IMG_H = 240, parameter 
             case(state)
                 IDLE: begin
                     if(start)begin
-                        state <= DELAY;
-                        maze_r_addr <= 0;
-                        start_pos <= 17'b0;
-                        end_pos <= 17'b0;
-                        cycles <= 0;
+                        state <= READ_DELAY;
+                        maze_pixel_addr <= 0;
                     end
                 end
-                DELAY: begin
-                    //window_end_i_read reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
-                    maze_r_addr <= maze_r_addr + 1;
-                    if(maze_r_addr == BRAM_READ_DELAY - 1)begin
+                READ_DELAY: begin
+                    //maze_pixel_addr reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
+                    maze_pixel_addr <= maze_pixel_addr + 1;
+                    if(maze_pixel_addr == BRAM_READ_DELAY - 1)begin
+                        state <= PROCESSING;
                         x <= 9'b0;
                         y <= 8'b0;
-                        state <= FIND_START_AND_END;
-                        rgb_2_hsv_sel <= 0;
-                        cycles <= 0;
                     end
                 end
-                FIND_START_AND_END: begin
-                    maze_r_addr <= maze_r_addr + 1;
-                    if(rgb_2_hsv_sel == RGB_2_HSV_CYCLES - 1)begin
-                        rgb_2_hsv_sel <= 0;
+                PROCESSING: begin
+                    maze_pixel_addr <= maze_pixel_addr + 1;
+                    if(x == IMG_W - 1)begin
+                        x <= 9'b0;
+                        y <= y + 1;
                     end
                     else begin
-                        rgb_2_hsv_sel <= rgb_2_hsv_sel + 1;
+                        x <= x + 1;
+                    end
+                    // if skel_pixel && start_yellow pixel, set output start_pos 
+                    if(skel_pixel && start_yellow_pixel)begin
+                        start_pos <= {x, y};
+                    end
+                    // if skel_pixel && end_red_pixel, set output end_pos 
+                    else if(skel_pixel && end_red_pixel)begin
+                        end_pos <= {x, y};
                     end
                     
-                    if(cycles >= RGB_2_HSV_CYCLES)begin
-                        if(x == IMG_W - 1)begin
-                            x <= 9'b0;
-                            y <= y + 1;
-                        end
-                        else begin
-                            x <= x + 1;
-                        end
-                        
-                        if(x == IMG_W - 1 && y == IMG_H - 1)begin
-                            state <= DONE;
-                        end
-                        
-                        /*
-                        if(start_color)begin
-                            start_pos <= {x, y};
-                        end
-                        else if(end_color)begin
-                            end_pos <= {x, y};
-                        end
-                        */
-                    end
-                    else begin
-                        cycles <= cycles + 1;
+                    if(x == (IMG_W - 1) && y == (IMG_H - 1))begin
+                        state <= DONE;
                     end
                 end
                 DONE: begin

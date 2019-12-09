@@ -108,13 +108,10 @@ module top_level(
     
     assign led = sw;                        // turn leds on
     
-    //logic [16:0] end_addr;
-    //logic [23:0] end_cycles;
     
     //assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
-    assign data = {7'b0, end_pos[16:8], 8'b0, end_pos[7:0]};
-    //assign data = {15'b0, end_addr[16], end_addr[15:0]};
-    //assign data = {8'b0, end_cycles[23:16], end_cycles[15:0]};
+    assign data = {15'b0, end_pos[16], end_pos[15:0]};
+
     assign led16_r = btnl;                  // left button -> red led
     assign led16_g = btnc;                  // center button -> green led
     assign led16_b = btnr;                  // right button -> blue led
@@ -221,29 +218,28 @@ module top_level(
              .done(skeletonizer_done)
              );
              
-    logic start_find_end_nodes;
-    logic find_end_nodes_done;
+    logic start_end_node_finder;
+    logic end_node_finder_done;
     logic [16:0] start_pos;
     //logic [16:0] end_pos;
+    
+    logic [16:0] start_pos_out;
+    logic [16:0] end_pos_out;
+    
     logic [16:0] maze_r_addr;
     
-    logic [16:0] color_wr_addr;
-    logic is_start;
-    logic is_end;
-    logic start_end_we;
-    logic [16:0] color_r_addr;
-    
-    find_end_nodes #(.IMG_W(IMG_W),.IMG_H(IMG_H),.BRAM_READ_DELAY(2)) fse
+    end_node_finder #(.IMG_W(IMG_W),.IMG_H(IMG_H),.BRAM_READ_DELAY(2))
         (
             .clk(clk_25mhz),
+            .start(start_end_node_finder),
             .rst(reset),
-            .start(start_find_end_nodes),
-            .rgb_pixel(rgb_pixel),
-            .skel_pixel(bin_pixel_out),
-            .maze_r_addr(maze_r_addr),
-            .start_pos(start_pos),
-            .end_pos(end_pos),
-            .done(find_end_nodes_done)
+            .skel_pixel(bin_pixel_out), // added by viv
+            .start_yellow_pixel(start_color_r), // added by viv
+            .end_red_pixel(end_color_r), // added by viv
+            .done(end_node_finder_done),
+            .maze_pixel_addr(maze_r_addr), 
+            .start_pos(start_pos_out), 
+            .end_pos(end_pos_out)
         );
     
     logic start_lees_alg;
@@ -288,12 +284,14 @@ module top_level(
     always_comb begin
         case(state)
             IDLE: begin
-                bin_pixel_r_addr = fpga_read_addr;
                 //cam_pixel_r_addr = fpga_read_addr;
+                bin_pixel_r_addr = fpga_read_addr;
+                start_end_r_addr = fpga_read_addr;
             end
             CAPTURE_IMAGE: begin
                 //cam_pixel_r_addr = fpga_read_addr;
                 bin_pixel_r_addr = fpga_read_addr;
+                start_end_r_addr = fpga_read_addr;
             end
             BINARY_MAZE_FILTERING: begin
                 bin_pixel_wr_addr = filt_pixel_wr_addr;
@@ -310,8 +308,8 @@ module top_level(
                 bin_pixel_r_addr = skel_pixel_r_addr;
             end
             FIND_END_NODES: begin
-                cam_pixel_r_addr = maze_r_addr;
                 bin_pixel_r_addr = maze_r_addr;
+                start_end_r_addr = maze_r_addr;
             end
             SOLVING: begin
                 bin_pixel_r_addr = solver_pixel_r_addr;
@@ -350,29 +348,39 @@ module top_level(
                 BINARY_MAZE_FILTERING: begin
                     bin_maze_filt_start <= 0;
                     if(bin_maze_filt_done)begin
-                        state <= SKELETONIZING;
-                        start_skeletonizer <= 1;
-                        //If want to skip skeletonization
-                        //state <= IDLE;
+                        if(sw[1:0] == 2'b01)begin
+                            //If want to skip skeletonization
+                            state <= IDLE;
+                        end
+                        else begin
+                            state <= SKELETONIZING;
+                            start_skeletonizer <= 1;
+                        end
                     end
                 end
                 SKELETONIZING: begin
                     start_skeletonizer <= 0;
                     //get stuck in here for now
                     if(skeletonizer_done)begin
-                        state <= FIND_END_NODES;
-                        start_find_end_nodes <= 1;
-                        //If want to skip FIND_END_NODES
-                        //state <= IDLE;
+                        if(sw[1:0] == 2'b10)begin
+                            //If want to skip FIND_END_NODES
+                            state <= IDLE;
+                        end
+                        else begin
+                            state <= FIND_END_NODES;
+                            start_end_node_finder <= 1;
+                        end
                     end
                 end
                 FIND_END_NODES: begin
-                    start_find_end_nodes <= 0;
-                    if(find_end_nodes_done)begin
-                        state <= SOLVING;
-                        start_lees_alg <= 1;
+                    start_end_node_finder <= 0;
+                    if(end_node_finder_done)begin
                         //If want to skip Lee's algorithm
                         state <= IDLE;
+                        start_pos <= start_pos_out;
+                        end_pos <= end_pos_out;
+                        //state <= SOLVING;
+                        //start_lees_alg <= 1;
                     end
                     
                 end
@@ -464,33 +472,14 @@ module top_level(
         
       end
       else begin
-          if (sw[1:0] == 2'b01) begin
+          if (sw[1:0] == 2'b01 || sw[1:0] == 2'b10) begin
              // 1 pixel outline of visible area (white)
              hs <= hsync;
              vs <= vsync;
              b <= blank;
-             rgb <= {12{border}};
-          end 
-          else if (sw[1:0] == 2'b10) begin
-             // color bars
-             hs <= hsync;
-             vs <= vsync;
-             b <= blank;
-             rgb <= {{4{hcount[7]}}, {4{hcount[6]}}, {4{hcount[5]}}} ;
-          end 
-          else begin
-             
-             hs <= hsync;
-             vs <= vsync;
-             b <= blank;
-
-             //fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
-             //rgb <= rgb_pixel;
              if(state == IDLE || state == CAPTURE_IMAGE)begin
                 fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
-                
-                start_end_r_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
-                
+                             
                 if(start_color_r)begin
                     //yellow
                     rgb <= 12'hFF0;
@@ -503,8 +492,33 @@ module top_level(
                     rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
                 end
              end
+          end
+          else begin
+             
+             hs <= hsync;
+             vs <= vsync;
+             b <= blank;
+             
+             //Camera images
              //fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
-             //rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
+             //rgb <= rgb_pixel;
+             
+             if(state == IDLE || state == CAPTURE_IMAGE)begin
+                fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
+                
+                if((start_pos[16:8] == (hcount >> 1)) && (start_pos[7:0] == (vcount >> 1)))begin
+                    //yellow
+                    rgb <= 12'hFF0;
+                end
+                else if((end_pos[16:8] == (hcount >> 1)) && (end_pos[7:0] == (vcount >> 1)))begin
+                    //red
+                    rgb <= 12'hF30;
+                end
+                else begin
+                    rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
+                end
+             end
+                
            end
       end
 

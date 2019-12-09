@@ -91,8 +91,9 @@ module top_level(
     parameter SKELETONIZING = 3'b011;
     
     parameter FIND_END_NODES = 3'b100;
-    parameter SOLVING = 3'b101;
-    parameter TRACING_BACKPOINTERS = 3'b110;
+    parameter CLEAR_PATH = 3'b101;
+    parameter SOLVING = 3'b110;
+    parameter TRACING_BACKPOINTERS = 3'b111;
 
     logic [2:0] state;
     logic [1:0] cam_state;
@@ -108,8 +109,9 @@ module top_level(
     
     assign led = sw;                        // turn leds on
     
-    
-    assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
+    logic did_lees_work;
+    assign data = did_lees_work ? {14'b0, state, 14'b0, 2'b10} : {14'b0, state, 14'b0, 2'b00};
+    //assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
     //assign data = {15'b0, end_pos[16], end_pos[15:0]};
 
     assign led16_r = btnl;                  // left button -> red led
@@ -249,7 +251,7 @@ module top_level(
     logic [1:0] bp;
     logic bp_we;
     logic [1:0] bp_r;
-    logic [16:0] bp_tracer_addr;
+    logic [16:0] bp_tracer_addr, bp_tracer_addr1, cp_bp_tracer_addr;
     logic [16:0] solver_pixel_r_addr;
     
                        
@@ -284,7 +286,7 @@ module top_level(
                 
    logic start_bp_tracer;
    logic bp_tracer_done;
-   logic write_path;
+   logic write_path, write_path1, write_path2, cp_write_path1, cp_write_path2;
    backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(IMG_W),.IMG_H(IMG_H)) bp_tracer
                 (
                   .clk(clk_25mhz),
@@ -301,9 +303,9 @@ module top_level(
     logic [16:0] path_r_addr;
     logic path_pixel;
     path_bram pb(.clka(clk_25mhz),
-                .addra(bp_tracer_addr),
-                .dina(write_path),
-                .wea(write_path),
+                .addra(bp_tracer_addr1),
+                .dina(write_path1),
+                .wea(write_path2),
                 .clkb(clk_25mhz),
                 .addrb(path_r_addr),
                 .doutb(path_pixel));
@@ -361,6 +363,11 @@ module top_level(
             
         endcase
     end
+    
+    assign write_path1 = (state==CLEAR_PATH)? cp_write_path1 : write_path;
+    assign write_path2 = (state==CLEAR_PATH)? cp_write_path2 : write_path; 
+    assign bp_tracer_addr1 = (state==CLEAR_PATH)? cp_bp_tracer_addr : bp_tracer_addr;
+
     
     logic frame_done;   
     logic [3:0] delay;              
@@ -424,17 +431,30 @@ module top_level(
                             state <= IDLE;
                         end
                         else begin
-                            state <= SOLVING;
+                            state <= CLEAR_PATH;
+                            cp_write_path1 <= 0;
+                            cp_write_path2 <= 1;
+                            cp_bp_tracer_addr <= 0;
                             start_pos <= start_pos_out;
                             end_pos <= end_pos_out;
-                            start_lees_alg <= 1;
                         end
                     end
                     
                 end
+                CLEAR_PATH: begin
+                    if (cp_bp_tracer_addr < 76800) begin
+                        cp_bp_tracer_addr <= cp_bp_tracer_addr + 1;
+                        state <= CLEAR_PATH;
+                    end else begin
+                        start_lees_alg <= 1;
+                        state <= SOLVING;
+                    end
+                end
+
                 SOLVING: begin
                     start_lees_alg <= 0;
                     if(lees_alg_done)begin
+                        did_lees_work <= path_found;
                         if(path_found)begin
                             //Path found, now we can trace the backpointers and display the path
                             state <= TRACING_BACKPOINTERS;

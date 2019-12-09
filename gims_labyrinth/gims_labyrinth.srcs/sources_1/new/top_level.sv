@@ -103,8 +103,18 @@ module top_level(
     //assign seg[6:0] = segments;
     assign  dp = 1'b1;  // turn off the period
 
+
+    logic [16:0] end_pos;
+    
     assign led = sw;                        // turn leds on
-    assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
+    
+    //logic [16:0] end_addr;
+    //logic [23:0] end_cycles;
+    
+    //assign data = {14'b0, cam_state, 13'b0, state};   // display 0123456 + sw[3:0]
+    assign data = {7'b0, end_pos[16:8], 8'b0, end_pos[7:0]};
+    //assign data = {15'b0, end_addr[16], end_addr[15:0]};
+    //assign data = {8'b0, end_cycles[23:16], end_cycles[15:0]};
     assign led16_r = btnl;                  // left button -> red led
     assign led16_g = btnc;                  // center button -> green led
     assign led16_b = btnr;                  // right button -> blue led
@@ -140,14 +150,42 @@ module top_level(
                           .addrb(bin_pixel_r_addr),
                           .doutb(bin_pixel_out)
                           );
+    
+    logic [16:0] start_end_wr_addr;
+    logic [16:0] start_end_r_addr;
+    logic start_end_wea;
+    logic start_color_wr;
+    logic end_color_wr;           
+    logic start_color_r;
+    logic end_color_r;   
+    binary_maze start_color_map(.clka(clk_25mhz),
+                        .addra(start_end_wr_addr),
+                        .dina(start_color_wr),
+                        .wea(start_end_wea),
+                        .clkb(clk_25mhz),
+                        .addrb(start_end_r_addr),
+                        .doutb(start_color_r)
+                        );
+                                                    
+    binary_maze end_color_map(.clka(clk_25mhz),
+                          .addra(start_end_wr_addr),
+                          .dina(end_color_wr),
+                          .wea(start_end_wea),
+                          .clkb(clk_25mhz),
+                          .addrb(start_end_r_addr),
+                          .doutb(end_color_r)
+                          );
+                                                                              
     logic bin_maze_filt_start;
     logic bin_maze_filt_done;
     logic [16:0] filt_pixel_wr_addr;
     logic filt_pixel;
     logic filt_pixel_we;
     logic [16:0] filt_pixel_r_addr;
+    
+
         
-    binary_maze_filtering #(.IMG_W(IMG_W),.IMG_W(IMG_H)) bin_maze_filt
+    binary_maze_filtering #(.IMG_W(IMG_W),.IMG_H(IMG_H)) bin_maze_filt
         (
          .clk(clk_25mhz),
          .rst(reset),
@@ -157,7 +195,12 @@ module top_level(
          .done(bin_maze_filt_done),
          .pixel_wr_addr(filt_pixel_wr_addr),
          .pixel_wea(filt_pixel_we),
-         .pixel_out(filt_pixel)
+         .pixel_out(filt_pixel),
+         
+         .start_end_wr_addr(start_end_wr_addr),
+         .start_end_wea(start_end_wea),
+         .start_color(start_color_wr),
+         .end_color(end_color_wr)
          );
     
     logic start_skeletonizer;
@@ -181,10 +224,16 @@ module top_level(
              
     logic start_find_end_nodes;
     logic find_end_nodes_done;
-    logic colored_maze_filt_done;
     logic [16:0] start_pos;
-    logic [16:0] end_pos;
+    //logic [16:0] end_pos;
     logic [16:0] maze_r_addr;
+    
+    logic [16:0] color_wr_addr;
+    logic is_start;
+    logic is_end;
+    logic start_end_we;
+    logic [16:0] color_r_addr;
+    
     find_end_nodes #(.IMG_W(IMG_W),.IMG_H(IMG_H),.BRAM_READ_DELAY(2)) fse
         (
             .clk(clk_25mhz),
@@ -198,14 +247,15 @@ module top_level(
             .done(find_end_nodes_done)
         );
     
-    
     logic start_lees_alg;
+    logic path_found;
     logic lees_alg_done;
     logic [16:0] bp_wr_addr;
     logic [1:0] bp;
     logic bp_we;
     logic [16:0] solver_pixel_r_addr;
-                       
+    
+    /*                   
     pixel_backpointers p_bp(.clka(clk_25mhz),
                             .addra(bp_wr_addr),
                             .dina(bp),
@@ -213,7 +263,7 @@ module top_level(
                             .clkb(clk_25mhz),
                             .addrb(bp_tracer_addr),
                             .doutb(backpointer_r));
-    
+    */
     
                  
     lees_algorithm #(.MAX_OUT_DEGREE(4),.BRAM_DELAY_CYCLES(2),
@@ -228,46 +278,37 @@ module top_level(
                   .pixel_wr_addr(bp_wr_addr),
                   .backpointer(bp),
                   .bp_we(bp_we),
-                  .done(lees_alg_done)
+                  .done(lees_alg_done),
+                  .success(path_found)
                   );
                   
-    /*
-    backpointer_tracer #(.BRAM_DELAY_CYCLES(2),.IMG_W(IMG_W),.IMG_H(IMG_H)) bp_tracer(
-                      .clk(clk_25mhz),
-                      .rst(rst),
-                      .start(start_bp_tracer),
-                      .start_pos(start_pos),
-                      .end_pos(end_pos),
-                      .bp(backpointer_r),
-                      .pixel_addr(bp_tracer_addr),
-                      .write_path(write_path),
-                      .done(bp_tracer_done)
-                      );
     
-    path_bram pb(.clka(clk_25mhz),
-                 .addra(bp_tracer_addr),
-                 .dina(write_path),
-                 .wea(write_path));   
-    */
-    
+                            
     logic [16:0] fpga_read_addr;
     
     always_comb begin
         case(state)
+            IDLE: begin
+                bin_pixel_r_addr = fpga_read_addr;
+                //cam_pixel_r_addr = fpga_read_addr;
+            end
+            CAPTURE_IMAGE: begin
+                //cam_pixel_r_addr = fpga_read_addr;
+                bin_pixel_r_addr = fpga_read_addr;
+            end
             BINARY_MAZE_FILTERING: begin
                 bin_pixel_wr_addr = filt_pixel_wr_addr;
                 bin_pixel_in = filt_pixel;
                 bin_pixel_we = filt_pixel_we;
                 cam_pixel_r_addr = filt_pixel_r_addr;
+                
+                bin_pixel_r_addr = fpga_read_addr;
             end
             SKELETONIZING: begin
                 bin_pixel_wr_addr = skel_pixel_wr_addr;
                 bin_pixel_in = skel_pixel;
                 bin_pixel_we = skel_pixel_we;
                 bin_pixel_r_addr = skel_pixel_r_addr;
-            end
-            IDLE: begin
-                bin_pixel_r_addr = fpga_read_addr;
             end
             FIND_END_NODES: begin
                 cam_pixel_r_addr = maze_r_addr;
@@ -280,7 +321,8 @@ module top_level(
         endcase
     end
     
-    logic frame_done;                   
+    logic frame_done;   
+    logic [3:0] delay;              
     always_ff @(posedge clk_25mhz)begin
         if(reset)begin
             state <= IDLE;
@@ -291,13 +333,19 @@ module top_level(
                     if(frame_done)begin
                         //Wait for camera to finish current incomplete frame
                         state <= CAPTURE_IMAGE;
+                        delay <= 0;
                     end
                 end
                 CAPTURE_IMAGE: begin
-                    if(frame_done)begin
-                        //camera image is now stored in bram
-                        state <= BINARY_MAZE_FILTERING;
-                        bin_maze_filt_start <= 1;
+                    if(delay < 2)begin
+                        delay <= delay + 1;
+                    end
+                    else begin
+                        if(frame_done)begin
+                            //camera image is now stored in bram
+                            state <= BINARY_MAZE_FILTERING;
+                            bin_maze_filt_start <= 1;
+                        end
                     end
                 end
                 BINARY_MAZE_FILTERING: begin
@@ -305,27 +353,39 @@ module top_level(
                     if(bin_maze_filt_done)begin
                         state <= SKELETONIZING;
                         start_skeletonizer <= 1;
+                        //state <= IDLE;
                     end
                 end
                 SKELETONIZING: begin
                     start_skeletonizer <= 0;
                     //get stuck in here for now
                     if(skeletonizer_done)begin
-                        state <= FIND_END_NODES;
-                        start_find_end_nodes <= 1;
+                        //state <= FIND_END_NODES;
+                        //start_find_end_nodes <= 1;
+                        state <= IDLE;
                     end
                 end
                 FIND_END_NODES: begin
                     start_find_end_nodes <= 0;
                     if(find_end_nodes_done)begin
-                        state <= SOLVING;
-                        start_lees_alg <= 1;
+                        //state <= SOLVING;
+                        //start_lees_alg <= 1;
+                        state <= IDLE;
                     end
+                    
                 end
                 SOLVING: begin
                     start_lees_alg <= 0;
                     if(lees_alg_done)begin
-                        state <= TRACING_BACKPOINTERS;
+                        if(path_found)begin
+                            //Path found, now we can trace the backpointers and display the path
+                            state <= TRACING_BACKPOINTERS;
+                        end
+                        else begin
+                            //no path found, take another image with the camera
+                            state <= IDLE;
+                        end
+                        
                     end
                 end
                 TRACING_BACKPOINTERS: begin
@@ -334,6 +394,7 @@ module top_level(
             endcase
         end
     end
+    
     
     logic frame_done_buff;
     always_ff @(posedge clk_25mhz) begin
@@ -420,12 +481,28 @@ module top_level(
              hs <= hsync;
              vs <= vsync;
              b <= blank;
-             
-             if(state == IDLE)begin
+
+             //fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
+             //rgb <= rgb_pixel;
+             if(state == IDLE || state == CAPTURE_IMAGE)begin
                 fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
-                rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
+                
+                start_end_r_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
+                
+                if(start_color_r)begin
+                    //yellow
+                    rgb <= 12'hFF0;
+                end
+                else if(end_color_r)begin
+                    //red
+                    rgb <= 12'hF30;
+                end
+                else begin
+                    rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
+                end
              end
-             
+             //fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
+             //rgb <= bin_pixel_out ? 12'hFFF : 12'b0;
            end
       end
 

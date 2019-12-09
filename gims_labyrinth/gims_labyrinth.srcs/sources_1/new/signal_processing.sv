@@ -34,7 +34,12 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
         //Used for writing filtered pixel values into bram
         output logic [16:0] pixel_wr_addr,
         output pixel_wea,
-        output pixel_out
+        output pixel_out,
+        
+        output logic [16:0] start_end_wr_addr,
+        output logic start_end_wea,
+        output logic start_color,
+        output logic end_color
     );
     logic [7:0] r;
     logic [7:0] g;
@@ -79,56 +84,59 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
     assign v = hsv_buffer[rgb_2_hsv_sel][7:0];
     
     logic bin_maze_pixel;
-
-    //This thresholds for red
-    logic red1;
-    thresholder #(.H_LOW(17'h0_00_00),.H_HIGH(17'h0_14_00),
-                      .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
-                      .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh_red1
-                (
-                    .h(h),   //Q9.8
-                    .s(s),  //Q8
-                    .v(v),  //Q8
-                    .b(r1)
-                );
-    logic red2;
-    thresholder #(.H_LOW(17'h1_54_00),.H_HIGH(17'h1_FF_FF),
-                  .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
-                  .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh_red2
-                (
-                   .h(h),   //Q9.8
-                   .s(s),  //Q8
-                   .v(v),  //Q8
-                   .b(r2)
-                );
-    assign bin_maze_pixel = red1 || red2;
-    
-    logic start_color;
-    thresholder #(.H_LOW(17'h1_54_00),.H_HIGH(17'h1_FF_FF),
-                  .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
-                  .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh_start
-                (
-                   .h(h),   //Q9.8
-                   .s(s),  //Q8
-                   .v(v),  //Q8
-                   .b(start_color)
-                );
     
     
-    logic end_color;
-    thresholder #(.H_LOW(17'h1_54_00),.H_HIGH(17'h1_FF_FF),
+    logic wall_color;
+    thresholder #(.H_LOW(17'h0_A0_00),.H_HIGH(17'h1_04_00),
+                  .S_LOW(8'b0000_0000),.S_HIGH(8'b1111_1111),
+                  .V_LOW(8'b0010_0000),.V_HIGH(8'b1111_1111)) skel_thresh_wall
+                    (
+                       .h(h),   //Q9.8
+                       .s(s),  //Q8
+                       .v(v),  //Q8
+                       .b(wall_color)
+                    );
+    assign bin_maze_pixel = 1 - wall_color;
+    
+    
+    //This threshold for yellow (start)
+    thresholder #(.H_LOW(17'h0_28_00),.H_HIGH(17'h0_5a_00),
                   .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
                   .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh_end
                 (
                    .h(h),   //Q9.8
                    .s(s),  //Q8
                    .v(v),  //Q8
-                   .b(end_color)
+                   .b(start_color)
                 );
-    assign end_markers = end_color;
-    
- 
+                
+    //This thresholds for red (end)
+    logic red1;
+    thresholder #(.H_LOW(17'h0_00_00),.H_HIGH(17'h0_14_00),
+                      .S_LOW(8'b1100_0000),.S_HIGH(8'b1111_1111),
+                      .V_LOW(8'b0010_0000),.V_HIGH(8'b1111_1111)) skel_thresh_red1
+                (
+                    .h(h),   //Q9.8
+                    .s(s),  //Q8
+                    .v(v),  //Q8
+                    .b(red1)
+                );
+    logic red2;
+    thresholder #(.H_LOW(17'h1_54_00),.H_HIGH(17'h1_FF_FF),
+                  .S_LOW(8'b1100_0000),.S_HIGH(8'b1111_1111),
+                  .V_LOW(8'b0010_0000),.V_HIGH(8'b1111_1111)) skel_thresh_red2
+                (
+                   .h(h),   //Q9.8
+                   .s(s),  //Q8
+                   .v(v),  //Q8
+                   .b(red2)
+                );
+    assign end_color = red1 || red2;
     logic [23:0] cycles;
+    
+    //assign start_end_wea = (RGB_2_HSV_CYCLES <= cycles) && (cycles < (RGB_2_HSV_CYCLES + IMG_W * IMG_H));
+    assign start_end_wea = (start_end_wr_addr < (IMG_W * IMG_H));
+    
     logic eroded_pixel;
     logic dilated_pixel;
     
@@ -188,6 +196,7 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                         state <= SMOOTHING;
                         rgb_2_hsv_sel <= 0;
                         cycles <= 0;
+                        start_end_wr_addr <= 0;
                         `ifdef SIM   
                         bin_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_img.txt","w");
                         `endif
@@ -206,6 +215,10 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                         state <= DONE;
                     end
                     
+                    if(start_end_wea)begin
+                        start_end_wr_addr <= start_end_wr_addr + 1;
+                    end
+                    
                     `ifdef SIM
                     if(cycles == (RGB_2_HSV_CYCLES + IMG_W * IMG_H))begin
                     $fclose(bin_maze_f);
@@ -219,6 +232,7 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                 end
                 DONE: begin
                     state <= IDLE;
+                    cycles <= 0;
                 end
             endcase
         end
@@ -240,6 +254,8 @@ module find_end_nodes #(parameter IMG_W = 320, parameter IMG_H = 240, parameter 
         output logic [16:0] end_pos,
         output done
     );
+    
+    
     logic [7:0] r;
     logic [7:0] g;
     logic [7:0] b;
@@ -248,8 +264,8 @@ module find_end_nodes #(parameter IMG_W = 320, parameter IMG_H = 240, parameter 
     assign b = {rgb_pixel[3:0], 4'b0}; 
     
     parameter IDLE = 2'b00;
-    parameter READ_DELAY = 2'b01;
-    parameter SMOOTHING = 2'b10;
+    parameter DELAY = 2'b01;
+    parameter FIND_START_AND_END = 2'b10;
     parameter DONE = 2'b11;
     logic [1:0] state;
     
@@ -285,30 +301,9 @@ module find_end_nodes #(parameter IMG_W = 320, parameter IMG_H = 240, parameter 
     assign s = hsv_buffer[rgb_2_hsv_sel][15:8];
     assign v = hsv_buffer[rgb_2_hsv_sel][7:0];
     
-    //green
-    logic start_color;
-    thresholder #(.H_LOW(17'h0_5A_00),.H_HIGH(17'h0_8C_00),
-                  .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
-                  .V_LOW(8'b0100_0000),.V_HIGH(8'b1111_1111)) skel_thresh_start
-                (
-                   .h(h),   //Q9.8
-                   .s(s),  //Q8
-                   .v(v),  //Q8
-                   .b(start_color)
-                );
     
-    //yellow
-    logic end_color;
-    thresholder #(.H_LOW(17'h0_32_00),.H_HIGH(17'h0_46_00),
-                  .S_LOW(8'b0100_0000),.S_HIGH(8'b1111_1111),
-                  .V_LOW(8'b1011_1111),.V_HIGH(8'b1111_1111)) skel_thresh_end
-                (
-                   .h(h),   //Q9.8
-                   .s(s),  //Q8
-                   .v(v),  //Q8
-                   .b(end_color)
-                );
     
+
  
     logic [23:0] cycles;
     assign done = state == DONE;
@@ -326,32 +321,57 @@ module find_end_nodes #(parameter IMG_W = 320, parameter IMG_H = 240, parameter 
             case(state)
                 IDLE: begin
                     if(start)begin
-                        state <= READ_DELAY;
+                        state <= DELAY;
                         maze_r_addr <= 0;
+                        start_pos <= 17'b0;
+                        end_pos <= 17'b0;
+                        cycles <= 0;
                     end
                 end
-                READ_DELAY: begin
+                DELAY: begin
                     //window_end_i_read reads from BRAM the value that we will want BRAM_READ_DELAY cycles from now
                     maze_r_addr <= maze_r_addr + 1;
                     if(maze_r_addr == BRAM_READ_DELAY - 1)begin
                         x <= 9'b0;
                         y <= 8'b0;
+                        state <= FIND_START_AND_END;
+                        rgb_2_hsv_sel <= 0;
+                        cycles <= 0;
                     end
                 end
-                SMOOTHING: begin
-                    if(x == IMG_W - 1)begin
-                        x <= 9'b0;
-                        y <= y + 1;
+                FIND_START_AND_END: begin
+                    maze_r_addr <= maze_r_addr + 1;
+                    if(rgb_2_hsv_sel == RGB_2_HSV_CYCLES - 1)begin
+                        rgb_2_hsv_sel <= 0;
                     end
                     else begin
-                        x <= x + 1;
+                        rgb_2_hsv_sel <= rgb_2_hsv_sel + 1;
                     end
                     
-                    if(skel_pixel && start_color)begin
-                        start_pos <= {x, y};
+                    if(cycles >= RGB_2_HSV_CYCLES)begin
+                        if(x == IMG_W - 1)begin
+                            x <= 9'b0;
+                            y <= y + 1;
+                        end
+                        else begin
+                            x <= x + 1;
+                        end
+                        
+                        if(x == IMG_W - 1 && y == IMG_H - 1)begin
+                            state <= DONE;
+                        end
+                        
+                        /*
+                        if(start_color)begin
+                            start_pos <= {x, y};
+                        end
+                        else if(end_color)begin
+                            end_pos <= {x, y};
+                        end
+                        */
                     end
-                    else if(skel_pixel && end_color)begin
-                        end_pos <= {x, y};
+                    else begin
+                        cycles <= cycles + 1;
                     end
                 end
                 DONE: begin

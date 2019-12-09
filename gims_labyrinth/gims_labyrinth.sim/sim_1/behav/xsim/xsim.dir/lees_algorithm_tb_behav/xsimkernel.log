@@ -1,0 +1,7 @@
+Running: xsim.dir/lees_algorithm_tb_behav/xsimk.exe -simmode gui -wdb lees_algorithm_tb_behav.wdb -simrunnum 0 -socket 54263
+Design successfully loaded
+Design Loading Memory Usage: 6280 KB (Peak: 6280 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 23704 KB (Peak: 23704 KB)
+Simulation CPU Usage: 1249 ms

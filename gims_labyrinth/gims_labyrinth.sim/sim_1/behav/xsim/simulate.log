@@ -611,4 +611,18 @@ blk_mem_gen_v8_4_1 collision detected at time: 173485000, Instance: lees_algorit
 blk_mem_gen_v8_4_1 collision detected at time: 173755000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 268f, B  read address: 268f
 blk_mem_gen_v8_4_1 collision detected at time: 174385000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 7f4b, B  read address: 7f4b
 blk_mem_gen_v8_4_1 collision detected at time: 174475000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: a85a, B  read address: a85a
-blk_mem_gen_v8_4_1 collision detected at time: 175015000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A writ
+blk_mem_gen_v8_4_1 collision detected at time: 175015000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 808b, B  read address: 808b
+blk_mem_gen_v8_4_1 collision detected at time: 175195000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 117ba, B  read address: 117ba
+blk_mem_gen_v8_4_1 collision detected at time: 175735000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: a99b, B  read address: a99b
+blk_mem_gen_v8_4_1 collision detected at time: 175915000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 118fa, B  read address: 118fa
+blk_mem_gen_v8_4_1 collision detected at time: 176185000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 27d2, B  read address: 27d2
+blk_mem_gen_v8_4_1 collision detected at time: 176365000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 81cc, B  read address: 81cc
+blk_mem_gen_v8_4_1 collision detected at time: 176635000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 11a3a, B  read address: 11a3a
+blk_mem_gen_v8_4_1 collision detected at time: 177085000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 830c, B  read address: 830c
+blk_mem_gen_v8_4_1 collision detected at time: 177175000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: aadc, B  read address: aadc
+blk_mem_gen_v8_4_1 collision detected at time: 177355000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 11b7a, B  read address: 11b7a
+blk_mem_gen_v8_4_1 collision detected at time: 177805000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 844c, B  read address: 844c
+Stopped at time : 178065 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/lees_algorithm.sv" Line 141
+blk_mem_gen_v8_4_1 collision detected at time: 178075000, Instance: lees_algorithm_tb.l_a.visited_map.inst.native_mem_module.blk_mem_gen_v8_4_1_inst, A write address: 11cba, B  read address: 11cba
+Stopped at time : 178105 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/backpointer_tracer.sv" Line 72
+Stopped at time : 190805 ns : File "C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/gims_labyrinth.srcs/sources_1/new/backpointer_tracer.sv" Line 108

@@ -39,6 +39,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     //These are set high when writing to the appropriate bram
     output logic bp_we,
     output logic done,
+    output logic success,
     
     output logic [2:0] state
     );
@@ -95,6 +96,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                         visited_we <= 1;
                         visit_val <= 1;
                         pixel_wr_addr <= start_pos[7:0] * IMG_W + start_pos[16:8];
+                        success <= 0;
                     end
                 end
                 FETCH_NEIGHBORS: begin
@@ -144,6 +146,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                             visited_we <= 1;
                             delay_cycles <= 0;        
                             state <= DELAY;
+                            success <= 1;
                         end
                         else if(skel_pixel == 1 && !visited && neighbor_within_bounds)begin
                             queue[q_idx] <= neighbors[j];
@@ -183,6 +186,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                 DONE: begin
                     visited_we <= 1;
                     state <= CLEAR_VISITED_MAP;
+                    success <= 0;
                 end
                 
                 CLEAR_VISITED_MAP: begin

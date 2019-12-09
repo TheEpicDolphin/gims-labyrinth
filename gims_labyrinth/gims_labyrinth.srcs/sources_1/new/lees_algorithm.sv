@@ -180,8 +180,6 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                 end
                 
                 CLEAR_VISITED_MAP: begin
-                    pixel_wr_addr <= 0;
-                    bp_we <= 0;
                     if(pixel_wr_addr == IMG_W * IMG_H)begin
                         state <= DONE;
                         visited_we <= 0;
@@ -192,7 +190,6 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                 end
                 
                 DONE: begin
-                    visited_we <= 1;
                     state <= IDLE;
                     success <= 0;
                 end

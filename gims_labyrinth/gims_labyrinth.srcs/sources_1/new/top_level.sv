@@ -313,13 +313,13 @@ module top_level(
     always_comb begin
         case(state)
             IDLE: begin
-                //cam_pixel_r_addr = fpga_read_addr;
+                cam_pixel_r_addr = fpga_read_addr;
                 bin_pixel_r_addr = fpga_read_addr;
                 start_end_r_addr = fpga_read_addr;
                 path_r_addr = fpga_read_addr;
             end
             CAPTURE_IMAGE: begin
-                //cam_pixel_r_addr = fpga_read_addr;
+                cam_pixel_r_addr = fpga_read_addr;
                 bin_pixel_r_addr = fpga_read_addr;
                 start_end_r_addr = fpga_read_addr;
                 path_r_addr = fpga_read_addr;
@@ -331,22 +331,32 @@ module top_level(
                 cam_pixel_r_addr = filt_pixel_r_addr;
                 
                 bin_pixel_r_addr = fpga_read_addr;
+                path_r_addr = fpga_read_addr;
             end
             SKELETONIZING: begin
                 bin_pixel_wr_addr = skel_pixel_wr_addr;
                 bin_pixel_in = skel_pixel;
                 bin_pixel_we = skel_pixel_we;
                 bin_pixel_r_addr = skel_pixel_r_addr;
+                cam_pixel_r_addr = fpga_read_addr;
+                path_r_addr = fpga_read_addr;
             end
             FIND_END_NODES: begin
                 bin_pixel_r_addr = maze_r_addr;
                 start_end_r_addr = maze_r_addr;
+                
+                cam_pixel_r_addr = fpga_read_addr;
+                path_r_addr = fpga_read_addr;
             end
             SOLVING: begin
                 bin_pixel_r_addr = solver_pixel_r_addr;
+                
+                cam_pixel_r_addr = fpga_read_addr;
+                path_r_addr = fpga_read_addr;
             end
             TRACING_BACKPOINTERS: begin
-                
+                cam_pixel_r_addr = fpga_read_addr;
+                path_r_addr = fpga_read_addr;
             end
             
         endcase
@@ -520,7 +530,6 @@ module top_level(
           vs <= vsync;
           b <= blank;
           if (sw[1:0] == 2'b01 || sw[1:0] == 2'b10) begin
-
              if(state == IDLE || state == CAPTURE_IMAGE)begin
                 fpga_read_addr <= (hcount>>1)+ ((vcount>>1) * IMG_W);
                              

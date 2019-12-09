@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Mon Dec  9 01:30:43 2019
+| Date         : Mon Dec  9 02:30:12 2019
 | Host         : LAPTOP-9CDK2BBH running 64-bit major release  (build 9200)
 | Command      : report_drc -file top_level_drc_routed.rpt -pb top_level_drc_routed.pb -rpx top_level_drc_routed.rpx
 | Design       : top_level
@@ -24,14 +24,14 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 63
+             Violations found: 61
 +----------+----------+-----------------------------------------------------+------------+
 | Rule     | Severity | Description                                         | Violations |
 +----------+----------+-----------------------------------------------------+------------+
 | CFGBVS-1 | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1          |
 | DPOP-1   | Warning  | PREG Output pipelining                              | 19         |
 | DPOP-2   | Warning  | MREG Output pipelining                              | 19         |
-| PDRC-153 | Warning  | Gated clock check                                   | 24         |
+| PDRC-153 | Warning  | Gated clock check                                   | 22         |
 +----------+----------+-----------------------------------------------------+------------+
 
 2. REPORT DETAILS
@@ -241,122 +241,112 @@ Related violations: <none>
 
 PDRC-153#1 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2/O, cell bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2/O, cell bin_maze_filt/genblk1[0].inst/h_reg[16]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#2 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9/O, cell bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9/O, cell bin_maze_filt/genblk1[10].inst/h_reg[16]_i_2__9. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#3 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10/O, cell bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10/O, cell bin_maze_filt/genblk1[11].inst/h_reg[16]_i_2__10. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#4 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11/O, cell bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11/O, cell bin_maze_filt/genblk1[12].inst/h_reg[16]_i_2__11. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#5 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12/O, cell bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12/O, cell bin_maze_filt/genblk1[13].inst/h_reg[16]_i_2__12. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#6 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13/O, cell bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13/O, cell bin_maze_filt/genblk1[14].inst/h_reg[16]_i_2__13. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#7 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14/O, cell bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14/O, cell bin_maze_filt/genblk1[15].inst/h_reg[16]_i_2__14. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#8 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15/O, cell bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15/O, cell bin_maze_filt/genblk1[16].inst/h_reg[16]_i_2__15. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#9 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16/O, cell bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16/O, cell bin_maze_filt/genblk1[17].inst/h_reg[16]_i_2__16. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#10 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17/O, cell bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17/O, cell bin_maze_filt/genblk1[18].inst/h_reg[16]_i_2__17. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#11 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0/O, cell bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0/O, cell bin_maze_filt/genblk1[1].inst/h_reg[16]_i_2__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#12 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1/O, cell bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1/O, cell bin_maze_filt/genblk1[2].inst/h_reg[16]_i_2__1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#13 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2/O, cell bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2/O, cell bin_maze_filt/genblk1[3].inst/h_reg[16]_i_2__2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#14 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3/O, cell bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3/O, cell bin_maze_filt/genblk1[4].inst/h_reg[16]_i_2__3. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#15 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4/O, cell bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4/O, cell bin_maze_filt/genblk1[5].inst/h_reg[16]_i_2__4. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#16 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5/O, cell bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5/O, cell bin_maze_filt/genblk1[6].inst/h_reg[16]_i_2__5. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#17 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6/O, cell bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6/O, cell bin_maze_filt/genblk1[7].inst/h_reg[16]_i_2__6. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#18 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7/O, cell bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7/O, cell bin_maze_filt/genblk1[8].inst/h_reg[16]_i_2__7. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#19 Warning
 Gated clock check  
-Net bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8_n_0 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8/O, cell bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8_n_1 is a gated clock net sourced by a combinational pin bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8/O, cell bin_maze_filt/genblk1[9].inst/h_reg[16]_i_2__8. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#20 Warning
 Gated clock check  
-Net bin_pixel_r_addr_reg[16]_i_2_n_0 is a gated clock net sourced by a combinational pin bin_pixel_r_addr_reg[16]_i_2/O, cell bin_pixel_r_addr_reg[16]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_pixel_r_addr_reg[16]_i_2_n_1 is a gated clock net sourced by a combinational pin bin_pixel_r_addr_reg[16]_i_2/O, cell bin_pixel_r_addr_reg[16]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#21 Warning
 Gated clock check  
-Net bin_pixel_we_reg_i_2_n_0 is a gated clock net sourced by a combinational pin bin_pixel_we_reg_i_2/O, cell bin_pixel_we_reg_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net bin_pixel_we_reg_i_2_n_1 is a gated clock net sourced by a combinational pin bin_pixel_we_reg_i_2/O, cell bin_pixel_we_reg_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#22 Warning
 Gated clock check  
-Net cam_pixel_r_addr_reg[16]_i_1_n_0 is a gated clock net sourced by a combinational pin cam_pixel_r_addr_reg[16]_i_1/O, cell cam_pixel_r_addr_reg[16]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
-Related violations: <none>
-
-PDRC-153#23 Warning
-Gated clock check  
-Net path_r_addr_reg[16]_i_1_n_0 is a gated clock net sourced by a combinational pin path_r_addr_reg[16]_i_1/O, cell path_r_addr_reg[16]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
-Related violations: <none>
-
-PDRC-153#24 Warning
-Gated clock check  
-Net start_end_r_addr_reg[16]_i_2_n_0 is a gated clock net sourced by a combinational pin start_end_r_addr_reg[16]_i_2/O, cell start_end_r_addr_reg[16]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net start_end_r_addr_reg[16]_i_2_n_1 is a gated clock net sourced by a combinational pin start_end_r_addr_reg[16]_i_2/O, cell start_end_r_addr_reg[16]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 

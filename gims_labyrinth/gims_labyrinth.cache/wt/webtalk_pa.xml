@@ -3,10 +3,10 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pa" timeStamp="Sun Dec  8 21:59:54 2019">
+<application name="pa" timeStamp="Sun Dec  8 22:43:49 2019">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="fab6d5d5160642e19baff0720c943570" type="ProjectID"/>
-<property name="ProjectIteration" value="158" type="ProjectIteration"/>
+<property name="ProjectIteration" value="162" type="ProjectIteration"/>
 </section>
 <section name="PlanAhead Usage" visible="true">
 <item name="Project Data">
@@ -26,16 +26,16 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="EditPaste" value="9" type="JavaHandler"/>
 <property name="EditUndo" value="5" type="JavaHandler"/>
 <property name="LaunchOpenTarget" value="1" type="JavaHandler"/>
-<property name="LaunchProgramFpga" value="75" type="JavaHandler"/>
-<property name="OpenHardwareManager" value="73" type="JavaHandler"/>
+<property name="LaunchProgramFpga" value="76" type="JavaHandler"/>
+<property name="OpenHardwareManager" value="74" type="JavaHandler"/>
 <property name="OpenProject" value="1" type="JavaHandler"/>
 <property name="OpenRecentTarget" value="12" type="JavaHandler"/>
-<property name="ProgramDevice" value="68" type="JavaHandler"/>
+<property name="ProgramDevice" value="69" type="JavaHandler"/>
 <property name="RecustomizeCore" value="70" type="JavaHandler"/>
-<property name="RunBitgen" value="77" type="JavaHandler"/>
-<property name="RunImplementation" value="86" type="JavaHandler"/>
-<property name="RunSynthesis" value="127" type="JavaHandler"/>
-<property name="SaveFileProxyHandler" value="68" type="JavaHandler"/>
+<property name="RunBitgen" value="79" type="JavaHandler"/>
+<property name="RunImplementation" value="88" type="JavaHandler"/>
+<property name="RunSynthesis" value="130" type="JavaHandler"/>
+<property name="SaveFileProxyHandler" value="71" type="JavaHandler"/>
 <property name="SetSourceEnabled" value="15" type="JavaHandler"/>
 <property name="SetTopNode" value="26" type="JavaHandler"/>
 <property name="ShowView" value="14" type="JavaHandler"/>
@@ -55,7 +55,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="AddSrcWizard_SPECIFY_SIMULATION_SPECIFIC_HDL_FILES" value="1" type="GuiHandlerData"/>
 <property name="BaseDialog_CANCEL" value="53" type="GuiHandlerData"/>
 <property name="BaseDialog_NO" value="1" type="GuiHandlerData"/>
-<property name="BaseDialog_OK" value="595" type="GuiHandlerData"/>
+<property name="BaseDialog_OK" value="605" type="GuiHandlerData"/>
 <property name="CmdMsgDialog_MESSAGES" value="2" type="GuiHandlerData"/>
 <property name="CmdMsgDialog_OK" value="35" type="GuiHandlerData"/>
 <property name="CmdMsgDialog_OPEN_MESSAGES_VIEW" value="2" type="GuiHandlerData"/>
@@ -63,7 +63,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="CreateSrcFileDialog_FILE_NAME" value="25" type="GuiHandlerData"/>
 <property name="CreateSrcFileDialog_FILE_TYPE" value="23" type="GuiHandlerData"/>
 <property name="FileSetPanel_FILE_SET_PANEL_TREE" value="764" type="GuiHandlerData"/>
-<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="850" type="GuiHandlerData"/>
+<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="856" type="GuiHandlerData"/>
 <property name="GettingStartedView_OPEN_PROJECT" value="1" type="GuiHandlerData"/>
 <property name="HACGCCoeFileDialog_CLOSE" value="5" type="GuiHandlerData"/>
 <property name="HACGCCoeFileDialog_HELP" value="1" type="GuiHandlerData"/>
@@ -105,7 +105,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PAViews_PROJECT_SUMMARY" value="19" type="GuiHandlerData"/>
 <property name="PlanAheadTab_SHOW_FLOW_NAVIGATOR" value="1" type="GuiHandlerData"/>
 <property name="ProgramDebugTab_PROGRAM_DEVICE" value="9" type="GuiHandlerData"/>
-<property name="ProgramFpgaDialog_PROGRAM" value="82" type="GuiHandlerData"/>
+<property name="ProgramFpgaDialog_PROGRAM" value="83" type="GuiHandlerData"/>
 <property name="ProgramFpgaDialog_SPECIFY_BITSTREAM_FILE" value="7" type="GuiHandlerData"/>
 <property name="ProgressDialog_BACKGROUND" value="1" type="GuiHandlerData"/>
 <property name="ProgressDialog_CANCEL" value="5" type="GuiHandlerData"/>
@@ -124,17 +124,12 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="StaleRunDialog_NO" value="1" type="GuiHandlerData"/>
 <property name="StateMonitor_RESET_RUN" value="2" type="GuiHandlerData"/>
 <property name="SyntheticaGettingStartedView_RECENT_PROJECTS" value="19" type="GuiHandlerData"/>
-<property name="SyntheticaStateMonitor_CANCEL" value="8" type="GuiHandlerData"/>
+<property name="SyntheticaStateMonitor_CANCEL" value="9" type="GuiHandlerData"/>
 <property name="TaskBanner_CLOSE" value="1" type="GuiHandlerData"/>
 <property name="TclObjectTreeTable_TREETABLE" value="5" type="GuiHandlerData"/>
 <property name="WaveformNameTree_WAVEFORM_NAME_TREE" value="11" type="GuiHandlerData"/>
 <property name="XPG_IPSymbol_SHOW_DISABLED_PORTS" value="4" type="GuiHandlerData"/>
 <property name="XPG_TabbedPane_TABBED_PANE" value="1" type="GuiHandlerData"/>
-</item>
-<item name="Other">
-<property name="GuiMode" value="64" type="GuiMode"/>
-<property name="BatchMode" value="0" type="BatchMode"/>
-<property name="TclMode" value="51" type="TclMode"/>
 </item>
 </section>
 </application>

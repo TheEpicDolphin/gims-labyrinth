@@ -36,8 +36,6 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
         output pixel_wea,
         output pixel_out,
         
-        output logic [16:0] start_end_wr_addr,
-        output logic start_end_wea,
         output logic start_color,
         output logic end_color
     );
@@ -100,17 +98,19 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
     
     
     //This threshold for yellow (start)
+    logic yellow;
     thresholder #(.H_LOW(17'h0_28_00),.H_HIGH(17'h0_5a_00),
                   .S_LOW(8'b1000_0000),.S_HIGH(8'b1111_1111),
-                  .V_LOW(8'b0000_0000),.V_HIGH(8'b1111_1111)) skel_thresh_end
+                  .V_LOW(8'b0010_0000),.V_HIGH(8'b1111_1111)) skel_thresh_end
                 (
                    .h(h),   //Q9.8
                    .s(s),  //Q8
                    .v(v),  //Q8
-                   .b(start_color)
+                   .b(yellow)
                 );
                 
     //This thresholds for red (end)
+    logic red;
     logic red1;
     thresholder #(.H_LOW(17'h0_00_00),.H_HIGH(17'h0_14_00),
                       .S_LOW(8'b1100_0000),.S_HIGH(8'b1111_1111),
@@ -131,16 +131,22 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                    .v(v),  //Q8
                    .b(red2)
                 );
-    assign end_color = red1 || red2;
-    logic [23:0] cycles;
+    assign red = red1 || red2;
     
-    //assign start_end_wea = (RGB_2_HSV_CYCLES <= cycles) && (cycles < (RGB_2_HSV_CYCLES + IMG_W * IMG_H));
-    assign start_end_wea = (start_end_wr_addr < (IMG_W * IMG_H));
+    logic [23:0] cycles;
     
     logic eroded_pixel;
     logic dilated_pixel;
     
+    logic eroded_yellow;
+    logic dilated_yellow;
+    
+    logic eroded_red;
+    logic dilated_red;
+    
     assign pixel_out = dilated_pixel;
+    assign start_color = dilated_yellow;
+    assign end_color = dilated_red;
          
     logic start_erosion;
     logic start_dilation;
@@ -169,14 +175,51 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                     .processed_pixel(dilated_pixel),
                     .done(dilation_done)
                     );
+
+    //SMOOTH YELLOW
+    erosion #(.K(5),.IMG_W(320),.IMG_H(240)) yellow_erosion
+                (
+                .clk(clk),
+                .rst(rst),
+                .start(start_erosion),
+                .pixel_in(yellow),
+                .processed_pixel(eroded_yellow)
+                );
     
-    assign done = state == DONE;
+    dilation #(.K(5),.IMG_W(320),.IMG_H(240)) yellow_dilation
+                    (
+                    .clk(clk),
+                    .rst(rst),
+                    .start(start_dilation),
+                    .pixel_in(eroded_yellow),
+                    .processed_pixel(start_color)
+                    );
     
-    //Debugging
+    
+    //SMOOTH RED
+     erosion #(.K(5),.IMG_W(320),.IMG_H(240)) red_erosion
+                 (
+                 .clk(clk),
+                 .rst(rst),
+                 .start(start_erosion),
+                 .pixel_in(red),
+                 .processed_pixel(eroded_red)
+                 );
+     
+     dilation #(.K(5),.IMG_W(320),.IMG_H(240)) red_dilation
+                     (
+                     .clk(clk),
+                     .rst(rst),
+                     .start(start_dilation),
+                     .pixel_in(eroded_red),
+                     .processed_pixel(end_color)
+                     );
+     
+     assign done = state == DONE;
+     //Debugging
     `ifdef SIM
     integer bin_maze_f;
     `endif
-    
     always_ff @(posedge clk)begin
         if(rst)begin
             state <= IDLE;
@@ -196,7 +239,6 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                         state <= SMOOTHING;
                         rgb_2_hsv_sel <= 0;
                         cycles <= 0;
-                        start_end_wr_addr <= 0;
                         `ifdef SIM   
                         bin_maze_f = $fopen("C:/Users/giand/Documents/MIT/Senior_Fall/6.111/gims-labyrinth/gims_labyrinth/python_stuff/verilog_testing/bin_maze_img.txt","w");
                         `endif
@@ -213,10 +255,6 @@ module binary_maze_filtering #(parameter IMG_W = 320, parameter IMG_H = 240, par
                     
                     if(dilation_done)begin
                         state <= DONE;
-                    end
-                    
-                    if(start_end_wea)begin
-                        start_end_wr_addr <= start_end_wr_addr + 1;
                     end
                     
                     `ifdef SIM

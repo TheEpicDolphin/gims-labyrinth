@@ -158,24 +158,9 @@ module top_level(
     logic end_color_wr;           
     logic start_color_r;
     logic end_color_r;   
-    binary_maze start_color_map(.clka(clk_25mhz),
-                        .addra(start_end_wr_addr),
-                        .dina(start_color_wr),
-                        .wea(start_end_wea),
-                        .clkb(clk_25mhz),
-                        .addrb(start_end_r_addr),
-                        .doutb(start_color_r)
-                        );
-                                                    
-    binary_maze end_color_map(.clka(clk_25mhz),
-                          .addra(start_end_wr_addr),
-                          .dina(end_color_wr),
-                          .wea(start_end_wea),
-                          .clkb(clk_25mhz),
-                          .addrb(start_end_r_addr),
-                          .doutb(end_color_r)
-                          );
-                                                                              
+    
+    
+    
     logic bin_maze_filt_start;
     logic bin_maze_filt_done;
     logic [16:0] filt_pixel_wr_addr;
@@ -183,8 +168,24 @@ module top_level(
     logic filt_pixel_we;
     logic [16:0] filt_pixel_r_addr;
     
-
-        
+    binary_maze start_color_map(.clka(clk_25mhz),
+                        .addra(filt_pixel_wr_addr),
+                        .dina(start_color_wr),
+                        .wea(filt_pixel_we),
+                        .clkb(clk_25mhz),
+                        .addrb(start_end_r_addr),
+                        .doutb(start_color_r)
+                        );
+                                                    
+    binary_maze end_color_map(.clka(clk_25mhz),
+                          .addra(filt_pixel_wr_addr),
+                          .dina(end_color_wr),
+                          .wea(filt_pixel_we),
+                          .clkb(clk_25mhz),
+                          .addrb(start_end_r_addr),
+                          .doutb(end_color_r)
+                          );
+  
     binary_maze_filtering #(.IMG_W(IMG_W),.IMG_H(IMG_H)) bin_maze_filt
         (
          .clk(clk_25mhz),
@@ -197,8 +198,6 @@ module top_level(
          .pixel_wea(filt_pixel_we),
          .pixel_out(filt_pixel),
          
-         .start_end_wr_addr(start_end_wr_addr),
-         .start_end_wea(start_end_wea),
          .start_color(start_color_wr),
          .end_color(end_color_wr)
          );
@@ -353,6 +352,7 @@ module top_level(
                     if(bin_maze_filt_done)begin
                         state <= SKELETONIZING;
                         start_skeletonizer <= 1;
+                        //If want to skip skeletonization
                         //state <= IDLE;
                     end
                 end
@@ -360,16 +360,18 @@ module top_level(
                     start_skeletonizer <= 0;
                     //get stuck in here for now
                     if(skeletonizer_done)begin
-                        //state <= FIND_END_NODES;
-                        //start_find_end_nodes <= 1;
-                        state <= IDLE;
+                        state <= FIND_END_NODES;
+                        start_find_end_nodes <= 1;
+                        //If want to skip FIND_END_NODES
+                        //state <= IDLE;
                     end
                 end
                 FIND_END_NODES: begin
                     start_find_end_nodes <= 0;
                     if(find_end_nodes_done)begin
-                        //state <= SOLVING;
-                        //start_lees_alg <= 1;
+                        state <= SOLVING;
+                        start_lees_alg <= 1;
+                        //If want to skip Lee's algorithm
                         state <= IDLE;
                     end
                     

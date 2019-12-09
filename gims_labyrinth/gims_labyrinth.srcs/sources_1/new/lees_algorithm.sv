@@ -50,8 +50,8 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     parameter FETCH_NEIGHBORS = 3'b001;
     parameter VALIDATE_NEIGHBORS = 3'b010;
     parameter DELAY = 3'b011;
-    parameter DONE = 3'b100;
-    parameter CLEAR_VISITED_MAP = 3'b101;
+    parameter CLEAR_VISITED_MAP = 3'b100;
+    parameter DONE = 3'b101;
     
     logic [5:0] q_idx;
     reg [16:0] queue[0:QUEUE_SIZE - 1];
@@ -61,7 +61,6 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
     reg [1:0] backpointers[0:MAX_OUT_DEGREE - 1];
     logic [2:0] i;
     logic [2:0] j;
-    logic [2:0] delay_cycles;
     assign done = state == DONE;
     
     logic visited_we;
@@ -74,6 +73,7 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                           .clkb(clk),
                           .addrb(pixel_r_addr),
                           .doutb(visited));
+                         
     
     logic neighbor_within_bounds;
     
@@ -103,7 +103,9 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                     visited_we <= 0;
                     if(q_idx == 0)begin
                         //End was not found
-                        state <= DONE;
+                        state <= DELAY;
+                        success <= 0;
+                        visited_we <= 1;
                     end
                     else begin
                         //right
@@ -143,10 +145,10 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                             pixel_wr_addr <= neighbors[j][7:0] * IMG_W + neighbors[j][16:8];
                             bp_we <= 1;
                             backpointer <= backpointers[j];
-                            visited_we <= 1;
-                            delay_cycles <= 0;        
+                                  
                             state <= DELAY;
                             success <= 1;
+                            visited_we <= 1;
                         end
                         else if(skel_pixel == 1 && !visited && neighbor_within_bounds)begin
                             queue[q_idx] <= neighbors[j];
@@ -172,31 +174,27 @@ module lees_algorithm #(parameter MAX_OUT_DEGREE = 4, parameter BRAM_DELAY_CYCLE
                 
                 DELAY: begin
                     pixel_wr_addr <= 0;
-                    visit_val <= 0;
                     bp_we <= 0;
-                    if(delay_cycles >= 2)begin
-                        state <= DONE;
-                    end
-                    else begin
-                        delay_cycles <= delay_cycles + 1;
-                    end
-                    
-                end
-                
-                DONE: begin
-                    visited_we <= 1;
+                    visit_val <= 0;
                     state <= CLEAR_VISITED_MAP;
-                    success <= 0;
                 end
                 
                 CLEAR_VISITED_MAP: begin
+                    pixel_wr_addr <= 0;
+                    bp_we <= 0;
                     if(pixel_wr_addr == IMG_W * IMG_H)begin
-                        state <= IDLE;
+                        state <= DONE;
                         visited_we <= 0;
                     end
                     else begin
                         pixel_wr_addr <= pixel_wr_addr + 1;
                     end
+                end
+                
+                DONE: begin
+                    visited_we <= 1;
+                    state <= IDLE;
+                    success <= 0;
                 end
                 
                 default: begin
